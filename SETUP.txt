@@ -1,0 +1,39 @@
+EFL BACKEND UPGRADE — SETUP
+
+Upload these files/folders to the ROOT of the EFL-dynasty GitHub repo:
+- package.json
+- customize.html
+- commissioner-dashboard.html
+- api/  (entire folder with all JS files)
+
+Then configure these Vercel Environment Variables:
+DATABASE_URL
+RESEND_API_KEY
+COMMISSIONER_EMAIL
+COMMISSIONER_KEY
+Optional: RESEND_FROM
+
+DATABASE:
+Create a Neon Postgres database through Vercel Marketplace, connect it to this EFL project, and copy/use the generated DATABASE_URL environment variable. The API creates its own table automatically.
+
+EMAIL:
+Create a Resend account/API key. For initial testing, you can use:
+RESEND_FROM = EFL Dynasty <onboarding@resend.dev>
+COMMISSIONER_EMAIL = your email
+For production sending to arbitrary recipients, verify efldynasty.com in Resend and change RESEND_FROM to an address on your domain.
+
+COMMISSIONER KEY:
+Make up a long private password, e.g. 20+ random characters. Put it in Vercel as COMMISSIONER_KEY. Do NOT put it inside the HTML file.
+
+After environment variables are added, redeploy.
+
+OWNER PAGE:
+https://efldynasty.com/customize.html
+
+COMMISSIONER DASHBOARD:
+https://efldynasty.com/commissioner-dashboard.html
+
+PUBLIC APPROVED PROFILE API:
+https://efldynasty.com/api/approved
+
+The next step is to wire /api/approved into franchises.html so approved customization automatically replaces the placeholders.
