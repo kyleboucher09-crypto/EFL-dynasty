@@ -82,6 +82,12 @@
   width:170px;height:170px;display:grid;place-items:center;
   font-size:105px;filter:drop-shadow(0 15px 26px rgba(0,0,0,.55))
 }
+.trophy-art{position:absolute;right:0;top:0;width:58%;height:100%;overflow:hidden;pointer-events:none;mask-image:linear-gradient(90deg,transparent 0,#000 24%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%)}
+.trophy-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,4,12,.9) 0,transparent 38%),linear-gradient(0deg,rgba(8,4,12,.55),transparent 40%)}
+.trophy-art img{width:100%;height:100%;object-fit:cover;object-position:52% 38%;transform:scale(1.65);filter:saturate(1.15) contrast(1.08) brightness(.9);}
+.feature[data-feature="0"]{background:radial-gradient(circle at 80% 45%,rgba(117,30,176,.28),transparent 45%),linear-gradient(90deg,rgba(7,4,10,.98) 0%,rgba(9,5,13,.91) 48%,rgba(9,5,13,.35) 100%)}
+.feature[data-feature="0"] .kicker,.feature[data-feature="0"] .headline,.feature[data-feature="0"] .champ-banner,.feature[data-feature="0"] .copy,.feature[data-feature="0"] .feature-cta{position:relative;z-index:3}
+
 .feature .kicker{color:var(--gold2);font-size:9px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}
 .feature .headline{font-size:clamp(34px,5vw,60px);font-weight:1000;line-height:.88;letter-spacing:-.055em;max-width:68%;margin-top:7px}
 .feature .headline .gold{color:var(--gold2)}
@@ -107,7 +113,7 @@
   .broadcast{grid-template-columns:1fr}.featurestage{order:-2}.sidecard{min-height:280px}.featurestage{min-height:390px}.statstrip{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .featurestage{min-height:430px}.feature{padding:23px}.feature .art{font-size:82px;width:125px;height:125px;right:12px;top:22px}
+  .featurestage{min-height:430px}.feature{padding:23px}.feature .art{font-size:82px;width:125px;height:125px;right:12px;top:22px}.trophy-art{width:72%;opacity:.78}
   .feature .headline,.feature .copy{max-width:88%}.feature .headline{font-size:38px}.navarrow.left{left:8px}.navarrow.right{right:8px}.sidecard{min-height:300px}.statstrip{grid-template-columns:1fr}.stripitem{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
 }
 .throne{margin-top:20px;padding:24px;border-radius:22px;background:linear-gradient(145deg,rgba(232,184,74,.12),rgba(20,10,28,.84));border:1px solid rgba(232,184,74,.31)}.throne .crown{font-size:45px}.throne-team{font-size:28px;font-weight:1000;margin-top:6px}.throne-meta{color:var(--muted);font-size:11px;margin-top:5px}
@@ -169,7 +175,7 @@
       <div class="featurestage" id="featureStage">
         <a class="feature on" href="franchises.html" data-feature="0">
           <img class="watermark" src="Assets/efl-logo.jpeg" alt="">
-          <div class="art">🏆</div>
+          <div class="trophy-art" aria-hidden="true"><img src="Assets/efl-championship-trophy.png" alt=""></div>
           <div class="kicker">The Crown Lives Here</div>
           <div class="headline"><span class="gold">REIGNING</span><br>CHAMPION</div>
           <div class="champ-banner" id="featureChampYear">EFL CHAMPION</div>
