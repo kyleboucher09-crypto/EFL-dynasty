@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Customize Franchise</title>
+<style>
+:root{--bg:#07060a;--panel:#140d1b;--purple:#7d22c9;--gold:#e8b84a;--gold2:#ffd979;--text:#f8f3ff;--muted:#aaa0b6}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 50% -100px,#7d22c944,transparent),var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:30;background:#07060aef;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff10;padding:14px 5%;display:flex;gap:14px;align-items:center}.nav img{width:42px;height:42px;border-radius:11px;object-fit:cover}.nav b{margin-right:auto}.nav a{font-size:11px;color:#ccc}
+.wrap{max-width:1050px;margin:auto;padding:25px 18px 60px}.hero{padding:38px;border-radius:27px;border:1px solid #e8b84a38;background:radial-gradient(450px 260px at 90% 10%,#e8b84a18,transparent),#0e0913}.eye{color:var(--gold2);font-size:9px;font-weight:950;letter-spacing:.17em;text-transform:uppercase}.hero h1{font-size:clamp(44px,7vw,78px);line-height:.9;letter-spacing:-.055em;margin:8px 0}.hero h1 span{color:var(--gold2);display:block}.hero p{max-width:650px;color:#c8bdcf;line-height:1.6;font-size:13px}
+.layout{display:grid;grid-template-columns:1fr .85fr;gap:14px;margin-top:18px}.panel{padding:20px;border-radius:18px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid #ffffff10}.panel h2{font-size:21px;margin:5px 0 15px}.field{margin-bottom:13px}.field label{display:block;color:var(--gold2);font-size:8px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #ffffff16;background:#0a0710;color:#fff;border-radius:10px;padding:11px 12px;font:inherit;font-size:12px}.field textarea{min-height:90px;resize:vertical}.field small{display:block;color:var(--muted);font-size:9px;margin-top:5px;line-height:1.4}
+.colors{display:grid;grid-template-columns:1fr 1fr;gap:8px}.colors input[type=color]{height:44px;padding:4px}
+.logo-preview{width:88px;height:88px;border-radius:20px;background:#241633;border:1px solid #ffd97944;display:grid;place-items:center;overflow:hidden;color:var(--gold2);font-weight:1000}.logo-preview img{width:100%;height:100%;object-fit:cover}
+.preview{position:sticky;top:92px}.preview-card{padding:20px;border-radius:20px;border:1px solid #ffd97938;background:radial-gradient(300px 160px at 100% 0,#7d22c92d,transparent),#0c0811}.preview-head{display:flex;gap:12px;align-items:center}.preview-team{font-size:22px;font-weight:1000}.preview-owner{color:var(--muted);font-size:10px}.motto{margin-top:14px;color:var(--gold2);font-size:14px;font-weight:900;font-style:italic}.story{margin-top:14px;color:#d4cad9;font-size:11px;line-height:1.65}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}.chip{padding:7px 9px;border-radius:999px;background:#ffffff08;font-size:9px;color:#d9cfe0}.quote{margin-top:14px;padding:12px;border-left:3px solid var(--gold2);background:#ffffff06;border-radius:0 10px 10px 0;font-size:11px;color:#ddd}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.btn{border:0;border-radius:11px;padding:12px 13px;font-weight:1000;font-size:10px;cursor:pointer}.primary{background:linear-gradient(135deg,#ffd979,#e8b84a);color:#1b1007}.secondary{background:#ffffff0c;border:1px solid #ffffff16;color:#fff}.notice{margin-top:12px;padding:11px;border-radius:11px;background:#7d22c914;border:1px solid #7d22c92d;color:#cfc3d8;font-size:9px;line-height:1.5}.success{display:none;margin-top:10px;color:#79daa8;font-size:10px}
+@media(max-width:850px){.nav a{display:none}.layout{grid-template-columns:1fr}.preview{position:static}}@media(max-width:560px){.wrap{padding:16px 12px 55px}.hero{padding:26px 20px}.actions,.colors{grid-template-columns:1fr}}
+</style></head><body>
+<div class="nav"><img src="Assets/efl-logo.jpeg"><b>EFL Dynasty</b><a href="index.html">Home</a><a href="franchises.html">Franchises</a></div>
+<main class="wrap"><section class="hero"><div class="eye">Build Your Identity</div><h1>CUSTOMIZE <span>YOUR FRANCHISE</span></h1><p>Make your EFL headquarters yours. Fill this out, preview it live, add a logo if you want, then share the submission into the league chat for commissioner approval.</p></section>
+<section class="layout">
+<div class="panel"><div class="eye">Owner Submission</div><h2>Franchise Details</h2>
+<div class="field"><label>Franchise</label><select id="team"><option>Loading EFL teams…</option></select></div>
+<div class="field"><label>Owner Name</label><input id="owner" placeholder="Your name"></div>
+<div class="field"><label>Team Motto</label><input id="motto" maxlength="80" placeholder="e.g. No rebuilds. Only reloads."></div>
+<div class="field"><label>Home Field / Stadium</label><input id="stadium" maxlength="60" placeholder="e.g. The Purple Palace"></div>
+<div class="colors"><div class="field"><label>Primary Colour</label><input id="c1" type="color" value="#7d22c9"></div><div class="field"><label>Secondary Colour</label><input id="c2" type="color" value="#e8b84a"></div></div>
+<div class="field"><label>Favorite / Franchise Player</label><input id="player" maxlength="60" placeholder="The face of your franchise"></div>
+<div class="field"><label>Nemesis</label><select id="rival"><option value="">Choose your rival</option></select></div>
+<div class="field"><label>Trash Talk Quote</label><input id="quote" maxlength="120" placeholder="Something the league will regret giving you space for…"></div>
+<div class="field"><label>Franchise Story</label><textarea id="story" maxlength="550" placeholder="Tell the league who you are. History, style, reputation, bad trades you're pretending never happened…"></textarea><small>Keep it under 550 characters. The commissioner can polish the wording before publishing.</small></div>
+<div class="field"><label>Custom Logo (optional)</label><input id="logo" type="file" accept="image/png,image/jpeg,image/webp"><small>The logo stays on your phone until you tap Share Submission. On supported phones it can be shared with the profile details.</small></div>
+<div class="actions"><button class="btn primary" id="share">📤 Share Submission</button><button class="btn secondary" id="copy">📋 Copy Details</button></div><div class="success" id="success">Copied. Paste it into the EFL league chat.</div>
+<div class="notice">This form does not change the live site by itself. It sends your requested profile to the commissioner for approval, which prevents someone from lovingly renaming another owner's stadium “The Toilet Bowl.”</div>
+</div>
+<div class="panel preview"><div class="eye">Live Preview</div><h2>Your Headquarters</h2>
+<div class="preview-card" id="card"><div class="preview-head"><div class="logo-preview" id="logoPreview">EFL</div><div><div class="preview-team" id="pTeam">Choose a franchise</div><div class="preview-owner" id="pOwner">Owner</div></div></div><div class="motto" id="pMotto">“Your motto goes here.”</div><div class="story" id="pStory">Your franchise story will appear here as you type.</div><div class="chips"><span class="chip" id="pStadium">🏟️ Home Field</span><span class="chip" id="pPlayer">⭐ Franchise Player</span><span class="chip" id="pRival">⚔️ Nemesis</span></div><div class="quote" id="pQuote">“Trash talk quote.”</div></div>
+</div></section></main>
+<script>
+const ID="1313240395462742016",API="https://api.sleeper.app/v1",Q=s=>document.querySelector(s);let logoFile=null;
+async function get(p){let r=await fetch(API+p);if(!r.ok)throw Error(r.status);return r.json()}
+(async()=>{try{let [u,r]=await Promise.all([get(`/league/${ID}/users`),get(`/league/${ID}/rosters`)]),ub=Object.fromEntries(u.map(x=>[x.user_id,x])),teams=r.map(x=>({team:ub[x.owner_id]?.metadata?.team_name||ub[x.owner_id]?.display_name||`Roster ${x.roster_id}`,owner:ub[x.owner_id]?.display_name||""})).sort((a,b)=>a.team.localeCompare(b.team));Q("#team").innerHTML='<option value="">Choose your franchise</option>'+teams.map(x=>`<option data-owner="${x.owner.replaceAll('"','&quot;')}">${x.team}</option>`).join("");Q("#rival").innerHTML='<option value="">Choose your rival</option>'+teams.map(x=>`<option>${x.team}</option>`).join("");Q("#team").onchange=()=>{let o=Q("#team").selectedOptions[0];if(o?.dataset.owner)Q("#owner").value=o.dataset.owner;update()};}catch(e){Q("#team").innerHTML='<option>Unable to load teams</option>'}})();
+function v(id){return Q(id).value.trim()}function update(){Q("#pTeam").textContent=v("#team")||"Choose a franchise";Q("#pOwner").textContent=v("#owner")||"Owner";Q("#pMotto").textContent=`“${v("#motto")||"Your motto goes here."}”`;Q("#pStory").textContent=v("#story")||"Your franchise story will appear here as you type.";Q("#pStadium").textContent="🏟️ "+(v("#stadium")||"Home Field");Q("#pPlayer").textContent="⭐ "+(v("#player")||"Franchise Player");Q("#pRival").textContent="⚔️ "+(v("#rival")||"Nemesis");Q("#pQuote").textContent=`“${v("#quote")||"Trash talk quote."}”`;Q("#card").style.borderColor=v("#c2");Q("#card").style.boxShadow=`inset 4px 0 0 ${v("#c1")}`;}
+["#owner","#motto","#stadium","#c1","#c2","#player","#rival","#quote","#story"].forEach(id=>Q(id).addEventListener("input",update));
+Q("#logo").addEventListener("change",e=>{logoFile=e.target.files[0]||null;if(!logoFile)return;let url=URL.createObjectURL(logoFile);Q("#logoPreview").innerHTML=`<img src="${url}" alt="">`});
+function text(){return `👑 EFL FRANCHISE PROFILE SUBMISSION
+
+Team: ${v("#team")}
+Owner: ${v("#owner")}
+Motto: ${v("#motto")}
+Home Field: ${v("#stadium")}
+Primary Colour: ${v("#c1")}
+Secondary Colour: ${v("#c2")}
+Franchise Player: ${v("#player")}
+Nemesis: ${v("#rival")}
+Trash Talk Quote: ${v("#quote")}
+
+Franchise Story:
+${v("#story")}
+
+Custom logo: ${logoFile?"Attached / selected":"None"}
+
+Submitted for commissioner approval at efldynasty.com`;}
+Q("#copy").onclick=async()=>{await navigator.clipboard.writeText(text());Q("#success").style.display="block";setTimeout(()=>Q("#success").style.display="none",2500)};
+Q("#share").onclick=async()=>{let data={title:"EFL Franchise Profile",text:text()};if(logoFile&&navigator.canShare&&navigator.canShare({files:[logoFile]}))data.files=[logoFile];if(navigator.share){try{await navigator.share(data);return}catch(e){if(e.name==="AbortError")return}}await navigator.clipboard.writeText(text());Q("#success").style.display="block";};
+update();
+</script></body></html>
