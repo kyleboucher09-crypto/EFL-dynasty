@@ -4,6 +4,18 @@
 .hub{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.hub a{padding:18px;border-radius:17px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07);min-height:135px}.hub a:hover{border-color:rgba(232,184,74,.28);transform:translateY(-2px)}.hub .icon{font-size:24px}.hub h3{font-size:14px;margin:12px 0 5px}.hub p{font-size:10px;color:var(--muted);line-height:1.5;margin:0}
 .snap-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.panel{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}.stand-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:center}.stand-row:last-child{border-bottom:0}.rank{font-size:20px;font-weight:1000;color:var(--gold2)}.tn{font-weight:900;font-size:13px}.tm{font-size:9px;color:var(--muted)}.rec{font-weight:900;font-size:11px}.record-big{font-size:42px;color:var(--gold2);font-weight:1000;letter-spacing:-.05em}
 @media(max-width:900px){.home-hero{grid-template-columns:1fr;min-height:auto}.logo-mark{width:260px}.hub{grid-template-columns:1fr 1fr}.snap-grid{grid-template-columns:1fr}}@media(max-width:520px){.hub{grid-template-columns:1fr}}
+
+.live-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.live-card{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}
+.motw{border-color:rgba(232,184,74,.28);background:radial-gradient(320px 180px at 100% 0%,rgba(232,184,74,.10),transparent 72%),linear-gradient(145deg,#21170f,#120c18)}
+.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:16px}
+.side{text-align:center}.side .team{font-size:18px;font-weight:1000}.side .owner{font-size:10px;color:var(--muted);margin-top:3px}.versus{font-size:12px;font-weight:1000;color:var(--gold2);padding:8px 10px;border-radius:999px;background:rgba(232,184,74,.08);border:1px solid rgba(232,184,74,.18)}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.award{padding:12px;border-radius:12px;background:#ffffff07}.award small{display:block;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.08em}.award b{display:block;font-size:13px;margin-top:5px}.award span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.race-row,.result-row{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}.race-row:last-child,.result-row:last-child{border-bottom:0}.seed{font-size:18px;font-weight:1000;color:var(--gold2)}.cut{border-top:1px dashed rgba(232,184,74,.35);margin-top:6px;padding-top:10px}
+.score{font-size:11px;font-weight:900}.result-team{font-size:12px;font-weight:900}.result-meta{font-size:9px;color:var(--muted);margin-top:2px}
+.throne-watch{margin-top:14px;padding:14px;border-radius:14px;background:rgba(125,34,201,.08);border:1px solid rgba(125,34,201,.18)}
+.preseason{color:var(--muted);font-size:11px;line-height:1.6}
+@media(max-width:900px){.live-grid{grid-template-columns:1fr}.matchup{grid-template-columns:1fr}.versus{justify-self:center}}
 </style></head><body>
 <div class="topbar"><div class="nav">
 <a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
@@ -27,6 +39,31 @@
 <a href="franchises.html"><div class="icon">🛡️</div><h3>Franchises</h3><p>Every team's league résumé.</p></a>
 <a href="history.html"><div class="icon">📜</div><h3>History</h3><p>The story of every season.</p></a>
 </section>
+
+<div class="section-head"><div class="eyebrow">Game Day Central</div><h2>This Week in the EFL</h2><p>Matchup spotlight, weekly awards, playoff race and recent results — all Sleeper powered.</p></div>
+<section class="live-grid">
+  <div class="live-card motw">
+    <div class="eyebrow">⚔️ Matchup of the Week</div>
+    <div id="motwContent" class="preseason">Preseason mode. Once Week 1 matchups are live, the marquee matchup will appear here automatically.</div>
+    <div class="throne-watch" id="throneWatch"><div class="eyebrow">👑 Throne Watch</div><div class="preseason">Tracking the reigning champion and the hottest challenger once weekly results begin.</div></div>
+  </div>
+  <div class="live-card">
+    <div class="eyebrow">🏆 Weekly Awards</div>
+    <div id="awardsContent" class="preseason">Awards unlock after the first completed week.</div>
+  </div>
+</section>
+
+<section class="live-grid" style="margin-top:14px">
+  <div class="live-card">
+    <div class="eyebrow">🏁 Playoff Race</div>
+    <div id="raceContent" class="preseason">The playoff picture will populate automatically once standings begin to move.</div>
+  </div>
+  <div class="live-card">
+    <div class="eyebrow">📊 Recent Results</div>
+    <div id="resultsContent" class="preseason">Completed weekly matchups will appear here during the season.</div>
+  </div>
+</section>
+
 <div class="section-head"><div class="eyebrow">Sleeper Live</div><h2>League Snapshot</h2><p>Current standings plus an all-time scoring record teaser.</p></div>
 <section class="snap-grid"><div class="panel" id="standings"><div class="loading">Loading standings…</div></div><div class="panel"><div class="eyebrow">Record Watch</div><div class="record-big" id="highScore">—</div><div class="tn" id="highTeam">Highest weekly score</div><div class="tm" id="highMeta">Scanning league history…</div><p style="margin-top:18px"><a href="records.html" style="color:var(--gold2);font-weight:900;font-size:11px">Open full record book →</a></p></div></section>
 <div class="footer">EFL Dynasty · League ID 1313240395462742016</div></main><script src="site.js"></script><script>
@@ -35,10 +72,58 @@ async function podium(lid){let [lg,u,r,b]=await Promise.all([apiGet(`/league/${l
 (async()=>{try{
  let [league,users,rosters]=await Promise.all([apiGet(`/league/${EFL_ID}`),apiGet(`/league/${EFL_ID}/users`),apiGet(`/league/${EFL_ID}/rosters`)]);
  $("#status").textContent=`● Sleeper Live · ${league.season}`;
+ await renderLiveHub(league,users,rosters);
  let p=league.previous_league_id?await podium(league.previous_league_id):null;if(p?.team){$("#throneLabel").textContent=`On The Throne · ${p.lg.season} Champion`;$("#champTeam").textContent=p.team;$("#champMeta").textContent=p.owner}
  let n=nmMaps(users,rosters),sorted=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
  $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
  let lid=EFL_ID,best=null,depth=0;while(lid&&depth<8){let [lg,u,r]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`)]),maps=nmMaps(u,r),end=Math.max(1,+lg.settings?.playoff_week_start-1||14);for(let w=1;w<=end;w++){let rows=[];try{rows=await apiGet(`/league/${lid}/matchups/${w}`)}catch(e){}for(let x of rows){let pts=+x.points||0;if(!best||pts>best.pts){let rr=r.find(z=>z.roster_id===x.roster_id);best={pts,year:lg.season,week:w,...maps(rr)}}}}lid=lg.previous_league_id;depth++}
  if(best){$("#highScore").textContent=best.pts.toFixed(2);$("#highTeam").textContent=best.team;$("#highMeta").textContent=`${best.year} · Week ${best.week}`}
 }catch(e){console.error(e);$("#status").textContent="● Sleeper temporarily unavailable"}})();
+
+async function weekRows(week){try{return await apiGet(`/league/${EFL_ID}/matchups/${week}`)}catch(e){return[]}}
+function matchupGroups(rows){let g={};for(const x of rows){if(x.matchup_id!=null)(g[x.matchup_id]??=[]).push(x)}return Object.values(g).filter(x=>x.length===2)}
+function rosterMaps(users,rosters){let ub=Object.fromEntries(users.map(u=>[u.user_id,u])),rb=Object.fromEntries(rosters.map(r=>[r.roster_id,r]));return {name:rid=>{let r=rb[rid],u=r?ub[r.owner_id]:null;return {team:teamName(u,r),owner:u?.display_name||""}},rb}}
+async function renderLiveHub(league,users,rosters){
+  const state=await apiGet(`/state/nfl`);
+  const regEnd=Math.max(1,Number(league.settings?.playoff_week_start||15)-1);
+  let currentWeek=Number(state.week||1);
+  let completedWeek=Math.max(0,Math.min(regEnd,currentWeek-1));
+  if(state.season!==league.season) completedWeek=0;
+  const maps=rosterMaps(users,rosters);
+
+  // Matchup of the week: closest standings pair among current week matchups
+  const liveRows=await weekRows(Math.max(1,currentWeek));
+  const liveGroups=matchupGroups(liveRows);
+  if(liveGroups.length){
+    let standings=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
+    let rankMap=Object.fromEntries(standings.map((r,i)=>[r.roster_id,i+1]));
+    let pick=[...liveGroups].sort((a,b)=>Math.abs((rankMap[a[0].roster_id]||99)-(rankMap[a[1].roster_id]||99))-Math.abs((rankMap[b[0].roster_id]||99)-(rankMap[b[1].roster_id]||99)))[0];
+    let A=maps.name(pick[0].roster_id),B=maps.name(pick[1].roster_id);
+    $("#motwContent").innerHTML=`<div class="matchup"><div class="side"><div class="team">${A.team}</div><div class="owner">${A.owner}</div></div><div class="versus">VS</div><div class="side"><div class="team">${B.team}</div><div class="owner">${B.owner}</div></div></div><div class="result-meta" style="text-align:center;margin-top:10px">Week ${currentWeek} · closest-ranked matchup</div>`;
+  }
+
+  if(completedWeek>0){
+    let rows=await weekRows(completedWeek),groups=matchupGroups(rows);
+    let games=groups.map(g=>{let a=g[0],b=g[1],ap=+a.points||0,bp=+b.points||0,A=maps.name(a.roster_id),B=maps.name(b.roster_id);return {a:A,b:B,ap,bp,high:Math.max(ap,bp),low:Math.min(ap,bp),margin:Math.abs(ap-bp),winner:ap>=bp?A:B,loser:ap>=bp?B:A}});
+    let top=[...games].sort((x,y)=>y.high-x.high)[0],blow=[...games].sort((x,y)=>y.margin-x.margin)[0],close=[...games].filter(x=>x.margin>0).sort((x,y)=>x.margin-y.margin)[0],tough=[...games].sort((x,y)=>y.low-x.low)[0];
+    $("#awardsContent").innerHTML=`<div class="awards">
+      <div class="award"><small>🔥 Top Score</small><b>${top.winner.team}</b><span>${top.high.toFixed(2)}</span></div>
+      <div class="award"><small>💥 Biggest Blowout</small><b>${blow.winner.team}</b><span>+${blow.margin.toFixed(2)}</span></div>
+      <div class="award"><small>😬 Closest Win</small><b>${close?.winner.team||"—"}</b><span>${close?close.margin.toFixed(2):"—"}</span></div>
+      <div class="award"><small>💔 Toughest Loss</small><b>${tough.loser.team}</b><span>${tough.low.toFixed(2)} in a loss</span></div>
+    </div><div class="result-meta" style="margin-top:10px">Week ${completedWeek} awards</div>`;
+    $("#resultsContent").innerHTML=games.slice(0,6).map(g=>`<div class="result-row"><div class="seed">•</div><div><div class="result-team">${g.a.team} vs ${g.b.team}</div><div class="result-meta">Week ${completedWeek}</div></div><div class="score">${g.ap.toFixed(1)}–${g.bp.toFixed(1)}</div></div>`).join("");
+  }
+
+  let standings=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
+  let playoffTeams=Number(league.settings?.playoff_teams||6);
+  $("#raceContent").innerHTML=standings.slice(0,Math.min(8,standings.length)).map((r,i)=>{let n=maps.name(r.roster_id),pf=(Number(r.settings?.fpts||0)+Number(r.settings?.fpts_decimal||0)/100).toFixed(1);return `<div class="race-row ${i===playoffTeams?'cut':''}"><div class="seed">${i+1}</div><div><div class="result-team">${n.team}</div><div class="result-meta">${n.owner}</div></div><div class="score">${r.settings?.wins||0}-${r.settings?.losses||0}<br><span style="color:var(--muted);font-size:8px">${pf} PF</span></div></div>`}).join("");
+
+  if(completedWeek>0 && standings.length){
+    let champ=$("#champTeam")?.textContent||"Reigning Champion";
+    let challenger=maps.name(standings[0].roster_id).team;
+    $("#throneWatch").innerHTML=`<div class="eyebrow">👑 Throne Watch</div><div class="result-team" style="margin-top:7px">${champ}</div><div class="result-meta">Reigning champion</div><div class="result-team" style="margin-top:10px">${challenger}</div><div class="result-meta">Current top challenger by standings</div>`;
+  }
+}
+
 </script></body></html>
