@@ -1,118 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Dynasty</title><link rel="stylesheet" href="site.css"><style>
 .home-hero{min-height:570px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}.home-hero h1{font-size:clamp(52px,8vw,98px)}.logo-mark{width:min(420px,100%);justify-self:center;filter:drop-shadow(0 0 28px rgba(125,34,201,.32))}
-
-/* ===== EFL SPOTLIGHT — POLISHED BROADCAST BUILD ===== */
-.home-hero{min-height:auto;display:block;padding:0;background:none;border:0}
-.spot-titlebar{
-  position:relative;text-align:center;padding:20px 10px 24px;margin:0 0 6px;
-  background:radial-gradient(700px 180px at 50% 0,rgba(125,34,201,.22),transparent 70%),linear-gradient(180deg,rgba(12,6,18,.35),rgba(4,2,7,.92));
-}
-.spot-titlebar:after{content:"";position:absolute;left:18%;right:18%;bottom:7px;height:1px;background:linear-gradient(90deg,transparent,#7d22c9,#ffd979,#7d22c9,transparent)}
-.spot-titlebar .eyebrow{margin-bottom:7px}
-.spot-titlebar h1{font-size:clamp(42px,6vw,78px);margin:0;letter-spacing:-.055em;line-height:.9;text-shadow:0 6px 24px #000}
-.spot-titlebar h1 span{color:var(--gold2)}
-
-.spot-wrap{position:relative;margin-top:0}
-.broadcast{display:grid;grid-template-columns:minmax(225px,.78fr) minmax(430px,1.55fr) minmax(225px,.78fr);gap:14px;align-items:stretch}
-.sidecard,.featurestage{
-  position:relative;overflow:hidden;border-radius:22px;
-  border:1px solid rgba(125,34,201,.5);
-  background:radial-gradient(460px 230px at 75% 5%,rgba(125,34,201,.24),transparent 70%),linear-gradient(145deg,#171020,#09070d);
-  box-shadow:0 20px 55px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.018)
-}
-.sidecard{padding:20px;min-height:392px}
-.sidehead{font-size:20px;font-weight:1000;font-style:italic;letter-spacing:-.025em;text-shadow:0 4px 18px #000}
-.side-sub{font-size:9px;color:var(--muted);margin-top:4px}
-.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-top:30px}
-.teammini{text-align:center}
-.teammini .crest{
-  width:78px;height:78px;border-radius:19px;margin:auto;display:grid;place-items:center;overflow:hidden;
-  border:1px solid rgba(255,255,255,.15);background:radial-gradient(circle at 50% 35%,#33134a,#0a0710 75%);
-  box-shadow:0 0 22px rgba(125,34,201,.24);font-weight:1000;color:var(--gold2)
-}
-.teammini .crest img{width:100%;height:100%;object-fit:cover}
-.teammini b{display:block;font-size:11px;margin-top:9px}.teammini small{display:block;color:var(--muted);font-size:8px;margin-top:3px}
-.vsbomb{font-size:29px;font-weight:1000;color:#fff;text-shadow:0 0 24px #9d36ff}
-.sidecta{position:absolute;left:20px;right:20px;bottom:18px}
-.sidecta a,.feature-cta{
-  display:inline-flex;justify-content:center;align-items:center;padding:11px 14px;border-radius:10px;
-  border:1px solid rgba(232,184,74,.42);background:rgba(232,184,74,.08);
-  color:var(--gold2);font-size:9px;font-weight:1000;box-shadow:inset 0 0 22px rgba(232,184,74,.035)
-}
-.ranklist{margin-top:18px}.rankitem{display:grid;grid-template-columns:32px 1fr auto;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.065)}
-.ranknum{font-size:27px;font-weight:1000;color:#fff}.rankteam{font-size:11px;font-weight:950}.rankrec{font-size:9px;color:var(--gold2);font-weight:900}
-
-.featurestage{min-height:430px;border-color:rgba(232,184,74,.62);box-shadow:0 22px 60px #0009,0 0 30px rgba(232,184,74,.08)}
-.feature{
-  position:absolute;inset:0;opacity:0;transform:translateX(28px) scale(.987);
-  transition:opacity .5s ease,transform .5s ease;pointer-events:none;
-  padding:34px 34px 88px;display:flex;flex-direction:column;justify-content:flex-end;
-  background:linear-gradient(90deg,rgba(7,4,10,.98) 0%,rgba(8,5,12,.90) 43%,rgba(8,5,12,.18) 72%,rgba(8,5,12,.04) 100%)
-}
-.feature.on{opacity:1;transform:none;pointer-events:auto}
-.feature-art{
-  position:absolute;inset:0 0 0 auto;width:64%;height:100%;object-fit:cover;object-position:center;
-  filter:saturate(1.15) contrast(1.05) brightness(.94);
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 9%,#000 32%,#000 100%);
-  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 9%,#000 32%,#000 100%)
-}
-.feature:after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(520px 260px at 77% 34%,rgba(125,34,201,.16),transparent 68%),
-    linear-gradient(0deg,rgba(5,3,8,.72),transparent 36%)
-}
-.feature[data-feature="0"]:after{background:radial-gradient(520px 300px at 78% 43%,rgba(232,184,74,.13),transparent 68%),linear-gradient(0deg,rgba(5,3,8,.72),transparent 38%)}
-.feature[data-feature="1"]{background-color:#0c0711}
-.feature[data-feature="2"]{background-color:#11090e}
-.feature[data-feature="3"]{background-color:#0b0710}
-
-.feature .kicker,.feature .headline,.feature .champ-banner,.feature .copy,.feature .feature-cta,.record-number{position:relative;z-index:4}
-.feature .kicker{color:var(--gold2);font-size:10px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}
-.feature .headline{font-size:clamp(40px,5vw,67px);font-weight:1000;line-height:.84;letter-spacing:-.06em;max-width:64%;margin-top:8px;text-shadow:0 5px 20px #000}
-.feature .headline .gold{color:var(--gold2)}
-.feature .copy{font-size:12px;color:#d1c4d8;line-height:1.55;max-width:57%;margin-top:12px;text-shadow:0 3px 12px #000}
-.feature .copy b{font-size:16px;color:#fff}
-.feature .feature-cta{margin-top:16px;margin-bottom:8px;align-self:flex-start;background:linear-gradient(135deg,#ffe08a,#d99d32);border-color:#f2c85e;color:#211405;padding:12px 16px;box-shadow:0 7px 20px rgba(232,184,74,.17)}
-.champ-banner{display:inline-flex;align-self:flex-start;margin-top:13px;padding:8px 11px;border-radius:999px;background:rgba(255,217,121,.10);border:1px solid rgba(255,217,121,.34);color:#ffe7a4;font-size:9px;font-weight:1000}
-.record-number{font-size:72px;line-height:.92;font-weight:1000;color:var(--gold2);letter-spacing:-.065em;text-shadow:0 6px 24px #000}
-.featuredots{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;z-index:12;display:flex;gap:9px}
-.featuredot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#ffffff48;box-shadow:0 2px 10px #0008}
-.featuredot.on{background:var(--gold2);box-shadow:0 0 13px rgba(232,184,74,.8)}
-
-.navarrow{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:30;width:46px;height:62px;border-radius:15px;
-  border:1px solid rgba(125,34,201,.72);background:linear-gradient(180deg,#3a1252,#15091e);color:#fff;
-  font-size:30px;font-weight:700;box-shadow:0 0 26px rgba(125,34,201,.38);cursor:pointer;touch-action:manipulation
-}
-.navarrow.left{left:-12px}.navarrow.right{right:-12px}
-
-.statstrip{display:grid;grid-template-columns:repeat(5,1fr);margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(125,34,201,.38);background:linear-gradient(180deg,#0f0a14,#09070c)}
-.stripitem{padding:16px;border-right:1px solid rgba(255,255,255,.065)}.stripitem:last-child{border-right:0}
-.stripitem small{display:block;color:var(--gold2);font-size:8px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
-.stripitem b{display:block;font-size:16px;margin-top:5px}.stripitem span{display:block;color:var(--muted);font-size:8px;margin-top:3px}
-
-@media(max-width:1000px){
-  .broadcast{grid-template-columns:1fr}.featurestage{order:-2;min-height:500px}.sidecard{min-height:310px}.statstrip{grid-template-columns:1fr 1fr}
-}
-@media(max-width:600px){
-  .spot-titlebar{padding-top:26px}.spot-titlebar h1{font-size:52px}
-  .featurestage{min-height:620px;border-radius:20px}
-  .feature{padding:30px 36px 92px;justify-content:flex-end;background:linear-gradient(0deg,rgba(7,4,10,.98) 0%,rgba(7,4,10,.91) 44%,rgba(7,4,10,.18) 76%,rgba(7,4,10,.03) 100%)}
-  .feature-art{
-    width:100%;height:61%;inset:0 0 auto 0;object-position:center 28%;
-    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%);
-    mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%)
-  }
-  .feature .headline{font-size:43px;max-width:100%}.feature .copy{max-width:100%;font-size:12px}.feature .copy b{font-size:16px}
-  .record-number{font-size:66px}.feature .feature-cta{margin-top:16px}
-  .featuredots{bottom:26px}.navarrow{width:38px;height:52px;font-size:25px}.navarrow.left{left:7px}.navarrow.right{right:7px}
-  .sidecard{min-height:330px}.statstrip{grid-template-columns:1fr}.stripitem{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
-}
+.spotlight{position:relative;min-height:430px;border-radius:28px;overflow:hidden;border:1px solid rgba(232,184,74,.24);background:#0c0811;box-shadow:0 22px 60px #0008}.spot-slide{position:absolute;inset:0;padding:28px;opacity:0;transform:translateX(22px);transition:.65s ease;pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(400px 260px at 80% 20%,rgba(125,34,201,.24),transparent 68%),linear-gradient(145deg,#181020,#0b0710)}.spot-slide.on{opacity:1;transform:none;pointer-events:auto}.spot-slide.champ{background:radial-gradient(430px 280px at 80% 20%,rgba(255,217,121,.20),transparent 65%),linear-gradient(145deg,#21160c,#0c0811)}.spot-slide.rankings{background:radial-gradient(400px 260px at 80% 15%,rgba(125,34,201,.32),transparent 68%),linear-gradient(145deg,#160d20,#0b0710)}.spot-slide.records{background:radial-gradient(400px 260px at 80% 15%,rgba(232,184,74,.17),transparent 68%),linear-gradient(145deg,#1b1011,#0b0710)}.spot-watermark{position:absolute;right:-30px;top:-20px;width:270px;opacity:.10;filter:grayscale(1)}.spot-icon{position:absolute;right:30px;top:30px;font-size:92px;filter:drop-shadow(0 10px 25px #0008)}.spot-kicker{color:var(--gold2);font-size:9px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}.spot-title{font-size:clamp(28px,4vw,48px);font-weight:1000;line-height:.94;letter-spacing:-.04em;max-width:80%;margin-top:7px}.spot-copy{color:#c8bdcf;font-size:11px;line-height:1.55;max-width:78%;margin-top:9px}.spot-cta{display:inline-flex;align-self:flex-start;margin-top:14px;padding:9px 12px;border-radius:999px;background:#ffd979;color:#211405;font-size:9px;font-weight:1000}.spot-dots{position:absolute;left:28px;bottom:18px;display:flex;gap:7px;z-index:4}.spot-dot{width:7px;height:7px;border-radius:50%;border:0;background:#ffffff38;padding:0}.spot-dot.on{background:#ffd979;box-shadow:0 0 10px #ffd97977}.spot-arrows{position:absolute;right:18px;bottom:14px;display:flex;gap:6px;z-index:4}.spot-arrow{width:32px;height:32px;border-radius:50%;border:1px solid #ffffff1c;background:#09070bbb;color:#fff}.spot-big{font-size:48px;font-weight:1000;color:var(--gold2);line-height:1}.spot-vs{display:flex;align-items:center;gap:9px;margin-top:9px;font-size:14px;font-weight:950}.spot-vs span{color:var(--gold2);font-size:10px}
 .throne{margin-top:20px;padding:24px;border-radius:22px;background:linear-gradient(145deg,rgba(232,184,74,.12),rgba(20,10,28,.84));border:1px solid rgba(232,184,74,.31)}.throne .crown{font-size:45px}.throne-team{font-size:28px;font-weight:1000;margin-top:6px}.throne-meta{color:var(--muted);font-size:11px;margin-top:5px}
 .hub{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.hub a{padding:18px;border-radius:17px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07);min-height:135px}.hub a:hover{border-color:rgba(232,184,74,.28);transform:translateY(-2px)}.hub .icon{font-size:24px}.hub h3{font-size:14px;margin:12px 0 5px}.hub p{font-size:10px;color:var(--muted);line-height:1.5;margin:0}
 .snap-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.panel{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}.stand-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:center}.stand-row:last-child{border-bottom:0}.rank{font-size:20px;font-weight:1000;color:var(--gold2)}.tn{font-weight:900;font-size:13px}.tm{font-size:9px;color:var(--muted)}.rec{font-weight:900;font-size:11px}.record-big{font-size:42px;color:var(--gold2);font-weight:1000;letter-spacing:-.05em}
-@media(max-width:900px){.home-hero{grid-template-columns:1fr;min-height:auto}.logo-mark{width:260px}.hub{grid-template-columns:1fr 1fr}.snap-grid{grid-template-columns:1fr}}@media(max-width:520px){.hub{grid-template-columns:1fr}}
+@media(max-width:900px){.home-hero{grid-template-columns:1fr;min-height:auto}.spotlight{min-height:360px}.spot-title,.spot-copy{max-width:85%}.spot-icon{font-size:70px}.logo-mark{width:260px}.hub{grid-template-columns:1fr 1fr}.snap-grid{grid-template-columns:1fr}}@media(max-width:520px){.hub{grid-template-columns:1fr}}
 
 .live-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
 .live-card{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}
@@ -126,30 +18,52 @@
 .preseason{color:var(--muted);font-size:11px;line-height:1.6}
 @media(max-width:900px){.live-grid{grid-template-columns:1fr}.matchup{grid-template-columns:1fr}.versus{justify-self:center}}
 
-/* PREMIUM SPOTLIGHT ART OVERRIDE */
-.featured{min-height:780px}
-.feature{min-height:780px;padding:390px 34px 92px;justify-content:flex-start}
-.feature-art{
-  position:absolute;inset:0 0 auto 0;width:100%;height:430px;
-  object-fit:cover;object-position:center top;opacity:1;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 100%);
-  mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 100%);
+/* EFL Spotlight v3 — portrait art built for the slider, live data stays HTML */
+.spotlight-v3{
+  position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(243,190,67,.48);
+  background:#050308;min-height:760px;box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
-.feature::after{
-  background:
-    linear-gradient(180deg,rgba(5,2,8,.02) 0%,rgba(5,2,8,.10) 44%,rgba(5,2,8,.94) 62%,#050308 78%),
-    linear-gradient(90deg,rgba(5,2,8,.08),transparent 58%);
+.spotlight-v3 .spot-slide{position:absolute;inset:0;display:none;color:#fff;text-decoration:none;overflow:hidden;padding:0}
+.spotlight-v3 .spot-slide.on{display:block}
+.spotlight-v3 .spot-art{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;
+  transform:scale(1.002);
 }
-.feature .kicker,.feature .headline,.feature .champ-banner,.feature .copy,.feature .feature-cta{position:relative;z-index:3}
-.feature .headline{font-size:clamp(40px,9vw,70px);line-height:.9;max-width:620px}
-.feature .copy{max-width:560px}
-.feature .feature-cta{align-self:flex-start}
-.featuredots{z-index:5;bottom:24px}
-@media(max-width:760px){
- .featured{min-height:760px}
- .feature{min-height:760px;padding:355px 24px 86px}
- .feature-art{height:405px}
- .feature .headline{font-size:43px}
+.spotlight-v3 .spot-slide:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(3,1,5,0) 0%,rgba(3,1,5,.05) 44%,rgba(3,1,5,.72) 60%,#050308 76%,#050308 100%);
+}
+.spotlight-v3 .spot-live{
+  position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 36px 78px;display:flex;flex-direction:column;align-items:flex-start;
+}
+.spotlight-v3 .spot-kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:900;color:#f6ce65;margin-bottom:10px}
+.spotlight-v3 .spot-title{font-size:clamp(38px,5.2vw,66px);line-height:.91;font-weight:1000;letter-spacing:-.045em;max-width:620px}
+.spotlight-v3 .spot-big{font-size:clamp(56px,8vw,88px);font-weight:1000;line-height:.9;color:#ffd666;letter-spacing:-.05em}
+.spotlight-v3 .record-team{font-size:30px;margin-top:8px}
+.spotlight-v3 .spot-copy{font-size:17px;line-height:1.42;color:#d8cfdd;margin-top:15px;max-width:560px}
+.spotlight-v3 .spot-cta{display:inline-flex;margin-top:18px;padding:14px 20px;border-radius:14px;background:linear-gradient(135deg,#ffe07b,#e7a92e);color:#1a1004;font-weight:950;font-size:13px;letter-spacing:.04em;box-shadow:0 10px 28px rgba(226,164,35,.22)}
+.spotlight-v3 .spot-dots{position:absolute;z-index:6;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:12px}
+.spotlight-v3 .spot-dot{width:10px;height:10px;border:0;border-radius:50%;background:#777;opacity:.6;padding:0}
+.spotlight-v3 .spot-dot.on{background:#ffd666;opacity:1;box-shadow:0 0 14px rgba(255,214,102,.65)}
+.spotlight-v3 .spot-arrows{position:absolute;z-index:7;left:14px;right:14px;top:46%;display:flex;justify-content:space-between;pointer-events:none}
+.spotlight-v3 .spot-arrow{pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid rgba(243,190,67,.5);background:rgba(5,3,8,.62);backdrop-filter:blur(8px);color:#ffd666;font-size:31px;line-height:1}
+@media(max-width:700px){
+ .spotlight-v3{min-height:760px;border-radius:25px}
+ .spotlight-v3 .spot-art{object-fit:cover;object-position:center top}
+ .spotlight-v3 .spot-live{padding:0 38px 76px}
+ .spotlight-v3 .spot-title{font-size:45px;max-width:520px}
+ .spotlight-v3 .spot-copy{font-size:16px;max-width:500px}
+ .spotlight-v3 .spot-arrows{left:8px;right:8px;top:43%}
+ .spotlight-v3 .spot-arrow{width:40px;height:40px;font-size:27px}
+}
+@media(max-width:430px){
+ .spotlight-v3{min-height:720px}
+ .spotlight-v3 .spot-live{padding:0 28px 70px}
+ .spotlight-v3 .spot-title{font-size:39px}
+ .spotlight-v3 .record-team{font-size:25px}
+ .spotlight-v3 .spot-big{font-size:62px}
+ .spotlight-v3 .spot-cta{font-size:12px;padding:13px 17px}
+ .spotlight-v3 .spot-dots{bottom:22px}
 }
 
 </style></head><body>
@@ -163,101 +77,29 @@
 <a data-nav href="index.html">🏠 Home</a><a data-nav href="champions.html">👑 Champions</a><a data-nav href="power-rankings.html">📈 Power Rankings</a><a data-nav href="records.html">🔥 Records</a><a data-nav href="franchises.html">🛡️ Franchises</a><a data-nav href="history.html">📜 History</a><a data-nav href="commissioner.html">♛ Commissioner</a>
 </div>
 <main class="shell">
-
 <section class="page-hero home-hero">
-  <div class="spot-titlebar">
-    <div class="eyebrow">Elite Fantasy Footballers · Dynasty</div>
-    <h1>EFL <span>SPOTLIGHT</span></h1>
-  </div>
-
-  <div class="spot-wrap">
-    <button class="navarrow left" id="heroPrev" aria-label="Previous spotlight">‹</button>
-    <button class="navarrow right" id="heroNext" aria-label="Next spotlight">›</button>
-
-    <div class="broadcast">
-      <aside class="sidecard">
-        <div class="sidehead">GAME OF THE WEEK</div>
-        <div class="side-sub" id="heroWeekLabel">Preseason · matchup loads automatically</div>
-        <div class="vs-block">
-          <div class="teammini">
-            <div class="crest" id="heroLeftCrest">EFL</div>
-            <b id="heroLeftTeam">TBD</b><small id="heroLeftRec">—</small>
-          </div>
-          <div class="vsbomb">VS</div>
-          <div class="teammini">
-            <div class="crest" id="heroRightCrest">EFL</div>
-            <b id="heroRightTeam">TBD</b><small id="heroRightRec">—</small>
-          </div>
-        </div>
-        <div class="sidecta"><a href="#game-day">VIEW MATCHUP ↓</a></div>
-      </aside>
-
-      <div class="featurestage" id="featureStage">
-        <a class="feature on" href="franchises.html" data-feature="0">
-          <img class="feature-art" src="Assets/spotlight-champion-premium.jpg" alt="" aria-hidden="true">
-          <div class="kicker">The Crown Lives Here</div>
-          <div class="headline">REIGNING<br><span class="gold">CHAMPION</span></div>
-          <div class="champ-banner" id="featureChampYear">EFL CHAMPION</div>
-          <div class="copy"><b id="featureChampTeam">Loading champion…</b><br><span id="featureChampOwner">Pulling the latest completed EFL season.</span></div>
-          <span class="feature-cta">VIEW THEIR FRANCHISE →</span>
-        </a>
-
-        <a class="feature" href="power-rankings.html" data-feature="1">
-          <img class="feature-art" src="Assets/spotlight-rankings-premium.jpg" alt="" aria-hidden="true">
-          <div class="kicker">League Hierarchy</div>
-          <div class="headline">TOP 3<br><span class="gold">POWER RANKINGS</span></div>
-          <div class="copy" id="featureRankCopy">The three franchises sitting at the top of the current EFL hierarchy.</div>
-          <span class="feature-cta">OPEN POWER RANKINGS →</span>
-        </a>
-
-        <a class="feature" href="records.html" data-feature="2">
-          <img class="feature-art" src="Assets/spotlight-record-premium.jpg" alt="" aria-hidden="true">
-          <div class="kicker">Record Watch</div>
-          <div class="record-number" id="featureRecordScore">—</div>
-          <div class="headline" style="font-size:34px" id="featureRecordTeam">HIGHEST WEEKLY SCORE</div>
-          <div class="copy" id="featureRecordMeta">Scanning EFL history…</div>
-          <span class="feature-cta">OPEN RECORD BOOK →</span>
-        </a>
-
-        <a class="feature" href="#game-day" data-feature="3">
-          <img class="feature-art" src="Assets/spotlight-matchup-premium.jpg" alt="" aria-hidden="true">
-          <div class="kicker">Marquee Matchup</div>
-          <div class="headline">GAME OF<br><span class="gold">THE WEEK</span></div>
-          <div class="champ-banner" id="featureGameWeek">EFL MATCHUP</div>
-          <div class="copy"><b id="featureGameTeams">Matchup loading…</b><br><span id="featureGameMeta">The week's featured showdown.</span></div>
-          <span class="feature-cta">VIEW GAME DAY CENTRAL ↓</span>
-        </a>
-
-        <div class="featuredots">
-          <button class="featuredot on" data-jump="0" aria-label="Spotlight 1"></button>
-          <button class="featuredot" data-jump="1" aria-label="Spotlight 2"></button>
-          <button class="featuredot" data-jump="2" aria-label="Spotlight 3"></button>
-          <button class="featuredot" data-jump="3" aria-label="Spotlight 4"></button>
-        </div>
-      </div>
-
-      <aside class="sidecard">
-        <div class="sidehead">POWER RANKINGS</div>
-        <div class="side-sub">Current EFL hierarchy</div>
-        <div class="ranklist" id="heroRankList">
-          <div class="rankitem"><div class="ranknum">1</div><div class="rankteam">Loading…</div><div class="rankrec">—</div></div>
-          <div class="rankitem"><div class="ranknum">2</div><div class="rankteam">Loading…</div><div class="rankrec">—</div></div>
-          <div class="rankitem"><div class="ranknum">3</div><div class="rankteam">Loading…</div><div class="rankrec">—</div></div>
-        </div>
-        <div class="sidecta"><a href="power-rankings.html">VIEW FULL RANKINGS →</a></div>
-      </aside>
-    </div>
-
-    <div class="statstrip">
-      <div class="stripitem"><small>Reigning Champion</small><b id="stripChampion">Loading…</b><span id="stripChampionMeta">—</span></div>
-      <div class="stripitem"><small>League Record</small><b id="stripRecord">—</b><span id="stripRecordMeta">Highest weekly score</span></div>
-      <div class="stripitem"><small>League Season</small><b id="stripSeason">—</b><span>Current Sleeper season</span></div>
-      <div class="stripitem"><small>League Size</small><b id="stripSize">—</b><span>Franchises</span></div>
-      <div class="stripitem"><small>Live Status</small><b id="status">Connecting…</b><span>Sleeper powered</span></div>
-    </div>
-  </div>
+<div><div class="eyebrow">Elite Fantasy Footballers · Dynasty</div><h1>THE EFL <span>LEAGUE HUB</span></h1><p>The throne, weekly rankings, records and league history — all in one place, powered by Sleeper.</p><div class="throne"><div class="crown">👑</div><div class="eyebrow" id="throneLabel">On The Throne</div><div class="throne-team" id="champTeam">Loading champion…</div><div class="throne-meta" id="champMeta">Pulling the latest completed EFL season.</div></div><div class="status" id="status">● Connecting to Sleeper…</div></div>
+<div class="spotlight spotlight-v3" id="spotlight">
+  <a class="spot-slide champ on" href="franchises.html" data-spot="0">
+    <img class="spot-art" src="Assets/spotlight-champion.jpg" alt="">
+    <div class="spot-live"><div class="spot-kicker">The Crown Lives Here</div><div class="spot-title" id="spotChamp">REIGNING CHAMPION</div><div class="spot-copy" id="spotChampCopy">Loading the latest EFL champion.</div><span class="spot-cta">VIEW THEIR FRANCHISE →</span></div>
+  </a>
+  <a class="spot-slide rankings" href="power-rankings.html" data-spot="1">
+    <img class="spot-art" src="Assets/spotlight-rankings.jpg" alt="">
+    <div class="spot-live"><div class="spot-kicker">League Hierarchy</div><div class="spot-title">TOP 3 POWER RANKINGS</div><div class="spot-copy" id="spotRank">Loading the EFL top three.</div><span class="spot-cta">OPEN POWER RANKINGS →</span></div>
+  </a>
+  <a class="spot-slide" href="#game-day" data-spot="2">
+    <img class="spot-art" src="Assets/spotlight-matchup.jpg" alt="">
+    <div class="spot-live"><div class="spot-kicker">Marquee Matchup</div><div class="spot-title">GAME OF THE WEEK</div><div class="spot-copy" id="spotGame">The week's featured showdown loads automatically.</div><span class="spot-cta">VIEW GAME DAY CENTRAL ↓</span></div>
+  </a>
+  <a class="spot-slide records" href="records.html" data-spot="3">
+    <img class="spot-art" src="Assets/spotlight-record.jpg" alt="">
+    <div class="spot-live"><div class="spot-kicker">League Points Record</div><div class="spot-big" id="spotRecord">—</div><div class="spot-title record-team" id="spotRecordTeam">HIGHEST WEEKLY SCORE</div><div class="spot-copy" id="spotRecordMeta">Scanning EFL history.</div><span class="spot-cta">OPEN RECORD BOOK →</span></div>
+  </a>
+  <div class="spot-dots"><button class="spot-dot on" data-go="0" aria-label="Champion"></button><button class="spot-dot" data-go="1" aria-label="Power rankings"></button><button class="spot-dot" data-go="2" aria-label="Game of the week"></button><button class="spot-dot" data-go="3" aria-label="Record"></button></div>
+  <div class="spot-arrows"><button class="spot-arrow" id="spotPrev" aria-label="Previous spotlight">‹</button><button class="spot-arrow" id="spotNext" aria-label="Next spotlight">›</button></div>
+</div>
 </section>
-
 <div class="section-head"><div class="eyebrow">Explore The League</div><h2>Everything EFL</h2><p>No digging. The good stuff is right here.</p></div>
 <section class="hub">
 <a href="power-rankings.html"><div class="icon">📈</div><h3>Power Rankings</h3><p>Weekly hierarchy and movement.</p></a>
@@ -293,21 +135,28 @@
 
 <div class="section-head"><div class="eyebrow">Sleeper Live</div><h2>League Snapshot</h2><p>Current standings plus an all-time scoring record teaser.</p></div>
 <section class="snap-grid"><div class="panel" id="standings"><div class="loading">Loading standings…</div></div><div class="panel"><div class="eyebrow">Record Watch</div><div class="record-big" id="highScore">—</div><div class="tn" id="highTeam">Highest weekly score</div><div class="tm" id="highMeta">Scanning league history…</div><p style="margin-top:18px"><a href="records.html" style="color:var(--gold2);font-weight:900;font-size:11px">Open full record book →</a></p></div></section>
-<div class="footer">EFL Dynasty · League ID 1313240395462742016</div></main><script src="site.js"></script><script>
+<div class="footer">EFL Dynasty · League ID 1313240395462742016</div></main><script src="site.js">
+(function(){
+ let i=0,timer=null,startX=0;
+ const slides=[...document.querySelectorAll(".spot-slide")],dots=[...document.querySelectorAll(".spot-dot")];
+ function go(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle("on",k===i));dots.forEach((d,k)=>d.classList.toggle("on",k===i));restart()}
+ function restart(){clearInterval(timer);timer=setInterval(()=>go(i+1),6000)}
+ dots.forEach(d=>d.onclick=e=>{e.preventDefault();e.stopPropagation();go(+d.dataset.go)});
+ $("#spotPrev").onclick=e=>{e.preventDefault();go(i-1)};$("#spotNext").onclick=e=>{e.preventDefault();go(i+1)};
+ const box=$("#spotlight");box.addEventListener("touchstart",e=>startX=e.touches[0].clientX,{passive:true});box.addEventListener("touchend",e=>{let dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>45)go(i+(dx<0?1:-1))},{passive:true});restart()
+})();
+</script><script>
 function nmMaps(users,rosters){let u=Object.fromEntries(users.map(x=>[x.user_id,x]));return r=>{let x=u[r.owner_id];return {team:teamName(x,r),owner:x?.display_name||""}}}
 async function podium(lid){let [lg,u,r,b]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`),apiGet(`/league/${lid}/winners_bracket`)]);let c=(b||[]).filter(x=>x.w&&x.l),f=c.find(x=>+x.p===1)||[...c].sort((a,b)=>(b.r||0)-(a.r||0))[0],rb=Object.fromEntries(r.map(x=>[x.roster_id,x])),ub=Object.fromEntries(u.map(x=>[x.user_id,x]));if(!f)return{lg};let rr=rb[f.w],uu=rr?ub[rr.owner_id]:null;return{lg,team:teamName(uu,rr),owner:uu?.display_name||""}}
 (async()=>{try{
  let [league,users,rosters]=await Promise.all([apiGet(`/league/${EFL_ID}`),apiGet(`/league/${EFL_ID}/users`),apiGet(`/league/${EFL_ID}/rosters`)]);
- $("#status").textContent="● LIVE";$("#stripSeason").textContent=league.season;$("#stripSize").textContent=rosters.length;
+ $("#status").textContent=`● Sleeper Live · ${league.season}`;
  await renderLiveHub(league,users,rosters);
- let p=league.previous_league_id?await podium(league.previous_league_id):null;if(p?.team){$("#featureChampTeam").textContent=p.team;$("#featureChampOwner").textContent=p.owner;$("#featureChampYear").textContent=`${p.lg.season} EFL CHAMPION`;$("#stripChampion").textContent=p.team;$("#stripChampionMeta").textContent=`${p.lg.season} · ${p.owner}`}
+ let p=league.previous_league_id?await podium(league.previous_league_id):null;if(p?.team){$("#throneLabel").textContent=`On The Throne · ${p.lg.season} Champion`;$("#champTeam").textContent=p.team;$("#champMeta").textContent=p.owner;$("#spotChamp").textContent=p.team;$("#spotChampCopy").textContent=`${p.lg.season} EFL Champion · ${p.owner} · The crown lives here.`}
  let n=nmMaps(users,rosters),sorted=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
- $("#heroRankList").innerHTML=sorted.slice(0,3).map((r,i)=>{let x=n(r);return `<div class="rankitem"><div class="ranknum">${i+1}</div><div class="rankteam">${x.team}</div><div class="rankrec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("");
- if(sorted[0]){let lead=n(sorted[0]);$("#featureRankCopy").textContent=`#1 ${lead.team} · ${sorted[0].settings?.wins||0}-${sorted[0].settings?.losses||0} · ${lead.owner}`}
-
- $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
+ if(sorted[0]){let lead=n(sorted[0]);$("#spotRank").textContent=`#1 ${lead.team} · ${sorted[0].settings?.wins||0}-${sorted[0].settings?.losses||0} · ${lead.owner}`} $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
  let lid=EFL_ID,best=null,depth=0;while(lid&&depth<8){let [lg,u,r]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`)]),maps=nmMaps(u,r),end=Math.max(1,+lg.settings?.playoff_week_start-1||14);for(let w=1;w<=end;w++){let rows=[];try{rows=await apiGet(`/league/${lid}/matchups/${w}`)}catch(e){}for(let x of rows){let pts=+x.points||0;if(!best||pts>best.pts){let rr=r.find(z=>z.roster_id===x.roster_id);best={pts,year:lg.season,week:w,...maps(rr)}}}}lid=lg.previous_league_id;depth++}
- if(best){$("#highScore").textContent=best.pts.toFixed(2);$("#highTeam").textContent=best.team;$("#highMeta").textContent=`${best.year} · Week ${best.week}`;$("#featureRecordScore").textContent=best.pts.toFixed(2);$("#featureRecordTeam").textContent=best.team;$("#featureRecordMeta").textContent=`EFL record · ${best.year} · Week ${best.week}`;$("#stripRecord").textContent=best.pts.toFixed(2);$("#stripRecordMeta").textContent=`${best.team} · ${best.year} Wk ${best.week}`}
+ if(best){$("#highScore").textContent=best.pts.toFixed(2);$("#highTeam").textContent=best.team;$("#highMeta").textContent=`${best.year} · Week ${best.week}`;$("#spotRecord").textContent=best.pts.toFixed(2);$("#spotRecordTeam").textContent=best.team;$("#spotRecordMeta").textContent=`EFL record · ${best.year} · Week ${best.week}`}
 }catch(e){console.error(e);$("#status").textContent="● Sleeper temporarily unavailable"}})();
 
 async function weekRows(week){try{return await apiGet(`/league/${EFL_ID}/matchups/${week}`)}catch(e){return[]}}
@@ -356,72 +205,4 @@ async function renderLiveHub(league,users,rosters){
   }
 }
 
-</script>
-<script>
-(function(){
-  const slides = Array.from(document.querySelectorAll(".feature"));
-  const dots = Array.from(document.querySelectorAll(".featuredot"));
-  const prev = document.getElementById("heroPrev");
-  const next = document.getElementById("heroNext");
-  const stage = document.getElementById("featureStage");
-  if (!slides.length || !stage) return;
-
-  let index = 0;
-  let timer = null;
-  let touchStartX = 0;
-
-  function render(n){
-    index = (n + slides.length) % slides.length;
-    slides.forEach((slide,i)=>slide.classList.toggle("on", i===index));
-    dots.forEach((dot,i)=>dot.classList.toggle("on", i===index));
-  }
-
-  function restart(){
-    clearInterval(timer);
-    timer = setInterval(()=>render(index + 1), 6000);
-  }
-
-  function move(delta){
-    render(index + delta);
-    restart();
-  }
-
-  prev?.addEventListener("click", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    move(-1);
-  });
-
-  next?.addEventListener("click", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    move(1);
-  });
-
-  dots.forEach((dot,i)=>{
-    dot.addEventListener("click", e=>{
-      e.preventDefault();
-      e.stopPropagation();
-      render(i);
-      restart();
-    });
-  });
-
-  stage.addEventListener("touchstart", e=>{
-    touchStartX = e.changedTouches[0].clientX;
-  }, {passive:true});
-
-  stage.addEventListener("touchend", e=>{
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 45) move(dx < 0 ? 1 : -1);
-  }, {passive:true});
-
-  stage.addEventListener("mouseenter", ()=>clearInterval(timer));
-  stage.addEventListener("mouseleave", restart);
-
-  render(0);
-  restart();
-})();
-</script>
-
-</body></html>
+</script></body></html>
