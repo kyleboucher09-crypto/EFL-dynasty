@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+<defs>
+ <radialGradient id="bg" cx="68%" cy="42%"><stop stop-color="#5a1987" stop-opacity=".62"/><stop offset=".55" stop-color="#160920" stop-opacity=".22"/><stop offset="1" stop-color="#050308" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x1="0" x2="1"><stop stop-color="#7b4708"/><stop offset=".22" stop-color="#ffe58b"/><stop offset=".46" stop-color="#c98616"/><stop offset=".72" stop-color="#fff1aa"/><stop offset="1" stop-color="#8c530b"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="14" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="900" height="650" fill="url(#bg)"/>
+<g opacity=".45" stroke="#9d3be8" fill="none" filter="url(#glow)">
+ <path d="M520 75l-55 115 92-34-38 105 113-73-37 117 125-92" stroke-width="5"/>
+ <path d="M720 90l-48 92 77-25-30 81 84-55" stroke-width="3"/>
+</g>
+<ellipse cx="660" cy="570" rx="205" ry="35" fill="#000" opacity=".65"/>
+<g transform="translate(450 35)" filter="url(#glow)">
+ <path d="M112 84l54-58 44 55 55-68 46 68 61-48 27 94H83z" fill="url(#gold)" stroke="#ffe9a0" stroke-width="5"/>
+ <path d="M97 123h317v65c0 115-59 191-158 226-99-35-159-111-159-226z" fill="url(#gold)" stroke="#ffe7a1" stroke-width="5"/>
+ <path d="M99 150C9 128 3 279 112 294M412 150c91-22 97 129-13 144" fill="none" stroke="url(#gold)" stroke-width="30"/>
+ <path d="M198 388h116l21 79H177zM139 459h235v59H139z" fill="url(#gold)" stroke="#f8d56b" stroke-width="4"/>
+ <circle cx="256" cy="245" r="75" fill="#160b20" stroke="#ffe58b" stroke-width="7"/>
+ <text x="256" y="233" text-anchor="middle" fill="#ffe58b" font-size="52" font-family="Arial Black,Arial" font-weight="900">EFL</text>
+ <text x="256" y="270" text-anchor="middle" fill="#fff" font-size="19" font-family="Arial" font-weight="700">CHAMPION</text>
+</g>
+<g fill="#f6d26d" opacity=".85"><circle cx="580" cy="98" r="4"/><circle cx="806" cy="204" r="5"/><circle cx="526" cy="294" r="3"/><circle cx="820" cy="420" r="4"/><circle cx="600" cy="470" r="3"/></g>
+</svg>

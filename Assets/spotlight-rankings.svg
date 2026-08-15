@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+<defs>
+ <radialGradient id="p" cx="68%" cy="35%"><stop stop-color="#6d20a4" stop-opacity=".7"/><stop offset=".6" stop-color="#12091a" stop-opacity=".15"/><stop offset="1" stop-color="#050308" stop-opacity="0"/></radialGradient>
+ <linearGradient id="g"><stop stop-color="#7d4b0c"/><stop offset=".25" stop-color="#ffe58d"/><stop offset=".55" stop-color="#c27a12"/><stop offset=".8" stop-color="#fff0a6"/><stop offset="1" stop-color="#87510a"/></linearGradient>
+ <filter id="s"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".75"/></filter>
+</defs>
+<rect width="900" height="650" fill="url(#p)"/>
+<g transform="translate(485 70)" filter="url(#s)">
+ <path d="M54 160L105 55l72 75 75-112 72 110 83-73 35 105z" fill="url(#g)" stroke="#ffe89a" stroke-width="5"/>
+ <path d="M82 161h329l-34 122H116z" fill="url(#g)" stroke="#e8b84a" stroke-width="4"/>
+ <circle cx="246" cy="222" r="37" fill="#190d20" stroke="#ffe58d" stroke-width="5"/><text x="246" y="235" text-anchor="middle" fill="#ffe58d" font-size="38" font-family="Arial Black">1</text>
+ <path d="M100 345h292v61H100z" rx="12" fill="#1b0d26" stroke="#7d22c9" stroke-width="3"/>
+ <path d="M128 423h236v52H128z" fill="#160b20" stroke="#6e1fae" stroke-width="3"/>
+ <path d="M153 489h186v45H153z" fill="#110817" stroke="#5a188d" stroke-width="3"/>
+ <text x="246" y="386" text-anchor="middle" fill="#ffe58d" font-size="28" font-family="Arial Black">TOP 3</text>
+ <text x="246" y="457" text-anchor="middle" fill="#ddd" font-size="19" font-family="Arial" font-weight="700">POWER RANKINGS</text>
+</g>
+<g opacity=".32" stroke="#9b35e6"><path d="M570 40l-55 90 74-25-32 81 88-54" fill="none" stroke-width="4"/><path d="M780 205l-38 75 58-20-24 65" fill="none" stroke-width="3"/></g>
+</svg>

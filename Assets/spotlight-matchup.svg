@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#250b35"/><stop offset=".55" stop-color="#09050d"/><stop offset="1" stop-color="#030204"/></linearGradient>
+ <radialGradient id="l"><stop stop-color="#b14aff" stop-opacity=".95"/><stop offset=".35" stop-color="#7d22c9" stop-opacity=".35"/><stop offset="1" stop-color="#7d22c9" stop-opacity="0"/></radialGradient>
+ <filter id="gl"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<rect width="900" height="650" fill="url(#sky)"/>
+<ellipse cx="450" cy="340" rx="430" ry="230" fill="url(#l)" opacity=".35"/>
+<path d="M0 470 Q220 395 450 445 T900 470V650H0z" fill="#07070a"/>
+<path d="M0 495 Q220 430 450 470 T900 495" fill="none" stroke="#7420ad" stroke-width="5" opacity=".65"/>
+<g fill="#fff" opacity=".9" filter="url(#gl)"><circle cx="110" cy="235" r="8"/><circle cx="175" cy="220" r="6"/><circle cx="730" cy="220" r="7"/><circle cx="790" cy="245" r="8"/></g>
+<g transform="translate(285 185)">
+ <path d="M0 0h330l55 105-55 105H0l-55-105z" fill="#12091a" stroke="#7d22c9" stroke-width="5"/>
+ <text x="165" y="84" text-anchor="middle" fill="#e9dff0" font-size="22" font-family="Arial" font-weight="800">GAME OF THE WEEK</text>
+ <text x="165" y="145" text-anchor="middle" fill="#ffe083" font-size="66" font-family="Arial Black">VS</text>
+</g>
+<path d="M432 30l-48 125 74-29-27 96 92-67-28 105" fill="none" stroke="#b34cff" stroke-width="5" opacity=".75"/>
+</svg>

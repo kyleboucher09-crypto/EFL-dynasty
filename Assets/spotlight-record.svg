@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+<defs>
+ <radialGradient id="bg" cx="70%" cy="40%"><stop stop-color="#542074" stop-opacity=".55"/><stop offset=".55" stop-color="#14091b" stop-opacity=".2"/><stop offset="1" stop-color="#050308" stop-opacity="0"/></radialGradient>
+ <linearGradient id="cr" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".18" stop-color="#bda6ff"/><stop offset=".48" stop-color="#7b2fd0"/><stop offset=".7" stop-color="#f5d982"/><stop offset="1" stop-color="#54217c"/></linearGradient>
+ <filter id="gl"><feGaussianBlur stdDeviation="11" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="900" height="650" fill="url(#bg)"/>
+<ellipse cx="660" cy="540" rx="205" ry="32" fill="#000" opacity=".7"/>
+<g transform="translate(500 55)" filter="url(#gl)">
+ <path d="M130 0l120 42 86 120-35 214-171 124L-4 368l-32-207L44 45z" fill="url(#cr)" opacity=".96" stroke="#eee0ff" stroke-width="4"/>
+ <path d="M130 0l-8 498M-36 161l372 1M44 45l257 331M250 42L-4 368" stroke="#fff" stroke-opacity=".32" stroke-width="3"/>
+ <circle cx="130" cy="245" r="91" fill="#100918" fill-opacity=".82" stroke="#f5d982" stroke-width="5"/>
+ <text x="130" y="229" text-anchor="middle" fill="#f5d982" font-size="33" font-family="Arial Black">EFL</text>
+ <text x="130" y="270" text-anchor="middle" fill="#fff" font-size="18" font-family="Arial" font-weight="700">RECORD</text>
+</g>
+<g stroke="#8d36d4" fill="none" opacity=".6"><path d="M485 76l-65 105 88-33-38 106 108-72" stroke-width="5"/><path d="M770 90l-45 80 64-20-28 70" stroke-width="3"/></g>
+</svg>
