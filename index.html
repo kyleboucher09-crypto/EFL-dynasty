@@ -5,9 +5,7 @@
 .home-hero{min-height:auto;display:block;padding:0;background:none;border:0}
 .spot-titlebar{
   position:relative;text-align:center;padding:20px 10px 24px;margin:0 0 6px;
-  background:
-    linear-gradient(180deg,rgba(4,2,7,.22),rgba(4,2,7,.92)),
-    url("Assets/spotlight-stadium.jpg") center/cover no-repeat;
+  background:radial-gradient(700px 180px at 50% 0,rgba(125,34,201,.22),transparent 70%),linear-gradient(180deg,rgba(12,6,18,.35),rgba(4,2,7,.92));
 }
 .spot-titlebar:after{content:"";position:absolute;left:18%;right:18%;bottom:7px;height:1px;background:linear-gradient(90deg,transparent,#7d22c9,#ffd979,#7d22c9,transparent)}
 .spot-titlebar .eyebrow{margin-bottom:7px}
@@ -48,7 +46,7 @@
 .feature{
   position:absolute;inset:0;opacity:0;transform:translateX(28px) scale(.987);
   transition:opacity .5s ease,transform .5s ease;pointer-events:none;
-  padding:34px 34px 72px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:34px 34px 88px;display:flex;flex-direction:column;justify-content:flex-end;
   background:linear-gradient(90deg,rgba(7,4,10,.98) 0%,rgba(8,5,12,.90) 43%,rgba(8,5,12,.18) 72%,rgba(8,5,12,.04) 100%)
 }
 .feature.on{opacity:1;transform:none;pointer-events:auto}
@@ -75,10 +73,10 @@
 .feature .headline .gold{color:var(--gold2)}
 .feature .copy{font-size:12px;color:#d1c4d8;line-height:1.55;max-width:57%;margin-top:12px;text-shadow:0 3px 12px #000}
 .feature .copy b{font-size:16px;color:#fff}
-.feature .feature-cta{margin-top:16px;align-self:flex-start;background:linear-gradient(135deg,#ffe08a,#d99d32);border-color:#f2c85e;color:#211405;padding:12px 16px;box-shadow:0 7px 20px rgba(232,184,74,.17)}
+.feature .feature-cta{margin-top:16px;margin-bottom:8px;align-self:flex-start;background:linear-gradient(135deg,#ffe08a,#d99d32);border-color:#f2c85e;color:#211405;padding:12px 16px;box-shadow:0 7px 20px rgba(232,184,74,.17)}
 .champ-banner{display:inline-flex;align-self:flex-start;margin-top:13px;padding:8px 11px;border-radius:999px;background:rgba(255,217,121,.10);border:1px solid rgba(255,217,121,.34);color:#ffe7a4;font-size:9px;font-weight:1000}
 .record-number{font-size:72px;line-height:.92;font-weight:1000;color:var(--gold2);letter-spacing:-.065em;text-shadow:0 6px 24px #000}
-.featuredots{position:absolute;left:50%;transform:translateX(-50%);bottom:20px;z-index:12;display:flex;gap:9px}
+.featuredots{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;z-index:12;display:flex;gap:9px}
 .featuredot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#ffffff48;box-shadow:0 2px 10px #0008}
 .featuredot.on{background:var(--gold2);box-shadow:0 0 13px rgba(232,184,74,.8)}
 
@@ -127,6 +125,33 @@
 .throne-watch{margin-top:14px;padding:14px;border-radius:14px;background:rgba(125,34,201,.08);border:1px solid rgba(125,34,201,.18)}
 .preseason{color:var(--muted);font-size:11px;line-height:1.6}
 @media(max-width:900px){.live-grid{grid-template-columns:1fr}.matchup{grid-template-columns:1fr}.versus{justify-self:center}}
+
+/* PREMIUM SPOTLIGHT ART OVERRIDE */
+.featured{min-height:780px}
+.feature{min-height:780px;padding:390px 34px 92px;justify-content:flex-start}
+.feature-art{
+  position:absolute;inset:0 0 auto 0;width:100%;height:430px;
+  object-fit:cover;object-position:center top;opacity:1;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 70%,transparent 100%);
+}
+.feature::after{
+  background:
+    linear-gradient(180deg,rgba(5,2,8,.02) 0%,rgba(5,2,8,.10) 44%,rgba(5,2,8,.94) 62%,#050308 78%),
+    linear-gradient(90deg,rgba(5,2,8,.08),transparent 58%);
+}
+.feature .kicker,.feature .headline,.feature .champ-banner,.feature .copy,.feature .feature-cta{position:relative;z-index:3}
+.feature .headline{font-size:clamp(40px,9vw,70px);line-height:.9;max-width:620px}
+.feature .copy{max-width:560px}
+.feature .feature-cta{align-self:flex-start}
+.featuredots{z-index:5;bottom:24px}
+@media(max-width:760px){
+ .featured{min-height:760px}
+ .feature{min-height:760px;padding:355px 24px 86px}
+ .feature-art{height:405px}
+ .feature .headline{font-size:43px}
+}
+
 </style></head><body>
 <div class="topbar"><div class="nav">
 <a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
@@ -169,7 +194,7 @@
 
       <div class="featurestage" id="featureStage">
         <a class="feature on" href="franchises.html" data-feature="0">
-          <img class="feature-art" src="Assets/spotlight-champion.jpg" alt="" aria-hidden="true">
+          <img class="feature-art" src="Assets/spotlight-champion-premium.jpg" alt="" aria-hidden="true">
           <div class="kicker">The Crown Lives Here</div>
           <div class="headline">REIGNING<br><span class="gold">CHAMPION</span></div>
           <div class="champ-banner" id="featureChampYear">EFL CHAMPION</div>
@@ -178,15 +203,15 @@
         </a>
 
         <a class="feature" href="power-rankings.html" data-feature="1">
-          <img class="feature-art" src="Assets/spotlight-rankings.jpg" alt="" aria-hidden="true">
+          <img class="feature-art" src="Assets/spotlight-rankings-premium.jpg" alt="" aria-hidden="true">
           <div class="kicker">League Hierarchy</div>
-          <div class="headline">WHO OWNS<br><span class="gold">THE TOP?</span></div>
-          <div class="copy" id="featureRankCopy">Power Rankings update automatically with the EFL.</div>
+          <div class="headline">TOP 3<br><span class="gold">POWER RANKINGS</span></div>
+          <div class="copy" id="featureRankCopy">The three franchises sitting at the top of the current EFL hierarchy.</div>
           <span class="feature-cta">OPEN POWER RANKINGS →</span>
         </a>
 
         <a class="feature" href="records.html" data-feature="2">
-          <img class="feature-art" src="Assets/spotlight-record.jpg" alt="" aria-hidden="true">
+          <img class="feature-art" src="Assets/spotlight-record-premium.jpg" alt="" aria-hidden="true">
           <div class="kicker">Record Watch</div>
           <div class="record-number" id="featureRecordScore">—</div>
           <div class="headline" style="font-size:34px" id="featureRecordTeam">HIGHEST WEEKLY SCORE</div>
@@ -194,12 +219,13 @@
           <span class="feature-cta">OPEN RECORD BOOK →</span>
         </a>
 
-        <a class="feature" href="franchises.html" data-feature="3">
-          <img class="feature-art" src="Assets/spotlight-legacy.jpg" alt="" aria-hidden="true">
-          <div class="kicker">Build Your Legacy</div>
-          <div class="headline">YOUR TEAM.<br><span class="gold">YOUR IDENTITY.</span></div>
-          <div class="copy">Customize your franchise, choose your colors, declare a rival and build a legacy worth remembering.</div>
-          <span class="feature-cta">EXPLORE FRANCHISES →</span>
+        <a class="feature" href="#game-day" data-feature="3">
+          <img class="feature-art" src="Assets/spotlight-matchup-premium.jpg" alt="" aria-hidden="true">
+          <div class="kicker">Marquee Matchup</div>
+          <div class="headline">GAME OF<br><span class="gold">THE WEEK</span></div>
+          <div class="champ-banner" id="featureGameWeek">EFL MATCHUP</div>
+          <div class="copy"><b id="featureGameTeams">Matchup loading…</b><br><span id="featureGameMeta">The week's featured showdown.</span></div>
+          <span class="feature-cta">VIEW GAME DAY CENTRAL ↓</span>
         </a>
 
         <div class="featuredots">
