@@ -1,126 +1,115 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Dynasty</title><link rel="stylesheet" href="site.css"><style>
 .home-hero{min-height:570px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}.home-hero h1{font-size:clamp(52px,8vw,98px)}.logo-mark{width:min(420px,100%);justify-self:center;filter:drop-shadow(0 0 28px rgba(125,34,201,.32))}
 
-/* ===== EFL SPOTLIGHT BROADCAST HERO ===== */
-.home-hero{
-  min-height:auto;
-  display:block;
-  padding:0;
-  background:none;
-  border:0;
-}
-.spot-wrap{position:relative;margin-top:6px}
-.spot-titlebar{text-align:center;margin:8px 0 16px}
-.spot-titlebar .eyebrow{margin-bottom:7px}
-.spot-titlebar h1{font-size:clamp(38px,6vw,72px);margin:0;letter-spacing:-.05em}
-.spot-titlebar h1 span{color:var(--gold2)}
-.broadcast{
-  display:grid;
-  grid-template-columns:minmax(220px,.78fr) minmax(380px,1.45fr) minmax(220px,.78fr);
-  gap:14px;
-  align-items:stretch;
-  position:relative;
-}
-.sidecard,.featurestage{
-  position:relative;
-  overflow:hidden;
-  border-radius:22px;
-  border:1px solid rgba(125,34,201,.42);
+/* ===== EFL SPOTLIGHT — POLISHED BROADCAST BUILD ===== */
+.home-hero{min-height:auto;display:block;padding:0;background:none;border:0}
+.spot-titlebar{
+  position:relative;text-align:center;padding:20px 10px 24px;margin:0 0 6px;
   background:
-    radial-gradient(420px 220px at 80% 5%,rgba(125,34,201,.22),transparent 70%),
-    linear-gradient(145deg,#171020,#0b0710);
-  box-shadow:0 20px 55px rgba(0,0,0,.46);
+    linear-gradient(180deg,rgba(4,2,7,.22),rgba(4,2,7,.92)),
+    url("Assets/spotlight-stadium.jpg") center/cover no-repeat;
 }
-.sidecard{padding:20px;min-height:370px}
-.sidecard:before,.featurestage:before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.025),transparent 22%,transparent 78%,rgba(0,0,0,.22))
+.spot-titlebar:after{content:"";position:absolute;left:18%;right:18%;bottom:7px;height:1px;background:linear-gradient(90deg,transparent,#7d22c9,#ffd979,#7d22c9,transparent)}
+.spot-titlebar .eyebrow{margin-bottom:7px}
+.spot-titlebar h1{font-size:clamp(42px,6vw,78px);margin:0;letter-spacing:-.055em;line-height:.9;text-shadow:0 6px 24px #000}
+.spot-titlebar h1 span{color:var(--gold2)}
+
+.spot-wrap{position:relative;margin-top:0}
+.broadcast{display:grid;grid-template-columns:minmax(225px,.78fr) minmax(430px,1.55fr) minmax(225px,.78fr);gap:14px;align-items:stretch}
+.sidecard,.featurestage{
+  position:relative;overflow:hidden;border-radius:22px;
+  border:1px solid rgba(125,34,201,.5);
+  background:radial-gradient(460px 230px at 75% 5%,rgba(125,34,201,.24),transparent 70%),linear-gradient(145deg,#171020,#09070d);
+  box-shadow:0 20px 55px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.018)
 }
-.sidehead{font-size:18px;font-weight:1000;font-style:italic;letter-spacing:-.02em}
+.sidecard{padding:20px;min-height:392px}
+.sidehead{font-size:20px;font-weight:1000;font-style:italic;letter-spacing:-.025em;text-shadow:0 4px 18px #000}
 .side-sub{font-size:9px;color:var(--muted);margin-top:4px}
-.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-top:26px}
+.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin-top:30px}
 .teammini{text-align:center}
 .teammini .crest{
-  width:70px;height:70px;border-radius:18px;margin:auto;
-  display:grid;place-items:center;overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);background:#120c18;
-  font-weight:1000;color:var(--gold2)
+  width:78px;height:78px;border-radius:19px;margin:auto;display:grid;place-items:center;overflow:hidden;
+  border:1px solid rgba(255,255,255,.15);background:radial-gradient(circle at 50% 35%,#33134a,#0a0710 75%);
+  box-shadow:0 0 22px rgba(125,34,201,.24);font-weight:1000;color:var(--gold2)
 }
 .teammini .crest img{width:100%;height:100%;object-fit:cover}
-.teammini b{display:block;font-size:11px;margin-top:8px}
-.teammini small{display:block;color:var(--muted);font-size:8px;margin-top:3px}
-.vsbomb{font-size:26px;font-weight:1000;color:#fff;text-shadow:0 0 22px #9d36ff}
+.teammini b{display:block;font-size:11px;margin-top:9px}.teammini small{display:block;color:var(--muted);font-size:8px;margin-top:3px}
+.vsbomb{font-size:29px;font-weight:1000;color:#fff;text-shadow:0 0 24px #9d36ff}
 .sidecta{position:absolute;left:20px;right:20px;bottom:18px}
 .sidecta a,.feature-cta{
-  display:inline-flex;justify-content:center;align-items:center;
-  padding:10px 13px;border-radius:10px;
-  border:1px solid rgba(232,184,74,.36);background:rgba(232,184,74,.08);
-  color:var(--gold2);font-size:9px;font-weight:1000
+  display:inline-flex;justify-content:center;align-items:center;padding:11px 14px;border-radius:10px;
+  border:1px solid rgba(232,184,74,.42);background:rgba(232,184,74,.08);
+  color:var(--gold2);font-size:9px;font-weight:1000;box-shadow:inset 0 0 22px rgba(232,184,74,.035)
 }
-.ranklist{margin-top:18px}
-.rankitem{display:grid;grid-template-columns:28px 1fr auto;gap:9px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.rankitem:last-child{border-bottom:0}.ranknum{font-size:24px;font-weight:1000;color:#fff}.rankteam{font-size:11px;font-weight:950}.rankrec{font-size:9px;color:var(--gold2);font-weight:900}
-.featurestage{min-height:390px;border-color:rgba(232,184,74,.50)}
-.featurestage:after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(420px 240px at 75% 30%,rgba(232,184,74,.11),transparent 70%)
-}
+.ranklist{margin-top:18px}.rankitem{display:grid;grid-template-columns:32px 1fr auto;gap:9px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.065)}
+.ranknum{font-size:27px;font-weight:1000;color:#fff}.rankteam{font-size:11px;font-weight:950}.rankrec{font-size:9px;color:var(--gold2);font-weight:900}
+
+.featurestage{min-height:430px;border-color:rgba(232,184,74,.62);box-shadow:0 22px 60px #0009,0 0 30px rgba(232,184,74,.08)}
 .feature{
-  position:absolute;inset:0;padding:28px;
-  opacity:0;transform:translateX(26px) scale(.985);
-  transition:opacity .55s ease,transform .55s ease;
-  pointer-events:none;
-  display:flex;flex-direction:column;justify-content:flex-end;
+  position:absolute;inset:0;opacity:0;transform:translateX(28px) scale(.987);
+  transition:opacity .5s ease,transform .5s ease;pointer-events:none;
+  padding:34px 34px 72px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(90deg,rgba(7,4,10,.98) 0%,rgba(8,5,12,.90) 43%,rgba(8,5,12,.18) 72%,rgba(8,5,12,.04) 100%)
 }
 .feature.on{opacity:1;transform:none;pointer-events:auto}
-.feature .watermark{
-  position:absolute;right:-30px;top:-24px;width:270px;opacity:.08;
-  filter:saturate(.4)
+.feature-art{
+  position:absolute;inset:0 0 0 auto;width:64%;height:100%;object-fit:cover;object-position:center;
+  filter:saturate(1.15) contrast(1.05) brightness(.94);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 9%,#000 32%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.22) 9%,#000 32%,#000 100%)
 }
-.feature .art{
-  position:absolute;right:24px;top:28px;
-  width:170px;height:170px;display:grid;place-items:center;
-  font-size:105px;filter:drop-shadow(0 15px 26px rgba(0,0,0,.55))
+.feature:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(520px 260px at 77% 34%,rgba(125,34,201,.16),transparent 68%),
+    linear-gradient(0deg,rgba(5,3,8,.72),transparent 36%)
 }
-.trophy-art{position:absolute;right:0;top:0;width:58%;height:100%;overflow:hidden;pointer-events:none;
-background:radial-gradient(circle at 72% 45%,rgba(125,34,201,.24),transparent 55%);
-mask-image:linear-gradient(90deg,transparent 0,#000 18%);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%)}
-.trophy-art:after{content:"";position:absolute;inset:0;background:
-linear-gradient(90deg,rgba(8,4,12,.98) 0,rgba(8,4,12,.42) 25%,transparent 56%),
-linear-gradient(0deg,rgba(8,4,12,.62),transparent 38%)}
-.trophy-art img{position:absolute;right:0;top:4%;width:96%;height:92%;object-fit:contain;object-position:center;
-filter:saturate(1.18) contrast(1.08) brightness(.97) drop-shadow(0 16px 32px rgba(0,0,0,.5))}
-.feature[data-feature="0"]{background:radial-gradient(circle at 80% 45%,rgba(117,30,176,.28),transparent 45%),linear-gradient(90deg,rgba(7,4,10,.98) 0%,rgba(9,5,13,.91) 48%,rgba(9,5,13,.35) 100%)}
-.feature[data-feature="0"] .kicker,.feature[data-feature="0"] .headline,.feature[data-feature="0"] .champ-banner,.feature[data-feature="0"] .copy,.feature[data-feature="0"] .feature-cta{position:relative;z-index:3}
+.feature[data-feature="0"]:after{background:radial-gradient(520px 300px at 78% 43%,rgba(232,184,74,.13),transparent 68%),linear-gradient(0deg,rgba(5,3,8,.72),transparent 38%)}
+.feature[data-feature="1"]{background-color:#0c0711}
+.feature[data-feature="2"]{background-color:#11090e}
+.feature[data-feature="3"]{background-color:#0b0710}
 
-.feature .kicker{color:var(--gold2);font-size:9px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}
-.feature .headline{font-size:clamp(34px,5vw,60px);font-weight:1000;line-height:.88;letter-spacing:-.055em;max-width:68%;margin-top:7px}
+.feature .kicker,.feature .headline,.feature .champ-banner,.feature .copy,.feature .feature-cta,.record-number{position:relative;z-index:4}
+.feature .kicker{color:var(--gold2);font-size:10px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}
+.feature .headline{font-size:clamp(40px,5vw,67px);font-weight:1000;line-height:.84;letter-spacing:-.06em;max-width:64%;margin-top:8px;text-shadow:0 5px 20px #000}
 .feature .headline .gold{color:var(--gold2)}
-.feature .copy{font-size:11px;color:#cbbfd2;line-height:1.55;max-width:66%;margin-top:10px}
-.feature .feature-cta{margin-top:14px;align-self:flex-start;background:linear-gradient(135deg,#ffd979,#d99d32);color:#211405}
-.champ-banner{display:inline-flex;align-self:flex-start;margin-top:10px;padding:7px 10px;border-radius:999px;background:rgba(255,217,121,.10);border:1px solid rgba(255,217,121,.28);color:#ffe7a4;font-size:9px;font-weight:1000}
-.record-number{font-size:58px;line-height:1;font-weight:1000;color:var(--gold2);letter-spacing:-.06em}
-.featuredots{position:absolute;left:28px;bottom:18px;z-index:6;display:flex;gap:8px}
-.featuredot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#ffffff38}
-.featuredot.on{background:var(--gold2);box-shadow:0 0 12px rgba(232,184,74,.65)}
+.feature .copy{font-size:12px;color:#d1c4d8;line-height:1.55;max-width:57%;margin-top:12px;text-shadow:0 3px 12px #000}
+.feature .copy b{font-size:16px;color:#fff}
+.feature .feature-cta{margin-top:16px;align-self:flex-start;background:linear-gradient(135deg,#ffe08a,#d99d32);border-color:#f2c85e;color:#211405;padding:12px 16px;box-shadow:0 7px 20px rgba(232,184,74,.17)}
+.champ-banner{display:inline-flex;align-self:flex-start;margin-top:13px;padding:8px 11px;border-radius:999px;background:rgba(255,217,121,.10);border:1px solid rgba(255,217,121,.34);color:#ffe7a4;font-size:9px;font-weight:1000}
+.record-number{font-size:72px;line-height:.92;font-weight:1000;color:var(--gold2);letter-spacing:-.065em;text-shadow:0 6px 24px #000}
+.featuredots{position:absolute;left:50%;transform:translateX(-50%);bottom:20px;z-index:12;display:flex;gap:9px}
+.featuredot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#ffffff48;box-shadow:0 2px 10px #0008}
+.featuredot.on{background:var(--gold2);box-shadow:0 0 13px rgba(232,184,74,.8)}
+
 .navarrow{
-  position:absolute;top:50%;transform:translateY(-50%);z-index:30;
-  width:46px;height:62px;border-radius:15px;border:1px solid rgba(125,34,201,.72);
-  background:linear-gradient(180deg,#3a1252,#15091e);color:#fff;
-  font-size:30px;font-weight:700;box-shadow:0 0 26px rgba(125,34,201,.38);
-  cursor:pointer;touch-action:manipulation;pointer-events:auto
+  position:absolute;top:50%;transform:translateY(-50%);z-index:30;width:46px;height:62px;border-radius:15px;
+  border:1px solid rgba(125,34,201,.72);background:linear-gradient(180deg,#3a1252,#15091e);color:#fff;
+  font-size:30px;font-weight:700;box-shadow:0 0 26px rgba(125,34,201,.38);cursor:pointer;touch-action:manipulation
 }
 .navarrow.left{left:-12px}.navarrow.right{right:-12px}
-.statstrip{display:grid;grid-template-columns:repeat(5,1fr);margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(125,34,201,.35);background:#0d0912}
-.stripitem{padding:15px 16px;border-right:1px solid rgba(255,255,255,.06)}.stripitem:last-child{border-right:0}
+
+.statstrip{display:grid;grid-template-columns:repeat(5,1fr);margin-top:14px;border-radius:18px;overflow:hidden;border:1px solid rgba(125,34,201,.38);background:linear-gradient(180deg,#0f0a14,#09070c)}
+.stripitem{padding:16px;border-right:1px solid rgba(255,255,255,.065)}.stripitem:last-child{border-right:0}
 .stripitem small{display:block;color:var(--gold2);font-size:8px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}
-.stripitem b{display:block;font-size:15px;margin-top:5px}.stripitem span{display:block;color:var(--muted);font-size:8px;margin-top:3px}
+.stripitem b{display:block;font-size:16px;margin-top:5px}.stripitem span{display:block;color:var(--muted);font-size:8px;margin-top:3px}
+
 @media(max-width:1000px){
-  .broadcast{grid-template-columns:1fr}.featurestage{order:-2}.sidecard{min-height:280px}.featurestage{min-height:390px}.statstrip{grid-template-columns:1fr 1fr}
+  .broadcast{grid-template-columns:1fr}.featurestage{order:-2;min-height:500px}.sidecard{min-height:310px}.statstrip{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .featurestage{min-height:430px}.feature{padding:23px}.feature .art{font-size:82px;width:125px;height:125px;right:12px;top:22px}.trophy-art{width:72%;opacity:.78}
-  .feature .headline,.feature .copy{max-width:88%}.feature .headline{font-size:38px}.navarrow.left{left:8px}.navarrow.right{right:8px}.sidecard{min-height:300px}.statstrip{grid-template-columns:1fr}.stripitem{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
+  .spot-titlebar{padding-top:26px}.spot-titlebar h1{font-size:52px}
+  .featurestage{min-height:620px;border-radius:20px}
+  .feature{padding:30px 36px 92px;justify-content:flex-end;background:linear-gradient(0deg,rgba(7,4,10,.98) 0%,rgba(7,4,10,.91) 44%,rgba(7,4,10,.18) 76%,rgba(7,4,10,.03) 100%)}
+  .feature-art{
+    width:100%;height:61%;inset:0 0 auto 0;object-position:center 28%;
+    -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 0%,#000 70%,transparent 100%)
+  }
+  .feature .headline{font-size:43px;max-width:100%}.feature .copy{max-width:100%;font-size:12px}.feature .copy b{font-size:16px}
+  .record-number{font-size:66px}.feature .feature-cta{margin-top:16px}
+  .featuredots{bottom:26px}.navarrow{width:38px;height:52px;font-size:25px}.navarrow.left{left:7px}.navarrow.right{right:7px}
+  .sidecard{min-height:330px}.statstrip{grid-template-columns:1fr}.stripitem{border-right:0;border-bottom:1px solid rgba(255,255,255,.06)}
 }
 .throne{margin-top:20px;padding:24px;border-radius:22px;background:linear-gradient(145deg,rgba(232,184,74,.12),rgba(20,10,28,.84));border:1px solid rgba(232,184,74,.31)}.throne .crown{font-size:45px}.throne-team{font-size:28px;font-weight:1000;margin-top:6px}.throne-meta{color:var(--muted);font-size:11px;margin-top:5px}
 .hub{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.hub a{padding:18px;border-radius:17px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07);min-height:135px}.hub a:hover{border-color:rgba(232,184,74,.28);transform:translateY(-2px)}.hub .icon{font-size:24px}.hub h3{font-size:14px;margin:12px 0 5px}.hub p{font-size:10px;color:var(--muted);line-height:1.5;margin:0}
@@ -180,40 +169,36 @@ filter:saturate(1.18) contrast(1.08) brightness(.97) drop-shadow(0 16px 32px rgb
 
       <div class="featurestage" id="featureStage">
         <a class="feature on" href="franchises.html" data-feature="0">
-          <img class="watermark" src="Assets/efl-logo.jpeg" alt="">
-          <div class="trophy-art" aria-hidden="true"><img src="Assets/efl-championship-trophy.png" alt=""></div>
+          <img class="feature-art" src="Assets/spotlight-champion.jpg" alt="" aria-hidden="true">
           <div class="kicker">The Crown Lives Here</div>
-          <div class="headline"><span class="gold">REIGNING</span><br>CHAMPION</div>
+          <div class="headline">REIGNING<br><span class="gold">CHAMPION</span></div>
           <div class="champ-banner" id="featureChampYear">EFL CHAMPION</div>
           <div class="copy"><b id="featureChampTeam">Loading champion…</b><br><span id="featureChampOwner">Pulling the latest completed EFL season.</span></div>
           <span class="feature-cta">VIEW THEIR FRANCHISE →</span>
         </a>
 
         <a class="feature" href="power-rankings.html" data-feature="1">
-          <img class="watermark" src="Assets/efl-logo.jpeg" alt="">
-          <div class="art">📈</div>
+          <img class="feature-art" src="Assets/spotlight-rankings.jpg" alt="" aria-hidden="true">
           <div class="kicker">League Hierarchy</div>
           <div class="headline">WHO OWNS<br><span class="gold">THE TOP?</span></div>
-          <div class="copy" id="featureRankCopy">Power Rankings update with the league.</div>
+          <div class="copy" id="featureRankCopy">Power Rankings update automatically with the EFL.</div>
           <span class="feature-cta">OPEN POWER RANKINGS →</span>
         </a>
 
         <a class="feature" href="records.html" data-feature="2">
-          <img class="watermark" src="Assets/efl-logo.jpeg" alt="">
-          <div class="art">🔥</div>
+          <img class="feature-art" src="Assets/spotlight-record.jpg" alt="" aria-hidden="true">
           <div class="kicker">Record Watch</div>
           <div class="record-number" id="featureRecordScore">—</div>
-          <div class="headline" style="font-size:30px" id="featureRecordTeam">HIGHEST WEEKLY SCORE</div>
+          <div class="headline" style="font-size:34px" id="featureRecordTeam">HIGHEST WEEKLY SCORE</div>
           <div class="copy" id="featureRecordMeta">Scanning EFL history…</div>
           <span class="feature-cta">OPEN RECORD BOOK →</span>
         </a>
 
         <a class="feature" href="franchises.html" data-feature="3">
-          <img class="watermark" src="Assets/efl-logo.jpeg" alt="">
-          <div class="art">🛡️</div>
+          <img class="feature-art" src="Assets/spotlight-legacy.jpg" alt="" aria-hidden="true">
           <div class="kicker">Build Your Legacy</div>
           <div class="headline">YOUR TEAM.<br><span class="gold">YOUR IDENTITY.</span></div>
-          <div class="copy">Customize your franchise, declare a rival, build a trophy room and make your mark on EFL history.</div>
+          <div class="copy">Customize your franchise, choose your colors, declare a rival and build a legacy worth remembering.</div>
           <span class="feature-cta">EXPLORE FRANCHISES →</span>
         </a>
 
