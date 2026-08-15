@@ -147,14 +147,27 @@ function nmMaps(users,rosters){let u=Object.fromEntries(users.map(x=>[x.user_id,
 async function podium(lid){let [lg,u,r,b]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`),apiGet(`/league/${lid}/winners_bracket`)]);let c=(b||[]).filter(x=>x.w&&x.l),f=c.find(x=>+x.p===1)||[...c].sort((a,b)=>(b.r||0)-(a.r||0))[0],rb=Object.fromEntries(r.map(x=>[x.roster_id,x])),ub=Object.fromEntries(u.map(x=>[x.user_id,x]));if(!f)return{lg};let rr=rb[f.w],uu=rr?ub[rr.owner_id]:null;return{lg,team:teamName(uu,rr),owner:uu?.display_name||""}}
 (async()=>{try{
  let [league,users,rosters]=await Promise.all([apiGet(`/league/${EFL_ID}`),apiGet(`/league/${EFL_ID}/users`),apiGet(`/league/${EFL_ID}/rosters`)]);
- $("#status").textContent=`● Sleeper Live · ${league.season}`;
+ if($("#status")) $("#status").textContent=`● Sleeper Live · ${league.season}`;
  await renderLiveHub(league,users,rosters);
- let p=league.previous_league_id?await podium(league.previous_league_id):null;if(p?.team){$("#throneLabel").textContent=`On The Throne · ${p.lg.season} Champion`;$("#champTeam").textContent=p.team;$("#champMeta").textContent=p.owner;$("#spotChamp").textContent=p.team;$("#spotChampCopy").textContent=`${p.owner}`;$("#spotChampYear").textContent=`👑 ${p.lg.season} EFL CHAMPION`}
+ let p=league.previous_league_id?await podium(league.previous_league_id):null;
+ if(p?.team){
+   const champ=$("#spotChamp"), copy=$("#spotChampCopy"), year=$("#spotChampYear");
+   if(champ) champ.textContent=p.team;
+   if(copy) copy.textContent=p.owner||"EFL Dynasty";
+   if(year) year.textContent=`👑 ${p.lg.season} EFL CHAMPION`;
+ }
  let n=nmMaps(users,rosters),sorted=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
- if(sorted[0]){let lead=n(sorted[0]);$("#spotRank").textContent=`#1 ${lead.team} · ${sorted[0].settings?.wins||0}-${sorted[0].settings?.losses||0} · ${lead.owner}`} $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
+ if(sorted[0]){let lead=n(sorted[0]);$("#spotRank").textContent=`#1 ${lead.team} · ${sorted[0].settings?.wins||0}-${sorted[0].settings?.losses||0} · ${lead.owner}`} if($("#standings")) $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
  let lid=EFL_ID,best=null,depth=0;while(lid&&depth<8){let [lg,u,r]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`)]),maps=nmMaps(u,r),end=Math.max(1,+lg.settings?.playoff_week_start-1||14);for(let w=1;w<=end;w++){let rows=[];try{rows=await apiGet(`/league/${lid}/matchups/${w}`)}catch(e){}for(let x of rows){let pts=+x.points||0;if(!best||pts>best.pts){let rr=r.find(z=>z.roster_id===x.roster_id);best={pts,year:lg.season,week:w,...maps(rr)}}}}lid=lg.previous_league_id;depth++}
- if(best){$("#highScore").textContent=best.pts.toFixed(2);$("#highTeam").textContent=best.team;$("#highMeta").textContent=`${best.year} · Week ${best.week}`;$("#spotRecord").textContent=best.pts.toFixed(2);$("#spotRecordTeam").textContent=best.team;$("#spotRecordMeta").textContent=`EFL record · ${best.year} · Week ${best.week}`}
-}catch(e){console.error(e);$("#status").textContent="● Sleeper temporarily unavailable"}})();
+ if(best){
+   if($("#highScore")) $("#highScore").textContent=best.pts.toFixed(2);
+   if($("#highTeam")) $("#highTeam").textContent=best.team;
+   if($("#highMeta")) $("#highMeta").textContent=`${best.year} · Week ${best.week}`;
+   if($("#spotRecord")) $("#spotRecord").textContent=best.pts.toFixed(2);
+   if($("#spotRecordTeam")) $("#spotRecordTeam").textContent=best.team;
+   if($("#spotRecordMeta")) $("#spotRecordMeta").textContent=`EFL record · ${best.year} · Week ${best.week}`;
+ }
+}catch(e){console.error(e);if($("#status")) $("#status").textContent="● Sleeper temporarily unavailable"}})();
 
 async function weekRows(week){try{return await apiGet(`/league/${EFL_ID}/matchups/${week}`)}catch(e){return[]}}
 function matchupGroups(rows){let g={};for(const x of rows){if(x.matchup_id!=null)(g[x.matchup_id]??=[]).push(x)}return Object.values(g).filter(x=>x.length===2)}
