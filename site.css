@@ -35,7 +35,6 @@
   --fm-player-stack-top:50.4%;
   --fm-player-stack-height:32.3%;
 }
-}
 @media(min-width:601px){
   html body .spot-slide.match-slide .match-team-name{top:var(--fm-team-name-top)!important;height:var(--fm-team-name-height)!important}
   html body .spot-slide.match-slide .match-team:first-child .win-prob{top:var(--fm-win-top)!important;height:var(--fm-win-height)!important;left:var(--fm-left-win-left)!important;width:var(--fm-left-win-width)!important}
