@@ -71,3 +71,9 @@
   html body .spot-slide:nth-of-type(2) .spot-cta{margin-top:5px!important;padding:7px 10px!important;font-size:6px!important}
   html body .spot-slide:nth-of-type(2) .spot-dots{bottom:3px!important}
 }
+
+/* Champion slide: push the trophy farther right and dim it so the champion badge leads. */
+.spot-slide:first-of-type>img{filter:brightness(.55)!important;left:14%!important;width:94%!important;object-position:center center!important}
+@media(max-width:600px){
+  html body .spot-slide:first-of-type>img{left:16%!important;width:92%!important;filter:brightness(.52)!important}
+}
