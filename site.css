@@ -15,13 +15,16 @@
 @media(max-width:900px){.navlinks{display:none}.menu-btn{display:block}.shell{padding:18px 14px 50px}.nav{padding:0 14px}.page-hero{padding:30px 23px;min-height:360px}.page-hero h1{font-size:52px}}
 @media(min-width:901px){.mobile-menu{display:none!important}}
 
-/* League Hub hero: wide and roughly 30% shorter, preserving the artwork's proportions (cropped, never stretched). */
-.league-hero-card{max-width:1040px!important;aspect-ratio:2.54/1!important;background:#050308 url('league-hub-hero.jpg') center center/cover no-repeat!important;overflow:hidden!important;}
+/* Final 2026 EFL league-status banner. The artwork is cropped, never stretched. */
+.league-hero-card{max-width:1080px!important;aspect-ratio:2.7/1!important;background:#050308 url('ChatGPT Image Aug 21, 2026, 02_43_11 PM.png') center center/cover no-repeat!important;overflow:hidden!important;}
 .league-hero-card img{display:none!important;}
+.league-status{display:none!important;}
+.spot-wrap{margin-top:14px!important;}
 
 /* Mobile spotlight: keep the full 16:9 artwork and blend the copy into the same card. */
 @media(max-width:600px){
-  .league-hero-card{width:100%!important;aspect-ratio:2.05/1!important;background-size:cover!important;background-position:center center!important;}
+  .league-hero-card{width:100%!important;aspect-ratio:2.15/1!important;background-size:cover!important;background-position:center center!important;}
+  .spot-wrap{margin-top:12px!important;}
   .spotlight{height:350px!important;background:#050308!important;}
   .spot-slide{overflow:hidden!important;background:#050308!important;}
   .spot-slide img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center top!important;transform:none!important;background:#050308!important;}
