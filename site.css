@@ -16,24 +16,23 @@
 
 /* ============================================================
    FEATURED MATCHUP — MASTER ALIGNMENT CONTROLS
-   EDIT ONLY THE VALUES IN THIS :root BLOCK.
-   These variables are the single source of truth for desktop.
+   Desktop mirrors the mobile geometry that is already correct.
    ============================================================ */
 :root{
-  --fm-team-name-top:28%;
-  --fm-team-name-height:14%;
+  --fm-team-name-top:28.5%;
+  --fm-team-name-height:15.5%;
 
-  --fm-win-top:45.1%;
-  --fm-win-height:5.3%;
+  --fm-win-top:45.2%;
+  --fm-win-height:5.1%;
 
-  --fm-left-win-left:27%;
-  --fm-left-win-width:46%;
+  --fm-left-win-left:30.4%;
+  --fm-left-win-width:31.2%;
 
-  --fm-right-win-left:16%;
-  --fm-right-win-width:46%;
+  --fm-right-win-left:38.3%;
+  --fm-right-win-width:31.2%;
 
-  --fm-player-stack-top:50.4%;
-  --fm-player-stack-height:32.3%;
+  --fm-player-stack-top:50.5%;
+  --fm-player-stack-height:31.5%;
 }
 @media(min-width:601px){
   html body .spot-slide.match-slide .match-team-name{top:var(--fm-team-name-top)!important;height:var(--fm-team-name-height)!important}
