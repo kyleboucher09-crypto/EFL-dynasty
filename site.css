@@ -20,3 +20,5 @@
 .spot-slide .spot-cta{display:none!important}
 /* Mobile 2026 main banner: aggressively crop baked-in black above/below while keeping the card dimensions unchanged. */
 @media(max-width:600px){html body .league-hero-card{aspect-ratio:2.15/1!important;background-size:auto 142%!important;background-position:center 59%!important}}
+/* Mobile champion slide: raise the Blaze Infantry foreground graphic toward true vertical center. */
+@media(max-width:600px){html body .spot-slide:first-of-type .spot-content{top:50%!important;bottom:auto!important;transform:translateY(-59%)!important}}
