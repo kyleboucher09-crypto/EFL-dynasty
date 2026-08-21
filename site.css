@@ -21,15 +21,20 @@
    ============================================================ */
 :root{
   --fm-team-name-top:24%;
-  --fm-team-name-height:30%;
+  --fm-team-name-height:15%;
+
   --fm-win-top:45.1%;
   --fm-win-height:5.3%;
-  --fm-left-win-left:19%;
-  --fm-left-win-width:35%;
-  --fm-right-win-left:87%;
-  --fm-right-win-width:35%;
+
+  --fm-left-win-left:27%;
+  --fm-left-win-width:46%;
+
+  --fm-right-win-left:27%;
+  --fm-right-win-width:46%;
+
   --fm-player-stack-top:50.4%;
   --fm-player-stack-height:32.3%;
+}
 }
 @media(min-width:601px){
   html body .spot-slide.match-slide .match-team-name{top:var(--fm-team-name-top)!important;height:var(--fm-team-name-height)!important}
