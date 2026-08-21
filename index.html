@@ -100,39 +100,78 @@
   .premium-hub p{display:none}
 }
 
-.league-switcher{display:flex;gap:7px;align-items:center;margin-left:auto;margin-right:9px}.league-switcher a{padding:8px 10px;border-radius:11px;border:1px solid #35283d;background:#100b14;color:#ddd4e1;text-decoration:none;font-size:10px;font-weight:950}.league-switcher .dyn{border-color:#d8aa3d;color:#ffd66b}.league-switcher .red{border-color:#4b6518;color:#baff31}
-/* Always-visible league switcher */
-.mobile-league-switcher{
-  display:none;
-  width:min(100% - 28px,1080px);
-  margin:12px auto 0;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
+.league-switcher{display:flex;gap:7px;align-items:center;margin-left:auto;margin-right:9px}.league-switcher a{padding:8px 10px;border-radius:11px;border:1px solid #35283d;background:#100b14;color:#ddd4e1;text-decoration:none;font-size:10px;font-weight:950}.league-switcher .dyn{border-color:#d8aa3d;color:#ffd66b}.league-switcher .red{border-color:#4b6518;color:#baff31}@media(max-width:650px){.league-switcher{display:none}}
+/* MOBILE REFINEMENT: header league selector + shorter seamless Spotlight */
+.league-menu{position:relative;margin-left:auto;margin-right:8px;z-index:80}
+.league-menu-btn{
+  height:42px;display:flex;align-items:center;gap:7px;padding:0 11px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.11);background:#0b0810;color:#f6f2f8;
+  font-size:10px;font-weight:1000;letter-spacing:.08em
 }
-.mobile-league-switcher a{
-  text-decoration:none;
-  text-align:center;
-  padding:11px 10px;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:.08em;
-  border:1px solid #34233e;
-  background:#0d0912;
-  color:#d9d2df;
+.league-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 12px currentColor}
+.dynasty-dot{background:#d9aa43;color:#d9aa43}.redraft-dot{background:#baff31;color:#baff31}
+.league-menu-btn .chev{font-size:12px;color:#9d93a4}
+.league-menu-pop{
+  display:none;position:absolute;right:0;top:48px;width:220px;padding:8px;border-radius:14px;
+  border:1px solid #33273b;background:#09070d;box-shadow:0 18px 45px #000c
 }
-.mobile-league-switcher .dynasty.active{
-  border-color:#e1b349;
-  color:#ffd86e;
-  box-shadow:0 0 18px rgba(225,179,73,.09);
+.league-menu.open .league-menu-pop{display:block}
+.league-menu-pop a{
+  display:flex;align-items:center;gap:10px;padding:11px;border-radius:10px;text-decoration:none;color:#ddd5e0
 }
-.mobile-league-switcher .redraft{
-  border-color:#526c1a;
-  color:#baff31;
+.league-menu-pop a:hover,.league-menu-pop a.active{background:#15101a}
+.league-menu-pop b{display:block;font-size:12px}.league-menu-pop small{display:block;font-size:9px;color:#8f8794;margin-top:2px}
+
+/* League Hub graphic: a bit shorter on mobile */
+.league-hub-graphic-wrap{margin-bottom:12px!important}
+@media(max-width:600px){
+  .league-hub-graphic-wrap{max-width:100%!important}
+  .league-hub-graphic{max-height:285px!important;object-fit:cover!important;object-position:center!important}
+  .home-hero{padding-top:10px!important}
 }
-@media(max-width:650px){
-  .league-switcher{display:none!important}
-  .mobile-league-switcher{display:grid}
+
+/* Seamless Spotlight card */
+.efl-spotlight-final{
+  border:1px solid rgba(224,173,57,.58)!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  background:#050308!important;
+  box-shadow:0 18px 52px #000a, inset 0 0 0 1px rgba(255,255,255,.015)!important;
+}
+.efl-spotlight-final .spot-bg{
+  inset:0!important;width:100%!important;height:100%!important;
+  border:0!important;border-radius:0!important;
+  object-fit:cover!important;object-position:center 35%!important
+}
+.efl-spotlight-final .spot-slide{border:0!important;border-radius:0!important}
+.efl-spotlight-final .spot-slide:before{display:none!important}
+
+/* Shorter, more sports-app-like carousel */
+@media(max-width:700px){
+  .efl-spotlight-final{min-height:465px!important;margin-top:16px!important}
+  .efl-spotlight-final .spot-slide:after{
+    background:linear-gradient(180deg,rgba(4,2,7,.02) 0%,rgba(4,2,7,.08) 44%,rgba(4,2,7,.78) 67%,#050308 88%,#050308 100%)!important
+  }
+  .efl-spotlight-final .spot-content{padding:0 24px 58px!important}
+  .efl-spotlight-final .spot-kicker{font-size:10px!important;margin-bottom:7px!important}
+  .efl-spotlight-final .spot-title{font-size:34px!important;line-height:.92!important}
+  .efl-spotlight-final .spot-team{font-size:19px!important;margin-top:10px!important}
+  .efl-spotlight-final .spot-copy{font-size:13px!important;line-height:1.35!important;margin-top:4px!important}
+  .efl-spotlight-final .spot-big{font-size:52px!important}
+  .efl-spotlight-final .spot-cta{margin-top:12px!important;padding:12px 15px!important;font-size:10px!important}
+  .efl-spotlight-final .spot-dots{bottom:15px!important;gap:10px!important}
+  .efl-spotlight-final .spot-dot{width:9px!important;height:9px!important}
+  .efl-spotlight-final .spot-arrow{width:38px!important;height:38px!important;font-size:25px!important;top:42%!important}
+  .efl-spotlight-final .spot-arrow.prev{left:8px!important}.efl-spotlight-final .spot-arrow.next{right:8px!important}
+}
+@media(max-width:430px){
+  .league-menu-btn{padding:0 9px;font-size:9px}
+  .league-menu-pop{width:205px}
+  .efl-spotlight-final{min-height:430px!important}
+  .efl-spotlight-final .spot-content{padding:0 20px 54px!important}
+  .efl-spotlight-final .spot-title{font-size:31px!important}
+  .efl-spotlight-final .spot-team{font-size:18px!important}
+  .efl-spotlight-final .spot-copy{font-size:12px!important}
 }
 
 </style></head><body>
@@ -140,7 +179,17 @@
 <a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
 <div class="navlinks">
 <a data-nav href="index.html">Home</a><a data-nav href="champions.html">Champions</a><a data-nav href="power-rankings.html">Power Rankings</a><a data-nav href="records.html">Records</a><a data-nav href="franchises.html">Franchises</a><a data-nav href="history.html">History</a><a data-nav href="commissioner.html">Commissioner</a>
-</div><div class="league-switcher"><a class="dyn" href="index.html">DYNASTY</a><a class="red" href="redraft.html">REDRAFT</a></div><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+</div><div class="league-switcher"><a class="dyn" href="index.html">DYNASTY</a><a class="red" href="redraft.html">REDRAFT</a></div>
+<div class="league-menu" id="leagueMenu">
+  <button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false">
+    <span class="league-dot dynasty-dot"></span><span>DYNASTY</span><span class="chev">▾</span>
+  </button>
+  <div class="league-menu-pop" id="leagueMenuPop">
+    <a class="active" href="index.html"><span class="league-dot dynasty-dot"></span><span><b>EFL Dynasty</b><small>Purple · Gold</small></span></a>
+    <a href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Lime · Silver</small></span></a>
+  </div>
+</div>
+<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
 </div></div>
 <div class="mobile-menu" id="mobileMenu">
 <a data-nav href="index.html">🏠 Home</a><a data-nav href="champions.html">👑 Champions</a><a data-nav href="power-rankings.html">📈 Power Rankings</a><a data-nav href="records.html">🔥 Records</a><a data-nav href="franchises.html">🛡️ Franchises</a><a data-nav href="history.html">📜 History</a><a data-nav href="commissioner.html">♛ Commissioner</a>
@@ -301,4 +350,20 @@ async function renderLiveHub(league,users,rosters){
   }
 }
 
-</script></body></html>
+</script>
+<script>
+(function(){
+  const menu=document.getElementById('leagueMenu');
+  const btn=document.getElementById('leagueMenuBtn');
+  if(!menu||!btn) return;
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    const open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')});
+  menu.addEventListener('click',e=>e.stopPropagation());
+})();
+</script>
+
+</body></html>

@@ -5,41 +5,44 @@ header{position:sticky;top:0;z-index:20;background:#03070af2;border-bottom:1px s
 h2{font-size:32px;margin:34px 0 14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.card{background:linear-gradient(150deg,#0d1518,#05080a);border:1px solid #293b12;border-radius:20px;padding:20px;min-height:175px}.label{color:#baff31;font-size:10px;letter-spacing:.17em;font-weight:900}.big{font-size:29px;font-weight:900;margin-top:13px}.sub{color:#969fa4;margin-top:7px;font-size:13px}.wide{grid-column:span 2}.row{display:grid;grid-template-columns:32px 1fr auto;padding:10px 0;border-top:1px solid #202d10}.rank{color:#baff31;font-weight:900}.links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0 60px}.links a{text-decoration:none;color:white;text-align:center;background:#081008;border:1px solid #2b4011;border-radius:17px;padding:20px 8px;font-weight:900}
 @media(max-width:650px){.brand b{font-size:17px}.brand small{font-size:8px}.switch a{font-size:8px;padding:7px}.hero{padding-top:16px}.heroBox{min-height:640px}.heroBox:before{background:linear-gradient(180deg,transparent,#02050722 40%,#020507f4 66%,#020507 100%),url("Assets/efl-redraft-logo.jpg") center top/100% auto no-repeat}.copy{position:absolute;bottom:0;padding:28px}.copy h1{font-size:58px}.copy p{font-size:15px}.grid{grid-template-columns:1fr 1fr}.wide{grid-column:span 2}.card{padding:16px;min-height:155px}.big{font-size:22px}.links{grid-template-columns:1fr 1fr}}
 
-.mobile-switch{
-  display:none;
-  width:min(100% - 28px,1080px);
-  margin:12px auto 0;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-.mobile-switch a{
-  text-decoration:none;
-  text-align:center;
-  padding:11px 10px;
-  border-radius:12px;
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:.08em;
-  border:1px solid #394619;
-  background:#071008;
-  color:#dce1df;
-}
-.mobile-switch a:first-child{border-color:#6b5320;color:#f3cf6c}
-.mobile-switch .on{background:#baff31;color:#071000;border-color:#baff31}
-@media(max-width:650px){
-  .mobile-switch{display:grid}
-}
+.league-menu{position:relative;margin-left:auto;z-index:80}
+.league-menu-btn{height:42px;display:flex;align-items:center;gap:7px;padding:0 11px;border-radius:12px;border:1px solid #4f651d;background:#071008;color:#eff8e8;font-size:10px;font-weight:1000;letter-spacing:.08em}
+.league-dot{width:9px;height:9px;border-radius:50%;display:inline-block}.dynasty-dot{background:#d9aa43}.redraft-dot{background:#baff31;box-shadow:0 0 12px #baff31}
+.league-menu-pop{display:none;position:absolute;right:0;top:48px;width:220px;padding:8px;border-radius:14px;border:1px solid #41531b;background:#050a06;box-shadow:0 18px 45px #000c}
+.league-menu.open .league-menu-pop{display:block}.league-menu-pop a{display:flex;align-items:center;gap:10px;padding:11px;border-radius:10px;text-decoration:none;color:#dde5da}.league-menu-pop a.active{background:#0c160b}.league-menu-pop b{display:block;font-size:12px}.league-menu-pop small{display:block;font-size:9px;color:#8e9b88;margin-top:2px}
+@media(max-width:650px){.switch{display:none!important}.league-menu-btn{padding:0 9px;font-size:9px}.league-menu-pop{width:205px}}
 
-</style></head><body><header><div class="wrap nav"><img src="Assets/efl-redraft-logo.jpg"><div class="brand"><b>EFL Redraft</b><small>ELITE FANTASY FOOTBALLERS</small></div><div class="switch"><a href="index.html">DYNASTY</a><a class="on" href="redraft.html">REDRAFT</a></div></div></header>
-<div class="mobile-switch">
-  <a href="index.html">👑 DYNASTY</a>
-  <a class="on" href="redraft.html">⚡ REDRAFT</a>
+</style></head><body><header><div class="wrap nav"><img src="Assets/efl-redraft-logo.jpg"><div class="brand"><b>EFL Redraft</b><small>ELITE FANTASY FOOTBALLERS</small></div>
+<div class="league-menu" id="leagueMenu">
+  <button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false">
+    <span class="league-dot redraft-dot"></span><span>REDRAFT</span><span class="chev">▾</span>
+  </button>
+  <div class="league-menu-pop" id="leagueMenuPop">
+    <a href="index.html"><span class="league-dot dynasty-dot"></span><span><b>EFL Dynasty</b><small>Purple · Gold</small></span></a>
+    <a class="active" href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Lime · Silver</small></span></a>
+  </div>
 </div>
-<main class="wrap">
+</div></header><main class="wrap">
 <section class="hero"><div class="heroBox"><div class="copy"><div class="eye">COMPETE · DOMINATE · WIN · REPEAT</div><h1>EFL<br><span>REDRAFT</span></h1><p>A fresh fight every season. Live standings, scoring leaders and the race for the EFL Redraft crown.</p><div class="live" id="live">● CONNECTING TO SLEEPER</div></div></div></section>
 <h2>Redraft Central</h2><section class="grid"><div class="card"><div class="label">LEAGUE LEADER</div><div class="big" id="leader">Loading…</div><div class="sub" id="leaderSub">Current standings</div></div><div class="card"><div class="label">POINTS LEADER</div><div class="big" id="points">—</div><div class="sub" id="pointsSub">Season scoring</div></div><div class="card"><div class="label">LEAGUE SIZE</div><div class="big" id="teams">—</div><div class="sub">Teams competing</div></div><div class="card wide"><div class="label">CURRENT HIERARCHY</div><div class="big">Top 5 Standings</div><div id="rows"></div></div><div class="card"><div class="label">SEASON</div><div class="big" id="year">2026</div><div class="sub">The chase starts fresh.</div></div></section>
 <h2>League Hub</h2><section class="links"><a href="#standings">📈<br>Standings</a><a href="#matchups">⚔️<br>Matchups</a><a href="#records">🔥<br>Records</a><a href="index.html">👑<br>Dynasty Hub</a></section></main>
 <script>
 const ID="1384539989001400320",API="https://api.sleeper.app/v1";async function g(x){let r=await fetch(API+x);if(!r.ok)throw Error();return r.json()}
 (async()=>{try{let [l,u,r]=await Promise.all([g("/league/"+ID),g("/league/"+ID+"/users"),g("/league/"+ID+"/rosters")]),um=Object.fromEntries(u.map(x=>[x.user_id,x])),a=r.map(x=>{let q=um[x.owner_id]||{},s=x.settings||{};return{name:q.metadata?.team_name||q.display_name||"EFL Team",w:s.wins||0,l:s.losses||0,t:s.ties||0,pf:(s.fpts||0)+(s.fpts_decimal||0)/100}});a.sort((x,y)=>y.w-x.w||x.l-y.l||y.pf-x.pf);let p=[...a].sort((x,y)=>y.pf-x.pf)[0];live.textContent="● SLEEPER LIVE · "+l.season;year.textContent=l.season;teams.textContent=l.total_rosters||a.length;if(a[0]){leader.textContent=a[0].name;leaderSub.textContent=`${a[0].w}-${a[0].l} · ${a[0].pf.toFixed(2)} PF`}if(p){points.textContent=p.pf.toFixed(2);pointsSub.textContent=p.name}rows.innerHTML=a.slice(0,5).map((x,i)=>`<div class="row"><b class="rank">#${i+1}</b><span>${x.name}</span><b>${x.w}-${x.l}</b></div>`).join("")}catch(e){live.textContent="● SLEEPER TEMPORARILY UNAVAILABLE";leader.textContent="EFL Redraft"}})();
-</script></body></html>
+</script>
+<script>
+(function(){
+  const menu=document.getElementById('leagueMenu');
+  const btn=document.getElementById('leagueMenuBtn');
+  if(!menu||!btn) return;
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    const open=menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')});
+  menu.addEventListener('click',e=>e.stopPropagation());
+})();
+</script>
+
+</body></html>
