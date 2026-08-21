@@ -44,3 +44,17 @@
 /* Slider background dimming: darkens artwork only, leaving foreground graphics/data untouched. */
 .spot-slide > img{filter:brightness(.70)!important}
 .spot-slide.match-slide{background-image:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),url('image_2026-08-21_165726056.png')!important;background-position:center!important;background-size:100% 100%!important;background-repeat:no-repeat!important}
+
+/* iPhone/mobile Power Rankings slider: keep all three cards and CTA inside the slide. */
+@media(max-width:600px){
+  html body .spot-slide:nth-of-type(2) .rank-content{left:50px!important;right:20px!important;top:9%!important;bottom:auto!important;max-width:none!important;height:82%!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important}
+  html body .spot-slide:nth-of-type(2) .spot-kicker{font-size:6px!important;letter-spacing:.15em!important;margin-bottom:2px!important}
+  html body .spot-slide:nth-of-type(2) .spot-title{font-size:18px!important;line-height:1!important;margin:0 0 6px!important}
+  html body .spot-slide:nth-of-type(2) .rank-list{width:100%!important;max-width:none!important;gap:5px!important;margin-top:0!important}
+  html body .spot-slide:nth-of-type(2) .rank-card{min-height:42px!important;height:42px!important;padding:5px 9px!important;grid-template-columns:44px 1fr auto!important;gap:7px!important;border-radius:9px!important}
+  html body .spot-slide:nth-of-type(2) .rank-place{font-size:17px!important;line-height:1!important}
+  html body .spot-slide:nth-of-type(2) .rank-name{font-size:11px!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  html body .spot-slide:nth-of-type(2) .rank-meta{font-size:6.5px!important;line-height:1.1!important;margin-top:2px!important}
+  html body .spot-slide:nth-of-type(2) .trend{font-size:6px!important;min-width:46px!important}
+  html body .spot-slide:nth-of-type(2) .spot-cta{align-self:flex-start!important;margin-top:7px!important;padding:8px 11px!important;font-size:6.5px!important;border-radius:9px!important}
+}
