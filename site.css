@@ -20,7 +20,7 @@
    These variables are the single source of truth for desktop.
    ============================================================ */
 :root{
-  --fm-team-name-top:25.3%;
+  --fm-team-name-top:24%;
   --fm-team-name-height:30%;
   --fm-win-top:45.1%;
   --fm-win-height:5.3%;
