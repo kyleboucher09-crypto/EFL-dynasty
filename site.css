@@ -16,3 +16,9 @@
 /* Corrected placement against the current Featured Matchup artwork. */
 html body .spot-slide.match-slide .win-prob{top:45.1%!important;height:5.3%!important}
 html body .spot-slide.match-slide .player-stack{top:50.4%!important;height:32.3%!important}
+/* Final desktop alignment: center team names vertically and win odds horizontally in their artwork fields. */
+@media(min-width:601px){
+html body .spot-slide.match-slide .match-team-name{top:23.2%!important;height:15.8%!important}
+html body .spot-slide.match-slide .match-team:first-child .win-prob{left:29.2%!important;width:48.4%!important}
+html body .spot-slide.match-slide .match-team:last-child .win-prob{left:26.4%!important;width:47.2%!important}
+}
