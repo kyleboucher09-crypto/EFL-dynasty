@@ -1,482 +1,289 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Dynasty</title><link rel="stylesheet" href="site.css"><style>
-.home-hero{min-height:570px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center}.home-hero h1{font-size:clamp(52px,8vw,98px)}.logo-mark{width:min(420px,100%);justify-self:center;filter:drop-shadow(0 0 28px rgba(125,34,201,.32))}
-.spotlight{position:relative;min-height:430px;border-radius:28px;overflow:hidden;border:1px solid rgba(232,184,74,.24);background:#0c0811;box-shadow:0 22px 60px #0008}.spot-slide{position:absolute;inset:0;padding:28px;opacity:0;transform:translateX(22px);transition:.65s ease;pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(400px 260px at 80% 20%,rgba(125,34,201,.24),transparent 68%),linear-gradient(145deg,#181020,#0b0710)}.spot-slide.on{opacity:1;transform:none;pointer-events:auto}.spot-slide.champ{background:radial-gradient(430px 280px at 80% 20%,rgba(255,217,121,.20),transparent 65%),linear-gradient(145deg,#21160c,#0c0811)}.spot-slide.rankings{background:radial-gradient(400px 260px at 80% 15%,rgba(125,34,201,.32),transparent 68%),linear-gradient(145deg,#160d20,#0b0710)}.spot-slide.records{background:radial-gradient(400px 260px at 80% 15%,rgba(232,184,74,.17),transparent 68%),linear-gradient(145deg,#1b1011,#0b0710)}.spot-watermark{position:absolute;right:-30px;top:-20px;width:270px;opacity:.10;filter:grayscale(1)}.spot-icon{position:absolute;right:30px;top:30px;font-size:92px;filter:drop-shadow(0 10px 25px #0008)}.spot-kicker{color:var(--gold2);font-size:9px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}.spot-title{font-size:clamp(28px,4vw,48px);font-weight:1000;line-height:.94;letter-spacing:-.04em;max-width:80%;margin-top:7px}.spot-copy{color:#c8bdcf;font-size:11px;line-height:1.55;max-width:78%;margin-top:9px}.spot-cta{display:inline-flex;align-self:flex-start;margin-top:14px;padding:9px 12px;border-radius:999px;background:#ffd979;color:#211405;font-size:9px;font-weight:1000}.spot-dots{position:absolute;left:28px;bottom:18px;display:flex;gap:7px;z-index:4}.spot-dot{width:7px;height:7px;border-radius:50%;border:0;background:#ffffff38;padding:0}.spot-dot.on{background:#ffd979;box-shadow:0 0 10px #ffd97977}.spot-arrows{position:absolute;right:18px;bottom:14px;display:flex;gap:6px;z-index:4}.spot-arrow{width:32px;height:32px;border-radius:50%;border:1px solid #ffffff1c;background:#09070bbb;color:#fff}.spot-big{font-size:48px;font-weight:1000;color:var(--gold2);line-height:1}.spot-vs{display:flex;align-items:center;gap:9px;margin-top:9px;font-size:14px;font-weight:950}.spot-vs span{color:var(--gold2);font-size:10px}
-.throne{margin-top:20px;padding:24px;border-radius:22px;background:linear-gradient(145deg,rgba(232,184,74,.12),rgba(20,10,28,.84));border:1px solid rgba(232,184,74,.31)}.throne .crown{font-size:45px}.throne-team{font-size:28px;font-weight:1000;margin-top:6px}.throne-meta{color:var(--muted);font-size:11px;margin-top:5px}
-.hub{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.hub a{padding:18px;border-radius:17px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07);min-height:135px}.hub a:hover{border-color:rgba(232,184,74,.28);transform:translateY(-2px)}.hub .icon{font-size:24px}.hub h3{font-size:14px;margin:12px 0 5px}.hub p{font-size:10px;color:var(--muted);line-height:1.5;margin:0}
-.snap-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.panel{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}.stand-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:center}.stand-row:last-child{border-bottom:0}.rank{font-size:20px;font-weight:1000;color:var(--gold2)}.tn{font-weight:900;font-size:13px}.tm{font-size:9px;color:var(--muted)}.rec{font-weight:900;font-size:11px}.record-big{font-size:42px;color:var(--gold2);font-weight:1000;letter-spacing:-.05em}
-@media(max-width:900px){.home-hero{grid-template-columns:1fr;min-height:auto}.spotlight{min-height:360px}.spot-title,.spot-copy{max-width:85%}.spot-icon{font-size:70px}.logo-mark{width:260px}.hub{grid-template-columns:1fr 1fr}.snap-grid{grid-template-columns:1fr}}@media(max-width:520px){.hub{grid-template-columns:1fr}}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EFL Dynasty</title>
+<link rel="stylesheet" href="site.css">
+<style>
+:root{
+  --home-bg:#06050a;
+  --home-panel:#0d0912;
+  --home-purple:#8d2bd1;
+  --home-purple2:#c74cff;
+  --home-gold:#e8b84a;
+  --home-gold2:#ffd76c;
+  --home-muted:#aaa1b1;
+}
+body{background:radial-gradient(900px 480px at 50% -100px,rgba(125,34,201,.20),transparent 65%),#06050a}
+.home-shell{max-width:1180px;margin:auto;padding:18px 20px 64px}
 
-.live-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
-.live-card{padding:20px;border-radius:19px;background:linear-gradient(145deg,#191022,#0e0a13);border:1px solid rgba(255,255,255,.07)}
-.motw{border-color:rgba(232,184,74,.28);background:radial-gradient(320px 180px at 100% 0%,rgba(232,184,74,.10),transparent 72%),linear-gradient(145deg,#21170f,#120c18)}
+/* header selector */
+.league-menu{position:relative;margin-left:auto;margin-right:8px}
+.league-menu-btn{height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;border-radius:12px;border:1px solid rgba(255,255,255,.11);background:#0c0910;color:#fff;font-size:10px;font-weight:950;letter-spacing:.08em;cursor:pointer}
+.league-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dynasty-dot{background:#e8b84a;box-shadow:0 0 12px rgba(232,184,74,.8)}
+.redraft-dot{background:#baff31;box-shadow:0 0 12px rgba(186,255,49,.8)}
+.league-pop{display:none;position:absolute;right:0;top:48px;width:220px;padding:8px;border-radius:14px;border:1px solid #34253d;background:#09070d;box-shadow:0 20px 50px rgba(0,0,0,.65);z-index:80}
+.league-menu.open .league-pop{display:block}
+.league-pop a{display:flex;align-items:center;gap:10px;padding:11px;border-radius:10px}
+.league-pop a:hover,.league-pop a.active{background:#17101b}
+.league-pop b{display:block;font-size:12px}.league-pop small{display:block;font-size:9px;color:#8f8794;margin-top:2px}
+
+/* premium league hub graphic */
+.league-hero{margin-top:12px}
+.league-hero-card{position:relative;overflow:hidden;border:1px solid rgba(232,184,74,.48);border-radius:24px;background:#08050b;box-shadow:0 22px 55px rgba(0,0,0,.38)}
+.league-hero-card img{display:block;width:100%;height:clamp(250px,38vw,420px);object-fit:cover;object-position:center}
+.league-status{display:flex;justify-content:center;align-items:center;gap:7px;margin:11px 0 0;color:#a69cad;font-size:11px}
+.league-status i{width:8px;height:8px;border-radius:50%;background:#9b43d7;box-shadow:0 0 10px #9b43d7}
+
+/* spotlight */
+.spot-wrap{margin-top:18px}
+.spotlight{position:relative;height:520px;overflow:hidden;border-radius:24px;border:1px solid rgba(232,184,74,.52);background:#050308;box-shadow:0 22px 55px rgba(0,0,0,.42)}
+.spot-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateX(22px);transition:opacity .45s ease,transform .45s ease;pointer-events:none}
+.spot-slide.on{opacity:1;visibility:visible;transform:none;pointer-events:auto;z-index:2}
+.spot-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;border:0}
+.spot-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,2,7,.84) 0%,rgba(4,2,7,.50) 38%,rgba(4,2,7,.07) 72%),linear-gradient(180deg,transparent 42%,rgba(4,2,7,.85) 100%);z-index:1}
+.spot-content{position:absolute;z-index:3;left:46px;bottom:58px;max-width:520px}
+.spot-kicker{color:var(--home-gold2);font-size:11px;font-weight:1000;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.spot-title{font-size:clamp(38px,5vw,66px);line-height:.9;letter-spacing:-.055em;font-weight:1000}
+.spot-team{font-size:24px;font-weight:950;margin-top:15px}
+.spot-copy{color:#d1c7d5;font-size:14px;line-height:1.45;margin-top:5px}
+.spot-big{font-size:72px;color:var(--home-gold2);font-weight:1000;line-height:.9;letter-spacing:-.05em}
+.spot-cta{display:inline-block;margin-top:16px;padding:13px 18px;border-radius:12px;background:linear-gradient(135deg,#ffe27b,#e4a829);color:#211404;font-size:11px;font-weight:1000;letter-spacing:.04em}
+.spot-arrow{position:absolute;z-index:8;top:46%;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(190,61,228,.58);background:rgba(7,4,10,.36);backdrop-filter:blur(7px);color:#d252ff;font-size:29px;cursor:pointer}
+.spot-arrow.prev{left:12px}.spot-arrow.next{right:12px}
+.spot-dots{position:absolute;z-index:8;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:11px}
+.spot-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#7a747d;opacity:.62;cursor:pointer}
+.spot-dot.on{background:#ffd76c;opacity:1;box-shadow:0 0 13px rgba(255,215,108,.75)}
+
+/* explore */
+.hub-heading{display:grid;grid-template-columns:1fr auto 1fr;gap:15px;align-items:center;margin:30px 0 15px;color:var(--home-gold2);font-size:11px;font-weight:1000;letter-spacing:.22em}
+.hub-heading span{height:1px;background:linear-gradient(90deg,transparent,#8f2bc4)}.hub-heading span:last-child{background:linear-gradient(90deg,#8f2bc4,transparent)}
+.hub-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.hub-tile{position:relative;min-height:170px;border:1px solid rgba(112,39,146,.48);border-radius:18px;background:linear-gradient(180deg,rgba(17,10,23,.76),rgba(7,5,10,.94));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:10px;overflow:hidden}
+.hub-tile:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(105,31,147,.18),transparent 58%);pointer-events:none}
+.hub-tile img{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:76%;height:66%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.42));z-index:1}
+.hub-tile h3,.hub-tile p{position:relative;z-index:2}.hub-tile h3{font-size:12px;margin:0 0 3px}.hub-tile p{font-size:8px;color:#a89fac;margin:0}
+.hub-tile .go{position:absolute;right:7px;bottom:7px;width:20px;height:20px;border-radius:50%;border:1px solid rgba(178,75,219,.55);display:grid;place-items:center;color:#dca5ee;font-size:14px;z-index:2}
+
+/* game day */
+.section-head{margin:34px 0 14px}.section-head .eyebrow{color:var(--home-gold2)}.section-head h2{font-size:33px;margin:5px 0 4px}.section-head p{font-size:12px;color:var(--home-muted);margin:0}
+.game-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}
+.game-card{border-radius:20px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(145deg,#171020,#0b0810);padding:20px}
+.game-card.featured{border-color:rgba(232,184,74,.28);background:radial-gradient(360px 180px at 100% 0,rgba(232,184,74,.10),transparent 72%),linear-gradient(145deg,#21170f,#100b16)}
 .matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:16px}
-.side{text-align:center}.side .team{font-size:18px;font-weight:1000}.side .owner{font-size:10px;color:var(--muted);margin-top:3px}.versus{font-size:12px;font-weight:1000;color:var(--gold2);padding:8px 10px;border-radius:999px;background:rgba(232,184,74,.08);border:1px solid rgba(232,184,74,.18)}
-.awards{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.award{padding:12px;border-radius:12px;background:#ffffff07}.award small{display:block;color:var(--muted);font-size:8px;text-transform:uppercase;letter-spacing:.08em}.award b{display:block;font-size:13px;margin-top:5px}.award span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
-.race-row,.result-row{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)}.race-row:last-child,.result-row:last-child{border-bottom:0}.seed{font-size:18px;font-weight:1000;color:var(--gold2)}.cut{border-top:1px dashed rgba(232,184,74,.35);margin-top:6px;padding-top:10px}
-.score{font-size:11px;font-weight:900}.result-team{font-size:12px;font-weight:900}.result-meta{font-size:9px;color:var(--muted);margin-top:2px}
-.throne-watch{margin-top:14px;padding:14px;border-radius:14px;background:rgba(125,34,201,.08);border:1px solid rgba(125,34,201,.18)}
-.preseason{color:var(--muted);font-size:11px;line-height:1.6}
-@media(max-width:900px){.live-grid{grid-template-columns:1fr}.matchup{grid-template-columns:1fr}.versus{justify-self:center}}
+.side{text-align:center}.side .team{font-size:18px;font-weight:1000}.side .owner{font-size:10px;color:var(--home-muted);margin-top:3px}
+.vs{font-size:12px;font-weight:1000;color:var(--home-gold2);padding:8px 10px;border-radius:99px;border:1px solid rgba(232,184,74,.22);background:rgba(232,184,74,.07)}
+.awards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.award{padding:11px;border-radius:12px;background:#ffffff07}.award small{display:block;font-size:8px;color:var(--home-muted);text-transform:uppercase;letter-spacing:.07em}.award b{display:block;font-size:12px;margin-top:4px}.award span{display:block;font-size:9px;color:var(--home-muted);margin-top:2px}
+.stand-row{display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff0e}.stand-row:last-child{border-bottom:0}.rank{color:var(--home-gold2);font-weight:1000}.tn{font-size:12px;font-weight:900}.tm{font-size:9px;color:var(--home-muted)}.rec{font-size:10px;font-weight:900}
 
-/* FINAL EFL HOME + WORKING SPOTLIGHT */
-.home-hero{display:block!important;min-height:auto!important;padding-bottom:24px}
-.home-hero>.status{display:none}
-.home-hero>div:first-child{max-width:850px;margin:0 auto;text-align:center}
-.home-hero h1{margin-bottom:14px}
-.efl-spotlight-final{position:relative!important;min-height:780px!important;margin-top:28px;border:1px solid rgba(239,184,58,.62)!important;border-radius:28px!important;overflow:hidden!important;background:#050308!important}
-.efl-spotlight-final .spot-slide{position:absolute!important;inset:0!important;display:block!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translateX(24px)!important;transition:opacity .45s ease,transform .45s ease!important;padding:0!important}
-.efl-spotlight-final .spot-slide.on{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;z-index:2!important}
-.efl-spotlight-final .spot-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
-.efl-spotlight-final .spot-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,rgba(4,2,7,.03) 44%,rgba(4,2,7,.7) 61%,#050308 79%,#050308 100%);z-index:1}
-.efl-spotlight-final .spot-content{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 54px 86px;text-align:left}
-.efl-spotlight-final .spot-kicker{color:#ffd465;font-size:13px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase;margin-bottom:9px}
-.efl-spotlight-final .spot-title{font-size:clamp(42px,7vw,70px);line-height:.92;font-weight:1000;letter-spacing:-.045em;color:#fff;max-width:700px}
-.efl-spotlight-final .spot-team{font-size:25px;font-weight:900;margin-top:17px;color:#fff}
-.efl-spotlight-final .spot-copy{font-size:17px;line-height:1.4;color:#d5ced9;margin-top:7px;max-width:600px}
-.efl-spotlight-final .spot-big{font-size:76px;line-height:.9;font-weight:1000;color:#ffd465;letter-spacing:-.05em}
-.efl-spotlight-final .spot-cta{display:inline-block;margin-top:18px;padding:15px 20px;border-radius:13px;background:linear-gradient(135deg,#ffe27b,#e7aa2d);color:#211404;font-size:12px;font-weight:1000;letter-spacing:.04em}
-.efl-spotlight-final .spot-dots{position:absolute;z-index:8;left:50%;bottom:25px;transform:translateX(-50%);display:flex;gap:13px}
-.efl-spotlight-final .spot-dot{width:11px;height:11px;border-radius:50%;border:0;background:#777;opacity:.62;padding:0;cursor:pointer}
-.efl-spotlight-final .spot-dot.on{background:#ffd465;opacity:1;box-shadow:0 0 13px #ffd46588}
-.efl-spotlight-final .spot-arrow{position:absolute;z-index:9;top:44%;width:48px;height:48px;border-radius:50%;border:1px solid #a738d8;background:#120a18cc;color:#c94cff;font-size:34px;line-height:1;cursor:pointer;display:grid;place-items:center}
-.efl-spotlight-final .spot-arrow.prev{left:13px}.efl-spotlight-final .spot-arrow.next{right:13px}
-@media(max-width:600px){
- .home-hero{padding-top:34px!important}
- .home-hero h1{font-size:55px!important;line-height:.94!important}
- .efl-spotlight-final{min-height:720px!important;margin-top:24px!important;border-radius:25px!important}
- .efl-spotlight-final .spot-content{padding:0 38px 72px}
- .efl-spotlight-final .spot-title{font-size:42px}
- .efl-spotlight-final .spot-team{font-size:22px}
- .efl-spotlight-final .spot-copy{font-size:15px}
- .efl-spotlight-final .spot-big{font-size:61px}
- .efl-spotlight-final .spot-arrow{width:42px;height:42px;font-size:29px;top:40%}
- .efl-spotlight-final .spot-arrow.prev{left:7px}.efl-spotlight-final .spot-arrow.next{right:7px}
-}
-
-
-/* PREMIUM LEAGUE HUB GRAPHIC + COMPACT SQUARE NAV */
-.home-hero{padding-top:20px!important}
-.league-hub-graphic-wrap{max-width:960px;margin:0 auto 20px!important;text-align:center!important;padding:0!important}
-.league-hub-graphic{
-  display:block;width:100%;height:auto;border-radius:26px;
-  border:1px solid rgba(238,184,67,.35);
-  box-shadow:0 22px 70px rgba(0,0,0,.55),0 0 45px rgba(105,28,171,.13);
-}
-.home-hero>.league-hub-graphic-wrap .hub-live-status{
-  display:block!important;margin:12px auto 0!important;color:#a99fb0!important;
-  font-size:12px!important;text-align:center!important;
-}
-.hub-heading{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;margin:34px 0 18px;color:#f2c85d;font-size:12px;font-weight:1000;letter-spacing:.22em}
-.hub-heading span{height:1px;background:linear-gradient(90deg,transparent,#9e34d7)}
-.hub-heading span:last-child{background:linear-gradient(90deg,#9e34d7,transparent)}
-.premium-hub{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:14px!important}
-.premium-hub a{
-  min-height:0!important;aspect-ratio:1/1!important;padding:12px!important;
-  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-end!important;
-  text-align:center!important;border-radius:20px!important;overflow:hidden!important;
-  background:linear-gradient(155deg,#180c21,#08070b)!important;
-  border:1px solid rgba(154,54,202,.38)!important;
-  box-shadow:inset 0 0 25px rgba(121,35,175,.07),0 12px 30px rgba(0,0,0,.25);
-}
-.premium-hub a:hover{transform:translateY(-3px)!important;border-color:rgba(238,184,67,.6)!important}
-.premium-hub img{
-  width:72%!important;aspect-ratio:1/1!important;object-fit:cover!important;border-radius:14px!important;
-  margin:auto auto 6px!important;mix-blend-mode:screen;
-}
-.premium-hub h3{font-size:13px!important;line-height:1.05!important;margin:4px 0 3px!important;color:#fff!important}
-.premium-hub p{font-size:9px!important;line-height:1.2!important;margin:0 0 2px!important;color:#aaa0ae!important}
-@media(max-width:600px){
-  .home-hero{padding-top:12px!important}
-  .league-hub-graphic{border-radius:22px}
-  .hub-heading{margin:26px 0 14px;gap:10px;font-size:10px}
-  .premium-hub{grid-template-columns:repeat(3,1fr)!important;gap:9px!important}
-  .premium-hub a{padding:8px!important;border-radius:16px!important}
-  .premium-hub img{width:78%!important;border-radius:11px!important}
-  .premium-hub h3{font-size:11px!important}
-  .premium-hub p{font-size:8px!important}
-}
-@media(max-width:380px){
-  .premium-hub h3{font-size:10px!important}
-  .premium-hub p{display:none}
-}
-
-.league-switcher{display:flex;gap:7px;align-items:center;margin-left:auto;margin-right:9px}.league-switcher a{padding:8px 10px;border-radius:11px;border:1px solid #35283d;background:#100b14;color:#ddd4e1;text-decoration:none;font-size:10px;font-weight:950}.league-switcher .dyn{border-color:#d8aa3d;color:#ffd66b}.league-switcher .red{border-color:#4b6518;color:#baff31}@media(max-width:650px){.league-switcher{display:none}}
-/* MOBILE REFINEMENT: header league selector + shorter seamless Spotlight */
-.league-menu{position:relative;margin-left:auto;margin-right:8px;z-index:80}
-.league-menu-btn{
-  height:42px;display:flex;align-items:center;gap:7px;padding:0 11px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.11);background:#0b0810;color:#f6f2f8;
-  font-size:10px;font-weight:1000;letter-spacing:.08em
-}
-.league-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 12px currentColor}
-.dynasty-dot{background:#d9aa43;color:#d9aa43}.redraft-dot{background:#baff31;color:#baff31}
-.league-menu-btn .chev{font-size:12px;color:#9d93a4}
-.league-menu-pop{
-  display:none;position:absolute;right:0;top:48px;width:220px;padding:8px;border-radius:14px;
-  border:1px solid #33273b;background:#09070d;box-shadow:0 18px 45px #000c
-}
-.league-menu.open .league-menu-pop{display:block}
-.league-menu-pop a{
-  display:flex;align-items:center;gap:10px;padding:11px;border-radius:10px;text-decoration:none;color:#ddd5e0
-}
-.league-menu-pop a:hover,.league-menu-pop a.active{background:#15101a}
-.league-menu-pop b{display:block;font-size:12px}.league-menu-pop small{display:block;font-size:9px;color:#8f8794;margin-top:2px}
-
-/* League Hub graphic: a bit shorter on mobile */
-.league-hub-graphic-wrap{margin-bottom:12px!important}
-@media(max-width:600px){
-  .league-hub-graphic-wrap{max-width:100%!important}
-  .league-hub-graphic{max-height:285px!important;object-fit:cover!important;object-position:center!important}
-  .home-hero{padding-top:10px!important}
-}
-
-/* Seamless Spotlight card */
-.efl-spotlight-final{
-  border:1px solid rgba(224,173,57,.58)!important;
-  border-radius:24px!important;
-  overflow:hidden!important;
-  background:#050308!important;
-  box-shadow:0 18px 52px #000a, inset 0 0 0 1px rgba(255,255,255,.015)!important;
-}
-.efl-spotlight-final .spot-bg{
-  inset:0!important;width:100%!important;height:100%!important;
-  border:0!important;border-radius:0!important;
-  object-fit:cover!important;object-position:center 35%!important
-}
-.efl-spotlight-final .spot-slide{border:0!important;border-radius:0!important}
-.efl-spotlight-final .spot-slide:before{display:none!important}
-
-/* Shorter, more sports-app-like carousel */
-@media(max-width:700px){
-  .efl-spotlight-final{min-height:465px!important;margin-top:16px!important}
-  .efl-spotlight-final .spot-slide:after{
-    background:linear-gradient(180deg,rgba(4,2,7,.02) 0%,rgba(4,2,7,.08) 44%,rgba(4,2,7,.78) 67%,#050308 88%,#050308 100%)!important
-  }
-  .efl-spotlight-final .spot-content{padding:0 24px 58px!important}
-  .efl-spotlight-final .spot-kicker{font-size:10px!important;margin-bottom:7px!important}
-  .efl-spotlight-final .spot-title{font-size:34px!important;line-height:.92!important}
-  .efl-spotlight-final .spot-team{font-size:19px!important;margin-top:10px!important}
-  .efl-spotlight-final .spot-copy{font-size:13px!important;line-height:1.35!important;margin-top:4px!important}
-  .efl-spotlight-final .spot-big{font-size:52px!important}
-  .efl-spotlight-final .spot-cta{margin-top:12px!important;padding:12px 15px!important;font-size:10px!important}
-  .efl-spotlight-final .spot-dots{bottom:15px!important;gap:10px!important}
-  .efl-spotlight-final .spot-dot{width:9px!important;height:9px!important}
-  .efl-spotlight-final .spot-arrow{width:38px!important;height:38px!important;font-size:25px!important;top:42%!important}
-  .efl-spotlight-final .spot-arrow.prev{left:8px!important}.efl-spotlight-final .spot-arrow.next{right:8px!important}
-}
-@media(max-width:430px){
-  .league-menu-btn{padding:0 9px;font-size:9px}
-  .league-menu-pop{width:205px}
-  .efl-spotlight-final{min-height:430px!important}
-  .efl-spotlight-final .spot-content{padding:0 20px 54px!important}
-  .efl-spotlight-final .spot-title{font-size:31px!important}
-  .efl-spotlight-final .spot-team{font-size:18px!important}
-  .efl-spotlight-final .spot-copy{font-size:12px!important}
-}
-
-
-/* ===== EFL SEAMLESS MOBILE PASS ===== */
-.league-hub-graphic-wrap,
-.efl-spotlight-final{
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-.league-hub-graphic{
-  display:block!important;
-  width:100%!important;
-  border:1px solid rgba(224,173,57,.50)!important;
-  border-radius:24px!important;
-  box-shadow:0 18px 46px rgba(0,0,0,.38)!important;
-}
-.efl-spotlight-final{
-  border:1px solid rgba(224,173,57,.50)!important;
-  border-radius:24px!important;
-  overflow:hidden!important;
-  box-shadow:0 18px 46px rgba(0,0,0,.40)!important;
-}
-.efl-spotlight-final .spot-slide,
-.efl-spotlight-final .spot-bg{
-  border:0!important;
-  outline:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-}
-.efl-spotlight-final .spot-bg{
-  width:100%!important;
-  height:100%!important;
-  object-fit:cover!important;
-  object-position:center 36%!important;
-}
-.efl-spotlight-final .spot-arrow{
-  background:rgba(5,3,8,.34)!important;
-  border:1px solid rgba(182,66,233,.58)!important;
-  backdrop-filter:blur(7px)!important;
-  box-shadow:0 0 18px rgba(132,36,191,.16)!important;
-}
-.premium-hub{gap:10px!important}
-.premium-hub a{
-  position:relative!important;
-  overflow:hidden!important;
-  aspect-ratio:1/1!important;
-  border:1px solid rgba(111,36,151,.48)!important;
-  border-radius:18px!important;
-  background:
-    radial-gradient(circle at 50% 35%,rgba(109,25,158,.15),transparent 55%),
-    linear-gradient(180deg,rgba(15,9,20,.88),rgba(7,5,10,.96))!important;
-  box-shadow:none!important;
-  padding:10px 8px 9px!important;
-}
-.premium-hub a:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(180deg,transparent 52%,rgba(5,3,8,.72) 100%);
-  z-index:1;
-}
-.premium-hub img{
-  position:absolute!important;
-  left:50%!important;
-  top:8%!important;
-  transform:translateX(-50%)!important;
-  width:78%!important;
-  height:66%!important;
-  object-fit:contain!important;
-  object-position:center!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  mix-blend-mode:screen!important;
-  filter:saturate(1.08) contrast(1.04) drop-shadow(0 8px 14px rgba(0,0,0,.38))!important;
-  z-index:0!important;
-}
-.premium-hub h3,.premium-hub p{position:relative!important;z-index:2!important}
-.premium-hub h3{margin-top:auto!important;margin-bottom:3px!important;font-size:12px!important;line-height:1.05!important}
-.premium-hub p{margin:0!important;font-size:8px!important;color:#aaa1ae!important}
-.premium-hub a:after{
-  content:"›";
-  position:absolute;
-  right:8px;
-  bottom:8px;
-  width:20px;
-  height:20px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  border:1px solid rgba(177,77,220,.55);
-  color:#d9a7ee;
-  font-size:15px;
-  line-height:1;
-  z-index:3;
+/* mobile */
+@media(max-width:900px){
+  .home-shell{padding:14px 14px 52px}
+  .hub-grid{grid-template-columns:repeat(3,1fr)}
+  .game-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
-  .home-hero{padding-top:8px!important}
-  .league-hub-graphic-wrap{margin-bottom:8px!important}
-  .league-hub-graphic{border-radius:21px!important}
-  .efl-spotlight-final{min-height:420px!important;margin-top:12px!important;border-radius:21px!important}
-  .efl-spotlight-final .spot-content{padding:0 20px 52px!important}
-  .efl-spotlight-final .spot-title{font-size:30px!important}
-  .efl-spotlight-final .spot-team{font-size:18px!important}
-  .efl-spotlight-final .spot-copy{font-size:12px!important}
-  .efl-spotlight-final .spot-dots{bottom:15px!important}
-  .hub-heading{margin-top:24px!important}
-  .premium-hub{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
-  .premium-hub a{border-radius:15px!important;padding:8px 6px 8px!important}
-  .premium-hub h3{font-size:11px!important}
+  .brand span{font-size:12px}.brand small{font-size:7px}
+  .league-menu-btn{padding:0 9px;font-size:9px}.league-pop{width:205px}
+  .league-hero-card{border-radius:20px}
+  .league-hero-card img{height:270px}
+  .spotlight{height:405px;border-radius:20px}
+  .spot-slide img{object-position:center 34%}
+  .spot-slide:after{background:linear-gradient(180deg,rgba(4,2,7,.02) 0%,rgba(4,2,7,.06) 40%,rgba(4,2,7,.76) 67%,#050308 100%)}
+  .spot-content{left:22px;right:22px;bottom:48px;max-width:none}
+  .spot-kicker{font-size:9px;margin-bottom:6px}
+  .spot-title{font-size:30px}.spot-team{font-size:18px;margin-top:9px}.spot-copy{font-size:12px}
+  .spot-big{font-size:51px}.spot-cta{padding:11px 14px;font-size:9px;margin-top:11px}
+  .spot-arrow{width:38px;height:38px;font-size:24px;top:39%}.spot-arrow.prev{left:7px}.spot-arrow.next{right:7px}
+  .spot-dots{bottom:14px}
+  .hub-heading{margin-top:24px;font-size:10px;gap:9px}
+  .hub-grid{gap:8px}.hub-tile{min-height:125px;border-radius:15px;padding:7px}.hub-tile img{top:7px;width:72%;height:62%}.hub-tile h3{font-size:10px}.hub-tile p{font-size:7px}.hub-tile .go{display:none}
+  .section-head{margin-top:28px}.section-head h2{font-size:29px}
 }
-
-</style></head><body>
-<div class="topbar"><div class="nav">
-<a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
-<div class="navlinks">
-<a data-nav href="index.html">Home</a><a data-nav href="champions.html">Champions</a><a data-nav href="power-rankings.html">Power Rankings</a><a data-nav href="records.html">Records</a><a data-nav href="franchises.html">Franchises</a><a data-nav href="history.html">History</a><a data-nav href="commissioner.html">Commissioner</a>
-</div><div class="league-switcher"><a class="dyn" href="index.html">DYNASTY</a><a class="red" href="redraft.html">REDRAFT</a></div>
-<div class="league-menu" id="leagueMenu">
-  <button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false">
-    <span class="league-dot dynasty-dot"></span><span>DYNASTY</span><span class="chev">▾</span>
-  </button>
-  <div class="league-menu-pop" id="leagueMenuPop">
-    <a class="active" href="index.html"><span class="league-dot dynasty-dot"></span><span><b>EFL Dynasty</b><small>Purple · Gold</small></span></a>
-    <a href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Lime · Silver</small></span></a>
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="nav">
+    <a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL"><span>EFL Dynasty<small>Elite Fantasy Footballers</small></span></a>
+    <nav class="navlinks">
+      <a data-nav href="index.html">Home</a><a data-nav href="power-rankings.html">Power Rankings</a><a data-nav href="records.html">Records</a><a data-nav href="franchises.html">Franchises</a><a data-nav href="history.html">History</a><a data-nav href="commissioner.html">Commissioner</a>
+    </nav>
+    <div class="league-menu" id="leagueMenu">
+      <button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false"><span class="league-dot dynasty-dot"></span>DYNASTY <span>▾</span></button>
+      <div class="league-pop" id="leaguePop">
+        <a class="active" href="index.html"><span class="league-dot dynasty-dot"></span><span><b>EFL Dynasty</b><small>Purple · Gold</small></span></a>
+        <a href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Lime · Silver</small></span></a>
+      </div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
-</div>
-<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
-</div></div>
+</header>
 <div class="mobile-menu" id="mobileMenu">
-<a data-nav href="index.html">🏠 Home</a><a data-nav href="champions.html">👑 Champions</a><a data-nav href="power-rankings.html">📈 Power Rankings</a><a data-nav href="records.html">🔥 Records</a><a data-nav href="franchises.html">🛡️ Franchises</a><a data-nav href="history.html">📜 History</a><a data-nav href="commissioner.html">♛ Commissioner</a>
+  <a data-nav href="index.html">🏠 Home</a><a data-nav href="power-rankings.html">📈 Power Rankings</a><a data-nav href="records.html">🔥 Records</a><a data-nav href="franchises.html">🛡️ Franchises</a><a data-nav href="history.html">📜 History</a><a data-nav href="commissioner.html">♛ Commissioner</a><a href="redraft.html">⚡ EFL Redraft</a>
 </div>
-<main class="shell">
-<section class="page-hero home-hero">
-<div class="league-hub-graphic-wrap">
-  <img class="league-hub-graphic" src="Assets/league-hub-hero.jpg" alt="The EFL League Hub — The throne. The rivalries. The records. One home for everything that makes EFL Dynasty ours.">
-  <div class="hub-live-status status" id="status">● Connecting to Sleeper…</div>
-</div>
-<div class="spotlight efl-spotlight-final" id="spotlight">
-<a class="spot-slide on" href="franchises.html" data-spot="0">
-<img class="spot-bg" src="Assets/spotlight-champion.jpg" alt="">
-<div class="spot-content"><div class="spot-kicker" id="spotChampYear">👑 EFL CHAMPION</div><div class="spot-title">Reigning Champion</div><div class="spot-team" id="spotChamp">Loading champion…</div><div class="spot-copy" id="spotChampCopy">Loading the latest completed EFL season.</div><span class="spot-cta">VIEW THEIR FRANCHISE →</span></div></a>
-<a class="spot-slide" href="power-rankings.html" data-spot="1">
-<img class="spot-bg" src="Assets/spotlight-rankings.jpg" alt="">
-<div class="spot-content"><div class="spot-kicker">👑 LEAGUE HIERARCHY</div><div class="spot-title">Top 3 Power Rankings</div><div class="spot-copy" id="spotRank">Loading the league's top three.</div><span class="spot-cta">OPEN POWER RANKINGS →</span></div></a>
-<a class="spot-slide" href="#game-day" data-spot="2">
-<img class="spot-bg" src="Assets/spotlight-matchup.jpg" alt="">
-<div class="spot-content"><div class="spot-kicker">⚔️ MARQUEE MATCHUP</div><div class="spot-title">Game of the Week</div><div class="spot-copy" id="spotGame">Preseason · matchup loads automatically.</div><span class="spot-cta">VIEW GAME DAY CENTRAL ↓</span></div></a>
-<a class="spot-slide" href="records.html" data-spot="3">
-<img class="spot-bg" src="Assets/spotlight-record.jpg" alt="">
-<div class="spot-content"><div class="spot-kicker">💎 LEAGUE POINTS RECORD</div><div class="spot-big" id="spotRecord">—</div><div class="spot-team" id="spotRecordTeam">Highest Weekly Score</div><div class="spot-copy" id="spotRecordMeta">Scanning EFL history.</div><span class="spot-cta">OPEN RECORD BOOK →</span></div></a>
-<div class="spot-dots"><button type="button" class="spot-dot on" data-go="0" aria-label="Champion"></button><button type="button" class="spot-dot" data-go="1" aria-label="Power rankings"></button><button type="button" class="spot-dot" data-go="2" aria-label="Game of the week"></button><button type="button" class="spot-dot" data-go="3" aria-label="Record"></button></div>
-<button type="button" class="spot-arrow prev" id="spotPrev" aria-label="Previous spotlight">‹</button>
-<button type="button" class="spot-arrow next" id="spotNext" aria-label="Next spotlight">›</button>
-</div>
-</section>
-<div class="hub-heading"><span></span><div>EXPLORE THE HUB</div><span></span></div>
-<section class="hub premium-hub">
-<a href="power-rankings.html"><img src="Assets/hub-rankings.jpg" alt=""><h3>Power Rankings</h3><p>Weekly hierarchy</p></a>
-<a href="champions.html"><img src="Assets/hub-champions.jpg" alt=""><h3>Champions</h3><p>Every throne</p></a>
-<a href="records.html"><img src="Assets/hub-records.jpg" alt=""><h3>Record Book</h3><p>League history</p></a>
-<a href="franchises.html"><img src="Assets/hub-franchises.jpg" alt=""><h3>Franchises</h3><p>Team résumés</p></a>
-<a href="history.html"><img src="Assets/hub-history.jpg" alt=""><h3>History</h3><p>Every season</p></a>
-<a href="#game-day"><img src="Assets/hub-gameday.jpg" alt=""><h3>Game Day</h3><p>Weekly battles</p></a>
-</section>
 
-<div class="section-head" id="game-day"><div class="eyebrow">Game Day Central</div><h2>This Week in the EFL</h2><p>Matchup spotlight, weekly awards, playoff race and recent results — all Sleeper powered.</p></div>
-<section class="live-grid">
-  <div class="live-card motw">
-    <div class="eyebrow">⚔️ Matchup of the Week</div>
-    <div id="motwContent" class="preseason">Preseason mode. Once Week 1 matchups are live, the marquee matchup will appear here automatically.</div>
-    <div class="throne-watch" id="throneWatch"><div class="eyebrow">👑 Throne Watch</div><div class="preseason">Tracking the reigning champion and the hottest challenger once weekly results begin.</div></div>
-  </div>
-  <div class="live-card">
-    <div class="eyebrow">🏆 Weekly Awards</div>
-    <div id="awardsContent" class="preseason">Awards unlock after the first completed week.</div>
-  </div>
-</section>
+<main class="home-shell">
+  <section class="league-hero">
+    <div class="league-hero-card"><img src="Assets/league-hub-hero.jpg" alt="The EFL League Hub"></div>
+    <div class="league-status"><i></i><span id="status">Connecting to Sleeper…</span></div>
+  </section>
 
-<section class="live-grid" style="margin-top:14px">
-  <div class="live-card">
-    <div class="eyebrow">🏁 Playoff Race</div>
-    <div id="raceContent" class="preseason">The playoff picture will populate automatically once standings begin to move.</div>
-  </div>
-  <div class="live-card">
-    <div class="eyebrow">📊 Recent Results</div>
-    <div id="resultsContent" class="preseason">Completed weekly matchups will appear here during the season.</div>
-  </div>
-</section>
+  <section class="spot-wrap">
+    <div class="spotlight" id="spotlight">
+      <a class="spot-slide on" data-spot="0" href="franchises.html">
+        <img src="Assets/spotlight-champion.jpg" alt="">
+        <div class="spot-content"><div class="spot-kicker" id="champYear">👑 EFL CHAMPION</div><div class="spot-title">Reigning Champion</div><div class="spot-team" id="champTeam">Loading champion…</div><div class="spot-copy" id="champOwner">Latest completed EFL season</div><span class="spot-cta">VIEW THEIR FRANCHISE →</span></div>
+      </a>
+      <a class="spot-slide" data-spot="1" href="power-rankings.html">
+        <img src="Assets/spotlight-rankings.jpg" alt="">
+        <div class="spot-content"><div class="spot-kicker">👑 LEAGUE HIERARCHY</div><div class="spot-title">Top 3 Power Rankings</div><div class="spot-copy" id="rankCopy">Loading the EFL hierarchy…</div><span class="spot-cta">OPEN POWER RANKINGS →</span></div>
+      </a>
+      <a class="spot-slide" data-spot="2" href="#game-day">
+        <img src="Assets/spotlight-matchup.jpg" alt="">
+        <div class="spot-content"><div class="spot-kicker">⚔️ MARQUEE MATCHUP</div><div class="spot-title">Game of the Week</div><div class="spot-copy" id="gameCopy">Preseason · matchup loads automatically.</div><span class="spot-cta">VIEW GAME DAY CENTRAL ↓</span></div>
+      </a>
+      <a class="spot-slide" data-spot="3" href="records.html">
+        <img src="Assets/spotlight-record.jpg" alt="">
+        <div class="spot-content"><div class="spot-kicker">💎 LEAGUE POINTS RECORD</div><div class="spot-big" id="recordScore">—</div><div class="spot-team" id="recordTeam">Highest Weekly Score</div><div class="spot-copy" id="recordMeta">Scanning EFL history…</div><span class="spot-cta">OPEN RECORD BOOK →</span></div>
+      </a>
+      <button class="spot-arrow prev" id="spotPrev" aria-label="Previous">‹</button>
+      <button class="spot-arrow next" id="spotNext" aria-label="Next">›</button>
+      <div class="spot-dots">
+        <button class="spot-dot on" data-go="0" aria-label="Champion"></button><button class="spot-dot" data-go="1" aria-label="Power rankings"></button><button class="spot-dot" data-go="2" aria-label="Game of the week"></button><button class="spot-dot" data-go="3" aria-label="Record"></button>
+      </div>
+    </div>
+  </section>
 
-<div class="section-head"><div class="eyebrow">Sleeper Live</div><h2>League Snapshot</h2><p>Current standings plus an all-time scoring record teaser.</p></div>
-<section class="snap-grid"><div class="panel" id="standings"><div class="loading">Loading standings…</div></div><div class="panel"><div class="eyebrow">Record Watch</div><div class="record-big" id="highScore">—</div><div class="tn" id="highTeam">Highest weekly score</div><div class="tm" id="highMeta">Scanning league history…</div><p style="margin-top:18px"><a href="records.html" style="color:var(--gold2);font-weight:900;font-size:11px">Open full record book →</a></p></div></section>
-<div class="footer">EFL Dynasty · League ID 1313240395462742016</div></main><script src="site.js"></script>
+  <div class="hub-heading"><span></span><div>EXPLORE THE HUB</div><span></span></div>
+  <section class="hub-grid">
+    <a class="hub-tile" href="power-rankings.html"><img src="Assets/hub-rankings.png" alt=""><h3>Power Rankings</h3><p>Weekly hierarchy</p><span class="go">›</span></a>
+    <a class="hub-tile" href="champions.html"><img src="Assets/hub-champions.png" alt=""><h3>Champions</h3><p>Every throne</p><span class="go">›</span></a>
+    <a class="hub-tile" href="records.html"><img src="Assets/hub-records.png" alt=""><h3>Record Book</h3><p>League history</p><span class="go">›</span></a>
+    <a class="hub-tile" href="franchises.html"><img src="Assets/hub-franchises.png" alt=""><h3>Franchises</h3><p>Team résumés</p><span class="go">›</span></a>
+    <a class="hub-tile" href="history.html"><img src="Assets/hub-history.png" alt=""><h3>History</h3><p>Every season</p><span class="go">›</span></a>
+    <a class="hub-tile" href="#game-day"><img src="Assets/hub-gameday.png" alt=""><h3>Game Day</h3><p>Weekly battles</p><span class="go">›</span></a>
+  </section>
+
+  <div class="section-head" id="game-day"><div class="eyebrow">Game Day Central</div><h2>This Week in the EFL</h2><p>Matchup spotlight, weekly leaders and the current standings — all Sleeper powered.</p></div>
+  <section class="game-grid">
+    <div class="game-card featured"><div class="eyebrow">⚔️ Matchup of the Week</div><div id="motw"><div class="spot-copy">Waiting for the current week matchup.</div></div><div class="awards" id="awards"></div></div>
+    <div class="game-card"><div class="eyebrow">Current Hierarchy</div><div style="font-size:24px;font-weight:1000;margin-top:7px">Top 5 Standings</div><div id="standings"></div></div>
+  </section>
+</main>
+
+<script src="site.js"></script>
 <script>
-(function(){
-  const slides=Array.from(document.querySelectorAll("#spotlight .spot-slide"));
-  const dots=Array.from(document.querySelectorAll("#spotlight .spot-dot"));
-  const box=document.getElementById("spotlight");
-  const prev=document.getElementById("spotPrev"), next=document.getElementById("spotNext");
-  if(!slides.length||!box) return;
-  let index=0,timer=null,startX=null;
-  function show(n){
-    index=(n+slides.length)%slides.length;
-    slides.forEach((el,k)=>el.classList.toggle("on",k===index));
-    dots.forEach((el,k)=>el.classList.toggle("on",k===index));
-  }
-  function reset(){ clearInterval(timer); timer=setInterval(()=>show(index+1),6500); }
-  function move(n){ show(n); reset(); }
-  dots.forEach((d,k)=>d.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();move(k)}));
-  prev?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();move(index-1)});
-  next?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();move(index+1)});
-  box.addEventListener("touchstart",e=>{startX=e.changedTouches[0].clientX},{passive:true});
-  box.addEventListener("touchend",e=>{if(startX===null)return;const dx=e.changedTouches[0].clientX-startX;startX=null;if(Math.abs(dx)>45)move(index+(dx<0?1:-1))},{passive:true});
-  show(0); reset();
+const LEAGUE_ID="1313240395462742016", API="https://api.sleeper.app/v1";
+const q=s=>document.querySelector(s);
+async function get(path){const r=await fetch(API+path);if(!r.ok)throw Error("Sleeper "+r.status);return r.json()}
+function nm(user,roster){return user?.metadata?.team_name||user?.display_name||`Roster ${roster?.roster_id||""}`}
+function pts(s){return (s?.fpts||0)+(s?.fpts_decimal||0)/100}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+
+(function carousel(){
+  const slides=[...document.querySelectorAll(".spot-slide")],dots=[...document.querySelectorAll(".spot-dot")],box=q("#spotlight");
+  let i=0,t=null,x0=null;
+  function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle("on",k===i));dots.forEach((d,k)=>d.classList.toggle("on",k===i))}
+  function reset(){clearInterval(t);t=setInterval(()=>show(i+1),6500)}
+  dots.forEach((d,k)=>d.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();show(k);reset()}));
+  q("#spotPrev").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();show(i-1);reset()});
+  q("#spotNext").addEventListener("click",e=>{e.preventDefault();e.stopPropagation();show(i+1);reset()});
+  box.addEventListener("touchstart",e=>x0=e.changedTouches[0].clientX,{passive:true});
+  box.addEventListener("touchend",e=>{if(x0===null)return;let dx=e.changedTouches[0].clientX-x0;x0=null;if(Math.abs(dx)>45){show(i+(dx<0?1:-1));reset()}},{passive:true});
+  show(0);reset();
 })();
-</script><script>
-function nmMaps(users,rosters){let u=Object.fromEntries(users.map(x=>[x.user_id,x]));return r=>{let x=u[r.owner_id];return {team:teamName(x,r),owner:x?.display_name||""}}}
-async function podium(lid){let [lg,u,r,b]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`),apiGet(`/league/${lid}/winners_bracket`)]);let c=(b||[]).filter(x=>x.w&&x.l),f=c.find(x=>+x.p===1)||[...c].sort((a,b)=>(b.r||0)-(a.r||0))[0],rb=Object.fromEntries(r.map(x=>[x.roster_id,x])),ub=Object.fromEntries(u.map(x=>[x.user_id,x]));if(!f)return{lg};let rr=rb[f.w],uu=rr?ub[rr.owner_id]:null;return{lg,team:teamName(uu,rr),owner:uu?.display_name||""}}
-(async()=>{try{
- let [league,users,rosters]=await Promise.all([apiGet(`/league/${EFL_ID}`),apiGet(`/league/${EFL_ID}/users`),apiGet(`/league/${EFL_ID}/rosters`)]);
- if($("#status")) $("#status").textContent=`● Sleeper Live · ${league.season}`;
- await renderLiveHub(league,users,rosters);
- let p=league.previous_league_id?await podium(league.previous_league_id):null;
- if(p?.team){
-   const champ=$("#spotChamp"), copy=$("#spotChampCopy"), year=$("#spotChampYear");
-   if(champ) champ.textContent=p.team;
-   if(copy) copy.textContent=p.owner||"EFL Dynasty";
-   if(year) year.textContent=`👑 ${p.lg.season} EFL CHAMPION`;
- }
- let n=nmMaps(users,rosters),sorted=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
- if(sorted[0]){let lead=n(sorted[0]);$("#spotRank").textContent=`#1 ${lead.team} · ${sorted[0].settings?.wins||0}-${sorted[0].settings?.losses||0} · ${lead.owner}`} if($("#standings")) $("#standings").innerHTML=sorted.slice(0,5).map((r,i)=>{let x=n(r);return `<div class="stand-row"><div class="rank">${i+1}</div><div><div class="tn">${x.team}</div><div class="tm">${x.owner}</div></div><div class="rec">${r.settings?.wins||0}-${r.settings?.losses||0}</div></div>`}).join("")+`<div style="margin-top:14px"><a href="franchises.html" style="color:var(--gold2);font-size:11px;font-weight:900">View every franchise →</a></div>`;
- let lid=EFL_ID,best=null,depth=0;while(lid&&depth<8){let [lg,u,r]=await Promise.all([apiGet(`/league/${lid}`),apiGet(`/league/${lid}/users`),apiGet(`/league/${lid}/rosters`)]),maps=nmMaps(u,r),end=Math.max(1,+lg.settings?.playoff_week_start-1||14);for(let w=1;w<=end;w++){let rows=[];try{rows=await apiGet(`/league/${lid}/matchups/${w}`)}catch(e){}for(let x of rows){let pts=+x.points||0;if(!best||pts>best.pts){let rr=r.find(z=>z.roster_id===x.roster_id);best={pts,year:lg.season,week:w,...maps(rr)}}}}lid=lg.previous_league_id;depth++}
- if(best){
-   if($("#highScore")) $("#highScore").textContent=best.pts.toFixed(2);
-   if($("#highTeam")) $("#highTeam").textContent=best.team;
-   if($("#highMeta")) $("#highMeta").textContent=`${best.year} · Week ${best.week}`;
-   if($("#spotRecord")) $("#spotRecord").textContent=best.pts.toFixed(2);
-   if($("#spotRecordTeam")) $("#spotRecordTeam").textContent=best.team;
-   if($("#spotRecordMeta")) $("#spotRecordMeta").textContent=`EFL record · ${best.year} · Week ${best.week}`;
- }
-}catch(e){console.error(e);if($("#status")) $("#status").textContent="● Sleeper temporarily unavailable"}})();
 
-async function weekRows(week){try{return await apiGet(`/league/${EFL_ID}/matchups/${week}`)}catch(e){return[]}}
-function matchupGroups(rows){let g={};for(const x of rows){if(x.matchup_id!=null)(g[x.matchup_id]??=[]).push(x)}return Object.values(g).filter(x=>x.length===2)}
-function rosterMaps(users,rosters){let ub=Object.fromEntries(users.map(u=>[u.user_id,u])),rb=Object.fromEntries(rosters.map(r=>[r.roster_id,r]));return {name:rid=>{let r=rb[rid],u=r?ub[r.owner_id]:null;return {team:teamName(u,r),owner:u?.display_name||""}},rb}}
-async function renderLiveHub(league,users,rosters){
-  const state=await apiGet(`/state/nfl`);
-  const regEnd=Math.max(1,Number(league.settings?.playoff_week_start||15)-1);
-  let currentWeek=Number(state.week||1);
-  let completedWeek=Math.max(0,Math.min(regEnd,currentWeek-1));
-  if(state.season!==league.season) completedWeek=0;
-  const maps=rosterMaps(users,rosters);
+(function leagueMenu(){
+  const m=q("#leagueMenu"),b=q("#leagueMenuBtn");
+  b?.addEventListener("click",e=>{e.stopPropagation();const o=m.classList.toggle("open");b.setAttribute("aria-expanded",o)});
+  document.addEventListener("click",()=>m?.classList.remove("open"));
+  m?.addEventListener("click",e=>e.stopPropagation());
+})();
 
-  // Matchup of the week: closest standings pair among current week matchups
-  const liveRows=await weekRows(Math.max(1,currentWeek));
-  const liveGroups=matchupGroups(liveRows);
-  if(liveGroups.length){
-    let standings=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
-    let rankMap=Object.fromEntries(standings.map((r,i)=>[r.roster_id,i+1]));
-    let pick=[...liveGroups].sort((a,b)=>Math.abs((rankMap[a[0].roster_id]||99)-(rankMap[a[1].roster_id]||99))-Math.abs((rankMap[b[0].roster_id]||99)-(rankMap[b[1].roster_id]||99)))[0];
-    let A=maps.name(pick[0].roster_id),B=maps.name(pick[1].roster_id);
-    $("#motwContent").innerHTML=`<div class="matchup"><div class="side"><div class="team">${A.team}</div><div class="owner">${A.owner}</div></div><div class="versus">VS</div><div class="side"><div class="team">${B.team}</div><div class="owner">${B.owner}</div></div></div><div class="result-meta" style="text-align:center;margin-top:10px">Week ${currentWeek} · closest-ranked matchup</div>`;
+async function previousChampion(league){
+  if(!league.previous_league_id)return null;
+  const id=league.previous_league_id;
+  const [lg,users,rosters,winners]=await Promise.all([get("/league/"+id),get("/league/"+id+"/users"),get("/league/"+id+"/rosters"),get("/league/"+id+"/winners_bracket").catch(()=>[])]);
+  const um=Object.fromEntries(users.map(u=>[u.user_id,u]));
+  let champRoster=null;
+  const final=winners.filter(x=>x.p===1 || x.p===2 || x.p===3).sort((a,b)=>(a.p||9)-(b.p||9))[0];
+  if(final){
+    const rid=final.w===1?final.r1:final.r2;
+    champRoster=rosters.find(r=>r.roster_id===rid);
   }
-
-  if(completedWeek>0){
-    let rows=await weekRows(completedWeek),groups=matchupGroups(rows);
-    let games=groups.map(g=>{let a=g[0],b=g[1],ap=+a.points||0,bp=+b.points||0,A=maps.name(a.roster_id),B=maps.name(b.roster_id);return {a:A,b:B,ap,bp,high:Math.max(ap,bp),low:Math.min(ap,bp),margin:Math.abs(ap-bp),winner:ap>=bp?A:B,loser:ap>=bp?B:A}});
-    let top=[...games].sort((x,y)=>y.high-x.high)[0],blow=[...games].sort((x,y)=>y.margin-x.margin)[0],close=[...games].filter(x=>x.margin>0).sort((x,y)=>x.margin-y.margin)[0],tough=[...games].sort((x,y)=>y.low-x.low)[0];
-    $("#awardsContent").innerHTML=`<div class="awards">
-      <div class="award"><small>🔥 Top Score</small><b>${top.winner.team}</b><span>${top.high.toFixed(2)}</span></div>
-      <div class="award"><small>💥 Biggest Blowout</small><b>${blow.winner.team}</b><span>+${blow.margin.toFixed(2)}</span></div>
-      <div class="award"><small>😬 Closest Win</small><b>${close?.winner.team||"—"}</b><span>${close?close.margin.toFixed(2):"—"}</span></div>
-      <div class="award"><small>💔 Toughest Loss</small><b>${tough.loser.team}</b><span>${tough.low.toFixed(2)} in a loss</span></div>
-    </div><div class="result-meta" style="margin-top:10px">Week ${completedWeek} awards</div>`;
-    $("#resultsContent").innerHTML=games.slice(0,6).map(g=>`<div class="result-row"><div class="seed">•</div><div><div class="result-team">${g.a.team} vs ${g.b.team}</div><div class="result-meta">Week ${completedWeek}</div></div><div class="score">${g.ap.toFixed(1)}–${g.bp.toFixed(1)}</div></div>`).join("");
+  if(!champRoster){
+    champRoster=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||pts(b.settings)-pts(a.settings))[0];
   }
-
-  let standings=[...rosters].sort((a,b)=>(b.settings?.wins||0)-(a.settings?.wins||0)||((b.settings?.fpts||0)+(b.settings?.fpts_decimal||0)/100)-((a.settings?.fpts||0)+(a.settings?.fpts_decimal||0)/100));
-  let playoffTeams=Number(league.settings?.playoff_teams||6);
-  $("#raceContent").innerHTML=standings.slice(0,Math.min(8,standings.length)).map((r,i)=>{let n=maps.name(r.roster_id),pf=(Number(r.settings?.fpts||0)+Number(r.settings?.fpts_decimal||0)/100).toFixed(1);return `<div class="race-row ${i===playoffTeams?'cut':''}"><div class="seed">${i+1}</div><div><div class="result-team">${n.team}</div><div class="result-meta">${n.owner}</div></div><div class="score">${r.settings?.wins||0}-${r.settings?.losses||0}<br><span style="color:var(--muted);font-size:8px">${pf} PF</span></div></div>`}).join("");
-
-  if(completedWeek>0 && standings.length){
-    let champ=$("#champTeam")?.textContent||"Reigning Champion";
-    let challenger=maps.name(standings[0].roster_id).team;
-    $("#throneWatch").innerHTML=`<div class="eyebrow">👑 Throne Watch</div><div class="result-team" style="margin-top:7px">${champ}</div><div class="result-meta">Reigning champion</div><div class="result-team" style="margin-top:10px">${challenger}</div><div class="result-meta">Current top challenger by standings</div>`;
-  }
+  if(!champRoster)return null;
+  const u=um[champRoster.owner_id]||{};
+  return {season:lg.season,team:nm(u,champRoster),owner:u.display_name||"EFL Owner"};
 }
 
-</script>
-<script>
-(function(){
-  const menu=document.getElementById('leagueMenu');
-  const btn=document.getElementById('leagueMenuBtn');
-  if(!menu||!btn) return;
-  btn.addEventListener('click',function(e){
-    e.stopPropagation();
-    const open=menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded',open?'true':'false');
-  });
-  document.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false')});
-  menu.addEventListener('click',e=>e.stopPropagation());
+async function allTimeRecord(league){
+  let id=league.league_id,best=null,depth=0;
+  while(id && depth<8){
+    depth++;
+    try{
+      const [lg,users,rosters]=await Promise.all([get("/league/"+id),get("/league/"+id+"/users"),get("/league/"+id+"/rosters")]);
+      const um=Object.fromEntries(users.map(u=>[u.user_id,u]));
+      const rmap=Object.fromEntries(rosters.map(r=>[r.roster_id,{team:nm(um[r.owner_id],r)}]));
+      for(let w=1;w<=18;w++){
+        const ms=await get("/league/"+id+"/matchups/"+w).catch(()=>[]);
+        if(!ms?.length) break;
+        for(const m of ms){
+          if(typeof m.points==="number" && (!best || m.points>best.score)) best={score:m.points,team:rmap[m.roster_id]?.team||"EFL Team",season:lg.season,week:w};
+        }
+      }
+      id=lg.previous_league_id;
+    }catch(e){break}
+  }
+  return best;
+}
+
+(async function loadHome(){
+  try{
+    const [league,users,rosters,state]=await Promise.all([get("/league/"+LEAGUE_ID),get("/league/"+LEAGUE_ID+"/users"),get("/league/"+LEAGUE_ID+"/rosters"),get("/state/nfl")]);
+    q("#status").textContent=`Sleeper Live · ${league.season}`;
+    const um=Object.fromEntries(users.map(u=>[u.user_id,u]));
+    const rows=rosters.map(r=>({r,u:um[r.owner_id]||{},team:nm(um[r.owner_id],r),w:r.settings?.wins||0,l:r.settings?.losses||0,t:r.settings?.ties||0,pf:pts(r.settings)}))
+      .sort((a,b)=>b.w-a.w||a.l-b.l||b.pf-a.pf);
+
+    q("#rankCopy").textContent=rows.slice(0,3).map((x,i)=>`#${i+1} ${x.team}${i<2?"  ·  ":""}`).join("");
+
+    q("#standings").innerHTML=rows.slice(0,5).map((x,i)=>`<div class="stand-row"><div class="rank">#${i+1}</div><div><div class="tn">${esc(x.team)}</div><div class="tm">${esc(x.u.display_name||"EFL Owner")} · ${x.pf.toFixed(2)} PF</div></div><div class="rec">${x.w}-${x.l}</div></div>`).join("");
+
+    const champ=await previousChampion(league).catch(()=>null);
+    if(champ){q("#champYear").textContent=`👑 ${champ.season} EFL CHAMPION`;q("#champTeam").textContent=champ.team;q("#champOwner").textContent=champ.owner}
+
+    const week=Math.max(1,state?.week||1);
+    const matchups=await get("/league/"+LEAGUE_ID+"/matchups/"+week).catch(()=>[]);
+    if(matchups.length){
+      const byId=Object.fromEntries(rows.map(x=>[x.r.roster_id,x]));
+      const groups={};matchups.forEach(m=>(groups[m.matchup_id]??=[]).push(m));
+      const pair=Object.values(groups).find(g=>g.length===2);
+      if(pair){
+        const a=byId[pair[0].roster_id],b=byId[pair[1].roster_id];
+        if(a&&b){
+          q("#gameCopy").textContent=`Week ${week} · ${a.team} vs ${b.team}`;
+          q("#motw").innerHTML=`<div class="matchup"><div class="side"><div class="team">${esc(a.team)}</div><div class="owner">${esc(a.u.display_name||"")}</div></div><div class="vs">VS</div><div class="side"><div class="team">${esc(b.team)}</div><div class="owner">${esc(b.u.display_name||"")}</div></div></div>`;
+        }
+      }
+    } else {
+      q("#motw").innerHTML='<div class="spot-copy" style="margin-top:12px">Preseason mode. The marquee matchup will appear automatically once Sleeper posts Week 1.</div>';
+    }
+
+    const pointLeader=[...rows].sort((a,b)=>b.pf-a.pf)[0];
+    const winLeader=rows[0];
+    q("#awards").innerHTML=`<div class="award"><small>Points Leader</small><b>${esc(pointLeader?.team||"—")}</b><span>${pointLeader?pointLeader.pf.toFixed(2)+" PF":"Waiting for season"}</span></div><div class="award"><small>Standings Leader</small><b>${esc(winLeader?.team||"—")}</b><span>${winLeader?winLeader.w+"-"+winLeader.l:"Waiting for season"}</span></div>`;
+
+    allTimeRecord(league).then(best=>{if(best){q("#recordScore").textContent=best.score.toFixed(2);q("#recordTeam").textContent=best.team;q("#recordMeta").textContent=`EFL record · ${best.season} · Week ${best.week}`}}).catch(()=>{});
+  }catch(e){
+    q("#status").textContent="Sleeper temporarily unavailable";
+  }
 })();
 </script>
-
-</body></html>
+</body>
+</html>
