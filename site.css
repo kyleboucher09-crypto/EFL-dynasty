@@ -77,3 +77,6 @@
 @media(max-width:600px){
   html body .spot-slide:first-of-type>img{left:16%!important;width:92%!important;filter:brightness(.52)!important}
 }
+
+/* Slider navigation CTAs removed for a cleaner presentation. */
+.spot-slide .spot-cta{display:none!important}
