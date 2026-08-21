@@ -15,8 +15,13 @@
 @media(max-width:900px){.navlinks{display:none}.menu-btn{display:block}.shell{padding:18px 14px 50px}.nav{padding:0 14px}.page-hero{padding:30px 23px;min-height:360px}.page-hero h1{font-size:52px}}
 @media(min-width:901px){.mobile-menu{display:none!important}}
 
+/* Keep the league-hub title artwork fully visible instead of cropping it. */
+.league-hero-card{background:#050308!important;}
+.league-hero-card img{height:auto!important;aspect-ratio:16/9!important;object-fit:contain!important;object-position:center center!important;background:#050308!important;}
+
 /* Mobile spotlight: keep the full 16:9 artwork and blend the copy into the same card. */
 @media(max-width:600px){
+  .league-hero-card img{height:auto!important;aspect-ratio:16/9!important;object-fit:contain!important;}
   .spotlight{height:350px!important;background:#050308!important;}
   .spot-slide{overflow:hidden!important;background:#050308!important;}
   .spot-slide img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center top!important;transform:none!important;background:#050308!important;}
