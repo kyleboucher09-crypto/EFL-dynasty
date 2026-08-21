@@ -21,6 +21,19 @@
 .league-status{display:none!important;}
 .spot-wrap{margin-top:14px!important;}
 
+/* Premium slider title assets */
+.spot-slide:first-of-type .spot-content{left:82px!important;bottom:34px!important;max-width:690px!important;}
+.spot-slide:first-of-type .spot-kicker,.spot-slide:first-of-type .champ-name,.spot-slide:first-of-type .champ-sub{display:none!important;}
+.spot-slide:first-of-type .spot-content:before{content:"";display:block;width:min(640px,70vw);height:220px;background:url('1787341211465-15c30d88-b343-4245-b698-f0b2bfeb0a37-Photoroom.png') left bottom/contain no-repeat;filter:drop-shadow(0 18px 28px rgba(0,0,0,.48));margin-bottom:-6px;}
+.spot-slide:first-of-type .spot-cta{margin-left:14px!important;margin-top:2px!important;}
+.spot-slide:nth-of-type(4) .spot-content{left:82px!important;bottom:28px!important;max-width:700px!important;}
+.spot-slide:nth-of-type(4) .purse-label,.spot-slide:nth-of-type(4) .purse-title,.spot-slide:nth-of-type(4) .purse-note{display:none!important;}
+.spot-slide:nth-of-type(4) .spot-content:before{content:"";display:block;width:min(650px,71vw);height:178px;background:url('1787341114676-56aa2e46-d500-4fe5-ac5f-8dd1bff701b3-Photoroom.png') left bottom/contain no-repeat;filter:drop-shadow(0 18px 28px rgba(0,0,0,.52));margin-bottom:-3px;}
+.spot-slide:nth-of-type(4) .purse-amount{font-size:58px!important;line-height:.78!important;margin:0!important;display:inline-block!important;vertical-align:bottom!important;}
+.spot-slide:nth-of-type(4) .purse-leader{font-size:24px!important;display:inline-block!important;margin:0 0 0 18px!important;vertical-align:bottom!important;}
+.spot-slide:nth-of-type(4) .purse-points{font-size:10px!important;margin:6px 0 0 4px!important;color:#d7c9dc!important;letter-spacing:.04em!important;}
+.spot-slide:nth-of-type(4) .purse-points:before{content:"$100 SEASON PURSE · CURRENT LEADER  ";color:#ffd979;font-weight:950;letter-spacing:.1em;}
+
 /* Mobile spotlight: keep the full 16:9 artwork and blend the copy into the same card. */
 @media(max-width:600px){
   .league-hero-card{width:100%!important;aspect-ratio:2.15/1!important;background-size:cover!important;background-position:center center!important;}
@@ -38,4 +51,13 @@
   .spot-cta{margin-top:7px!important;padding:8px 11px!important;font-size:7px!important;}
   .spot-arrow{top:27%!important;width:34px!important;height:34px!important;font-size:21px!important;background:rgba(5,3,8,.30)!important;}
   .spot-dots{bottom:10px!important;}
+  .spot-slide:first-of-type .spot-content{left:52px!important;right:12px!important;bottom:26px!important;}
+  .spot-slide:first-of-type .spot-content:before{width:90%!important;height:115px!important;margin-bottom:-4px!important;}
+  .spot-slide:first-of-type .spot-cta{margin-left:4px!important;}
+  .spot-slide:nth-of-type(4) .spot-content{left:52px!important;right:12px!important;bottom:25px!important;}
+  .spot-slide:nth-of-type(4) .spot-content:before{width:91%!important;height:92px!important;}
+  .spot-slide:nth-of-type(4) .purse-amount{font-size:42px!important;}
+  .spot-slide:nth-of-type(4) .purse-leader{font-size:17px!important;margin-left:9px!important;}
+  .spot-slide:nth-of-type(4) .purse-points{font-size:7px!important;margin-top:4px!important;}
+  .spot-slide:nth-of-type(4) .purse-points:before{font-size:7px!important;}
 }
