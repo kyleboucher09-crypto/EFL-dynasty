@@ -17,7 +17,32 @@ function setupRankArtwork(){
   '🏛️':['Hall of Famer','Assets/E8EA15EF-8A41-4267-BB97-307CF803EC52.png']
  };
  const style=document.createElement('style');
- style.textContent=`.rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;border-radius:inherit;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}.rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}`;
+ style.textContent=`
+ .rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;border-radius:inherit;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}
+ .rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+ body:has(#grid) .rankline{grid-template-columns:87px minmax(0,1fr) auto;gap:14px}
+ body:has(#grid) .rank-icon{width:87px!important;height:87px!important}
+ body:has(#grid) .rank-name{font-size:22px}
+ body:has(#grid) .rank-sub{font-size:8px}
+ body:has(#grid) .lp{font-size:11px;line-height:1.45}
+ body:has(#grid) .badge-row{gap:8px;min-height:50px}
+ body:has(#grid) .badge{width:50px;height:50px;font-size:25px}
+ body:has(#grid) .legacy-title{grid-template-columns:111px minmax(0,1fr) auto}
+ body:has(#grid) .legacy-title .rank-icon{width:111px!important;height:111px!important}
+ @media(max-width:560px){
+   body:has(#grid) .legacy{padding:16px}
+   body:has(#grid) .rankline{grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:center}
+   body:has(#grid) .rank-icon{width:78px!important;height:78px!important}
+   body:has(#grid) .rank-name{font-size:22px;line-height:1.05;margin-top:3px}
+   body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}
+   body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-4px}
+   body:has(#grid) .bar{margin-top:13px}
+   body:has(#grid) .badge-row{gap:8px;min-height:52px;justify-content:flex-start}
+   body:has(#grid) .badge{width:52px;height:52px;font-size:26px;flex:0 0 52px}
+   body:has(#grid) .legacy-title{grid-template-columns:96px minmax(0,1fr)}
+   body:has(#grid) .legacy-title .rank-icon{width:96px!important;height:96px!important}
+ }
+ `;
  document.head.appendChild(style);
  const replace=el=>{
   if(!el||el.dataset.rankArtApplied)return;
