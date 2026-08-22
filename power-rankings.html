@@ -1,157 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EFL Power Rankings</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EFL 2026 Power Rankings</title>
 <style>
-:root{--bg:#07060a;--panel:#110b18;--panel2:#181022;--purple:#7d22c9;--purple2:#b04cff;--gold:#e8b84a;--gold2:#ffd979;--text:#f8f3ff;--muted:#aaa0b6;--line:rgba(232,184,74,.20);--green:#62d7a0;--red:#ff7785}
-*{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(900px 500px at 50% -100px,rgba(125,34,201,.23),transparent 64%),radial-gradient(650px 350px at 92% 11%,rgba(232,184,74,.09),transparent 65%),var(--bg)}
-a{color:inherit;text-decoration:none}
-.topbar{position:sticky;top:0;z-index:30;background:rgba(7,6,10,.84);backdrop-filter:blur(15px);border-bottom:1px solid rgba(255,255,255,.06)}
-.nav{max-width:1180px;margin:auto;min-height:72px;padding:0 20px;display:flex;align-items:center;gap:18px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:950;margin-right:auto}.brand img{width:42px;height:42px;object-fit:cover;border-radius:12px;border:1px solid rgba(232,184,74,.3)}
-.brand span{font-size:13px}.brand small{display:block;font-size:8px;color:var(--gold2);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
-.navlinks{display:flex;gap:5px;align-items:center;flex-wrap:wrap}.navlinks a{font-size:12px;font-weight:800;color:#c9bfce;padding:9px 11px;border-radius:10px}.navlinks a:hover,.navlinks a.active{background:rgba(125,34,201,.16);color:white}
-.shell{max-width:1180px;margin:auto;padding:30px 20px 64px}
-.hero{position:relative;overflow:hidden;border-radius:30px;border:1px solid rgba(232,184,74,.22);background:radial-gradient(480px 330px at 82% 18%,rgba(232,184,74,.17),transparent 68%),radial-gradient(590px 390px at 12% 24%,rgba(125,34,201,.31),transparent 69%),linear-gradient(145deg,#12091c,#09070c 64%);box-shadow:0 28px 70px rgba(0,0,0,.34)}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,black,transparent)}
-.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:35px;align-items:center;min-height:510px;padding:48px}
-.eyebrow{font-size:10px;font-weight:950;letter-spacing:.19em;text-transform:uppercase;color:var(--gold2)}
-.hero h1{margin:10px 0 13px;font-size:clamp(48px,7vw,88px);line-height:.89;letter-spacing:-.065em}.hero h1 span{display:block;color:var(--gold2)}
-.hero p{max-width:600px;color:#c8bdcf;line-height:1.65;font-size:14px}
-.status{display:flex;align-items:center;gap:9px;margin-top:19px;font-size:11px;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 13px rgba(98,215,160,.7)}
-.no1{padding:25px;border-radius:24px;border:1px solid rgba(232,184,74,.30);background:linear-gradient(145deg,rgba(232,184,74,.12),rgba(16,9,23,.80));box-shadow:0 22px 42px rgba(0,0,0,.25)}
-.no1-crown{font-size:46px;line-height:1}.no1-kicker{margin-top:11px;color:var(--gold2);font-size:9px;font-weight:950;letter-spacing:.16em;text-transform:uppercase}.no1-rank{font-size:18px;font-weight:900;margin-top:6px}.no1-team{font-size:30px;font-weight:1000;letter-spacing:-.035em;margin-top:7px}.no1-owner{font-size:11px;color:var(--muted);margin-top:4px}.no1-meta{margin-top:14px;padding-top:13px;border-top:1px solid rgba(232,184,74,.17);font-size:12px;color:#e7d4a0;font-weight:800}
-.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:22px 0 13px;flex-wrap:wrap}
-.toolbar h2{margin:0;font-size:28px;letter-spacing:-.04em}.toolbar p{margin:5px 0 0;color:var(--muted);font-size:11px}
-.select-wrap{display:flex;align-items:center;gap:8px}.select-wrap label{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:900;letter-spacing:.1em}
-select{background:#100b17;border:1px solid rgba(255,255,255,.10);color:white;border-radius:11px;padding:10px 12px;font:inherit;font-size:12px;font-weight:800}
-.snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.snap{padding:16px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}.snap .label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.11em;font-weight:900}.snap .value{font-size:18px;font-weight:1000;margin-top:7px}.snap .sub{font-size:10px;color:var(--muted);margin-top:3px}
-.rank-list{display:grid;gap:11px}
-.rank-card{position:relative;display:grid;grid-template-columns:72px 1fr auto;gap:15px;align-items:center;padding:17px 18px;border-radius:18px;background:linear-gradient(145deg,rgba(24,16,33,.93),rgba(12,9,17,.95));border:1px solid rgba(255,255,255,.065);overflow:hidden}
-.rank-card:first-child{border-color:rgba(232,184,74,.35);background:radial-gradient(360px 150px at 100% 0%,rgba(232,184,74,.09),transparent 70%),linear-gradient(145deg,rgba(35,25,15,.58),rgba(19,11,28,.95))}
-.rank-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple2)}.rank-card:first-child:before{background:var(--gold2)}
-.ranknum{font-size:34px;font-weight:1000;color:var(--gold2);letter-spacing:-.06em;text-align:center}.teamname{font-size:18px;font-weight:950}.owner{font-size:10px;color:var(--muted);margin-top:2px}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.tag{font-size:10px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.045);color:#cbc0d1}.tag b{color:white}
-.move{min-width:70px;text-align:center;font-size:11px;font-weight:950;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.05)}.move.up{color:var(--green)}.move.down{color:var(--red)}.move.new{color:var(--gold2)}
-.scoreline{text-align:right;margin-top:8px;font-size:9px;color:#746b7b;text-transform:uppercase;letter-spacing:.08em}
-.formula{margin-top:18px;padding:15px 17px;border-radius:16px;border:1px solid rgba(125,34,201,.18);background:rgba(125,34,201,.055);color:#c7bccd;font-size:11px;line-height:1.6}.formula b{color:var(--gold2)}
-.empty{padding:38px;text-align:center;border:1px dashed rgba(232,184,74,.22);border-radius:18px;color:var(--muted)}
-.api-warning{display:none;margin-top:16px;padding:13px 15px;border-radius:13px;background:rgba(255,194,71,.08);border:1px solid rgba(255,194,71,.2);color:#e7cb8b;font-size:12px}
-.footer{text-align:center;color:#786e82;font-size:11px;margin-top:44px}
-@media(max-width:900px){.hero-inner{grid-template-columns:1fr;padding:34px}.snapshot{grid-template-columns:1fr 1fr}}
-@media(max-width:680px){.navlinks{display:none}.shell{padding:18px 14px 50px}.nav{padding:0 14px}.hero-inner{padding:28px 22px}.hero h1{font-size:51px}.no1-team{font-size:24px}.rank-card{grid-template-columns:52px 1fr auto;padding:14px 12px;gap:10px}.ranknum{font-size:27px}.teamname{font-size:15px}.snapshot{grid-template-columns:1fr 1fr}}
+:root{--bg:#07060a;--panel:#120d18;--panel2:#181120;--purple:#8b2bd4;--gold:#e8b84a;--gold2:#ffd979;--text:#f8f3ff;--muted:#aaa0b6;--green:#62d7a0;--red:#ff7785}*{box-sizing:border-box}body{margin:0;background:radial-gradient(900px 500px at 50% -100px,rgba(139,43,212,.24),transparent 65%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit;text-decoration:none}.topbar{position:sticky;top:0;z-index:20;background:rgba(7,6,10,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}.nav{max-width:1180px;margin:auto;min-height:70px;padding:0 20px;display:flex;align-items:center;gap:16px}.brand{display:flex;align-items:center;gap:10px;margin-right:auto;font-weight:950}.brand img{width:42px;height:42px;border-radius:12px;object-fit:cover}.brand small{display:block;color:var(--gold2);font-size:8px;letter-spacing:.14em;text-transform:uppercase}.navlinks{display:flex;gap:5px}.navlinks a{padding:9px 10px;border-radius:10px;font-size:11px;font-weight:850;color:#c8bece}.navlinks a.active{background:rgba(139,43,212,.18);color:#fff}.shell{max-width:1180px;margin:auto;padding:28px 20px 70px}.hero{border:1px solid rgba(232,184,74,.23);border-radius:28px;padding:40px;background:radial-gradient(520px 300px at 86% 8%,rgba(232,184,74,.14),transparent 70%),linear-gradient(145deg,#13091d,#09070c);box-shadow:0 28px 70px rgba(0,0,0,.3)}.eyebrow{font-size:9px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2)}h1{font-size:clamp(46px,7vw,82px);line-height:.9;letter-spacing:-.06em;margin:10px 0 15px}h1 span{display:block;color:var(--gold2)}.hero p{max-width:760px;color:#c9bfd0;line-height:1.65;font-size:14px}.status{margin-top:18px;font-size:11px;color:var(--muted)}.status b{color:var(--green)}.method{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.method div{padding:14px;border-radius:15px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.035)}.method b{display:block;color:var(--gold2);font-size:17px}.method span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:26px 0 12px}.section-head h2{font-size:29px;margin:4px 0 0;letter-spacing:-.04em}.section-head p{margin:0;color:var(--muted);font-size:11px}.rank-list{display:grid;gap:12px}.card{position:relative;overflow:hidden;display:grid;grid-template-columns:68px minmax(0,1fr) auto;gap:15px;align-items:center;padding:18px;border-radius:19px;border:1px solid rgba(255,255,255,.07);background:linear-gradient(145deg,rgba(24,17,32,.96),rgba(11,8,15,.97))}.card:first-child{border-color:rgba(232,184,74,.38);background:radial-gradient(340px 130px at 100% 0,rgba(232,184,74,.11),transparent 70%),linear-gradient(145deg,rgba(34,25,15,.6),rgba(18,10,27,.96))}.card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#a94bea}.card:first-child:before{background:var(--gold2)}.rank{font-size:34px;text-align:center;font-weight:1000;color:var(--gold2);letter-spacing:-.06em}.team{font-size:19px;font-weight:950}.owner{font-size:10px;color:var(--muted);margin-top:2px}.why{font-size:11px;color:#c8bdcf;line-height:1.5;margin-top:8px;max-width:760px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.tag{font-size:9px;border-radius:999px;padding:5px 8px;background:rgba(255,255,255,.05);color:#d1c6d7}.tag b{color:#fff}.score{text-align:right}.power{font-size:27px;font-weight:1000;color:var(--gold2)}.grade{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.loading{padding:34px;text-align:center;border:1px dashed rgba(232,184,74,.22);border-radius:18px;color:var(--muted)}.source{margin-top:18px;padding:14px 16px;border-radius:15px;border:1px solid rgba(139,43,212,.18);background:rgba(139,43,212,.055);font-size:10px;line-height:1.6;color:#bdb2c5}.source b{color:var(--gold2)}.footer{text-align:center;margin-top:38px;color:#776e81;font-size:10px}@media(max-width:760px){.navlinks{display:none}.shell{padding:18px 14px 70px}.hero{padding:28px 22px}.method{grid-template-columns:1fr 1fr}.card{grid-template-columns:48px 1fr;gap:10px;padding:15px 12px}.rank{font-size:28px}.score{grid-column:2;text-align:left;display:flex;align-items:center;gap:8px}.power{font-size:20px}.team{font-size:16px}}
 </style>
-<style>.efl-mobile-dock{display:none}@media(max-width:900px){.efl-mobile-dock{display:flex;position:fixed;left:10px;right:10px;bottom:10px;z-index:99;background:rgba(7,6,10,.95);backdrop-filter:blur(14px);border:1px solid rgba(232,184,74,.2);border-radius:15px;padding:5px;gap:3px;overflow-x:auto;box-shadow:0 15px 40px rgba(0,0,0,.45)}.efl-mobile-dock a{flex:0 0 auto;padding:9px 10px;border-radius:10px;color:#d7cedc;font-size:10px;font-weight:900}.efl-mobile-dock a:first-child{color:#ffd979}body{padding-bottom:62px}}</style></head>
-<body>
-<div class="topbar"><div class="nav">
-<a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
-<div class="navlinks"><a href="index.html">Home</a><a href="champions.html">Champions</a><a class="active" href="power-rankings.html">Power Rankings</a><a href="records.html">Records</a><a href="franchises.html">Franchises</a><a href="history.html">History</a><a href="commissioner.html">Commissioner</a></div>
-</div></div>
-
+</head><body>
+<div class="topbar"><div class="nav"><a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL"><div>EFL Dynasty<small>Elite Fantasy Footballers</small></div></a><div class="navlinks"><a href="index.html">Home</a><a href="champions.html">Champions</a><a class="active" href="power-rankings.html">Power Rankings</a><a href="records.html">Records</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a></div></div></div>
 <main class="shell">
-<section class="hero"><div class="hero-inner">
-<div><div class="eyebrow">EFL Weekly Heat Check</div><h1>POWER <span>RANKINGS</span></h1><p>Wins matter. Scoring matters. Momentum matters. Every week the league gets reordered from Sleeper results so nobody gets to hide behind vibes alone.</p><div class="status"><span class="dot"></span><span id="apiStatus">Connecting to Sleeper…</span></div></div>
-<div class="no1"><div class="no1-crown">👑</div><div class="no1-kicker">King of the Rankings</div><div class="no1-rank" id="kingWeek">Week — · #1</div><div class="no1-team" id="kingTeam">Loading…</div><div class="no1-owner" id="kingOwner"></div><div class="no1-meta" id="kingMeta">Calculating EFL supremacy.</div></div>
-</div></section>
-
-<div class="toolbar">
-<div><div class="eyebrow">League Ladder</div><h2 id="weekTitle">Weekly Rankings</h2><p>Choose a completed week to rewind the league and see who was rising or falling.</p></div>
-<div class="select-wrap"><label for="weekSelect">Week</label><select id="weekSelect"></select></div>
-</div>
-
-<section class="snapshot">
-<div class="snap"><div class="label">Top Scorer</div><div class="value" id="topScorer">—</div><div class="sub" id="topScorerSub">—</div></div>
-<div class="snap"><div class="label">Biggest Riser</div><div class="value" id="bigRiser">—</div><div class="sub" id="bigRiserSub">—</div></div>
-<div class="snap"><div class="label">Best Record</div><div class="value" id="bestRecord">—</div><div class="sub" id="bestRecordSub">—</div></div>
-<div class="snap"><div class="label">League Scoring</div><div class="value" id="leaguePoints">—</div><div class="sub">Total points scored through selected week</div></div>
-</section>
-
-<section id="rankList" class="rank-list"><div class="empty">Building the EFL rankings from Sleeper matchups…</div></section>
-<div class="formula"><b>EFL ranking formula:</b> 70% record strength + 30% points-for strength. Movement compares the same formula against the previous week. This makes the page fully automatic and available to every league member — no commissioner phone storage required.</div>
-<div class="api-warning" id="apiWarning">Sleeper data could not be loaded right now. Refresh in a moment.</div>
-<div class="footer">EFL Dynasty · League ID 1313240395462742016 · Weekly bragging rights powered by Sleeper.</div>
+<section class="hero"><div class="eyebrow">2026 Preseason · Roster Intelligence</div><h1>POWER <span>RANKINGS</span></h1><p>This is not a standings list. Every EFL franchise is ranked by what it is projected to bring into 2026: optimal starting-lineup scoring, usable depth, current injury risk and the difficulty of the NFL schedules attached to its players.</p><div class="method"><div><b>50%</b><span>Projected scoring</span></div><div><b>20%</b><span>Roster depth</span></div><div><b>15%</b><span>Health / availability</span></div><div><b>15%</b><span>Opponent strength</span></div></div><div class="status" id="status">Loading current Sleeper rosters and 2026 projections…</div></section>
+<div class="section-head"><div><div class="eyebrow">League Forecast</div><h2>2026 Preseason Rankings</h2></div><p>Updated from current EFL rosters</p></div>
+<section class="rank-list" id="rankList"><div class="loading">Building the rankings…</div></section>
+<div class="source"><b>How the model works:</b> Sleeper supplies the current EFL rosters, league scoring settings, player metadata and 2026 season projections. The model optimizes each roster into the strongest legal starting lineup, scores the next usable bench pieces for depth, penalizes current injury designations, and applies a position-weighted 2026 strength-of-schedule adjustment. The schedule component uses opponent fantasy points allowed by position from the 2026 LineupBeat schedule table (updated Aug. 22, 2026). These are forward-looking power rankings, not dynasty trade-value rankings.</div>
+<div class="footer">EFL Dynasty · 2026 Preseason Power Rankings · League 1313240395462742016</div>
 </main>
-
 <script>
-const LEAGUE_ID="1313240395462742016", API="https://api.sleeper.app/v1";
+const LEAGUE='1313240395462742016',BASE='https://api.sleeper.app/v1';
 const $=s=>document.querySelector(s);
-async function get(path){const r=await fetch(API+path);if(!r.ok)throw new Error("Sleeper "+r.status);return r.json()}
-function safeName(u,r){return u?.metadata?.team_name||u?.display_name||(r?`Roster ${r.roster_id}`:"EFL Team")}
-function maps(users,rosters){return{usersById:Object.fromEntries(users.map(u=>[u.user_id,u])),rosterById:Object.fromEntries(rosters.map(r=>[r.roster_id,r]))}}
-async function weekMatchups(week){try{return await get(`/league/${LEAGUE_ID}/matchups/${week}`)}catch(e){return[]}}
-function emptyStats(rosters){return Object.fromEntries(rosters.map(r=>[r.roster_id,{roster_id:r.roster_id,w:0,l:0,t:0,pf:0,pa:0}]))}
-function applyWeek(stats,rows){
-  const groups={}; rows.forEach(x=>{if(x.matchup_id==null)return;(groups[x.matchup_id]??=[]).push(x)});
-  Object.values(groups).forEach(g=>{
-    if(g.length<2)return;
-    g.forEach(x=>{stats[x.roster_id].pf+=Number(x.points||0);stats[x.roster_id].pa+=g.filter(y=>y.roster_id!==x.roster_id).reduce((s,y)=>s+Number(y.points||0),0)});
-    if(g.length===2){
-      const [a,b]=g,ap=Number(a.points||0),bp=Number(b.points||0);
-      if(ap>bp){stats[a.roster_id].w++;stats[b.roster_id].l++}
-      else if(bp>ap){stats[b.roster_id].w++;stats[a.roster_id].l++}
-      else{stats[a.roster_id].t++;stats[b.roster_id].t++}
-    }
-  });
-}
-function rank(stats,users,rosters){
-  const m=maps(users,rosters), arr=Object.values(stats), maxPF=Math.max(...arr.map(x=>x.pf),1);
-  arr.forEach(s=>{const gp=s.w+s.l+s.t;const pct=gp?(s.w+.5*s.t)/gp:0;s.rating=.70*pct+.30*(s.pf/maxPF)});
-  arr.sort((a,b)=>b.rating-a.rating||b.w-a.w||b.pf-a.pf);
-  return arr.map((s,i)=>{const r=m.rosterById[s.roster_id],u=r?m.usersById[r.owner_id]:null;return{...s,rank:i+1,team:safeName(u,r),owner:u?.display_name||""}})
-}
-async function buildThrough(week,users,rosters){
-  const stats=emptyStats(rosters);
-  for(let w=1;w<=week;w++){const rows=await weekMatchups(w);applyWeek(stats,rows)}
-  return rank(stats,users,rosters)
-}
-function movement(cur,prev){
-  if(!prev)return{label:"PRE",cls:"new",delta:0};
-  const p=prev.find(x=>x.roster_id===cur.roster_id);if(!p)return{label:"NEW",cls:"new",delta:0};
-  const d=p.rank-cur.rank;return d>0?{label:`▲ ${d}`,cls:"up",delta:d}:d<0?{label:`▼ ${Math.abs(d)}`,cls:"down",delta:d}:{label:"—",cls:"",delta:0}
-}
-async function render(week,users,rosters){
-  $("#weekTitle").textContent=`Week ${week} Power Rankings`;
-  const cur=await buildThrough(week,users,rosters),prev=week>1?await buildThrough(week-1,users,rosters):null;
-  const moves=cur.map(x=>({...x,movement:movement(x,prev)}));
-  const king=moves[0];
-  $("#kingWeek").textContent=`Week ${week} · #1`;
-  $("#kingTeam").textContent=king?.team||"—";$("#kingOwner").textContent=king?.owner||"";
-  $("#kingMeta").textContent=king?`${king.w}-${king.l}${king.t?`-${king.t}`:""} · ${king.pf.toFixed(2)} PF · Rating ${(king.rating*100).toFixed(1)}`:"—";
-  const scorer=[...moves].sort((a,b)=>b.pf-a.pf)[0];
-  $("#topScorer").textContent=scorer?.team||"—";$("#topScorerSub").textContent=scorer?`${scorer.pf.toFixed(2)} points for`:"—";
-  const riser=[...moves].sort((a,b)=>b.movement.delta-a.movement.delta)[0];
-  $("#bigRiser").textContent=(riser&&riser.movement.delta>0)?riser.team:"No movement";$("#bigRiserSub").textContent=(riser&&riser.movement.delta>0)?`Up ${riser.movement.delta} spot${riser.movement.delta===1?"":"s"}`:"Rankings held steady";
-  const best=[...moves].sort((a,b)=>b.w-a.w||b.pf-a.pf)[0];
-  $("#bestRecord").textContent=best?.team||"—";$("#bestRecordSub").textContent=best?`${best.w}-${best.l}${best.t?`-${best.t}`:""}`:"—";
-  $("#leaguePoints").textContent=moves.reduce((s,x)=>s+x.pf,0).toFixed(1);
-  $("#rankList").innerHTML=moves.map(x=>`
-    <article class="rank-card">
-      <div class="ranknum">${x.rank}</div>
-      <div>
-        <div class="teamname">${x.team}</div><div class="owner">${x.owner}</div>
-        <div class="meta"><span class="tag"><b>${x.w}-${x.l}${x.t?`-${x.t}`:""}</b> record</span><span class="tag"><b>${x.pf.toFixed(2)}</b> PF</span><span class="tag"><b>${x.pa.toFixed(2)}</b> PA</span></div>
-      </div>
-      <div><div class="move ${x.movement.cls}">${x.movement.label}</div><div class="scoreline">${(x.rating*100).toFixed(1)} rating</div></div>
-    </article>`).join("");
-}
-(async()=>{
- try{
-   const [league,users,rosters,state]=await Promise.all([get(`/league/${LEAGUE_ID}`),get(`/league/${LEAGUE_ID}/users`),get(`/league/${LEAGUE_ID}/rosters`),get(`/state/nfl`)]);
-   const seasonWeeks=Number(league.settings?.playoff_week_start||15)-1;
-   let current=Number(state.week||1);
-   let completed=Math.max(1,Math.min(seasonWeeks,current-1));
-   // If current season is still preseason, use week 1 as a preview baseline.
-   if(state.season!==league.season) completed=1;
-   const sel=$("#weekSelect");for(let w=1;w<=seasonWeeks;w++){const o=document.createElement("option");o.value=w;o.textContent=`Week ${w}`;if(w===completed)o.selected=true;sel.appendChild(o)}
-   $("#apiStatus").textContent=`Sleeper Live · ${league.season} season`;
-   await render(completed,users,rosters);
-   sel.addEventListener("change",()=>render(Number(sel.value),users,rosters));
- }catch(e){console.error(e);$("#apiStatus").textContent="Sleeper connection unavailable";$("#apiWarning").style.display="block";$("#rankList").innerHTML='<div class="empty">Power rankings are temporarily unavailable.</div>'}
-})();
-</script>
-<nav class="efl-mobile-dock" aria-label="Mobile navigation"><a href="index.html">EFL</a><a href="champions.html">👑 Champions</a><a href="power-rankings.html">📈 Rankings</a><a href="records.html">🔥 Records</a><a href="franchises.html">🛡️ Teams</a><a href="history.html">📜 History</a></nav></body>
-</html>
+const SOS={CLE:{QB:16.6,RB:22.1,WR:30.2,TE:13.7},DET:{QB:15.5,RB:21.9,WR:29.3,TE:12.4},NO:{QB:15.9,RB:21.8,WR:29.8,TE:12.7},PHI:{QB:16.9,RB:21.7,WR:31.3,TE:13.4},TEN:{QB:16.4,RB:21.7,WR:30.6,TE:13.2},HOU:{QB:16.4,RB:21.6,WR:30.9,TE:13.0},WAS:{QB:15.9,RB:21.6,WR:29.2,TE:12.3},BAL:{QB:15.8,RB:21.5,WR:29.1,TE:13.5},IND:{QB:16.2,RB:21.5,WR:29.7,TE:13.1},MIA:{QB:15.4,RB:21.5,WR:29.1,TE:12.6},DAL:{QB:15.7,RB:21.4,WR:29.5,TE:12.5},MIN:{QB:16.1,RB:21.4,WR:30.5,TE:12.8},NE:{QB:15.7,RB:21.4,WR:29.3,TE:12.6},ATL:{QB:15.6,RB:21.3,WR:28.8,TE:13.2},JAX:{QB:16.5,RB:21.3,WR:30.7,TE:13.4},SEA:{QB:15.6,RB:21.3,WR:29.6,TE:12.4},BUF:{QB:15.8,RB:21.3,WR:29.9,TE:12.8},PIT:{QB:15.2,RB:21.2,WR:28.2,TE:13.1},GB:{QB:15.8,RB:21.2,WR:29.7,TE:12.3},TB:{QB:15.4,RB:21.1,WR:29.7,TE:12.3},KC:{QB:15.0,RB:21.1,WR:28.6,TE:12.8},LAR:{QB:15.2,RB:21.1,WR:28.3,TE:12.0},SF:{QB:15.2,RB:21.0,WR:28.8,TE:12.2},NYJ:{QB:15.1,RB:21.0,WR:29.1,TE:12.2},NYG:{QB:15.9,RB:20.9,WR:29.6,TE:12.5},CIN:{QB:15.9,RB:20.9,WR:30.1,TE:13.0},DEN:{QB:15.0,RB:20.9,WR:28.6,TE:12.4},LAC:{QB:15.2,RB:20.9,WR:28.4,TE:12.4},ARI:{QB:15.5,RB:20.7,WR:29.1,TE:12.2},CHI:{QB:14.8,RB:20.6,WR:28.0,TE:12.0},CAR:{QB:15.3,RB:20.5,WR:28.7,TE:12.4},LV:{QB:14.6,RB:20.3,WR:27.6,TE:12.4}};
+async function get(u){const r=await fetch(u);if(!r.ok)throw new Error(r.status);return r.json()}
+function nameOf(u,r){return u?.metadata?.team_name||u?.display_name||`Roster ${r.roster_id}`}
+function ownerOf(u){return u?.display_name||u?.username||'EFL Owner'}
+function pos(p){return p?.position||p?.fantasy_positions?.[0]||''}
+function eligible(slot,p){const q=pos(p);if(slot===q)return true;if(slot==='FLEX')return ['RB','WR','TE'].includes(q);if(slot==='SUPER_FLEX')return ['QB','RB','WR','TE'].includes(q);if(slot==='REC_FLEX')return ['WR','TE'].includes(q);if(slot==='WRRB_FLEX')return ['WR','RB'].includes(q);return slot==='BN'?false:false}
+function calcPts(row,scoring){if(!row)return 0;const st=row.stats||row;let n=0;for(const [k,v] of Object.entries(scoring||{})){if(Number.isFinite(Number(st[k])))n+=Number(st[k])*Number(v||0)}if(n>0)return n;return Number(row.pts_ppr||row.pts_half_ppr||row.pts_std||0)}
+function norm(v,min,max){return max===min?75:60+40*((v-min)/(max-min))}
+function letter(n){return n>=94?'A+':n>=90?'A':n>=86?'A-':n>=82?'B+':n>=78?'B':n>=74?'B-':n>=70?'C+':n>=66?'C':n>=62?'C-':'D'}
+function injuryPenalty(p){const s=String(p?.injury_status||p?.status||'').toUpperCase();if(/IR|OUT|PUP|NFI/.test(s))return 22;if(/DOUBTFUL/.test(s))return 14;if(/QUESTIONABLE/.test(s))return 6;return 0}
+function sosRaw(p){const q=pos(p),t=p?.team;if(!SOS[t]||!SOS[t][q])return 0;return SOS[t][q]}
+function lineupFor(roster,players,proj,slots){let pool=(roster.players||[]).map(id=>({id,p:players[id]||{},pts:calcPts(proj[id],window.EFL_SCORING)})).filter(x=>x.p&&x.pts>=0);const starters=[];for(const slot of slots.filter(x=>!['BN','IR','TAXI'].includes(x))){const choices=pool.filter(x=>eligible(slot,x.p)).sort((a,b)=>b.pts-a.pts);if(choices.length){const pick=choices[0];pick.slot=slot;starters.push(pick);pool=pool.filter(x=>x.id!==pick.id)}}return{starters,bench:pool.sort((a,b)=>b.pts-a.pts)}}
+function why(x){const parts=[];if(x.lineupN>=88)parts.push('elite projected starter scoring');else if(x.lineupN>=78)parts.push('strong weekly scoring');else parts.push('a lineup that needs to outperform projection');if(x.depthN>=84)parts.push('real bench insulation');else if(x.depthN<70)parts.push('thin usable depth');if(x.health>=92)parts.push('a clean health profile');else if(x.health<78)parts.push('meaningful injury exposure');if(x.schedule>=84)parts.push('a favorable positional schedule');else if(x.schedule<70)parts.push('a tougher path through the schedule');return parts.join(', ').replace(/^./,m=>m.toUpperCase())+'.'}
+async function projections(){for(const u of [`${BASE}/projections/nfl/regular/2026`,`https://api.sleeper.app/projections/nfl/regular/2026`]){try{const d=await get(u);if(Array.isArray(d)&&d.length)return Object.fromEntries(d.map(x=>[String(x.player_id||x.player?.player_id),x]));if(d&&typeof d==='object')return d}catch(e){}}return{}}
+async function run(){try{const [league,rosters,users,players,proj]=await Promise.all([get(`${BASE}/league/${LEAGUE}`),get(`${BASE}/league/${LEAGUE}/rosters`),get(`${BASE}/league/${LEAGUE}/users`),get(`${BASE}/players/nfl`),projections()]);window.EFL_SCORING=league.scoring_settings||{};const uBy=Object.fromEntries(users.map(u=>[u.user_id,u]));const slots=league.roster_positions||[];let raw=rosters.map(r=>{const u=uBy[r.owner_id],L=lineupFor(r,players,proj,slots);const starterPts=L.starters.reduce((s,x)=>s+x.pts,0);const benchUseful=L.bench.slice(0,Math.max(5,Math.round(L.starters.length*.55)));const depth=benchUseful.reduce((s,x,i)=>s+x.pts*(1-i*.08),0);let health=100-Math.min(45,L.starters.reduce((s,x)=>s+injuryPenalty(x.p),0)+L.bench.slice(0,5).reduce((s,x)=>s+injuryPenalty(x.p)*.25,0));const sosVals=L.starters.map(x=>sosRaw(x.p)).filter(Boolean);const scheduleRaw=sosVals.length?sosVals.reduce((a,b)=>a+b,0)/sosVals.length:0;return{r,u,L,name:nameOf(u,r),owner:ownerOf(u),starterPts,depth,health,scheduleRaw}});const mins={l:Math.min(...raw.map(x=>x.starterPts)),d:Math.min(...raw.map(x=>x.depth)),s:Math.min(...raw.map(x=>x.scheduleRaw||0))},maxs={l:Math.max(...raw.map(x=>x.starterPts)),d:Math.max(...raw.map(x=>x.depth)),s:Math.max(...raw.map(x=>x.scheduleRaw||0))};raw.forEach(x=>{x.lineupN=norm(x.starterPts,mins.l,maxs.l);x.depthN=norm(x.depth,mins.d,maxs.d);x.schedule=x.scheduleRaw?norm(x.scheduleRaw,mins.s,maxs.s):75;x.power=.50*x.lineupN+.20*x.depthN+.15*x.health+.15*x.schedule;x.ppg=x.starterPts/17});raw.sort((a,b)=>b.power-a.power);$('#rankList').innerHTML=raw.map((x,i)=>`<article class="card"><div class="rank">${i+1}</div><div><div class="team">${x.name}</div><div class="owner">${x.owner}</div><div class="why">${why(x)}</div><div class="tags"><span class="tag"><b>${x.ppg.toFixed(1)}</b> proj PPG</span><span class="tag">Lineup <b>${letter(x.lineupN)}</b></span><span class="tag">Depth <b>${letter(x.depthN)}</b></span><span class="tag">Health <b>${letter(x.health)}</b></span><span class="tag">Schedule <b>${letter(x.schedule)}</b></span></div></div><div class="score"><div class="power">${x.power.toFixed(1)}</div><div class="grade">Power Score</div></div></article>`).join('');$('#status').innerHTML=`<b>LIVE MODEL</b> · ${raw.length} current franchises · ${Object.keys(proj).length? '2026 Sleeper projections loaded':'projection fallback active'}`;}catch(e){console.error(e);$('#status').textContent='Sleeper data could not be loaded. Refresh in a moment.';$('#rankList').innerHTML='<div class="loading">Could not load the live EFL roster model right now.</div>'}}
+run();
+</script><script src="site.js"></script>
+</body></html>
