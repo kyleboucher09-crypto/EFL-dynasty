@@ -4,6 +4,24 @@ const $=s=>document.querySelector(s);
 async function apiGet(path){const r=await fetch(EFL_API+path);if(!r.ok)throw new Error("Sleeper "+r.status);return r.json()}
 function teamName(user,roster){return user?.metadata?.team_name||user?.display_name||(roster?`Roster ${roster.roster_id}`:"EFL Team")}
 
+function setupRankArtwork(){
+ const style=document.createElement('style');
+ style.textContent=`.rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit}`;
+ document.head.appendChild(style);
+ const apply=root=>{
+   (root.querySelectorAll?root.querySelectorAll('.rank-mark,.rank-icon'):[]).forEach(el=>{
+     if(el.dataset.rankArtApplied) return;
+     if(el.textContent.trim()==='🏈'){
+       el.innerHTML='<img src="Assets/rank-prospect.svg" alt="Prospect rank badge">';
+       el.dataset.rankArtApplied='1';
+     }
+   });
+ };
+ apply(document);
+ const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches?.('.rank-mark,.rank-icon')&&n.textContent.trim()==='🏈'){n.innerHTML='<img src="Assets/rank-prospect.svg" alt="Prospect rank badge">';n.dataset.rankArtApplied='1'}apply(n)}})));
+ observer.observe(document.body,{childList:true,subtree:true});
+}
+
 function setupMobileDock(){
  if(document.querySelector('.efl-mobile-dock')) return;
  const page=location.pathname.split('/').pop()||'index.html';
@@ -51,5 +69,6 @@ function setupShell(){
  if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});
  document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}
  setupMobileDock();
+ setupRankArtwork();
 }
 document.addEventListener("DOMContentLoaded",setupShell);
