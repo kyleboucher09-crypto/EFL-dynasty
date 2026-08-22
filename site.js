@@ -5,20 +5,31 @@ async function apiGet(path){const r=await fetch(EFL_API+path);if(!r.ok)throw new
 function teamName(user,roster){return user?.metadata?.team_name||user?.display_name||(roster?`Roster ${roster.roster_id}`:"EFL Team")}
 
 function setupRankArtwork(){
- const style=document.createElement('style');
- style.textContent=`.rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit}`;
- document.head.appendChild(style);
- const apply=root=>{
-   (root.querySelectorAll?root.querySelectorAll('.rank-mark,.rank-icon'):[]).forEach(el=>{
-     if(el.dataset.rankArtApplied) return;
-     if(el.textContent.trim()==='🏈'){
-       el.innerHTML='<img src="Assets/rank-prospect.svg" alt="Prospect rank badge">';
-       el.dataset.rankArtApplied='1';
-     }
-   });
+ const art={
+  '🏈':['Prospect','Assets/3ED57F2C-69A2-427F-9DB1-F020652E5A7D.png'],
+  '🪖':['Rookie','Assets/3ACFFE79-7314-48A1-9BAD-88D72446C0BC.png'],
+  '🛡️':['Veteran','Assets/41A69F96-74FB-4A4C-AA47-3A2FD1FBDAB7.png'],
+  '©️':['Captain','Assets/97A9681C-3CD5-473A-855B-EF5BE9AC7191.png'],
+  '⭐':['All Star','Assets/5079A91E-C035-406C-A35D-779D46B90FFD.png'],
+  '🏅':['MVP','Assets/19C23122-FD7A-4EBC-9C62-966332FAADD2.png'],
+  '💎':['Elite','Assets/DE1A5EAB-965D-49BE-BA89-1C783D503FED.png'],
+  '👑':['Legend','Assets/93135308-577B-4524-9CE7-2D65DAD1648C.png'],
+  '🏛️':['Hall of Famer','Assets/E8EA15EF-8A41-4267-BB97-307CF803EC52.png']
  };
+ const style=document.createElement('style');
+ style.textContent=`.rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;border-radius:inherit;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}.rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}`;
+ document.head.appendChild(style);
+ const replace=el=>{
+  if(!el||el.dataset.rankArtApplied)return;
+  const key=el.textContent.trim();
+  const item=art[key];
+  if(!item)return;
+  el.innerHTML=`<img src="${item[1]}" alt="${item[0]} rank badge">`;
+  el.dataset.rankArtApplied='1';
+ };
+ const apply=root=>{if(root.matches?.('.rank-mark,.rank-icon'))replace(root);(root.querySelectorAll?root.querySelectorAll('.rank-mark,.rank-icon'):[]).forEach(replace)};
  apply(document);
- const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches?.('.rank-mark,.rank-icon')&&n.textContent.trim()==='🏈'){n.innerHTML='<img src="Assets/rank-prospect.svg" alt="Prospect rank badge">';n.dataset.rankArtApplied='1'}apply(n)}})));
+ const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)apply(n)})));
  observer.observe(document.body,{childList:true,subtree:true});
 }
 
