@@ -62,3 +62,4 @@ function setupMobileDock(){
 }
 function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork()}
 document.addEventListener("DOMContentLoaded",setupShell);
+// deployment refresh: corrected franchise rank sizing
