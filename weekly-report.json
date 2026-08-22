@@ -1,0 +1,39 @@
+{
+  "edition": "PRESEASON EDITION",
+  "season": 2026,
+  "week": 1,
+  "published": "August 22, 2026",
+  "headline": "The EFL Weekly",
+  "dek": "Trades, waiver movement, power shifts and the stories shaping the league — written from live EFL data every week.",
+  "lead": {
+    "tag": "FROM THE NEWSROOM",
+    "title": "The board is set for Week 1",
+    "body": "The 2026 EFL season is taking shape. Until the NFL regular season begins, the league remains officially on Week 1. Once games are underway, this report will automatically turn the week's Sleeper activity into a full league recap — including trades, waiver claims, power-ranking movement, rising franchises and the matchups that defined the week."
+  },
+  "briefs": [
+    {
+      "icon": "⇄",
+      "label": "TRADE DESK",
+      "title": "Every deal, with context",
+      "body": "Completed trades will be broken down by franchise, players and picks moved, with the biggest dynasty implications highlighted."
+    },
+    {
+      "icon": "+",
+      "label": "WAIVER WIRE",
+      "title": "Who won the wire?",
+      "body": "Notable waiver claims and free-agent additions will be surfaced automatically, with priority given to moves that can change weekly lineups or long-term value."
+    },
+    {
+      "icon": "↗",
+      "label": "POWER MOVES",
+      "title": "Risers, fallers and momentum",
+      "body": "The largest changes in the EFL power rankings will become weekly storylines instead of another copy of the standings."
+    },
+    {
+      "icon": "⚔",
+      "label": "GAME OF THE WEEK",
+      "title": "The matchups that mattered",
+      "body": "Close finishes, statement wins, scoring explosions and playoff-impacting battles will get the spotlight after every completed week."
+    }
+  ]
+}
