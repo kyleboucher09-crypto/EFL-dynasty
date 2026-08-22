@@ -20,27 +20,31 @@ function setupRankArtwork(){
  style.textContent=`
  .rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;border-radius:inherit;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}
  .rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
- body:has(#grid) .rankline{grid-template-columns:87px minmax(0,1fr) auto;gap:14px}
- body:has(#grid) .rank-icon{width:87px!important;height:87px!important}
- body:has(#grid) .rank-name{font-size:22px}
+ body:has(#grid) .rankline{grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:center}
+ body:has(#grid) .rank-icon{width:104px!important;height:104px!important}
+ body:has(#grid) .rank-icon img{transform:scale(1.55);transform-origin:center}
+ body:has(#grid) .rank-name{font-size:23px}
  body:has(#grid) .rank-sub{font-size:8px}
- body:has(#grid) .lp{font-size:11px;line-height:1.45}
- body:has(#grid) .badge-row{gap:8px;min-height:50px}
- body:has(#grid) .badge{width:50px;height:50px;font-size:25px}
- body:has(#grid) .legacy-title{grid-template-columns:111px minmax(0,1fr) auto}
- body:has(#grid) .legacy-title .rank-icon{width:111px!important;height:111px!important}
+ body:has(#grid) .lp{grid-column:2;text-align:left;font-size:12px;line-height:1.45;margin-top:-10px}
+ body:has(#grid) .bar{margin-top:14px}
+ body:has(#grid) .badge-row{gap:9px;min-height:54px}
+ body:has(#grid) .badge{width:54px;height:54px;font-size:27px;flex:0 0 54px}
+ body:has(#grid) .legacy-title{grid-template-columns:125px minmax(0,1fr)}
+ body:has(#grid) .legacy-title .rank-icon{width:125px!important;height:125px!important}
+ body:has(#grid) .legacy-title .rank-icon img{transform:scale(1.45)}
  @media(max-width:560px){
-   body:has(#grid) .legacy{padding:16px}
-   body:has(#grid) .rankline{grid-template-columns:78px minmax(0,1fr);gap:14px;align-items:center}
-   body:has(#grid) .rank-icon{width:78px!important;height:78px!important}
-   body:has(#grid) .rank-name{font-size:22px;line-height:1.05;margin-top:3px}
+   body:has(#grid) .legacy{padding:17px 16px 16px}
+   body:has(#grid) .rankline{grid-template-columns:104px minmax(0,1fr);gap:16px;align-items:center;min-height:118px}
+   body:has(#grid) .rank-icon{width:104px!important;height:104px!important}
+   body:has(#grid) .rank-icon img{transform:scale(1.55)}
+   body:has(#grid) .rank-name{font-size:23px;line-height:1.05;margin-top:4px}
    body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}
-   body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-4px}
-   body:has(#grid) .bar{margin-top:13px}
-   body:has(#grid) .badge-row{gap:8px;min-height:52px;justify-content:flex-start}
-   body:has(#grid) .badge{width:52px;height:52px;font-size:26px;flex:0 0 52px}
-   body:has(#grid) .legacy-title{grid-template-columns:96px minmax(0,1fr)}
-   body:has(#grid) .legacy-title .rank-icon{width:96px!important;height:96px!important}
+   body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-20px}
+   body:has(#grid) .bar{margin-top:10px}
+   body:has(#grid) .badge-row{gap:9px;min-height:56px;justify-content:flex-start}
+   body:has(#grid) .badge{width:56px;height:56px;font-size:28px;flex:0 0 56px}
+   body:has(#grid) .legacy-title{grid-template-columns:110px minmax(0,1fr)}
+   body:has(#grid) .legacy-title .rank-icon{width:110px!important;height:110px!important}
  }
  `;
  document.head.appendChild(style);
@@ -78,33 +82,18 @@ function setupMobileDock(){
  const dock=document.createElement('nav');
  dock.className='efl-mobile-dock';
  dock.setAttribute('aria-label','Primary mobile navigation');
- const links=[
-   ['index.html','🏠','Home'],
-   ['franchises.html','🛡️','Franchise'],
-   ['legacy.html','🏅','Legacy'],
-   ['power-rankings.html','📈','Rankings']
- ];
+ const links=[['index.html','🏠','Home'],['franchises.html','🛡️','Franchise'],['legacy.html','🏅','Legacy'],['power-rankings.html','📈','Rankings']];
  dock.innerHTML=links.map(([href,icon,label])=>`<a href="${href}"${page===href?' class="active" aria-current="page"':''}><span class="dock-icon">${icon}</span><span>${label}</span></a>`).join('')+`<button type="button" id="dockMore" aria-label="Open more navigation"><span class="dock-icon">☰</span><span>More</span></button>`;
  document.body.appendChild(dock);
  const more=dock.querySelector('#dockMore');
- more?.addEventListener('click',()=>{
-   const menu=document.querySelector('#mobileMenu')||document.querySelector('#mobile');
-   const topBtn=document.querySelector('#menuBtn');
-   if(menu){
-     const open=menu.classList.toggle('open');
-     if(topBtn){topBtn.setAttribute('aria-expanded',String(open));if(topBtn.classList.contains('menu-btn'))topBtn.textContent=open?'✕':'☰'}
-     if(open) window.scrollTo({top:0,behavior:'smooth'});
-   }
- });
+ more?.addEventListener('click',()=>{const menu=document.querySelector('#mobileMenu')||document.querySelector('#mobile');const topBtn=document.querySelector('#menuBtn');if(menu){const open=menu.classList.toggle('open');if(topBtn){topBtn.setAttribute('aria-expanded',String(open));if(topBtn.classList.contains('menu-btn'))topBtn.textContent=open?'✕':'☰'}if(open)window.scrollTo({top:0,behavior:'smooth'})}});
 }
 
 function setupShell(){
  const page=location.pathname.split("/").pop()||"index.html";
  document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});
  const btn=$("#menuBtn"),menu=$("#mobileMenu");
- if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});
- document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}
- setupMobileDock();
- setupRankArtwork();
+ if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}
+ setupMobileDock();setupRankArtwork();
 }
 document.addEventListener("DOMContentLoaded",setupShell);
