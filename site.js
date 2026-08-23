@@ -27,8 +27,10 @@ function setupRankArtwork(){
  body:has(#grid) .rank-sub{font-size:8px}
  body:has(#grid) .lp{grid-column:2;text-align:left;font-size:12px;line-height:1.45;margin-top:-8px}
  body:has(#grid) .bar{margin-top:12px}
- body:has(#grid) .badge-row{gap:8px;min-height:52px}
- body:has(#grid) .badge{width:52px;height:52px;font-size:26px;flex:0 0 52px}
+ body:has(#grid) .badge-row{gap:8px;min-height:58px}
+ body:has(#grid) .badge{width:58px;height:58px;font-size:0;flex:0 0 58px;padding:2px;overflow:hidden;background:rgba(255,255,255,.025)}
+ body:has(#grid) .badge img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5))}
+ body:has(#grid) .ach .ico img{width:82px;height:82px;display:block;object-fit:contain;margin:0 auto;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}
  body:has(#grid) .legacy-title{grid-template-columns:108px minmax(0,1fr)}
  body:has(#grid) .legacy-title .rank-icon{width:108px!important;height:108px!important}
  body:has(#grid) .legacy-title .rank-icon img{transform:scale(1.18)}
@@ -41,8 +43,8 @@ function setupRankArtwork(){
    body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}
    body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-14px}
    body:has(#grid) .bar{margin-top:10px}
-   body:has(#grid) .badge-row{gap:8px;min-height:52px;justify-content:flex-start}
-   body:has(#grid) .badge{width:52px;height:52px;font-size:26px;flex:0 0 52px}
+   body:has(#grid) .badge-row{gap:8px;min-height:58px;justify-content:flex-start}
+   body:has(#grid) .badge{width:58px;height:58px;flex:0 0 58px}
    body:has(#grid) .legacy-title{grid-template-columns:100px minmax(0,1fr)}
    body:has(#grid) .legacy-title .rank-icon{width:100px!important;height:100px!important}
  }
@@ -118,8 +120,8 @@ function enforcePreseasonHeritageBaseline(){
    const championBadge=RULES.badges.find(b=>b.id==='legacy_champion');
    for(const a of arr){
     a.badges=[];a.lp=0;
-    if(a.heritageYears?.length&&franchiseBadge){a.badges.push({...franchiseBadge,count:1,icon:'🛡️',meta:'Pre-2026 franchise owner'});a.lp+=franchiseBadge.lp}
-    if(a.historicTitles>0&&championBadge){a.badges.push({...championBadge,count:1,icon:'🏆',meta:`${a.historicTitles} pre-2026 championship${a.historicTitles===1?'':'s'}`});a.lp+=championBadge.lp}
+    if(a.heritageYears?.length&&franchiseBadge){a.badges.push({...franchiseBadge,count:1,icon:`<img src="${franchiseBadge.image}" alt="Legacy Franchise Owner badge">`,meta:'Pre-2026 franchise owner'});a.lp+=franchiseBadge.lp}
+    if(a.historicTitles>0&&championBadge){a.badges.push({...championBadge,count:1,icon:`<img src="${championBadge.image}" alt="Legacy Champion badge">`,meta:`${a.historicTitles} pre-2026 championship${a.historicTitles===1?'':'s'}`});a.lp+=championBadge.lp}
    }
    arr.sort((a,b)=>b.lp-a.lp||b.historicTitles-a.historicTitles);
    const grid=document.querySelector('#grid');if(grid)grid.innerHTML=arr.map((a,i)=>card(a,i)).join('');
@@ -130,4 +132,4 @@ function enforcePreseasonHeritageBaseline(){
 
 function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener("DOMContentLoaded",setupShell);
-// deployment refresh: preseason franchise badges restricted to Heritage baseline
+// deployment refresh: official Heritage badge artwork on franchise cards
