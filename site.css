@@ -1,14 +1,15 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Homepage 2026 season banner: use the full content width without cropping. */
+/* Mobile 2026 season banner: fill the card edge-to-edge with the artwork. */
 @media(max-width:600px){
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
     aspect-ratio:2.7/1!important;
-    background-size:100% 100%!important;
+    background-size:cover!important;
     background-position:center center!important;
     background-repeat:no-repeat!important;
+    background-color:transparent!important;
   }
 }
