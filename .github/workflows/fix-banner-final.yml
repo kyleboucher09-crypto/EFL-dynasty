@@ -1,4 +1,4 @@
-name: Fix 2026 mobile banner width
+name: Tune 2026 mobile banner width
 
 on:
   push:
@@ -13,25 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Replace bad mobile banner override
+      - name: Slightly enlarge mobile banner artwork
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('site.css')
           s=p.read_text()
-          bad="@media(max-width:600px){html body .league-hero-card{aspect-ratio:2.15/1!important;background-size:auto 142%!important;background-position:center 59%!important}}"
-          good="@media(max-width:600px){html body .league-hero-card{width:100%!important;aspect-ratio:2.7/1!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;background-color:#050308!important}}"
-          if bad in s:
-              s=s.replace(bad,good)
-          elif good not in s:
-              s += '\n' + good + '\n'
-          p.write_text(s)
+          old="@media(max-width:600px){.league-hero-card{width:100%!important;aspect-ratio:2.7/1!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important;background-color:#050308!important}"
+          new="@media(max-width:600px){.league-hero-card{width:100%!important;aspect-ratio:2.7/1!important;background-size:105% auto!important;background-position:center!important;background-repeat:no-repeat!important;background-color:#050308!important}"
+          if old not in s:
+              raise SystemExit('Expected mobile hero rule not found')
+          p.write_text(s.replace(old,new,1))
           PY
-      - name: Commit actual CSS fix
+      - name: Commit mobile banner sizing
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site.css
           git diff --cached --quiet && exit 0
-          git commit -m "Apply actual mobile banner CSS fix"
+          git commit -m "Slightly enlarge 2026 mobile banner artwork"
           git push
