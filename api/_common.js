@@ -1,5 +1,5 @@
-
 import { neon } from '@neondatabase/serverless';
+import crypto from 'node:crypto';
 
 export function db() {
   if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not configured');
@@ -37,8 +37,34 @@ export function clean(v, max=1000) {
   return String(v ?? '').trim().slice(0,max);
 }
 
+function expectedKey(){ return process.env.COMMISSIONER_KEY || ''; }
+function safeEqual(a,b){
+  const aa=Buffer.from(String(a||'')), bb=Buffer.from(String(b||''));
+  return aa.length===bb.length && aa.length>0 && crypto.timingSafeEqual(aa,bb);
+}
+function parseCookies(req){
+  return Object.fromEntries(String(req.headers.cookie||'').split(';').map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf('=');return i<0?[x,'']:[x.slice(0,i),decodeURIComponent(x.slice(i+1))]}));
+}
+function signExpiry(exp){ return crypto.createHmac('sha256',expectedKey()).update(String(exp)).digest('base64url'); }
+export function createCommissionerSession(){
+  if(!expectedKey()) throw new Error('COMMISSIONER_KEY is not configured');
+  const exp=Date.now()+8*60*60*1000;
+  return `${exp}.${signExpiry(exp)}`;
+}
+export function setCommissionerCookie(res,token){
+  res.setHeader('Set-Cookie',`efl_commissioner=${encodeURIComponent(token)}; Path=/api; HttpOnly; Secure; SameSite=Strict; Max-Age=${8*60*60}`);
+}
+export function clearCommissionerCookie(res){
+  res.setHeader('Set-Cookie','efl_commissioner=; Path=/api; HttpOnly; Secure; SameSite=Strict; Max-Age=0');
+}
+export function commissionerKeyOK(supplied){ return safeEqual(supplied,expectedKey()); }
 export function commissionerOK(req) {
   const supplied = req.headers['x-commissioner-key'];
-  const expected = process.env.COMMISSIONER_KEY;
-  return Boolean(expected && supplied && supplied === expected);
+  if(commissionerKeyOK(supplied)) return true;
+  const token=parseCookies(req).efl_commissioner;
+  if(!token) return false;
+  const [expRaw,sig]=String(token).split('.');
+  const exp=Number(expRaw);
+  if(!exp||exp<Date.now()||!sig) return false;
+  return safeEqual(sig,signExpiry(exp));
 }
