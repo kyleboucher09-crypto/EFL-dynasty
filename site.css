@@ -1,13 +1,13 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Mobile League Hub hero: preserve the complete 16:9 artwork with no top crop. */
+/* Mobile League Hub hero: fill the full card width while anchoring the artwork to the top. */
 @media(max-width:600px){
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
-    height:auto!important;
     aspect-ratio:16/9!important;
+    height:auto!important;
     overflow:hidden!important;
     background:#07050a!important;
   }
@@ -16,14 +16,12 @@
     width:100%!important;
     height:100%!important;
     max-width:none!important;
-    object-fit:contain!important;
+    object-fit:cover!important;
     object-position:center top!important;
   }
 
-  /* Hide the literal ▾ in the button text without changing the menu behavior. */
-  .league-menu-btn{
-    font-size:0!important;
-  }
+  /* Keep selector clean: no small dropdown caret. */
+  .league-menu-btn{font-size:0!important}
   .league-menu-btn::after{
     content:"DYNASTY"!important;
     display:inline!important;
@@ -34,22 +32,38 @@
   }
 }
 
-/* Gold interaction treatment for the six Explore the Hub tiles/icons. */
+/* Base tile motion. */
 .hub-tile{
-  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease,background .18s ease!important;
+  transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;
   -webkit-tap-highlight-color:transparent;
 }
-.hub-tile:hover,
-.hub-tile:focus,
-.hub-tile:focus-visible,
-.hub-tile:active{
-  border-color:#ffd76c!important;
-  background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;
-  box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 26px rgba(232,184,74,.26),inset 0 0 24px rgba(232,184,74,.08)!important;
+.hub-tile img{
+  transition:filter .16s ease,transform .16s ease!important;
 }
-.hub-tile:hover img,
-.hub-tile:focus img,
-.hub-tile:focus-visible img,
-.hub-tile:active img{
-  filter:drop-shadow(0 0 12px rgba(255,215,108,.9)) brightness(1.12)!important;
+
+/* True hover only on devices that actually have a mouse/trackpad, preventing sticky iPhone hover states. */
+@media(hover:hover) and (pointer:fine){
+  .hub-tile:hover{
+    border-color:#ffd76c!important;
+    background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;
+    box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 26px rgba(232,184,74,.26),inset 0 0 24px rgba(232,184,74,.08)!important;
+    transform:translateY(-2px)!important;
+  }
+  .hub-tile:hover img{
+    filter:drop-shadow(0 0 12px rgba(255,215,108,.9)) brightness(1.12)!important;
+    transform:scale(1.04)!important;
+  }
+}
+
+/* Touch selection flashes gold only while pressed, then immediately releases. */
+@media(hover:none), (pointer:coarse){
+  .hub-tile:active{
+    border-color:#ffd76c!important;
+    background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;
+    box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 24px rgba(232,184,74,.24),inset 0 0 22px rgba(232,184,74,.08)!important;
+    transform:scale(.985)!important;
+  }
+  .hub-tile:active img{
+    filter:drop-shadow(0 0 11px rgba(255,215,108,.86)) brightness(1.1)!important;
+  }
 }
