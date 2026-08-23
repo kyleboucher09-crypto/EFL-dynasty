@@ -1,0 +1,1 @@
+Trigger Vercel deployment after reconnecting GitHub integration on 2026-08-23.
