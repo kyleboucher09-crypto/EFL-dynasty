@@ -13,3 +13,11 @@
 #spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;background-position:left top!important;background-size:contain!important;background-repeat:no-repeat!important;transform:none!important}
 #spotlight .spot-slide:first-of-type .spot-kicker,#spotlight .spot-slide:first-of-type .champ-name,#spotlight .spot-slide:first-of-type .champ-sub{display:none!important}}
 .hub-tile{transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;-webkit-tap-highlight-color:transparent}.hub-tile img{transition:filter .16s ease,transform .16s ease!important}@media(hover:hover) and (pointer:fine){.hub-tile:hover{border-color:#ffd76c!important;background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 26px rgba(232,184,74,.26),inset 0 0 24px rgba(232,184,74,.08)!important;transform:translateY(-2px)!important}.hub-tile:hover img{filter:drop-shadow(0 0 12px rgba(255,215,108,.9)) brightness(1.12)!important;transform:scale(1.04)!important}}@media(hover:none),(pointer:coarse){.hub-tile:active{border-color:#ffd76c!important;background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 24px rgba(232,184,74,.24),inset 0 0 22px rgba(232,184,74,.08)!important;transform:scale(.985)!important}.hub-tile:active img{filter:drop-shadow(0 0 11px rgba(255,215,108,.86)) brightness(1.1)!important;transform:scale(.985)!important}}
+
+/* Force clear mobile separation on the Power Rankings slide. */
+@media(max-width:600px){
+#spotlight .spot-slide:nth-of-type(2) .rank-content{left:20px!important;right:20px!important;top:3%!important;bottom:32px!important;max-width:none!important}
+#spotlight .spot-slide:nth-of-type(2) .rank-content h2,#spotlight .spot-slide:nth-of-type(2) .rank-title{transform:translateY(-4px)!important;margin:0!important}
+#spotlight .spot-slide:nth-of-type(2) .rank-list{width:100%!important;max-width:none!important;margin-top:48px!important;gap:12px!important}
+#spotlight .spot-slide:nth-of-type(2) .rank-card{min-height:56px!important;padding:10px 14px!important}
+}
