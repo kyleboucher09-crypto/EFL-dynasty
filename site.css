@@ -73,3 +73,16 @@ filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(184,
 .hub-grid .hub-tile:nth-child(5) h3::after{content:"EFL Legacy";font-size:12px!important}
 .hub-grid .hub-tile:nth-child(6) h3::after{content:"The Crown Report";font-size:12px!important}
 .hub-grid .hub-tile:nth-child(6) p::after{content:"News, moves & rivalries";font-size:8px!important}
+
+/* Badge Vault mobile fit: keep artwork visually separated from title/requirements. */
+@media(max-width:650px){
+body:has(#badges) .badge{min-height:258px!important;padding:10px 10px 13px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important}
+body:has(#badges) .badge-art{height:96px!important;min-height:96px!important;margin:8px auto 12px!important;width:100%!important;overflow:hidden!important}
+body:has(#badges) .badge-art img{width:100%!important;height:100%!important;max-width:118px!important;max-height:96px!important;object-fit:contain!important;transform:none!important;margin:auto!important}
+body:has(#badges) .badge h3{position:relative!important;z-index:2!important;margin:4px 0 7px!important;line-height:1.15!important}
+body:has(#badges) .badge p{position:relative!important;z-index:2!important;line-height:1.45!important;margin:0 auto!important;max-width:96%!important}
+body:has(#badges) .badge .rarity{margin-top:auto!important;padding-top:10px!important}
+body:has(#badges) .badge .lp{z-index:4!important}
+body:has(#badges) .badge.secret .badge-art{height:96px!important;min-height:96px!important;overflow:visible!important}
+body:has(#badges) .secret-mark{width:70px!important;height:70px!important;font-size:30px!important;margin:auto!important}
+}
