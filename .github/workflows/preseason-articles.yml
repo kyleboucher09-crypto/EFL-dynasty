@@ -44,3 +44,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Make homepage articles compact and visual"
           git push
+
+# forced rerun 2026-08-22
