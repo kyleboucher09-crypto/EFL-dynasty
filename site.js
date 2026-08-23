@@ -53,6 +53,28 @@ function setupRankArtwork(){
  apply(document);const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)apply(n)})));observer.observe(document.body,{childList:true,subtree:true});
 }
 
+function setupHubTouchTrail(){
+ const grid=document.querySelector('.hub-grid');
+ if(!grid||grid.dataset.touchTrailReady)return;
+ grid.dataset.touchTrailReady='1';
+ const style=document.createElement('style');
+ style.textContent=`
+ .hub-tile{touch-action:pan-y;will-change:transform,box-shadow,border-color;background-clip:padding-box}
+ .hub-tile.hub-touch-active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.58),0 0 28px rgba(153,55,230,.38),inset 0 0 24px rgba(184,92,255,.12)!important;transform:translateY(-1px) scale(.99)!important}
+ .hub-tile.hub-touch-active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.62)) brightness(1.12)!important;transform:scale(1.035)!important}
+ `;
+ document.head.appendChild(style);
+ let active=null,pointerId=null,moved=false,startX=0,startY=0;
+ const setActive=tile=>{if(active===tile)return;active?.classList.remove('hub-touch-active');active=tile||null;active?.classList.add('hub-touch-active')};
+ const tileAt=(x,y)=>document.elementFromPoint(x,y)?.closest?.('.hub-tile');
+ grid.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;const tile=e.target.closest('.hub-tile');if(!tile)return;pointerId=e.pointerId;startX=e.clientX;startY=e.clientY;moved=false;setActive(tile)}, {passive:true});
+ grid.addEventListener('pointermove',e=>{if(e.pointerId!==pointerId)return;if(Math.hypot(e.clientX-startX,e.clientY-startY)>8)moved=true;const tile=tileAt(e.clientX,e.clientY);if(tile&&grid.contains(tile))setActive(tile);else setActive(null)}, {passive:true});
+ const end=e=>{if(e.pointerId!==pointerId)return;pointerId=null;setTimeout(()=>setActive(null),70)};
+ grid.addEventListener('pointerup',end,{passive:true});
+ grid.addEventListener('pointercancel',end,{passive:true});
+ grid.addEventListener('pointerleave',e=>{if(e.pointerId===pointerId&&moved)setActive(null)},{passive:true});
+}
+
 function setupMobileDock(){
  if(document.querySelector('.efl-mobile-dock')) return;
  const page=location.pathname.split('/').pop()||'index.html';
@@ -60,6 +82,6 @@ function setupMobileDock(){
  const dock=document.createElement('nav');dock.className='efl-mobile-dock';dock.setAttribute('aria-label','Primary mobile navigation');const links=[['index.html','🏠','Home'],['franchises.html','🛡️','Franchise'],['legacy.html','🏅','Legacy'],['power-rankings.html','📈','Rankings']];dock.innerHTML=links.map(([href,icon,label])=>`<a href="${href}"${page===href?' class="active" aria-current="page"':''}><span class="dock-icon">${icon}</span><span>${label}</span></a>`).join('')+`<button type="button" id="dockMore" aria-label="Open more navigation"><span class="dock-icon">☰</span><span>More</span></button>`;document.body.appendChild(dock);
  const more=dock.querySelector('#dockMore');more?.addEventListener('click',()=>{const menu=document.querySelector('#mobileMenu')||document.querySelector('#mobile');const topBtn=document.querySelector('#menuBtn');if(menu){const open=menu.classList.toggle('open');if(topBtn){topBtn.setAttribute('aria-expanded',String(open));if(topBtn.classList.contains('menu-btn'))topBtn.textContent=open?'✕':'☰'}if(open)window.scrollTo({top:0,behavior:'smooth'})}});
 }
-function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork()}
+function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail()}
 document.addEventListener("DOMContentLoaded",setupShell);
 // deployment refresh: corrected franchise rank sizing
