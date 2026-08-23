@@ -46,6 +46,65 @@
     border-radius:14px!important;
   }
 
+  /* Make the entire homepage spotlight/slider substantially larger and easier to read on phones. */
+  .spot-wrap{
+    width:calc(100% + 20px)!important;
+    margin-left:-10px!important;
+    margin-right:-10px!important;
+    margin-top:10px!important;
+  }
+  .spotlight{
+    width:100%!important;
+    aspect-ratio:1.78/1!important;
+    min-height:0!important;
+    border-radius:16px!important;
+  }
+  .spot-slide{
+    width:100%!important;
+    height:100%!important;
+  }
+  .spot-arrow{
+    width:46px!important;
+    height:46px!important;
+    font-size:25px!important;
+  }
+  .spot-dots{
+    bottom:10px!important;
+    gap:10px!important;
+  }
+  .spot-dot{
+    width:12px!important;
+    height:12px!important;
+  }
+
+  /* Scale the ranking slide content up with the larger stage. */
+  .spot-slide:nth-of-type(2) .rank-content{
+    left:58px!important;
+    right:16px!important;
+    bottom:34px!important;
+  }
+  .spot-slide:nth-of-type(2) .rank-content h2,
+  .spot-slide:nth-of-type(2) .rank-title{
+    font-size:clamp(24px,6vw,34px)!important;
+  }
+  .spot-slide:nth-of-type(2) .rank-list{
+    max-width:none!important;
+    gap:7px!important;
+  }
+  .spot-slide:nth-of-type(2) .rank-card{
+    min-height:56px!important;
+    padding:9px 12px!important;
+  }
+  .spot-slide:nth-of-type(2) .rank-place{font-size:22px!important}
+  .spot-slide:nth-of-type(2) .rank-name{font-size:15px!important}
+
+  /* Scale the featured matchup typography and player portraits for readability. */
+  .spot-slide.match-slide .match-team-name{font-size:clamp(13px,3.8vw,19px)!important}
+  .spot-slide.match-slide .win-prob{font-size:clamp(6px,1.55vw,9px)!important}
+  .spot-slide.match-slide .player-chip img{width:27px!important;height:27px!important}
+  .spot-slide.match-slide .player-pos{font-size:6px!important}
+  .spot-slide.match-slide .player-name{font-size:clamp(7px,1.85vw,10px)!important}
+
   /* Keep selector clean: no small dropdown caret. */
   .league-menu-btn{font-size:0!important}
   .league-menu-btn::after{
