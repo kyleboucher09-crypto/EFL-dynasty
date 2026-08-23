@@ -104,6 +104,30 @@ function setupMobileDock(){
  const dock=document.createElement('nav');dock.className='efl-mobile-dock';dock.setAttribute('aria-label','Primary mobile navigation');const links=[['index.html','🏠','Home'],['franchises.html','🛡️','Franchise'],['legacy.html','🏅','Legacy'],['power-rankings.html','📈','Rankings']];dock.innerHTML=links.map(([href,icon,label])=>`<a href="${href}"${page===href?' class="active" aria-current="page"':''}><span class="dock-icon">${icon}</span><span>${label}</span></a>`).join('')+`<button type="button" id="dockMore" aria-label="Open more navigation"><span class="dock-icon">☰</span><span>More</span></button>`;document.body.appendChild(dock);
  const more=dock.querySelector('#dockMore');more?.addEventListener('click',()=>{const menu=document.querySelector('#mobileMenu')||document.querySelector('#mobile');const topBtn=document.querySelector('#menuBtn');if(menu){const open=menu.classList.toggle('open');if(topBtn){topBtn.setAttribute('aria-expanded',String(open));if(topBtn.classList.contains('menu-btn'))topBtn.textContent=open?'✕':'☰'}if(open)window.scrollTo({top:0,behavior:'smooth'})}});
 }
-function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail()}
+
+function enforcePreseasonHeritageBaseline(){
+ if(!document.querySelector('#grid'))return;
+ let tries=0;
+ const timer=setInterval(()=>{
+  tries++;
+  const arr=window.EFL;
+  if(!Array.isArray(arr)||!arr.length){if(tries>120)clearInterval(timer);return}
+  const gamesPlayed=arr.reduce((n,a)=>n+(+a.r?.settings?.wins||0)+(+a.r?.settings?.losses||0)+(+a.r?.settings?.ties||0),0);
+  if(gamesPlayed===0&&typeof RULES!=='undefined'&&typeof card==='function'){
+   const franchiseBadge=RULES.badges.find(b=>b.id==='legacy_franchise');
+   const championBadge=RULES.badges.find(b=>b.id==='legacy_champion');
+   for(const a of arr){
+    a.badges=[];a.lp=0;
+    if(a.heritageYears?.length&&franchiseBadge){a.badges.push({...franchiseBadge,count:1,icon:'🛡️',meta:'Pre-2026 franchise owner'});a.lp+=franchiseBadge.lp}
+    if(a.historicTitles>0&&championBadge){a.badges.push({...championBadge,count:1,icon:'🏆',meta:`${a.historicTitles} pre-2026 championship${a.historicTitles===1?'':'s'}`});a.lp+=championBadge.lp}
+   }
+   arr.sort((a,b)=>b.lp-a.lp||b.historicTitles-a.historicTitles);
+   const grid=document.querySelector('#grid');if(grid)grid.innerHTML=arr.map((a,i)=>card(a,i)).join('');
+  }
+  clearInterval(timer);
+ },100);
+}
+
+function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener("DOMContentLoaded",setupShell);
-// deployment refresh: corrected franchise rank sizing
+// deployment refresh: preseason franchise badges restricted to Heritage baseline
