@@ -1,6 +1,6 @@
-
-import { db, ensureTable, json, commissionerOK } from './_common.js';
+import { db, ensureTable, json, commissionerOK, noStore } from './_common.js';
 export default async function handler(req,res){
+  noStore(res);
   if(!commissionerOK(req)) return json(res,401,{error:'Unauthorized'});
   try{
     const sql=db(); await ensureTable(sql);
