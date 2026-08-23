@@ -5,7 +5,14 @@ export default async function handler(req,res){
   try{
     const sql=db(); await ensureTable(sql);
     if(req.method==='GET'){
-      const rows=await sql`SELECT * FROM franchise_submissions ORDER BY created_at DESC LIMIT 100`;
+      const rows=await sql`
+        SELECT id,team_name,owner_name,motto,stadium,primary_color,secondary_color,
+               franchise_player,nemesis,quote,story,status,created_at,reviewed_at,review_note,
+               COALESCE(NULLIF(logo_url,''),logo_data) AS logo_data
+        FROM franchise_submissions
+        ORDER BY created_at DESC
+        LIMIT 100
+      `;
       return json(res,200,{submissions:rows});
     }
     return json(res,405,{error:'Method not allowed'});
