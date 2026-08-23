@@ -1,15 +1,22 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Mobile 2026 season banner: fill the card edge-to-edge with the artwork. */
+/* Mobile 2026 season banner: size the actual IMG, not the card background. */
 @media(max-width:600px){
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
-    aspect-ratio:2.7/1!important;
-    background-size:cover!important;
-    background-position:center center!important;
-    background-repeat:no-repeat!important;
-    background-color:transparent!important;
+    height:clamp(190px,43vw,230px)!important;
+    aspect-ratio:auto!important;
+    overflow:hidden!important;
+    background:#07050a!important;
+  }
+  .league-hero-card img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
   }
 }
