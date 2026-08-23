@@ -64,27 +64,28 @@
     height:100%!important;
   }
 
-  /* Keep arrows accessible but out of the way of slide content. */
+  /* Move arrows to the lower corners so they never sit over matchup/ranking content. */
   .spot-arrow{
-    width:34px!important;
-    height:34px!important;
-    top:50%!important;
-    transform:translateY(-50%)!important;
-    font-size:21px!important;
-    border-color:rgba(210,82,255,.32)!important;
-    background:rgba(7,4,10,.10)!important;
-    color:rgba(210,82,255,.72)!important;
-    backdrop-filter:blur(2px)!important;
+    width:30px!important;
+    height:30px!important;
+    top:auto!important;
+    bottom:8px!important;
+    transform:none!important;
+    font-size:18px!important;
+    border-color:rgba(210,82,255,.22)!important;
+    background:rgba(7,4,10,.06)!important;
+    color:rgba(210,82,255,.58)!important;
+    backdrop-filter:none!important;
     box-shadow:none!important;
-    opacity:.58!important;
+    opacity:.45!important;
     transition:opacity .16s ease,background .16s ease,border-color .16s ease!important;
   }
-  .spot-arrow.prev{left:5px!important}
-  .spot-arrow.next{right:5px!important}
+  .spot-arrow.prev{left:10px!important}
+  .spot-arrow.next{right:10px!important}
   .spot-arrow:active{
-    opacity:.95!important;
-    background:rgba(7,4,10,.34)!important;
-    border-color:rgba(210,82,255,.72)!important;
+    opacity:.9!important;
+    background:rgba(7,4,10,.28)!important;
+    border-color:rgba(210,82,255,.62)!important;
   }
 
   .spot-dots{
@@ -98,9 +99,9 @@
 
   /* Scale the ranking slide content up with the larger stage. */
   .spot-slide:nth-of-type(2) .rank-content{
-    left:48px!important;
-    right:48px!important;
-    bottom:34px!important;
+    left:34px!important;
+    right:34px!important;
+    bottom:38px!important;
   }
   .spot-slide:nth-of-type(2) .rank-content h2,
   .spot-slide:nth-of-type(2) .rank-title{
@@ -117,12 +118,23 @@
   .spot-slide:nth-of-type(2) .rank-place{font-size:22px!important}
   .spot-slide:nth-of-type(2) .rank-name{font-size:15px!important}
 
-  /* Scale the featured matchup typography and player portraits for readability. */
+  /* Give each matchup row more breathing room between portrait, position and player name. */
   .spot-slide.match-slide .match-team-name{font-size:clamp(13px,3.8vw,19px)!important}
   .spot-slide.match-slide .win-prob{font-size:clamp(6px,1.55vw,9px)!important}
   .spot-slide.match-slide .player-chip img{width:27px!important;height:27px!important}
-  .spot-slide.match-slide .player-pos{font-size:6px!important}
-  .spot-slide.match-slide .player-name{font-size:clamp(7px,1.85vw,10px)!important}
+  .spot-slide.match-slide .player-pos{
+    left:25%!important;
+    width:12%!important;
+    font-size:6px!important;
+  }
+  .spot-slide.match-slide .player-name{
+    left:43%!important;
+    right:3%!important;
+    justify-content:flex-start!important;
+    text-align:left!important;
+    padding-left:2px!important;
+    font-size:clamp(7px,1.85vw,10px)!important;
+  }
 
   /* Keep selector clean: no small dropdown caret. */
   .league-menu-btn{font-size:0!important}
