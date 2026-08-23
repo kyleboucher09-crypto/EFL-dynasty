@@ -1,39 +1,39 @@
 {
-  "edition": "PRESEASON EDITION",
+  "edition": "2026 PRESEASON EDITION",
   "season": 2026,
   "week": 1,
   "published": "August 22, 2026",
   "headline": "The EFL Weekly",
-  "dek": "Trades, waiver movement, power shifts and the stories shaping the league — written from live EFL data every week.",
+  "dek": "The 2026 chase begins: a defending champion, a new preseason hierarchy and twelve franchises entering the season with something to prove.",
   "lead": {
-    "tag": "FROM THE NEWSROOM",
-    "title": "The board is set for Week 1",
-    "body": "The 2026 EFL season is taking shape. Until the NFL regular season begins, the league remains officially on Week 1. Once games are underway, this report will automatically turn the week's Sleeper activity into a full league recap — including trades, waiver claims, power-ranking movement, rising franchises and the matchups that defined the week."
+    "tag": "2026 SEASON PREVIEW",
+    "title": "The Road to the Throne Starts Here",
+    "body": "Blaze Infantry enters 2026 with the one thing every other EFL franchise wants: the crown. Last season's championship is now part of league history, but dynasty football rarely gives a champion much time to celebrate. Rosters change, young players emerge, injuries reshape expectations and contenders spend an entire offseason looking for the move that closes the gap. The opening EFL model has Master Peyton at the top of the preseason board, with Kaaron Rodgers and The Don's Soldiers immediately behind, creating a fascinating opening question: can the defending champion turn last year's run into an era, or will 2026 belong to a challenger? The league is deeper, the margins are thinner and every franchise begins the year knowing the same thing — the throne is occupied, but it is not protected."
   },
   "briefs": [
     {
-      "icon": "⇄",
-      "label": "TRADE DESK",
-      "title": "Every deal, with context",
-      "body": "Completed trades will be broken down by franchise, players and picks moved, with the biggest dynasty implications highlighted."
+      "icon": "1",
+      "label": "POWER RANKINGS",
+      "title": "Master Peyton Opens 2026 at No. 1",
+      "body": "The first EFL preseason model puts Master Peyton in the pole position with a 96.8 power score. This is not a reward for last season's record; it is a forward-looking roster grade built around projected scoring, lineup strength, usable depth, health and schedule context. Kaaron Rodgers sits second at 89.8, while The Don's Soldiers opens third at 89.6 — a razor-thin separation that makes the top of the league far less settled than the No. 1 ranking might suggest. Preseason rankings are only a baseline, but they establish the first target of 2026: until the games tell us otherwise, everyone is chasing Master Peyton."
     },
     {
-      "icon": "+",
-      "label": "WAIVER WIRE",
-      "title": "Who won the wire?",
-      "body": "Notable waiver claims and free-agent additions will be surfaced automatically, with priority given to moves that can change weekly lineups or long-term value."
+      "icon": "♛",
+      "label": "CHAMPIONSHIP WATCH",
+      "title": "Blaze Infantry Has the Crown — and the Target",
+      "body": "There is a different kind of pressure that comes with entering a season as defending EFL champion. Blaze Infantry no longer gets to play the role of hunter; every matchup now comes with the credibility of the 2025 title and the expectation that a championship roster should remain in the fight. Repeating in dynasty requires more than preserving last year's lineup. It means surviving changing player values, new breakout stars, injuries and eleven opponents who have spent the offseason trying to improve. The champion's advantage is proof that the roster can finish the job. The challenge is proving that 2025 was the beginning of something rather than the end of one great run."
     },
     {
       "icon": "↗",
-      "label": "POWER MOVES",
-      "title": "Risers, fallers and momentum",
-      "body": "The largest changes in the EFL power rankings will become weekly storylines instead of another copy of the standings."
+      "label": "CONTENDERS & SLEEPERS",
+      "title": "The Gap Behind No. 1 Is Where 2026 Gets Interesting",
+      "body": "Kaaron Rodgers and The Don's Soldiers begin the preseason separated by only two-tenths of a point in the EFL model, the kind of margin that can disappear with one breakout player, one injury or one trade. That battle also captures what makes this preseason difficult to predict: roster value alone will not decide it. Weekly starting strength, depth through bye weeks, player availability and NFL opponent strength will continuously reshape the order. The franchises outside the opening top three are not being written off — they are being given a starting line. Once the season begins, movement will be earned every week, and the teams that outperform projection will have the quickest path from sleeper to contender."
     },
     {
       "icon": "⚔",
-      "label": "GAME OF THE WEEK",
-      "title": "The matchups that mattered",
-      "body": "Close finishes, statement wins, scoring explosions and playoff-impacting battles will get the spotlight after every completed week."
+      "label": "WHAT COMES NEXT",
+      "title": "Week 1 Will Turn Projection Into Evidence",
+      "body": "For now, every EFL ranking is a forecast. Week 1 changes that. Projected scoring will meet actual lineups, offseason optimism will meet real usage and the first wins and losses will begin separating roster theory from weekly performance. The EFL power model will update as the season develops, while weekly coverage will track the biggest risers and fallers, injuries, trades, waiver moves and matchups that alter the championship picture. The preseason tells us who should be good. The regular season gets to tell us who actually is."
     }
   ]
 }
