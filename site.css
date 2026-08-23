@@ -56,7 +56,15 @@ outline:none!important;
 filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(184,92,255,.72)) brightness(1.12)!important;
 }
 @media(hover:hover) and (pointer:fine){.hub-tile:hover{transform:translateY(-2px)!important}.hub-tile:hover img{transform:scale(1.04)!important}}
-@media(hover:none),(pointer:coarse){.hub-tile:active{transform:scale(.985)!important}.hub-tile:active img{transform:scale(.985)!important}}
+
+/* Touch devices: no sticky hover/focus. Purple exists only while the finger is actually down. */
+@media(hover:none),(pointer:coarse){
+.hub-tile{touch-action:manipulation!important;-webkit-user-select:none!important;user-select:none!important}
+.hub-tile:hover:not(:active),.hub-tile:focus:not(:active),.hub-tile:focus-visible:not(:active),.hub-tile.active:not(:active),.hub-tile.is-active:not(:active),.hub-tile[aria-current="page"]:not(:active){border-color:rgba(232,184,74,.34)!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.14),rgba(232,184,74,.045) 45%,rgba(9,7,13,.96) 74%)!important;box-shadow:0 0 14px rgba(232,184,74,.10),0 0 30px rgba(232,184,74,.055),inset 0 0 22px rgba(232,184,74,.045)!important;transform:none!important}
+.hub-tile:hover:not(:active) img,.hub-tile:focus:not(:active) img,.hub-tile:focus-visible:not(:active) img,.hub-tile.active:not(:active) img,.hub-tile.is-active:not(:active) img,.hub-tile[aria-current="page"]:not(:active) img{filter:drop-shadow(0 0 9px rgba(255,215,108,.68)) drop-shadow(0 0 20px rgba(232,184,74,.28)) brightness(1.07)!important;transform:none!important}
+.hub-tile:active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(184,92,255,.20) 52%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 2px rgba(184,92,255,.68),0 0 30px rgba(153,55,230,.52),inset 0 0 24px rgba(184,92,255,.16)!important;transform:scale(.985)!important}
+.hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.50)) drop-shadow(0 0 20px rgba(184,92,255,.80)) brightness(1.14)!important;transform:scale(1.03)!important}
+}
 
 /* Hub naming refresh */
 .hub-grid .hub-tile:nth-child(2) h3,.hub-grid .hub-tile:nth-child(2) p,.hub-grid .hub-tile:nth-child(5) h3,.hub-grid .hub-tile:nth-child(6) h3,.hub-grid .hub-tile:nth-child(6) p{font-size:0!important}
