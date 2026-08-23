@@ -59,20 +59,42 @@ function setupHubTouchTrail(){
  grid.dataset.touchTrailReady='1';
  const style=document.createElement('style');
  style.textContent=`
- .hub-tile{touch-action:pan-y;will-change:transform,box-shadow,border-color;background-clip:padding-box}
- .hub-tile.hub-touch-active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.58),0 0 28px rgba(153,55,230,.38),inset 0 0 24px rgba(184,92,255,.12)!important;transform:translateY(-1px) scale(.99)!important}
- .hub-tile.hub-touch-active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.62)) brightness(1.12)!important;transform:scale(1.035)!important}
+ .hub-tile{will-change:transform,box-shadow,border-color}
+ .hub-tile.hub-touch-active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.62),0 0 30px rgba(153,55,230,.42),inset 0 0 24px rgba(184,92,255,.13)!important;transform:translateY(-1px) scale(.99)!important}
+ .hub-tile.hub-touch-active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}
+ @media(hover:none),(pointer:coarse){
+   .hub-tile:active{border-color:rgba(232,184,74,.28)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.13),rgba(232,184,74,.045) 46%,rgba(9,7,13,.96) 74%)!important;box-shadow:0 0 16px rgba(232,184,74,.12),inset 0 0 20px rgba(232,184,74,.045)!important;transform:none!important}
+   .hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.6)) drop-shadow(0 0 18px rgba(232,184,74,.25)) brightness(1.06)!important;transform:none!important}
+   .hub-tile.hub-touch-active,.hub-tile.hub-touch-active:active{border-color:#b85cff!important;box-shadow:0 0 0 1px rgba(184,92,255,.62),0 0 30px rgba(153,55,230,.42),inset 0 0 24px rgba(184,92,255,.13)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;transform:translateY(-1px) scale(.99)!important}
+   .hub-tile.hub-touch-active img,.hub-tile.hub-touch-active:active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}
+ }
  `;
  document.head.appendChild(style);
- let active=null,pointerId=null,moved=false,startX=0,startY=0;
+ let active=null,touchId=null,startX=0,startY=0,dragging=false;
  const setActive=tile=>{if(active===tile)return;active?.classList.remove('hub-touch-active');active=tile||null;active?.classList.add('hub-touch-active')};
- const tileAt=(x,y)=>document.elementFromPoint(x,y)?.closest?.('.hub-tile');
- grid.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;const tile=e.target.closest('.hub-tile');if(!tile)return;pointerId=e.pointerId;startX=e.clientX;startY=e.clientY;moved=false;setActive(tile)}, {passive:true});
- grid.addEventListener('pointermove',e=>{if(e.pointerId!==pointerId)return;if(Math.hypot(e.clientX-startX,e.clientY-startY)>8)moved=true;const tile=tileAt(e.clientX,e.clientY);if(tile&&grid.contains(tile))setActive(tile);else setActive(null)}, {passive:true});
- const end=e=>{if(e.pointerId!==pointerId)return;pointerId=null;setTimeout(()=>setActive(null),70)};
- grid.addEventListener('pointerup',end,{passive:true});
- grid.addEventListener('pointercancel',end,{passive:true});
- grid.addEventListener('pointerleave',e=>{if(e.pointerId===pointerId&&moved)setActive(null)},{passive:true});
+ const tileAt=(x,y)=>{const el=document.elementFromPoint(x,y);const tile=el?.closest?.('.hub-tile');return tile&&grid.contains(tile)?tile:null};
+ const findTouch=list=>Array.from(list||[]).find(t=>t.identifier===touchId);
+ grid.addEventListener('touchstart',e=>{
+   if(touchId!==null)return;
+   const t=e.changedTouches[0],tile=e.target.closest('.hub-tile');
+   if(!t||!tile)return;
+   touchId=t.identifier;startX=t.clientX;startY=t.clientY;dragging=false;setActive(tile);
+ },{passive:true});
+ document.addEventListener('touchmove',e=>{
+   if(touchId===null)return;
+   const t=findTouch(e.touches);if(!t)return;
+   const dx=t.clientX-startX,dy=t.clientY-startY;
+   if(Math.abs(dx)>7||Math.abs(dy)>7)dragging=true;
+   if(Math.abs(dx)>Math.abs(dy)+3)e.preventDefault();
+   setActive(tileAt(t.clientX,t.clientY));
+ },{passive:false,capture:true});
+ const finish=e=>{
+   if(touchId===null)return;
+   const t=findTouch(e.changedTouches);if(!t)return;
+   touchId=null;dragging=false;setActive(null);
+ };
+ document.addEventListener('touchend',finish,{passive:true,capture:true});
+ document.addEventListener('touchcancel',finish,{passive:true,capture:true});
 }
 
 function setupMobileDock(){
