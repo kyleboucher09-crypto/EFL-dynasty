@@ -4,15 +4,14 @@ async function apiGet(path){const r=await fetch(EFL_API+path);if(!r.ok)throw new
 function teamName(user,roster){return user?.metadata?.team_name||user?.display_name||(roster?`Roster ${roster.roster_id}`:"EFL Team")}
 
 const LEGACY_RANK_LEVELS=[
- {level:1,name:'Prospect',lp:0,icon:'🏈'},
- {level:2,name:'Rookie',lp:1,icon:'🪖'},
- {level:3,name:'Veteran',lp:500,icon:'🛡️'},
- {level:4,name:'Captain',lp:1200,icon:'©️'},
- {level:5,name:'All Star',lp:2000,icon:'⭐'},
- {level:6,name:'MVP',lp:2900,icon:'🏅'},
- {level:7,name:'Elite',lp:3900,icon:'💎'},
- {level:8,name:'Legend',lp:4900,icon:'👑'},
- {level:9,name:'Hall of Famer',lp:6000,icon:'🏛️'}
+ {level:1,name:'Prospect',lp:0,icon:'P'},
+ {level:2,name:'Rookie',lp:1,icon:'R'},
+ {level:3,name:'Veteran',lp:500,icon:'V'},
+ {level:4,name:'Captain ★',lp:1200,icon:'C1'},
+ {level:5,name:'Captain ★★',lp:2200,icon:'C2'},
+ {level:6,name:'Captain ★★★',lp:3400,icon:'C3'},
+ {level:7,name:'Captain ★★★★',lp:4700,icon:'C4'},
+ {level:8,name:'Hall of Famer',lp:6000,icon:'HOF'}
 ];
 const LEGACY_BADGE_ALIASES={efl_champion:'champion',first_round_bye:'first_class_ticket',podium:'on_the_podium',consolation:'consolation_king',bye_to_final:'business_trip',thousand:'four_digits',high_week:'weekly_hammer',defending_champ:'title_defense',iron_man:'iron_franchise',decade:'efl_lifetime'};
 const SEASONAL_REPEAT_BADGES=new Set(['champion','regular_season_king','points_king','untouchable','two_hundred_club','absolute_destruction','photo_finish','hot_streak','perfect_month','comeback_kid','giant_killer','wire_wizard','playoff_assassin','first_class_ticket','on_the_podium','four_digits','weekly_hammer','bracket_breaker','consolation_king','business_trip','title_defense','three_week_terror','double_crown','triple_crown_season','survivor','bench_boss','consistency_king','precision_drafter','rivalry_king','roster_builder','sleeper_hit','streak_breaker','sunday_miracle','the_spoiler','trade_heist','trade_master','upset_of_year','waiver_steal','monday_night_hero','iron_curtain']);
@@ -57,24 +56,30 @@ function installLegacyEconomyPatch(){
 installLegacyEconomyPatch();
 
 function setupRankArtwork(){
- const art={
-  '🏈':['Prospect','Assets/3ED57F2C-69A2-427F-9DB1-F020652E5A7D.png'],
-  '🪖':['Rookie','Assets/3ACFFE79-7314-48A1-9BAD-88D72446C0BC.png'],
-  '🛡️':['Veteran','Assets/41A69F96-74FB-4A4C-AA47-3A2FD1FBDAB7.png'],
-  '©️':['Captain','Assets/97A9681C-3CD5-473A-855B-EF5BE9AC7191.png'],
-  '⭐':['All Star','Assets/5079A91E-C035-406C-A35D-779D46B90FFD.png'],
-  '🏅':['MVP','Assets/19C23122-FD7A-4EBC-9C62-966332FAADD2.png'],
-  '💎':['Elite','Assets/DE1A5EAB-965D-49BE-BA89-1C783D503FED.png'],
-  '👑':['Legend','Assets/93135308-577B-4524-9CE7-2D65DAD1648C.png'],
-  '🏛️':['Hall of Famer','Assets/E8EA15EF-8A41-4267-BB97-307CF803EC52.png']
+ const ranks={
+  P:{label:'P',name:'Prospect',stars:0,tone:'prospect'},
+  R:{label:'R',name:'Rookie',stars:0,tone:'rookie'},
+  V:{label:'V',name:'Veteran',stars:0,tone:'veteran'},
+  C1:{label:'C',name:'Captain',stars:1,tone:'captain'},
+  C2:{label:'C',name:'Captain',stars:2,tone:'captain'},
+  C3:{label:'C',name:'Captain',stars:3,tone:'captain'},
+  C4:{label:'C',name:'Captain',stars:4,tone:'captain'},
+  HOF:{label:'HOF',name:'Hall of Famer',stars:0,tone:'hof'}
  };
  const style=document.createElement('style');
  style.textContent=`
- .rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;border-radius:inherit;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}
- .rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+ .rank-mark,.rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+ .efl-rank-patch{--edge:#b8bcc7;--thread:#f2f2f2;position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;box-sizing:border-box;color:var(--thread);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',system-ui,sans-serif;font-weight:900;letter-spacing:.02em;text-shadow:0 2px 0 #000,0 0 8px rgba(255,255,255,.12);filter:drop-shadow(0 6px 8px rgba(0,0,0,.55))}
+ .efl-rank-patch:before{content:'';position:absolute;inset:7%;clip-path:polygon(50% 0,93% 18%,93% 68%,50% 100%,7% 68%,7% 18%);background:linear-gradient(145deg,var(--edge),#292b32 27%,#08090c 48%,#1b1d22 72%,var(--edge));box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)}
+ .efl-rank-patch:after{content:'';position:absolute;inset:12%;clip-path:polygon(50% 0,93% 18%,93% 68%,50% 100%,7% 68%,7% 18%);background:radial-gradient(circle at 50% 28%,rgba(255,255,255,.08),transparent 34%),repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px),#111218;border:1px solid rgba(255,255,255,.09)}
+ .efl-rank-patch .rank-letter{position:relative;z-index:2;font-size:44%;line-height:1;transform:translateY(-4%)}
+ .efl-rank-patch .rank-stars{position:absolute;z-index:3;left:20%;right:20%;bottom:19%;display:flex;align-items:center;justify-content:center;gap:2%;font-family:Arial,sans-serif;font-size:14%;line-height:1;color:#f0c85c;text-shadow:0 1px 2px #000}
+ .efl-rank-patch.prospect{--edge:#a9adb7;--thread:#e5e7eb}.efl-rank-patch.rookie{--edge:#c47b3f;--thread:#e5a05e}.efl-rank-patch.veteran{--edge:#708aa0;--thread:#d8e4ec}.efl-rank-patch.captain{--edge:#d7a727;--thread:#f3cf64}.efl-rank-patch.hof{--edge:#e3bd45;--thread:#ffdf73}
+ .efl-rank-patch.hof:before{background:linear-gradient(145deg,#f3d467,#7b5516 25%,#0b0a08 52%,#704c13 78%,#f3d467)}
+ .efl-rank-patch.hof .rank-letter{font-size:27%;letter-spacing:.04em}
+ .efl-rank-patch.hof .rank-stars:before{content:'✦';font-size:115%}
  body:has(#grid) .rankline{grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center}
  body:has(#grid) .rank-icon{width:92px!important;height:92px!important}
- body:has(#grid) .rank-icon img{transform:scale(1.22);transform-origin:center}
  body:has(#grid) .rank-name{font-size:22px}
  body:has(#grid) .rank-sub{font-size:8px}
  body:has(#grid) .lp{grid-column:2;text-align:left;font-size:12px;line-height:1.45;margin-top:-8px}
@@ -85,11 +90,11 @@ function setupRankArtwork(){
  body:has(#grid) .ach .ico img{width:82px;height:82px;display:block;object-fit:contain;margin:0 auto;filter:drop-shadow(0 5px 8px rgba(0,0,0,.45))}
  body:has(#grid) .legacy-title{grid-template-columns:108px minmax(0,1fr)}
  body:has(#grid) .legacy-title .rank-icon{width:108px!important;height:108px!important}
- body:has(#grid) .legacy-title .rank-icon img{transform:scale(1.18)}
- @media(max-width:560px){body:has(#grid) .legacy{padding:17px 16px 16px}body:has(#grid) .rankline{grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;min-height:102px}body:has(#grid) .rank-icon{width:92px!important;height:92px!important}body:has(#grid) .rank-icon img{transform:scale(1.22)}body:has(#grid) .rank-name{font-size:22px;line-height:1.05;margin-top:3px}body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-14px}body:has(#grid) .bar{margin-top:10px}body:has(#grid) .badge-row{gap:8px;min-height:58px;justify-content:flex-start}body:has(#grid) .badge{width:58px;height:58px;flex:0 0 58px}body:has(#grid) .legacy-title{grid-template-columns:100px minmax(0,1fr)}body:has(#grid) .legacy-title .rank-icon{width:100px!important;height:100px!important}}
+ @media(max-width:560px){body:has(#grid) .legacy{padding:17px 16px 16px}body:has(#grid) .rankline{grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;min-height:102px}body:has(#grid) .rank-icon{width:92px!important;height:92px!important}body:has(#grid) .rank-name{font-size:22px;line-height:1.05;margin-top:3px}body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-14px}body:has(#grid) .bar{margin-top:10px}body:has(#grid) .badge-row{gap:8px;min-height:58px;justify-content:flex-start}body:has(#grid) .badge{width:58px;height:58px;flex:0 0 58px}body:has(#grid) .legacy-title{grid-template-columns:100px minmax(0,1fr)}body:has(#grid) .legacy-title .rank-icon{width:100px!important;height:100px!important}}
  `;
  document.head.appendChild(style);
- const replace=el=>{if(!el||el.dataset.rankArtApplied)return;const key=el.textContent.trim(),item=art[key];if(!item)return;el.innerHTML=`<img src="${item[1]}" alt="${item[0]} rank badge">`;el.dataset.rankArtApplied='1'};
+ const patchMarkup=item=>`<span class="efl-rank-patch ${item.tone}" role="img" aria-label="${item.name} rank"><span class="rank-letter">${item.label}</span><span class="rank-stars">${item.stars?'★'.repeat(item.stars):''}</span></span>`;
+ const replace=el=>{if(!el||el.dataset.rankArtApplied)return;const key=el.textContent.trim(),item=ranks[key];if(!item)return;el.innerHTML=patchMarkup(item);el.dataset.rankArtApplied='1'};
  const apply=root=>{if(root.matches?.('.rank-mark,.rank-icon'))replace(root);(root.querySelectorAll?root.querySelectorAll('.rank-mark,.rank-icon'):[]).forEach(replace)};
  apply(document);const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)apply(n)})));observer.observe(document.body,{childList:true,subtree:true});
 }
@@ -121,4 +126,4 @@ function enforcePreseasonHeritageBaseline(){
 
 function setupShell(){const page=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute('href')===page)a.classList.add('active')});const btn=$('#menuBtn'),menu=$('#mobileMenu');if(btn&&menu){btn.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'✕':'☰'});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove('open');btn.textContent='☰';btn.setAttribute('aria-expanded','false')}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener('DOMContentLoaded',setupShell);
-// Legacy economy: 0 LP = Prospect, 1+ = Rookie; seasonal qualifying LP repeats while badge art unlocks once; franchise ranks stay separate per league.
+// Legacy ranks now use jersey-style P/R/V/C captain patches with 1-4 stars and Hall of Famer at 6000 LP.
