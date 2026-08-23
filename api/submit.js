@@ -1,6 +1,33 @@
 
 import { db, ensureTable, json, clean } from './_common.js';
 
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 8;
+const BODY_LIMIT = 1_200_000;
+const rateBuckets = globalThis.__eflSubmitRateBuckets || (globalThis.__eflSubmitRateBuckets = new Map());
+
+function clientIp(req) {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (Array.isArray(forwarded)) return forwarded[0] || 'unknown';
+  return String(forwarded || req.headers['x-real-ip'] || 'unknown').split(',')[0].trim();
+}
+function rateLimited(req) {
+  const now = Date.now();
+  const ip = clientIp(req);
+  const current = rateBuckets.get(ip);
+  if (!current || now - current.start >= RATE_WINDOW_MS) {
+    rateBuckets.set(ip, { start: now, count: 1 });
+    return false;
+  }
+  current.count += 1;
+  rateBuckets.set(ip, current);
+  return current.count > RATE_MAX;
+}
+function validImageDataUrl(value) {
+  if (!value) return true;
+  return /^data:image\/(png|jpeg|jpg|webp);base64,[a-z0-9+/=\r\n]+$/i.test(value);
+}
+
 async function sendEmail(data, id) {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.COMMISSIONER_EMAIL;
@@ -37,12 +64,23 @@ function escapeHtml(s='') {
 }
 
 export default async function handler(req,res){
+  res.setHeader('Allow','POST');
+  res.setHeader('Cache-Control','no-store');
+  res.setHeader('X-Content-Type-Options','nosniff');
   if(req.method!=='POST') return json(res,405,{error:'Method not allowed'});
+
+  const contentLength = Number(req.headers['content-length'] || 0);
+  if(contentLength > BODY_LIMIT) return json(res,413,{error:'Submission too large'});
+  if(rateLimited(req)) {
+    res.setHeader('Retry-After','600');
+    return json(res,429,{error:'Too many submissions. Please try again later.'});
+  }
+
   try{
     const sql=db(); await ensureTable(sql);
     const b=req.body||{};
     const logo = clean(b.logoData, 900000);
-    if(logo && !logo.startsWith('data:image/')) return json(res,400,{error:'Invalid logo'});
+    if(!validImageDataUrl(logo)) return json(res,400,{error:'Invalid logo'});
     const data={
       teamName:clean(b.teamName,120),
       ownerName:clean(b.ownerName,120),
