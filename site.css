@@ -12,7 +12,7 @@
 #spotlight .spot-slide:first-of-type .spot-content{left:-1%!important;right:auto!important;top:-8%!important;bottom:auto!important;width:96%!important;height:62%!important;max-width:none!important;overflow:visible!important;display:block!important}
 #spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;background-position:left top!important;background-size:contain!important;background-repeat:no-repeat!important;transform:none!important}
 #spotlight .spot-slide:first-of-type .spot-kicker,#spotlight .spot-slide:first-of-type .champ-name,#spotlight .spot-slide:first-of-type .champ-sub{display:none!important}}
-.hub-tile{transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;-webkit-tap-highlight-color:transparent}.hub-tile img{transition:filter .16s ease,transform .16s ease!important}@media(hover:hover) and (pointer:fine){.hub-tile:hover{border-color:#ffd76c!important;background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 26px rgba(232,184,74,.26),inset 0 0 24px rgba(232,184,74,.08)!important;transform:translateY(-2px)!important}.hub-tile:hover img{filter:drop-shadow(0 0 12px rgba(255,215,108,.9)) brightness(1.12)!important;transform:scale(1.04)!important}}@media(hover:none),(pointer:coarse){.hub-tile:active{border-color:#ffd76c!important;background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 24px rgba(232,184,74,.24),inset 0 0 22px rgba(232,184,74,.08)!important;transform:scale(.985)!important}.hub-tile:active img{filter:drop-shadow(0 0 11px rgba(255,215,108,.86)) brightness(1.1)!important;transform:scale(.985)!important}}
+.hub-tile{transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;-webkit-tap-highlight-color:transparent}.hub-tile img{transition:filter .16s ease,transform .16s ease!important}
 
 /* Mobile Power Rankings: compact cards while preserving clear title separation. */
 @media(max-width:600px){
@@ -35,14 +35,25 @@
 #spotlight .spot-slide.match-slide .player-name{left:35%!important;right:-2%!important;font-size:clamp(6.2px,1.55vw,8.4px)!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
 }
 
-/* Hub tiles: all icons carry a permanent gold halo; active/hover state switches to purple contrast. */
-.hub-tile{position:relative!important;border-color:rgba(232,184,74,.20)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(232,184,74,.035) 42%,rgba(9,7,13,.96) 72%)!important;box-shadow:inset 0 0 20px rgba(232,184,74,.035)!important}
-.hub-tile img{filter:drop-shadow(0 0 8px rgba(255,215,108,.58)) drop-shadow(0 0 18px rgba(232,184,74,.24)) brightness(1.06)!important}
-@media(hover:hover) and (pointer:fine){
-.hub-tile:hover{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.12) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.42),0 0 25px rgba(153,55,230,.30),inset 0 0 24px rgba(184,92,255,.10)!important;transform:translateY(-2px)!important}
-.hub-tile:hover img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 17px rgba(184,92,255,.58)) brightness(1.12)!important;transform:scale(1.04)!important}
+/* Hub tiles: permanent soft gold frame + halo. Purple is reserved for interaction only. */
+.hub-tile{
+position:relative!important;
+border:1px solid rgba(232,184,74,.34)!important;
+background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.14),rgba(232,184,74,.045) 45%,rgba(9,7,13,.96) 74%)!important;
+box-shadow:0 0 14px rgba(232,184,74,.10),0 0 30px rgba(232,184,74,.055),inset 0 0 22px rgba(232,184,74,.045)!important;
+outline:none!important;
 }
-@media(hover:none),(pointer:coarse){
-.hub-tile:active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.14) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.46),0 0 24px rgba(153,55,230,.30),inset 0 0 22px rgba(184,92,255,.10)!important;transform:scale(.985)!important}
-.hub-tile:active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 17px rgba(184,92,255,.58)) brightness(1.12)!important;transform:scale(.985)!important}
+.hub-tile img{filter:drop-shadow(0 0 9px rgba(255,215,108,.68)) drop-shadow(0 0 20px rgba(232,184,74,.28)) brightness(1.07)!important}
+
+/* Selected / pressed / focused tile = unmistakable purple contrast, never gold. */
+.hub-tile:hover,.hub-tile:active,.hub-tile:focus,.hub-tile:focus-visible,.hub-tile.active,.hub-tile.is-active,.hub-tile[aria-current="page"]{
+border-color:#b85cff!important;
+background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(184,92,255,.18) 52%,rgba(9,7,13,.96) 76%)!important;
+box-shadow:0 0 0 2px rgba(184,92,255,.62),0 0 26px rgba(153,55,230,.46),inset 0 0 24px rgba(184,92,255,.14)!important;
+outline:none!important;
 }
+.hub-tile:hover img,.hub-tile:active img,.hub-tile:focus img,.hub-tile:focus-visible img,.hub-tile.active img,.hub-tile.is-active img,.hub-tile[aria-current="page"] img{
+filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(184,92,255,.72)) brightness(1.12)!important;
+}
+@media(hover:hover) and (pointer:fine){.hub-tile:hover{transform:translateY(-2px)!important}.hub-tile:hover img{transform:scale(1.04)!important}}
+@media(hover:none),(pointer:coarse){.hub-tile:active{transform:scale(.985)!important}.hub-tile:active img{transform:scale(.985)!important}}
