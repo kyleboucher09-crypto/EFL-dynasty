@@ -116,6 +116,17 @@ function enforcePreseasonHeritageBaseline(){
   if(!Array.isArray(arr)||!arr.length){if(tries>120)clearInterval(timer);return}
   const gamesPlayed=arr.reduce((n,a)=>n+(+a.r?.settings?.wins||0)+(+a.r?.settings?.losses||0)+(+a.r?.settings?.ties||0),0);
   if(gamesPlayed===0&&typeof RULES!=='undefined'&&typeof card==='function'){
+   RULES.levels=[
+    {level:1,name:'Prospect',lp:0,icon:'🏈'},
+    {level:2,name:'Rookie',lp:1,icon:'🪖'},
+    {level:3,name:'Veteran',lp:400,icon:'🛡️'},
+    {level:4,name:'Captain',lp:800,icon:'©️'},
+    {level:5,name:'All Star',lp:1400,icon:'⭐'},
+    {level:6,name:'MVP',lp:2200,icon:'🏅'},
+    {level:7,name:'Elite',lp:3200,icon:'💎'},
+    {level:8,name:'Legend',lp:4500,icon:'👑'},
+    {level:9,name:'Hall of Famer',lp:6000,icon:'🏛️'}
+   ];
    const franchiseBadge=RULES.badges.find(b=>b.id==='legacy_franchise');
    const championBadge=RULES.badges.find(b=>b.id==='legacy_champion');
    for(const a of arr){
@@ -132,4 +143,4 @@ function enforcePreseasonHeritageBaseline(){
 
 function setupShell(){const page=location.pathname.split("/").pop()||"index.html";document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute("href")===page)a.classList.add("active")});const btn=$("#menuBtn"),menu=$("#mobileMenu");if(btn&&menu){btn.addEventListener("click",()=>{const open=menu.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"✕":"☰"});document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove("open");btn.textContent="☰";btn.setAttribute("aria-expanded","false")}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener("DOMContentLoaded",setupShell);
-// deployment refresh: official Heritage badge artwork on franchise cards
+// deployment refresh: Prospect is 0 LP only; Rookie begins at 1 LP and rank artwork matches rank name
