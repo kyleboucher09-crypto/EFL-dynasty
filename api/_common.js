@@ -37,6 +37,21 @@ export function clean(v, max=1000) {
   return String(v ?? '').trim().slice(0,max);
 }
 
+export function noStore(res){
+  res.setHeader('Cache-Control','no-store, max-age=0');
+  res.setHeader('Pragma','no-cache');
+  res.setHeader('X-Content-Type-Options','nosniff');
+}
+
+export function sameOrigin(req){
+  const origin=String(req.headers.origin||'').trim();
+  if(!origin) return true;
+  const forwardedProto=String(req.headers['x-forwarded-proto']||'https').split(',')[0].trim();
+  const host=String(req.headers['x-forwarded-host']||req.headers.host||'').split(',')[0].trim();
+  if(!host) return false;
+  try{return new URL(origin).origin===`${forwardedProto}://${host}`}catch{return false}
+}
+
 function expectedKey(){ return process.env.COMMISSIONER_KEY || ''; }
 function safeEqual(a,b){
   const aa=Buffer.from(String(a||'')), bb=Buffer.from(String(b||''));
