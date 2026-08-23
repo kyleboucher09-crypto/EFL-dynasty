@@ -1,0 +1,49 @@
+name: Add real preseason power ranking articles
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/preseason-articles.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upgrade preseason team articles
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('power-rankings.html')
+          s=p.read_text()
+          old="""function articleFor(x){const stars=[...x.starters].sort((a,b)=>b.pts-a.pts).slice(0,2).map(s=>fullName(s.p));let lead=stars.length>1?`${stars[0]} and ${stars[1]} give this roster its clearest weekly ceiling.`:stars.length?`${stars[0]} is the centerpiece of this projected lineup.`:`This roster's ranking is being driven more by balance than one obvious superstar.`;let outlook='';if(x.lineupN>=88)outlook+=' The starting group grades as one of the league’s most dangerous on projected scoring.';else if(x.lineupN>=78)outlook+=' The starting lineup projects as a solid weekly contender without much room for dead spots.';else outlook+=' The starters need a few players to beat projection for this team to climb.';if(x.depthN>=84)outlook+=' Strong bench depth gives it real protection against injuries and bye weeks.';else if(x.depthN<70)outlook+=' Depth is the pressure point, so one injury could change the weekly outlook quickly.';else if(x.health<80)outlook+=' Current injury exposure keeps the ceiling a little less secure than the raw talent suggests.';else if(x.schedule>=84)outlook+=' A favorable schedule profile provides another reason for optimism.';else if(x.schedule<70)outlook+=' A tougher schedule keeps the model from pushing this roster any higher right now.';return lead+outlook}"""
+          new="""function articleFor(x){
+  const ordered=[...x.starters].sort((a,b)=>b.pts-a.pts),stars=ordered.slice(0,3),starNames=stars.map(s=>fullName(s.p));
+  const groups={};for(const s of x.starters){const k=pos(s.p)||'FLEX';(groups[k]??=[]).push(s)}
+  const groupScores=Object.entries(groups).map(([k,v])=>({k,v,pts:v.reduce((n,a)=>n+a.pts,0)})).sort((a,b)=>b.pts-a.pts),bestGroup=groupScores[0];
+  const bench=[...x.bench].filter(b=>b.pts>0).slice(0,2),benchNames=bench.map(b=>fullName(b.p));
+  const injured=x.starters.filter(s=>injuryPenalty(s.p)>0).sort((a,b)=>injuryPenalty(b.p)-injuryPenalty(a.p));
+  const rankLine=x.rank<=3?`${x.team} enters the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score, firmly in the league's opening contender tier.`:x.rank<=6?`${x.team} opens the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score and a roster the model sees as a legitimate playoff-level threat.`:`${x.team} begins the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score, leaving a clear path to climb if the roster beats its current projection.`;
+  let starLine='';if(starNames.length>=3)starLine=`The ceiling starts with ${starNames[0]}, ${starNames[1]} and ${starNames[2]}`;else if(starNames.length===2)starLine=`The ceiling starts with ${starNames[0]} and ${starNames[1]}`;else if(starNames.length===1)starLine=`The offense is built around ${starNames[0]}`;else starLine='This roster is being carried more by balance than by one obvious projected star';
+  if(bestGroup?.v?.length){const names=bestGroup.v.sort((a,b)=>b.pts-a.pts).slice(0,2).map(a=>fullName(a.p));starLine+=`, while ${bestGroup.k} currently grades as the roster's strongest projected position group${names.length?` behind ${names.join(' and ')}`:''}.`; }else starLine+='.';
+  let depthLine='';if(x.depthN>=86){depthLine=benchNames.length?`Depth is a real advantage, with ${benchNames.join(' and ')} among the first options off the bench, giving this team protection against injuries and bye weeks.`:`Depth grades as one of the better units in the EFL and gives this team useful insulation over a full season.`}else if(x.depthN>=74){depthLine=benchNames.length?`The bench is usable rather than dominant, with ${benchNames.join(' and ')} providing the first layer of insurance.`:`The bench is solid enough to survive normal attrition, but it is not the part of the roster driving this ranking.`}else{depthLine=benchNames.length?`The biggest preseason concern is depth: ${benchNames.join(' and ')} headline a bench that the model sees as thin relative to the league.`:`The biggest preseason concern is depth, where one injury or role change could expose the roster quickly.`}
+  if(injured.length){const names=injured.slice(0,2).map(s=>`${fullName(s.p)} (${String(s.p?.injury_status||s.p?.status||'injury concern')})`);depthLine+=` Health is already part of the equation with ${names.join(' and ')} carrying current availability flags.`}
+  let finish='';if(x.schedule>=86)finish='The schedule profile is one of the friendlier in the league, so the model sees room for this roster to outperform its raw talent grade once the season starts.';else if(x.schedule<=70)finish='The schedule is doing this roster no favors, meaning the path upward likely requires its best players to outperform projection rather than simply hold serve.';else if(x.health>=92)finish='With a relatively clean health profile and a neutral schedule, this ranking is mostly a straight bet on the talent already on the roster.';else finish='The schedule lands near the middle of the league, so movement from here should be driven mostly by health, role changes and whether the projected stars actually deliver.';
+  return `<b>Preseason outlook:</b> ${rankLine} ${starLine} ${depthLine} ${finish}`
+}"""
+          if old not in s:
+              raise SystemExit('articleFor block not found; no changes made')
+          p.write_text(s.replace(old,new,1))
+          PY
+      - name: Commit preseason articles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add power-rankings.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Write real 2026 preseason team articles"
+          git push
