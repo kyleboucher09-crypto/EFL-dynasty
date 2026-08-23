@@ -29,3 +29,8 @@
 #spotlight .spot-slide.match-slide .match-team:first-child .match-team-name{left:-2%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
 #spotlight .spot-slide.match-slide .match-team:last-child .match-team-name{left:8%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
 }
+
+/* Give matchup player names enough horizontal room on mobile so long names never clip. */
+@media(max-width:600px){
+#spotlight .spot-slide.match-slide .player-name{left:35%!important;right:-2%!important;font-size:clamp(6.2px,1.55vw,8.4px)!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+}
