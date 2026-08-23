@@ -1,50 +1,55 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Mobile hub hero: show the entire artwork so its top line is never clipped. */
+/* Mobile League Hub hero: preserve the complete 16:9 artwork with no top crop. */
 @media(max-width:600px){
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
     height:auto!important;
-    aspect-ratio:auto!important;
+    aspect-ratio:16/9!important;
     overflow:hidden!important;
     background:#07050a!important;
   }
   .league-hero-card img{
     display:block!important;
     width:100%!important;
-    height:auto!important;
+    height:100%!important;
     max-width:none!important;
     object-fit:contain!important;
     object-position:center top!important;
   }
 
-  /* Remove the tiny dropdown caret from the Dynasty/Redraft selector. */
-  .league-menu-btn::after,
-  .league-menu-btn .caret,
-  .league-menu-btn .chevron,
-  .league-menu-btn [class*="caret"],
-  .league-menu-btn [class*="chevron"]{
-    display:none!important;
-    content:none!important;
+  /* Hide the literal ▾ in the button text without changing the menu behavior. */
+  .league-menu-btn{
+    font-size:0!important;
+  }
+  .league-menu-btn::after{
+    content:"DYNASTY"!important;
+    display:inline!important;
+    font-size:10px!important;
+    font-weight:950!important;
+    letter-spacing:.08em!important;
+    color:#fff!important;
   }
 }
 
-/* Hub tiles: gold feedback for mouse hover, keyboard focus and touch/selection. */
+/* Gold interaction treatment for the six Explore the Hub tiles/icons. */
 .hub-tile{
-  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease,background .18s ease;
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease,background .18s ease!important;
   -webkit-tap-highlight-color:transparent;
 }
 .hub-tile:hover,
+.hub-tile:focus,
 .hub-tile:focus-visible,
 .hub-tile:active{
-  border-color:rgba(255,215,108,.92)!important;
-  background:radial-gradient(circle at 50% 40%,rgba(232,184,74,.15),rgba(232,184,74,.035) 58%,transparent 76%)!important;
-  box-shadow:0 0 0 1px rgba(232,184,74,.18),0 0 24px rgba(232,184,74,.20),inset 0 0 22px rgba(232,184,74,.07)!important;
+  border-color:#ffd76c!important;
+  background:radial-gradient(circle at 50% 38%,rgba(232,184,74,.18),rgba(232,184,74,.05) 58%,rgba(9,7,13,.96) 78%)!important;
+  box-shadow:0 0 0 1px rgba(255,215,108,.28),0 0 26px rgba(232,184,74,.26),inset 0 0 24px rgba(232,184,74,.08)!important;
 }
 .hub-tile:hover img,
+.hub-tile:focus img,
 .hub-tile:focus-visible img,
 .hub-tile:active img{
-  filter:drop-shadow(0 0 10px rgba(255,215,108,.72)) brightness(1.08);
+  filter:drop-shadow(0 0 12px rgba(255,215,108,.9)) brightness(1.12)!important;
 }
