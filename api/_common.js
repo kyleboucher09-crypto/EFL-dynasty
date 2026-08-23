@@ -6,27 +6,37 @@ export function db() {
   return neon(process.env.DATABASE_URL);
 }
 
+let schemaReady = globalThis.__eflSchemaReady || null;
 export async function ensureTable(sql) {
-  await sql`
-    CREATE TABLE IF NOT EXISTS franchise_submissions (
-      id BIGSERIAL PRIMARY KEY,
-      team_name TEXT NOT NULL,
-      owner_name TEXT,
-      motto TEXT,
-      stadium TEXT,
-      primary_color TEXT,
-      secondary_color TEXT,
-      franchise_player TEXT,
-      nemesis TEXT,
-      quote TEXT,
-      story TEXT,
-      logo_data TEXT,
-      status TEXT NOT NULL DEFAULT 'pending',
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      reviewed_at TIMESTAMPTZ,
-      review_note TEXT
-    )
-  `;
+  if (!schemaReady) {
+    schemaReady = (async()=>{
+      await sql`
+        CREATE TABLE IF NOT EXISTS franchise_submissions (
+          id BIGSERIAL PRIMARY KEY,
+          team_name TEXT NOT NULL,
+          owner_name TEXT,
+          motto TEXT,
+          stadium TEXT,
+          primary_color TEXT,
+          secondary_color TEXT,
+          franchise_player TEXT,
+          nemesis TEXT,
+          quote TEXT,
+          story TEXT,
+          logo_data TEXT,
+          logo_url TEXT,
+          status TEXT NOT NULL DEFAULT 'pending',
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+          reviewed_at TIMESTAMPTZ,
+          review_note TEXT
+        )
+      `;
+      await sql`ALTER TABLE franchise_submissions ADD COLUMN IF NOT EXISTS logo_url TEXT`;
+      await sql`CREATE INDEX IF NOT EXISTS idx_franchise_submissions_status_created ON franchise_submissions(status, created_at DESC)`;
+    })().catch(err=>{ schemaReady=null; globalThis.__eflSchemaReady=null; throw err; });
+    globalThis.__eflSchemaReady=schemaReady;
+  }
+  return schemaReady;
 }
 
 export function json(res, status, body) {
