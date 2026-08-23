@@ -18,22 +18,47 @@ button{border:0;border-radius:10px;padding:12px 14px;font-weight:1000;font-size:
 <body>
 <main class="wrap">
 <div class="topbar"><img class="logo" src="Assets/efl-logo.jpeg" alt="EFL"><div class="brand"><b>EFL Dynasty</b><small>COMMISSIONER CONTROL</small></div><a class="home" href="index.html">League Hub</a></div>
-<section class="hero"><div class="eye">Commissioner's Office</div><h1>FRANCHISE <span>APPROVALS</span></h1><p>Private control room for owner franchise submissions. Enter your commissioner key to review, approve, or reject profile updates.</p><div class="badge">SECURE DASHBOARD · v2</div></section>
-<section class="panel login-card" id="loginCard"><div class="eye">Commissioner Access Required</div><h2>Unlock the office</h2><p>Your key is checked by the server. It is never stored in this page or in GitHub.</p><div class="key-row"><input id="key" type="password" placeholder="Enter commissioner key"><button class="gold" id="loginBtn">OPEN DASHBOARD</button></div><div class="msg" id="loginMsg"></div></section>
+<section class="hero"><div class="eye">Commissioner's Office</div><h1>FRANCHISE <span>APPROVALS</span></h1><p>Private control room for owner franchise submissions. Sign in once with your commissioner key to review, approve, or reject profile updates.</p><div class="badge">SECURE SESSION · HTTPONLY · v3</div></section>
+<section class="panel login-card" id="loginCard"><div class="eye">Commissioner Access Required</div><h2>Unlock the office</h2><p>Your key is sent once to the server and exchanged for a secure, HttpOnly session cookie. The browser does not keep the key in page memory after login.</p><div class="key-row"><input id="key" type="password" autocomplete="current-password" placeholder="Enter commissioner key"><button class="gold" id="loginBtn">OPEN DASHBOARD</button></div><div class="msg" id="loginMsg"></div></section>
 <section id="dashboard" class="hidden"><div class="dash-head"><div><div class="eye">Submission Queue</div><h2>Franchise Requests</h2></div><div class="count" id="count">0 SUBMISSIONS</div></div><div id="list"></div><div class="actions" style="justify-content:center;margin-top:16px"><button class="ghost" id="refreshBtn">REFRESH</button><button class="ghost" id="lockBtn">LOCK DASHBOARD</button></div></section>
-<div class="version">EFL Commissioner Dashboard v2.1</div>
+<div class="version">EFL Commissioner Dashboard v3.0</div>
 </main>
 <script>
-const Q=s=>document.querySelector(s);let KEY="";
+const Q=s=>document.querySelector(s);
 function esc(v=""){return String(v).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function showMsg(t){let m=Q("#loginMsg");m.textContent=t;m.className="msg bad"}
-async function api(path,options={}){const headers={...(options.headers||{}),"x-commissioner-key":KEY};return fetch(path,{...options,headers})}
-async function login(){Q("#loginMsg").className="msg";KEY=Q("#key").value.trim();if(!KEY){showMsg("Enter your commissioner key first.");return}Q("#loginBtn").textContent="CHECKING…";try{let r=await api("/api/submissions"),j={};try{j=await r.json()}catch{}if(r.status===401){showMsg("That commissioner key was not accepted.");return}if(!r.ok){showMsg(j.error||("Dashboard error "+r.status));return}Q("#loginCard").classList.add("hidden");Q("#dashboard").classList.remove("hidden");render(j.submissions||[])}catch(e){showMsg("Could not reach the EFL backend.")}finally{Q("#loginBtn").textContent="OPEN DASHBOARD"}}
-function render(items){items=(items||[]).filter(x=>(x.status||"pending").toLowerCase()==="pending");Q("#count").textContent=`${items.length} SUBMISSION${items.length===1?"":"S"}`;if(!items.length){Q("#list").innerHTML='<div class="empty"><div class="eye">Queue Clear</div><div style="margin-top:8px">No franchise submissions awaiting review.</div></div>';return}Q("#list").innerHTML=items.map(x=>`<article class="card"><div class="eye">Submission #${x.id}</div><h3>${esc(x.team_name||"Unknown Franchise")}</h3><div class="meta">${esc(x.owner_name||"")} · ${x.created_at?new Date(x.created_at).toLocaleString():""}</div><div class="status">${esc((x.status||"pending").toUpperCase())}</div>${x.logo_data?`<img class="logo-preview" src="${esc(x.logo_data)}">`:""}<div class="grid"><div class="field"><small>MOTTO</small><b>${esc(x.motto||"—")}</b></div><div class="field"><small>HOME FIELD</small><b>${esc(x.stadium||"—")}</b></div><div class="field"><small>FRANCHISE PLAYER</small><b>${esc(x.franchise_player||"—")}</b></div><div class="field"><small>NEMESIS</small><b>${esc(x.nemesis||"—")}</b></div><div class="field"><small>COLORS</small><b>${esc(x.primary_color||"—")} · ${esc(x.secondary_color||"—")}</b></div><div class="field"><small>QUOTE</small><b>${esc(x.quote||"—")}</b></div></div><div class="story">${esc(x.story||"No franchise story submitted.")}</div><div class="actions"><button class="green" onclick="review(${Number(x.id)},'approved')">✓ APPROVE</button><button class="red" onclick="review(${Number(x.id)},'rejected')">✕ REJECT</button></div></article>`).join("")}
-async function refresh(){Q("#list").innerHTML='<div class="loading">Refreshing…</div>';let r=await api("/api/submissions");if(r.status===401){lock();return}let j=await r.json();render(j.submissions||[])}
-async function review(id,status){let note=prompt("Optional note:")||"";let r=await api("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id,status,note})});if(!r.ok){alert("Could not update submission.");return}refresh()}
-function lock(){KEY="";Q("#key").value="";Q("#dashboard").classList.add("hidden");Q("#loginCard").classList.remove("hidden")}
-Q("#loginBtn").onclick=login;Q("#key").onkeydown=e=>{if(e.key==="Enter")login()};Q("#refreshBtn").onclick=refresh;Q("#lockBtn").onclick=lock;
+function showMsg(t){const m=Q("#loginMsg");m.textContent=t;m.className="msg bad"}
+async function api(path,options={}){return fetch(path,{credentials:"same-origin",...options})}
+function openDashboard(){Q("#loginCard").classList.add("hidden");Q("#dashboard").classList.remove("hidden")}
+function showLogin(){Q("#dashboard").classList.add("hidden");Q("#loginCard").classList.remove("hidden")}
+async function login(){
+  Q("#loginMsg").className="msg";
+  const key=Q("#key").value.trim();
+  if(!key){showMsg("Enter your commissioner key first.");return}
+  Q("#loginBtn").textContent="CHECKING…";
+  try{
+    const r=await api("/api/commissioner-login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({key})});
+    Q("#key").value="";
+    let j={};try{j=await r.json()}catch{}
+    if(r.status===429){showMsg(j.error||"Too many attempts. Try again later.");return}
+    if(r.status===401){showMsg("That commissioner key was not accepted.");return}
+    if(!r.ok){showMsg(j.error||("Dashboard error "+r.status));return}
+    await refresh(true);
+  }catch(e){showMsg("Could not reach the EFL backend.")}finally{Q("#loginBtn").textContent="OPEN DASHBOARD"}
+}
+function render(items){items=(items||[]).filter(x=>(x.status||"pending").toLowerCase()==="pending");Q("#count").textContent=`${items.length} SUBMISSION${items.length===1?"":"S"}`;if(!items.length){Q("#list").innerHTML='<div class="empty"><div class="eye">Queue Clear</div><div style="margin-top:8px">No franchise submissions awaiting review.</div></div>';return}Q("#list").innerHTML=items.map(x=>`<article class="card"><div class="eye">Submission #${x.id}</div><h3>${esc(x.team_name||"Unknown Franchise")}</h3><div class="meta">${esc(x.owner_name||"")} · ${x.created_at?new Date(x.created_at).toLocaleString():""}</div><div class="status">${esc((x.status||"pending").toUpperCase())}</div>${x.logo_data?`<img class="logo-preview" src="${esc(x.logo_data)}" alt="Submitted team logo">`:""}<div class="grid"><div class="field"><small>MOTTO</small><b>${esc(x.motto||"—")}</b></div><div class="field"><small>HOME FIELD</small><b>${esc(x.stadium||"—")}</b></div><div class="field"><small>FRANCHISE PLAYER</small><b>${esc(x.franchise_player||"—")}</b></div><div class="field"><small>NEMESIS</small><b>${esc(x.nemesis||"—")}</b></div><div class="field"><small>COLORS</small><b>${esc(x.primary_color||"—")} · ${esc(x.secondary_color||"—")}</b></div><div class="field"><small>QUOTE</small><b>${esc(x.quote||"—")}</b></div></div><div class="story">${esc(x.story||"No franchise story submitted.")}</div><div class="actions"><button class="green" onclick="review(${Number(x.id)},'approved')">✓ APPROVE</button><button class="red" onclick="review(${Number(x.id)},'rejected')">✕ REJECT</button></div></article>`).join("")}
+async function refresh(openOnSuccess=false){
+  Q("#list").innerHTML='<div class="loading">Refreshing…</div>';
+  const r=await api("/api/submissions");
+  if(r.status===401){showLogin();if(!openOnSuccess)showMsg("Your secure session expired. Sign in again.");return}
+  let j={};try{j=await r.json()}catch{}
+  if(!r.ok){showLogin();showMsg(j.error||"Could not load submissions.");return}
+  if(openOnSuccess)openDashboard();
+  render(j.submissions||[])
+}
+async function review(id,status){const note=prompt("Optional note:")||"";const r=await api("/api/review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id,status,note})});if(r.status===401){showLogin();showMsg("Your secure session expired. Sign in again.");return}if(!r.ok){alert("Could not update submission.");return}refresh()}
+async function lock(){try{await api("/api/commissioner-logout",{method:"POST"})}catch{}Q("#key").value="";showLogin()}
+async function restoreSession(){try{const r=await api("/api/submissions");if(!r.ok)return;const j=await r.json();openDashboard();render(j.submissions||[])}catch{}}
+Q("#loginBtn").onclick=login;Q("#key").onkeydown=e=>{if(e.key==="Enter")login()};Q("#refreshBtn").onclick=()=>refresh();Q("#lockBtn").onclick=lock;restoreSession();
 </script>
 </body>
 </html>
