@@ -1,23 +1,37 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Mobile League Hub hero: fill the full card width while anchoring the artwork to the top. */
+/* Use the new purpose-built EFL Hub banner and always show the complete artwork. */
+.league-hero-card{
+  width:100%!important;
+  max-width:880px!important;
+  height:auto!important;
+  aspect-ratio:auto!important;
+  overflow:hidden!important;
+  background:transparent!important;
+}
+.league-hero-card img{
+  content:url('Public assets/B4A8ED42-5CE1-4632-BE8B-4032500021AA.png')!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+
 @media(max-width:600px){
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
-    aspect-ratio:16/9!important;
     height:auto!important;
-    overflow:hidden!important;
-    background:#07050a!important;
+    aspect-ratio:auto!important;
   }
   .league-hero-card img{
-    display:block!important;
     width:100%!important;
-    height:100%!important;
-    max-width:none!important;
-    object-fit:cover!important;
-    object-position:center top!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:center center!important;
   }
 
   /* Keep selector clean: no small dropdown caret. */
