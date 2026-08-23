@@ -23,3 +23,9 @@
 #spotlight .spot-slide:nth-of-type(2) .rank-place{font-size:19px!important}
 #spotlight .spot-slide:nth-of-type(2) .rank-name{font-size:13px!important}
 }
+
+/* Center featured matchup team names inside their actual header panels on mobile. */
+@media(max-width:600px){
+#spotlight .spot-slide.match-slide .match-team:first-child .match-team-name{left:-2%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
+#spotlight .spot-slide.match-slide .match-team:last-child .match-team-name{left:8%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
+}
