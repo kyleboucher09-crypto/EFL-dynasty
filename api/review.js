@@ -1,7 +1,8 @@
-
-import { db, ensureTable, json, commissionerOK, clean } from './_common.js';
+import { db, ensureTable, json, commissionerOK, clean, noStore, sameOrigin } from './_common.js';
 export default async function handler(req,res){
+  noStore(res);
   if(req.method!=='POST') return json(res,405,{error:'Method not allowed'});
+  if(!sameOrigin(req)) return json(res,403,{error:'Forbidden'});
   if(!commissionerOK(req)) return json(res,401,{error:'Unauthorized'});
   try{
     const sql=db(); await ensureTable(sql);
