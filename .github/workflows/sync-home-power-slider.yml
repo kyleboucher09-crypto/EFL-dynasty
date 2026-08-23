@@ -11,48 +11,33 @@ permissions:
 
 jobs:
   sync:
-    if: github.event.head_commit.message != 'Sync homepage power ranking slider'
+    if: github.event.head_commit.message != 'Fix homepage ranking trend display'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch homepage slider to mirror live rankings page
+      - name: Fix homepage ranking trend display
         run: |
           python - <<'PY'
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
-          old="""q('#rankHeading').textContent=`Power Rankings · Week ${week}`;q('#rankList').innerHTML=rows.slice(0,3).map((x,i)=>`<div class=\"rank-card\"><div class=\"rank-place\">${ord(i)}</div><div><div class=\"rank-name\">${esc(x.team)}</div><div class=\"rank-meta\">${x.w}-${x.l} · ${x.pf.toFixed(1)} PF</div></div></div>`).join('');"""
-          new="""q('#rankHeading').textContent='2026 Power Rankings';
-          (async()=>{try{
-            const frame=document.createElement('iframe');
-            frame.src='power-rankings.html?v='+Date.now();
-            frame.setAttribute('aria-hidden','true');
-            frame.style.cssText='position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:0;';
-            document.body.appendChild(frame);
-            const sync=()=>{try{
-              const d=frame.contentDocument;
-              const cards=[...d.querySelectorAll('#rankList .card')].slice(0,3);
-              if(cards.length<3)return false;
-              q('#rankList').innerHTML=cards.map((c,i)=>{
-                const team=c.querySelector('.team')?.textContent?.trim()||'EFL Team';
-                const power=c.querySelector('.power')?.textContent?.trim()||'—';
-                const movement=c.querySelector('.movement')?.textContent?.trim()||'Baseline';
-                const icon=c.querySelector('.trend-icon img')?.getAttribute('src')||'Assets/trending-hold.svg';
-                return `<div class=\"rank-card\"><div class=\"rank-place\">${ord(i)}</div><div><div class=\"rank-name\">${esc(team)}</div><div class=\"rank-meta\">Power ${esc(power)} · ${esc(movement)}</div></div><img src=\"${esc(icon)}\" alt=\"\" style=\"width:28px;height:28px\"></div>`;
-              }).join('');
-              return true;
-            }catch(e){return false}};
-            frame.addEventListener('load',()=>{let tries=0;const timer=setInterval(()=>{tries++;if(sync()||tries>20){clearInterval(timer);if(tries>20)q('#rankList').innerHTML='<div class=\"rank-meta\">Open Power Rankings for the latest order.</div>';if(frame.isConnected)frame.remove()}},250)});
-          }catch(e){}})();"""
+          old="""      const icon=c.querySelector('.trend-icon img')?.getAttribute('src')||'Assets/trending-hold.svg';
+      return `<div class=\"rank-card\"><div class=\"rank-place\">${ord(i)}</div><div><div class=\"rank-name\">${esc(team)}</div><div class=\"rank-meta\">Power ${esc(power)} · ${esc(movement)}</div></div><img src=\"${esc(icon)}\" alt=\"\" style=\"width:28px;height:28px\"></div>`;"""
+          new="""      const lower=movement.toLowerCase();
+      const up=lower.startsWith('up');
+      const down=lower.startsWith('down');
+      const symbol=up?'↑':down?'↓':'—';
+      const color=up?'#62d7a0':down?'#ff7785':'#ffd979';
+      return `<div class=\"rank-card\"><div class=\"rank-place\">${ord(i)}</div><div><div class=\"rank-name\">${esc(team)}</div><div class=\"rank-meta\">Power ${esc(power)} · ${esc(movement)}</div></div><span aria-label=\"${esc(movement)}\" style=\"width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(232,184,74,.45);background:#120b19;color:${color};font-size:20px;font-weight:1000;line-height:1\">${symbol}</span></div>`;"""
           if old not in s:
-              raise SystemExit('Expected homepage ranking block not found; no changes made.')
+              raise SystemExit('Expected current slider icon block not found; no changes made.')
           p.write_text(s.replace(old,new,1))
           PY
-      - name: Commit homepage sync
+      - name: Commit homepage fix
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m "Sync homepage power ranking slider"
+          git commit -m "Fix homepage ranking trend display"
           git push
