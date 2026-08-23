@@ -63,11 +63,30 @@
     width:100%!important;
     height:100%!important;
   }
+
+  /* Keep arrows accessible but out of the way of slide content. */
   .spot-arrow{
-    width:46px!important;
-    height:46px!important;
-    font-size:25px!important;
+    width:34px!important;
+    height:34px!important;
+    top:50%!important;
+    transform:translateY(-50%)!important;
+    font-size:21px!important;
+    border-color:rgba(210,82,255,.32)!important;
+    background:rgba(7,4,10,.10)!important;
+    color:rgba(210,82,255,.72)!important;
+    backdrop-filter:blur(2px)!important;
+    box-shadow:none!important;
+    opacity:.58!important;
+    transition:opacity .16s ease,background .16s ease,border-color .16s ease!important;
   }
+  .spot-arrow.prev{left:5px!important}
+  .spot-arrow.next{right:5px!important}
+  .spot-arrow:active{
+    opacity:.95!important;
+    background:rgba(7,4,10,.34)!important;
+    border-color:rgba(210,82,255,.72)!important;
+  }
+
   .spot-dots{
     bottom:10px!important;
     gap:10px!important;
@@ -79,8 +98,8 @@
 
   /* Scale the ranking slide content up with the larger stage. */
   .spot-slide:nth-of-type(2) .rank-content{
-    left:58px!important;
-    right:16px!important;
+    left:48px!important;
+    right:48px!important;
     bottom:34px!important;
   }
   .spot-slide:nth-of-type(2) .rank-content h2,
