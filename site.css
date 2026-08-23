@@ -57,3 +57,11 @@ filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(184,
 }
 @media(hover:hover) and (pointer:fine){.hub-tile:hover{transform:translateY(-2px)!important}.hub-tile:hover img{transform:scale(1.04)!important}}
 @media(hover:none),(pointer:coarse){.hub-tile:active{transform:scale(.985)!important}.hub-tile:active img{transform:scale(.985)!important}}
+
+/* Hub naming refresh */
+.hub-grid .hub-tile:nth-child(2) h3,.hub-grid .hub-tile:nth-child(2) p,.hub-grid .hub-tile:nth-child(5) h3,.hub-grid .hub-tile:nth-child(6) h3,.hub-grid .hub-tile:nth-child(6) p{font-size:0!important}
+.hub-grid .hub-tile:nth-child(2) h3::after{content:"The Throne Room";font-size:12px!important}
+.hub-grid .hub-tile:nth-child(2) p::after{content:"EFL Champions";font-size:8px!important}
+.hub-grid .hub-tile:nth-child(5) h3::after{content:"EFL Legacy";font-size:12px!important}
+.hub-grid .hub-tile:nth-child(6) h3::after{content:"The Crown Report";font-size:12px!important}
+.hub-grid .hub-tile:nth-child(6) p::after{content:"News, moves & rivalries";font-size:8px!important}
