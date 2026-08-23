@@ -36,3 +36,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Show full 2026 banner on mobile"
           git push
+
+# rerun after workflow exists on main
