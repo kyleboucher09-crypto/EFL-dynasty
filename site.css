@@ -1,42 +1,49 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Use the new purpose-built EFL Hub banner and always show the complete artwork. */
+/* Purpose-built EFL Hub banner: crop only the unused black canvas around the artwork. */
+.league-hero{
+  margin-top:0!important;
+}
 .league-hero-card{
   width:100%!important;
   max-width:880px!important;
+  aspect-ratio:3.25/1!important;
   height:auto!important;
-  aspect-ratio:auto!important;
-  overflow:visible!important;
+  overflow:hidden!important;
+  padding:0!important;
   background:transparent!important;
-  padding:8px 6px 14px!important;
+  border-radius:18px!important;
 }
 .league-hero-card img{
   content:url('Public assets/B4A8ED42-5CE1-4632-BE8B-4032500021AA.png')!important;
   display:block!important;
   width:100%!important;
-  height:auto!important;
+  height:100%!important;
   max-width:none!important;
-  object-fit:contain!important;
-  object-position:center center!important;
+  object-fit:cover!important;
+  object-position:center 58%!important;
   border-radius:18px!important;
 }
 
 @media(max-width:600px){
+  .home-shell{padding-top:4px!important}
+  .league-hero{margin-top:0!important}
   .league-hero-card{
     width:100%!important;
     max-width:none!important;
+    aspect-ratio:3.25/1!important;
     height:auto!important;
-    aspect-ratio:auto!important;
-    overflow:visible!important;
-    padding:8px 5px 16px!important;
+    overflow:hidden!important;
+    padding:0!important;
+    border-radius:14px!important;
   }
   .league-hero-card img{
     width:100%!important;
-    height:auto!important;
-    object-fit:contain!important;
-    object-position:center center!important;
-    border-radius:16px!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center 58%!important;
+    border-radius:14px!important;
   }
 
   /* Keep selector clean: no small dropdown caret. */
