@@ -1,4 +1,4 @@
-
+import { put } from '@vercel/blob';
 import { db, ensureTable, json, clean } from './_common.js';
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
@@ -26,6 +26,30 @@ function rateLimited(req) {
 function validImageDataUrl(value) {
   if (!value) return true;
   return /^data:image\/(png|jpeg|jpg|webp);base64,[a-z0-9+/=\r\n]+$/i.test(value);
+}
+function decodeImageDataUrl(value){
+  const m=String(value||'').match(/^data:(image\/(?:png|jpeg|jpg|webp));base64,([a-z0-9+/=\r\n]+)$/i);
+  if(!m)return null;
+  const mime=m[1].toLowerCase().replace('image/jpg','image/jpeg');
+  return {mime,buffer:Buffer.from(m[2].replace(/\s/g,''),'base64')};
+}
+function safeSlug(value){
+  return String(value||'team').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,55)||'team';
+}
+async function storeLogo(logoData,teamName){
+  if(!logoData)return {logoUrl:'',logoData:''};
+  if(!process.env.BLOB_READ_WRITE_TOKEN)return {logoUrl:'',logoData};
+  const decoded=decodeImageDataUrl(logoData);
+  if(!decoded)return {logoUrl:'',logoData};
+  const ext=decoded.mime==='image/png'?'png':decoded.mime==='image/webp'?'webp':'jpg';
+  const name=`franchise-logos/${safeSlug(teamName)}-${Date.now()}-${Math.random().toString(36).slice(2,9)}.${ext}`;
+  try{
+    const blob=await put(name,decoded.buffer,{access:'public',contentType:decoded.mime,token:process.env.BLOB_READ_WRITE_TOKEN});
+    return {logoUrl:blob.url,logoData:''};
+  }catch(err){
+    console.error('Blob logo upload failed; using database fallback',err);
+    return {logoUrl:'',logoData};
+  }
 }
 
 async function sendEmail(data, id) {
@@ -91,18 +115,18 @@ export default async function handler(req,res){
       franchisePlayer:clean(b.franchisePlayer,120),
       nemesis:clean(b.nemesis,120),
       quote:clean(b.quote,180),
-      story:clean(b.story,700),
-      logoData:logo
+      story:clean(b.story,700)
     };
     if(!data.teamName) return json(res,400,{error:'Team is required'});
+    const storedLogo=await storeLogo(logo,data.teamName);
     const rows=await sql`
       INSERT INTO franchise_submissions
-      (team_name,owner_name,motto,stadium,primary_color,secondary_color,franchise_player,nemesis,quote,story,logo_data)
-      VALUES(${data.teamName},${data.ownerName},${data.motto},${data.stadium},${data.primaryColor},${data.secondaryColor},${data.franchisePlayer},${data.nemesis},${data.quote},${data.story},${data.logoData})
+      (team_name,owner_name,motto,stadium,primary_color,secondary_color,franchise_player,nemesis,quote,story,logo_data,logo_url)
+      VALUES(${data.teamName},${data.ownerName},${data.motto},${data.stadium},${data.primaryColor},${data.secondaryColor},${data.franchisePlayer},${data.nemesis},${data.quote},${data.story},${storedLogo.logoData},${storedLogo.logoUrl})
       RETURNING id, created_at
     `;
     let email={sent:false};
     try{ email=await sendEmail(data,rows[0].id); }catch(e){ email={sent:false,reason:'email_failed'}; }
-    return json(res,200,{ok:true,id:rows[0].id,emailSent:email.sent});
+    return json(res,200,{ok:true,id:rows[0].id,emailSent:email.sent,logoStorage:storedLogo.logoUrl?'blob':(storedLogo.logoData?'database':'none')});
   }catch(e){ console.error(e); return json(res,500,{error:'Submission failed'}); }
 }
