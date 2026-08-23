@@ -1,4 +1,4 @@
-name: Add real preseason power ranking articles
+name: Compact preseason articles on homepage
 
 on:
   push:
@@ -14,38 +14,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Upgrade preseason team articles
+      - name: Compact homepage newsroom cards
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('power-rankings.html')
+          p=Path('index.html')
           s=p.read_text()
-          old="""function articleFor(x){const stars=[...x.starters].sort((a,b)=>b.pts-a.pts).slice(0,2).map(s=>fullName(s.p));let lead=stars.length>1?`${stars[0]} and ${stars[1]} give this roster its clearest weekly ceiling.`:stars.length?`${stars[0]} is the centerpiece of this projected lineup.`:`This roster's ranking is being driven more by balance than one obvious superstar.`;let outlook='';if(x.lineupN>=88)outlook+=' The starting group grades as one of the league’s most dangerous on projected scoring.';else if(x.lineupN>=78)outlook+=' The starting lineup projects as a solid weekly contender without much room for dead spots.';else outlook+=' The starters need a few players to beat projection for this team to climb.';if(x.depthN>=84)outlook+=' Strong bench depth gives it real protection against injuries and bye weeks.';else if(x.depthN<70)outlook+=' Depth is the pressure point, so one injury could change the weekly outlook quickly.';else if(x.health<80)outlook+=' Current injury exposure keeps the ceiling a little less secure than the raw talent suggests.';else if(x.schedule>=84)outlook+=' A favorable schedule profile provides another reason for optimism.';else if(x.schedule<70)outlook+=' A tougher schedule keeps the model from pushing this roster any higher right now.';return lead+outlook}"""
-          new="""function articleFor(x){
-  const ordered=[...x.starters].sort((a,b)=>b.pts-a.pts),stars=ordered.slice(0,3),starNames=stars.map(s=>fullName(s.p));
-  const groups={};for(const s of x.starters){const k=pos(s.p)||'FLEX';(groups[k]??=[]).push(s)}
-  const groupScores=Object.entries(groups).map(([k,v])=>({k,v,pts:v.reduce((n,a)=>n+a.pts,0)})).sort((a,b)=>b.pts-a.pts),bestGroup=groupScores[0];
-  const bench=[...x.bench].filter(b=>b.pts>0).slice(0,2),benchNames=bench.map(b=>fullName(b.p));
-  const injured=x.starters.filter(s=>injuryPenalty(s.p)>0).sort((a,b)=>injuryPenalty(b.p)-injuryPenalty(a.p));
-  const rankLine=x.rank<=3?`${x.team} enters the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score, firmly in the league's opening contender tier.`:x.rank<=6?`${x.team} opens the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score and a roster the model sees as a legitimate playoff-level threat.`:`${x.team} begins the 2026 preseason at No. ${x.rank} with a ${x.power.toFixed(1)} Power Score, leaving a clear path to climb if the roster beats its current projection.`;
-  let starLine='';if(starNames.length>=3)starLine=`The ceiling starts with ${starNames[0]}, ${starNames[1]} and ${starNames[2]}`;else if(starNames.length===2)starLine=`The ceiling starts with ${starNames[0]} and ${starNames[1]}`;else if(starNames.length===1)starLine=`The offense is built around ${starNames[0]}`;else starLine='This roster is being carried more by balance than by one obvious projected star';
-  if(bestGroup?.v?.length){const names=bestGroup.v.sort((a,b)=>b.pts-a.pts).slice(0,2).map(a=>fullName(a.p));starLine+=`, while ${bestGroup.k} currently grades as the roster's strongest projected position group${names.length?` behind ${names.join(' and ')}`:''}.`; }else starLine+='.';
-  let depthLine='';if(x.depthN>=86){depthLine=benchNames.length?`Depth is a real advantage, with ${benchNames.join(' and ')} among the first options off the bench, giving this team protection against injuries and bye weeks.`:`Depth grades as one of the better units in the EFL and gives this team useful insulation over a full season.`}else if(x.depthN>=74){depthLine=benchNames.length?`The bench is usable rather than dominant, with ${benchNames.join(' and ')} providing the first layer of insurance.`:`The bench is solid enough to survive normal attrition, but it is not the part of the roster driving this ranking.`}else{depthLine=benchNames.length?`The biggest preseason concern is depth: ${benchNames.join(' and ')} headline a bench that the model sees as thin relative to the league.`:`The biggest preseason concern is depth, where one injury or role change could expose the roster quickly.`}
-  if(injured.length){const names=injured.slice(0,2).map(s=>`${fullName(s.p)} (${String(s.p?.injury_status||s.p?.status||'injury concern')})`);depthLine+=` Health is already part of the equation with ${names.join(' and ')} carrying current availability flags.`}
-  let finish='';if(x.schedule>=86)finish='The schedule profile is one of the friendlier in the league, so the model sees room for this roster to outperform its raw talent grade once the season starts.';else if(x.schedule<=70)finish='The schedule is doing this roster no favors, meaning the path upward likely requires its best players to outperform projection rather than simply hold serve.';else if(x.health>=92)finish='With a relatively clean health profile and a neutral schedule, this ranking is mostly a straight bet on the talent already on the roster.';else finish='The schedule lands near the middle of the league, so movement from here should be driven mostly by health, role changes and whether the projected stars actually deliver.';
-  return `<b>Preseason outlook:</b> ${rankLine} ${starLine} ${depthLine} ${finish}`
-}"""
-          if old not in s:
-              raise SystemExit('articleFor block not found; no changes made')
-          p.write_text(s.replace(old,new,1))
+
+          extra_css='''
+.weekly-lead,.weekly-brief{position:relative;overflow:hidden;isolation:isolate}.weekly-lead:before,.weekly-brief:before{content:"";position:absolute;inset:0;background-image:var(--story-image);background-size:cover;background-position:center;z-index:-2;opacity:.6}.weekly-lead:after,.weekly-brief:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,3,8,.05),rgba(5,3,8,.62) 46%,rgba(5,3,8,.98))}.weekly-teaser{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#d3c8d7!important}.weekly-read{display:inline-flex;margin-top:12px;padding:9px 12px;border:1px solid rgba(255,215,108,.4);border-radius:10px;background:rgba(7,4,10,.76);color:#ffe083;font-size:8px;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.weekly-lead{min-height:350px!important}.weekly-brief{min-height:230px!important;display:flex;flex-direction:column;justify-content:flex-end}.weekly-brief .weekly-icon{position:absolute;top:15px;left:15px}.weekly-modal{position:fixed;inset:0;z-index:500;display:none;align-items:flex-end;justify-content:center;padding:14px;background:rgba(2,1,4,.84);backdrop-filter:blur(10px)}.weekly-modal.open{display:flex}.weekly-modal-card{width:min(760px,100%);max-height:88vh;overflow:auto;padding:24px;border-radius:22px;border:1px solid rgba(255,215,108,.25);background:linear-gradient(160deg,#17101f,#08060b 68%);box-shadow:0 30px 80px rgba(0,0,0,.65)}.weekly-modal-art{height:185px;margin:-24px -24px 20px;background-image:linear-gradient(180deg,transparent 25%,#17101f),var(--story-image);background-size:cover;background-position:center;border-radius:22px 22px 0 0}.weekly-modal h3{font-size:clamp(27px,5vw,42px);line-height:1.02;letter-spacing:-.04em;margin:7px 0 15px}.weekly-modal p{font-size:13px;line-height:1.78;color:#cfc4d3}.weekly-modal-close{position:sticky;float:right;top:0;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:#0a0710;color:#fff;font-size:19px;cursor:pointer;z-index:2}@media(max-width:600px){.weekly-lead{min-height:285px!important}.weekly-brief{min-height:205px!important}.weekly-brief h4{font-size:19px!important}.weekly-modal{padding:7px}.weekly-modal-card{max-height:92vh;padding:19px}.weekly-modal-art{height:145px;margin:-19px -19px 18px}.weekly-modal p{font-size:12px}}
+'''
+          if '.weekly-modal{' not in s:
+              s=s.replace('</style></head>',extra_css+'</style></head>',1)
+
+          start=s.find('(async function loadWeeklyReport(){')
+          end=s.find('\n(function(){const slides=',start)
+          if start<0 or end<0:
+              raise SystemExit('weekly loader not found')
+
+          loader='''(async function loadWeeklyReport(){try{const r=await fetch('weekly-report.json?v='+Date.now());if(!r.ok)throw Error(r.status);const d=await r.json();q('#weeklyEdition').textContent=[d.edition,d.published].filter(Boolean).join(' · ');q('#weeklyHeadline').textContent=d.headline||'The EFL Weekly';q('#weeklyDek').textContent=d.dek||'';const lead=d.lead||{},briefs=Array.isArray(d.briefs)?d.briefs:[];const art=(label,leadStory=false)=>{const l=String(label||'').toUpperCase();if(leadStory)return 'Assets/spotlight-champion-premium.jpg';if(l.includes('POWER'))return 'Assets/spotlight-rankings-premium.jpg';if(l.includes('CHAMPIONSHIP'))return 'Assets/spotlight-champion.jpg';if(l.includes('CONTENDER')||l.includes('SLEEPER'))return 'Assets/spotlight-stadium.jpg';if(l.includes('NEXT')||l.includes('WEEK'))return 'Assets/spotlight-matchup-premium.jpg';return 'Assets/spotlight-record-premium.jpg'};const teaser=b=>{const t=String(b||'').trim(),m=t.match(/[^.!?]+[.!?]+/g)||[];return(m.slice(0,2).join(' ').trim()||t).slice(0,250)};q('#weeklyReport').innerHTML=`<article class="weekly-lead" style="--story-image:url('${art(lead.tag,true)}')"><div class="weekly-tag">${esc(lead.tag||'EFL WEEKLY')}</div><h3>${esc(lead.title||'This week around the league')}</h3><p class="weekly-teaser">${esc(teaser(lead.body))}</p><button class="weekly-read" type="button" data-story="lead">Read Full Article →</button></article><div class="weekly-briefs">${briefs.map((x,i)=>`<article class="weekly-brief" style="--story-image:url('${art(x.label)}')"><div class="weekly-icon">${esc(x.icon||'•')}</div><div class="weekly-tag">${esc(x.label||'LEAGUE NOTE')}</div><h4>${esc(x.title||'Around the EFL')}</h4><p class="weekly-teaser">${esc(teaser(x.body))}</p><button class="weekly-read" type="button" data-story="${i}">Read Full Article →</button></article>`).join('')}</div>`;let modal=q('#weeklyModal');if(!modal){modal=document.createElement('div');modal.id='weeklyModal';modal.className='weekly-modal';modal.innerHTML='<article class="weekly-modal-card"><button class="weekly-modal-close" type="button">×</button><div class="weekly-modal-art"></div><div class="weekly-tag" id="modalTag"></div><h3 id="modalTitle"></h3><p id="modalBody"></p></article>';document.body.appendChild(modal);const close=()=>modal.classList.remove('open');modal.querySelector('.weekly-modal-close').onclick=close;modal.addEventListener('click',e=>{if(e.target===modal)close()})}q('#weeklyReport').querySelectorAll('.weekly-read').forEach(btn=>btn.onclick=()=>{const k=btn.dataset.story,x=k==='lead'?lead:briefs[Number(k)],isLead=k==='lead';modal.style.setProperty('--story-image',`url('${art(x.tag||x.label,isLead)}')`);q('#modalTag').textContent=x.tag||x.label||'EFL NEWSROOM';q('#modalTitle').textContent=x.title||'EFL Story';q('#modalBody').textContent=x.body||'';modal.classList.add('open')})}catch(e){q('#weeklyReport').innerHTML='<div class="weekly-loading">The EFL newsroom is preparing the latest report.</div>'}})();'''
+          s=s[:start]+loader+s[end:]
+          p.write_text(s)
           PY
-      - name: Commit preseason articles
+      - name: Commit homepage newsroom redesign
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add power-rankings.html
+          git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m "Write real 2026 preseason team articles"
+          git commit -m "Make homepage articles compact and visual"
           git push
-
-# retrigger publish
