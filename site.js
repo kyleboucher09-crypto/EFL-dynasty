@@ -58,14 +58,14 @@ installLegacyEconomyPatch();
 
 function setupRankArtwork(){
  const art={
-  P:{name:'Prospect',src:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'},
-  R:{name:'Rookie',src:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
-  V:{name:'Veteran',src:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
-  C1:{name:'Captain ★',src:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
-  C2:{name:'Captain ★★',src:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
-  C3:{name:'Captain ★★★',src:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
-  C4:{name:'Captain ★★★★',src:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
-  HOF:{name:'Hall of Famer',src:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'}
+  P:{name:'Prospect',src:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'},
+  R:{name:'Rookie',src:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
+  V:{name:'Veteran',src:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
+  C1:{name:'Captain ★',src:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
+  C2:{name:'Captain ★★',src:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
+  C3:{name:'Captain ★★★',src:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
+  C4:{name:'Captain ★★★★',src:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
+  HOF:{name:'Hall of Famer',src:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'}
  };
  const style=document.createElement('style');
  style.textContent=`
