@@ -13,6 +13,7 @@ const LEGACY_RANK_LEVELS=[
  {level:7,name:'Captain ★★★★',lp:4700,icon:'C4'},
  {level:8,name:'Hall of Famer',lp:6000,icon:'HOF'}
 ];
+
 const LEGACY_BADGE_ALIASES={efl_champion:'champion',first_round_bye:'first_class_ticket',podium:'on_the_podium',consolation:'consolation_king',bye_to_final:'business_trip',thousand:'four_digits',high_week:'weekly_hammer',defending_champ:'title_defense',iron_man:'iron_franchise',decade:'efl_lifetime'};
 const SEASONAL_REPEAT_BADGES=new Set(['champion','regular_season_king','points_king','untouchable','two_hundred_club','absolute_destruction','photo_finish','hot_streak','perfect_month','comeback_kid','giant_killer','wire_wizard','playoff_assassin','first_class_ticket','on_the_podium','four_digits','weekly_hammer','bracket_breaker','consolation_king','business_trip','title_defense','three_week_terror','double_crown','triple_crown_season','survivor','bench_boss','consistency_king','precision_drafter','rivalry_king','roster_builder','sleeper_hit','streak_breaker','sunday_miracle','the_spoiler','trade_heist','trade_master','upset_of_year','waiver_steal','monday_night_hero','iron_curtain']);
 window.EFL_LEGACY_POLICY={hallOfFameTargetYears:[8,12],rankScope:'franchise-per-league',multiLeagueMode:'separate-franchise-ledgers',leagueIds:[EFL_ID],note:'One owner may have multiple league franchises, but each franchise keeps its own LP and rank so joining more leagues does not accelerate a single Hall of Fame track.'};
@@ -28,7 +29,7 @@ function installLegacyEconomyPatch(){
   const originalAward=window.award;
   const patched=function(a,id,count=1,meta=''){
    id=LEGACY_BADGE_ALIASES[id]||id;
-   let b=(typeof RULES!=='undefined'&&RULES.badges||[]).find(x=>x.id===id);
+   const b=(typeof RULES!=='undefined'&&RULES.badges||[]).find(x=>x.id===id);
    if(!b||count<=0)return;
    const year=Number(a?.modern?.[a.modern.length-1]?.year)||0;
    if(SEASONAL_REPEAT_BADGES.has(id)&&year>=2026){
@@ -56,28 +57,20 @@ function installLegacyEconomyPatch(){
 installLegacyEconomyPatch();
 
 function setupRankArtwork(){
- const ranks={
-  P:{label:'P',name:'Prospect',stars:0,tone:'prospect'},
-  R:{label:'R',name:'Rookie',stars:0,tone:'rookie'},
-  V:{label:'V',name:'Veteran',stars:0,tone:'veteran'},
-  C1:{label:'C',name:'Captain',stars:1,tone:'captain'},
-  C2:{label:'C',name:'Captain',stars:2,tone:'captain'},
-  C3:{label:'C',name:'Captain',stars:3,tone:'captain'},
-  C4:{label:'C',name:'Captain',stars:4,tone:'captain'},
-  HOF:{label:'HOF',name:'Hall of Famer',stars:0,tone:'hof'}
+ const art={
+  P:{name:'Prospect',src:'Assets/D2751C69-F5D3-411C-A50F-ADACC6ED2787.png'},
+  R:{name:'Rookie',src:'Assets/755F37EB-B462-45E6-B5A6-785DC3183CDF.png'},
+  V:{name:'Veteran',src:'Assets/740153F8-9D5F-4F33-A168-B03FE9F31012.png'},
+  C1:{name:'Captain ★',src:'Assets/207A9B99-619F-4EBB-8695-4EF75B366000.png'},
+  C2:{name:'Captain ★★',src:'Assets/E133E406-603D-4E67-8274-A6DABAD4B339.png'},
+  C3:{name:'Captain ★★★',src:'Assets/A428E06C-472D-47AF-A71F-2CF47F2438F0.png'},
+  C4:{name:'Captain ★★★★',src:'Assets/85ACDAEA-7E66-4C66-B156-12DF58298C5E.png'},
+  HOF:{name:'Hall of Famer',src:'Assets/F7231A5B-872E-4746-B2C4-511832582CB6.png'}
  };
  const style=document.createElement('style');
  style.textContent=`
  .rank-mark,.rank-icon{overflow:visible!important;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
- .efl-rank-patch{--edge:#b8bcc7;--thread:#f2f2f2;position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;box-sizing:border-box;color:var(--thread);font-family:Impact,Haettenschweiler,'Arial Narrow Bold',system-ui,sans-serif;font-weight:900;letter-spacing:.02em;text-shadow:0 2px 0 #000,0 0 8px rgba(255,255,255,.12);filter:drop-shadow(0 6px 8px rgba(0,0,0,.55))}
- .efl-rank-patch:before{content:'';position:absolute;inset:7%;clip-path:polygon(50% 0,93% 18%,93% 68%,50% 100%,7% 68%,7% 18%);background:linear-gradient(145deg,var(--edge),#292b32 27%,#08090c 48%,#1b1d22 72%,var(--edge));box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)}
- .efl-rank-patch:after{content:'';position:absolute;inset:12%;clip-path:polygon(50% 0,93% 18%,93% 68%,50% 100%,7% 68%,7% 18%);background:radial-gradient(circle at 50% 28%,rgba(255,255,255,.08),transparent 34%),repeating-linear-gradient(45deg,rgba(255,255,255,.025) 0 1px,transparent 1px 4px),#111218;border:1px solid rgba(255,255,255,.09)}
- .efl-rank-patch .rank-letter{position:relative;z-index:2;font-size:44%;line-height:1;transform:translateY(-4%)}
- .efl-rank-patch .rank-stars{position:absolute;z-index:3;left:20%;right:20%;bottom:19%;display:flex;align-items:center;justify-content:center;gap:2%;font-family:Arial,sans-serif;font-size:14%;line-height:1;color:#f0c85c;text-shadow:0 1px 2px #000}
- .efl-rank-patch.prospect{--edge:#a9adb7;--thread:#e5e7eb}.efl-rank-patch.rookie{--edge:#c47b3f;--thread:#e5a05e}.efl-rank-patch.veteran{--edge:#708aa0;--thread:#d8e4ec}.efl-rank-patch.captain{--edge:#d7a727;--thread:#f3cf64}.efl-rank-patch.hof{--edge:#e3bd45;--thread:#ffdf73}
- .efl-rank-patch.hof:before{background:linear-gradient(145deg,#f3d467,#7b5516 25%,#0b0a08 52%,#704c13 78%,#f3d467)}
- .efl-rank-patch.hof .rank-letter{font-size:27%;letter-spacing:.04em}
- .efl-rank-patch.hof .rank-stars:before{content:'✦';font-size:115%}
+ .rank-mark img,.rank-icon img{width:100%;height:100%;display:block;object-fit:contain;filter:drop-shadow(0 5px 8px rgba(0,0,0,.48))}
  body:has(#grid) .rankline{grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center}
  body:has(#grid) .rank-icon{width:92px!important;height:92px!important}
  body:has(#grid) .rank-name{font-size:22px}
@@ -93,10 +86,11 @@ function setupRankArtwork(){
  @media(max-width:560px){body:has(#grid) .legacy{padding:17px 16px 16px}body:has(#grid) .rankline{grid-template-columns:92px minmax(0,1fr);gap:14px;align-items:center;min-height:102px}body:has(#grid) .rank-icon{width:92px!important;height:92px!important}body:has(#grid) .rank-name{font-size:22px;line-height:1.05;margin-top:3px}body:has(#grid) .rank-sub{font-size:8px;line-height:1.35}body:has(#grid) .lp{grid-column:2!important;text-align:left!important;font-size:12px;margin-top:-14px}body:has(#grid) .bar{margin-top:10px}body:has(#grid) .badge-row{gap:8px;min-height:58px;justify-content:flex-start}body:has(#grid) .badge{width:58px;height:58px;flex:0 0 58px}body:has(#grid) .legacy-title{grid-template-columns:100px minmax(0,1fr)}body:has(#grid) .legacy-title .rank-icon{width:100px!important;height:100px!important}}
  `;
  document.head.appendChild(style);
- const patchMarkup=item=>`<span class="efl-rank-patch ${item.tone}" role="img" aria-label="${item.name} rank"><span class="rank-letter">${item.label}</span><span class="rank-stars">${item.stars?'★'.repeat(item.stars):''}</span></span>`;
- const replace=el=>{if(!el||el.dataset.rankArtApplied)return;const key=el.textContent.trim(),item=ranks[key];if(!item)return;el.innerHTML=patchMarkup(item);el.dataset.rankArtApplied='1'};
+ const replace=el=>{if(!el||el.dataset.rankArtApplied)return;const key=el.textContent.trim(),item=art[key];if(!item)return;el.innerHTML=`<img src="${item.src}" alt="${item.name} rank patch">`;el.dataset.rankArtApplied='1'};
  const apply=root=>{if(root.matches?.('.rank-mark,.rank-icon'))replace(root);(root.querySelectorAll?root.querySelectorAll('.rank-mark,.rank-icon'):[]).forEach(replace)};
- apply(document);const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)apply(n)})));observer.observe(document.body,{childList:true,subtree:true});
+ apply(document);
+ const observer=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)apply(n)})));
+ observer.observe(document.body,{childList:true,subtree:true});
 }
 
 function setupHubTouchTrail(){
@@ -126,4 +120,4 @@ function enforcePreseasonHeritageBaseline(){
 
 function setupShell(){const page=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute('href')===page)a.classList.add('active')});const btn=$('#menuBtn'),menu=$('#mobileMenu');if(btn&&menu){btn.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'✕':'☰'});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove('open');btn.textContent='☰';btn.setAttribute('aria-expanded','false')}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener('DOMContentLoaded',setupShell);
-// Legacy ranks now use jersey-style P/R/V/C captain patches with 1-4 stars and Hall of Famer at 6000 LP.
+// Legacy rank artwork now uses the official uploaded Prospect, Rookie, Veteran, Captain 1-4 star, and Hall of Famer patches.
