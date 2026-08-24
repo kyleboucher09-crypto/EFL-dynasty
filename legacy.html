@@ -34,11 +34,20 @@
 </main>
 <script src="site.js"></script>
 <script>
-const rankArt={"Prospect":"Assets/3ED57F2C-69A2-427F-9DB1-F020652E5A7D.png","Rookie":"Assets/3ACFFE79-7314-48A1-9BAD-88D72446C0BC.png","Veteran":"Assets/41A69F96-74FB-4A4C-AA47-3A2FD1FBDAB7.png","Captain":"Assets/97A9681C-3CD5-473A-855B-EF5BE9AC7191.png","All Star":"Assets/5079A91E-C035-406C-A35D-779D46B90FFD.png","MVP":"Assets/19C23122-FD7A-4EBC-9C62-966332FAADD2.png","Elite":"Assets/DE1A5EAB-965D-49BE-BA89-1C783D503FED.png","Legend":"Assets/93135308-577B-4524-9CE7-2D65DAD1648C.png","Hall of Famer":"Assets/E8EA15EF-8A41-4267-BB97-307CF803EC52.png"};
+const rankLevels=[
+ {name:'Prospect',lp:0,art:'Assets/D2751C69-F5D3-411C-A50F-ADACC6ED2787.png'},
+ {name:'Rookie',lp:1,art:'Assets/755F37EB-B462-45E6-B5A6-785DC3183CDF.png'},
+ {name:'Veteran',lp:500,art:'Assets/740153F8-9D5F-4F33-A168-B03FE9F31012.png'},
+ {name:'Captain ★',lp:1200,art:'Assets/207A9B99-619F-4EBB-8695-4EF75B366000.png'},
+ {name:'Captain ★★',lp:2200,art:'Assets/E133E406-603D-4E67-8274-A6DABAD4B339.png'},
+ {name:'Captain ★★★',lp:3400,art:'Assets/A428E06C-472D-47AF-A71F-2CF47F2438F0.png'},
+ {name:'Captain ★★★★',lp:4700,art:'Assets/85ACDAEA-7E66-4C66-B156-12DF58298C5E.png'},
+ {name:'Hall of Famer',lp:6000,art:'Assets/F7231A5B-872E-4746-B2C4-511832582CB6.png'}
+];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let DATA;
 function badgeCard(b){if(b.secret){return `<article class="badge secret" tabindex="0"><span class="lp">+${b.lp} LP</span><div class="badge-art"><div class="secret-mark">?</div></div><h3>???</h3><p>${esc(b.requirement)}</p><span class="rarity">SECRET</span></article>`}return `<article class="badge" tabindex="0" title="${esc(b.name+': '+b.requirement)}"><span class="lp">+${b.lp} LP</span><div class="badge-art"><img src="${esc(b.image)}" alt="${esc(b.name)} badge" loading="lazy"></div><h3>${esc(b.name)}</h3><p>${esc(b.requirement)}</p><span class="rarity">${esc(b.rarity)}</span></article>`}
 function renderBadges(f='All'){const list=DATA.badges.filter(b=>f==='All'||b.rarity===f);document.querySelector('#badges').innerHTML=list.map(badgeCard).join('')}
-fetch('legacy-system.json?v=8',{cache:'no-store'}).then(r=>r.json()).then(d=>{DATA=d;document.querySelector('#ranks').innerHTML=d.levels.map((r,i)=>`<article class="rank-card"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><div class="rank-mark"><img src="${rankArt[r.name]}" alt="${esc(r.name)} rank badge"></div><h3>${esc(r.name)}</h3><span class="rank-lp">${r.lp.toLocaleString()} LP</span></article>`).join('');document.querySelector('#rewards').innerHTML=d.rewards.map((r,i)=>`<article class="reward"><span class="reward-tier">${i===2?'Top Reward':i===1?'Premium Reward':'Reward'}</span><div class="reward-icon">${esc(r.icon||'🎁')}</div><strong>${r.credits} EC</strong><b>${esc(r.name)}</b><p>${esc(r.note)}</p></article>`).join('');renderBadges()});
+fetch('legacy-system.json?v=9',{cache:'no-store'}).then(r=>r.json()).then(d=>{DATA=d;document.querySelector('#ranks').innerHTML=rankLevels.map((r,i)=>`<article class="rank-card"><span class="rank-num">${String(i+1).padStart(2,'0')}</span><div class="rank-mark"><img src="${r.art}" alt="${esc(r.name)} rank patch"></div><h3>${esc(r.name)}</h3><span class="rank-lp">${r.lp.toLocaleString()} LP</span></article>`).join('');document.querySelector('#rewards').innerHTML=d.rewards.map((r,i)=>`<article class="reward"><span class="reward-tier">${i===2?'Top Reward':i===1?'Premium Reward':'Reward'}</span><div class="reward-icon">${esc(r.icon||'🎁')}</div><strong>${r.credits} EC</strong><b>${esc(r.name)}</b><p>${esc(r.note)}</p></article>`).join('');renderBadges()});
 document.querySelector('#filters').onclick=e=>{if(!e.target.dataset.f)return;document.querySelectorAll('#filters button').forEach(b=>b.classList.remove('on'));e.target.classList.add('on');renderBadges(e.target.dataset.f)};
 </script>
 </body></html>
