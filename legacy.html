@@ -16,8 +16,13 @@
 .legacy-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.badge{position:relative;min-height:252px;padding:12px 12px 14px;border-radius:18px;background:linear-gradient(145deg,#17101f,#0c0910);border:1px solid #ffffff12;text-align:center;overflow:hidden}.badge:hover{border-color:#ffd97940;transform:translateY(-1px)}.badge-art{height:142px;display:grid;place-items:center;margin:2px auto 3px}.badge-art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 18px #000b)}.badge h3{margin:5px 0 5px;font-size:12px}.badge p{margin:0;color:var(--muted);font-size:8px;line-height:1.45}.rarity{display:inline-block;margin-top:8px;font-size:7px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}.lp{position:absolute;right:9px;top:9px;padding:5px 7px;border-radius:999px;background:#09070dcc;border:1px solid #ffd9792a;color:var(--gold);font-size:7px;font-weight:950;z-index:3}
 .badge.secret{background:radial-gradient(circle at 50% 20%,rgba(144,54,212,.18),transparent 38%),linear-gradient(145deg,#0c0910,#050407);border-color:#7d22c944}.badge.secret .badge-art{height:142px}.secret-mark{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;position:relative;color:#d9c5e8;font-size:46px;font-weight:1000;background:radial-gradient(circle at 35% 25%,#ffffff14,#0d0812 70%);border:1px solid #7d22c966;box-shadow:0 0 0 8px #7d22c90d,0 0 34px #7d22c933}.secret-mark:before{content:"";position:absolute;inset:-13px;border-radius:50%;border:1px dashed #b76cff33;animation:spin 18s linear infinite}.secret-mark:after{content:"LOCKED";position:absolute;bottom:-27px;font-size:6px;letter-spacing:.28em;color:#7f6e8b}.badge.secret h3{letter-spacing:.25em;color:#cbb6db}.badge.secret p{color:#75687f}.badge.secret .rarity{color:#b76cff}.badge.secret .lp{color:#c48cff;border-color:#7d22c955}.mystery-note{margin:8px 0 14px;padding:10px 12px;border:1px solid #7d22c933;border-radius:12px;background:#7d22c90d;color:#9d8ca8;font-size:8px;line-height:1.4}.mystery-note b{color:#c48cff}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:900px){.legacy-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:650px){.legacy-hero{padding:28px 24px}.legacy-hero h1{font-size:48px}.legacy-hero>p{font-size:12px}.quick-rules{grid-template-columns:1fr}.rewards{grid-template-columns:1fr}.legacy-grid{grid-template-columns:repeat(2,1fr);gap:8px}.badge{min-height:226px;padding:10px}.badge-art{height:118px}.badge.secret .badge-art{height:118px}.rank-card{flex-basis:124px}.section-head{margin-top:20px}}
-@media(max-width:430px){.legacy-hero h1{font-size:43px}.badge h3{font-size:10px}.badge p{font-size:7px}.secret-mark{width:86px;height:86px;font-size:38px}}
+@media(max-width:650px){
+.legacy-hero{padding:28px 24px}.legacy-hero h1{font-size:48px}.legacy-hero>p{font-size:12px}
+.quick-rules{grid-template-columns:1fr}
+/* Mobile reward bank: one compact swipe row instead of three tall stacked cards. */
+.rewards{display:flex;grid-template-columns:none;gap:10px;overflow-x:auto;overflow-y:hidden;margin:10px -4px 0;padding:2px 4px 8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}.rewards::-webkit-scrollbar{display:none}.reward{flex:0 0 72%;min-height:118px;padding:14px 14px 13px;scroll-snap-align:start;border-radius:15px}.reward-icon{font-size:18px;margin-bottom:4px}.reward strong{font-size:21px;line-height:1}.reward b{font-size:10px;line-height:1.25;margin-top:6px;max-width:88%}.reward-tier{right:10px;top:9px;font-size:5.5px}.spend-rule{margin-top:3px}
+.legacy-grid{grid-template-columns:repeat(2,1fr);gap:8px}.badge{min-height:226px;padding:10px}.badge-art{height:118px}.badge.secret .badge-art{height:118px}.rank-card{flex-basis:124px}.section-head{margin-top:20px}}
+@media(max-width:430px){.legacy-hero h1{font-size:43px}.badge h3{font-size:10px}.badge p{font-size:7px}.secret-mark{width:86px;height:86px;font-size:38px}.reward{flex-basis:78%}}
 </style>
 </head>
 <body>
@@ -38,7 +43,7 @@
 
 <div class="section-head compact"><div class="eyebrow">Reward Bank</div><h2>Use Your EFL Credits</h2></div>
 <section class="rewards" id="rewards"></section>
-<div class="spend-rule">One Legacy reward may be redeemed per league year.</div>
+<div class="spend-rule">Swipe rewards · One Legacy reward may be redeemed per league year.</div>
 
 <div class="section-head compact"><div class="eyebrow">Collection</div><h2>Badge Vault</h2></div>
 <div class="filterbar" id="filters"><button class="on" data-f="All">All</button><button data-f="Heritage">Heritage</button><button data-f="Championship">Championship</button><button data-f="Dynasty">Dynasty</button><button data-f="Elite">Elite</button><button data-f="Legendary">Legendary</button><button data-f="Achievement">Achievements</button><button data-f="Legacy">Legacy</button><button data-f="Live">Live</button><button data-f="Secret">Secret</button></div>
