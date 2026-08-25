@@ -1,0 +1,200 @@
+name: Weekly EFL Power Rankings
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/weekly-power-rankings.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests
+      - name: Build current EFL rankings
+        run: |
+          python - <<'PY'
+          import json, math, re, requests
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          LEAGUE='1313240395462742016'
+          BASE='https://api.sleeper.app/v1'
+          S=requests.Session(); S.headers['User-Agent']='EFL-Dynasty-Rankings/1.0'
+          def get(url):
+              r=S.get(url,timeout=45); r.raise_for_status(); return r.json()
+          league=get(f'{BASE}/league/{LEAGUE}')
+          rosters=get(f'{BASE}/league/{LEAGUE}/rosters')
+          users=get(f'{BASE}/league/{LEAGUE}/users')
+          players=get(f'{BASE}/players/nfl')
+          state=get(f'{BASE}/state/nfl')
+          current_week=max(1,int(state.get('week') or 1))
+          week=1 if str(state.get('season_type','')).lower()!='regular' else current_week
+          matchups=get(f'{BASE}/league/{LEAGUE}/matchups/{week}')
+          positions=['QB','RB','WR','TE','K','DEF']
+          q='&'.join('position[]='+x for x in positions)
+          season_proj=get(f'https://api.sleeper.com/projections/nfl/2026?season_type=regular&{q}&order_by=pts_ppr')
+          weekly_proj=get(f'https://api.sleeper.com/projections/nfl/2026/{week}?season_type=regular&{q}&order_by=pts_ppr')
+          def projmap(rows): return {str(x.get('player_id') or (x.get('player') or {}).get('player_id')):x for x in rows if x.get('player_id') or (x.get('player') or {}).get('player_id')}
+          sp,wp=projmap(season_proj),projmap(weekly_proj)
+          um={u['user_id']:u for u in users}
+          scoring=league.get('scoring_settings') or {}
+          slots=league.get('roster_positions') or []
+          def pos(p): return p.get('position') or ((p.get('fantasy_positions') or [''])[0])
+          def eligible(slot,p):
+              q=pos(p)
+              return slot==q or (slot=='FLEX' and q in ['RB','WR','TE']) or (slot=='SUPER_FLEX' and q in ['QB','RB','WR','TE']) or (slot=='REC_FLEX' and q in ['WR','TE']) or (slot=='WRRB_FLEX' and q in ['WR','RB'])
+          def calc(row):
+              if not row:return 0.0
+              st=row.get('stats') or row
+              n=0.0
+              for k,v in scoring.items():
+                  try:n+=float(st.get(k,0) or 0)*float(v or 0)
+                  except:pass
+              if n>0:return n
+              for k in ('pts_ppr','pts_half_ppr','pts_std'):
+                  try:
+                      if row.get(k) is not None:return float(row[k])
+                  except:pass
+              return 0.0
+          def lineup(roster,pm):
+              pool=[{'id':str(pid),'p':players.get(str(pid),{}),'pts':calc(pm.get(str(pid)))} for pid in (roster.get('players') or [])]
+              starters=[]
+              for slot in [s for s in slots if s not in ('BN','IR','TAXI')]:
+                  choices=sorted([x for x in pool if eligible(slot,x['p'])],key=lambda x:x['pts'],reverse=True)
+                  if choices:
+                      pick=choices[0]; pick=dict(pick,slot=slot); starters.append(pick); pool=[x for x in pool if x['id']!=pick['id']]
+              return starters,sorted(pool,key=lambda x:x['pts'],reverse=True)
+          def inj(p):
+              s=str(p.get('injury_status') or p.get('status') or '').upper()
+              if any(x in s for x in ('IR','OUT','PUP','NFI')): return 24
+              if 'DOUBTFUL' in s:return 14
+              if 'QUESTIONABLE' in s:return 6
+              return 0
+          def norm(vals,v,lo=62,hi=100):
+              a,b=min(vals),max(vals)
+              return 80 if b==a else lo+(hi-lo)*(v-a)/(b-a)
+          def team_name(u,r): return (u.get('metadata') or {}).get('team_name') or u.get('display_name') or f"Roster {r['roster_id']}"
+          def owner_name(u): return u.get('display_name') or u.get('username') or 'EFL Owner'
+          def fname(p): return p.get('full_name') or 'Top starter'
+
+          # Previous-season form by owner.
+          prev_form={}
+          prev_id=league.get('previous_league_id')
+          if prev_id:
+              try:
+                  for r in get(f'{BASE}/league/{prev_id}/rosters'):
+                      st=r.get('settings') or {}; gp=(st.get('wins',0)+st.get('losses',0)+st.get('ties',0)) or 1
+                      pf=float(st.get('fpts',0) or 0)+float(st.get('fpts_decimal',0) or 0)/100
+                      prev_form[r.get('owner_id')]={'ppg':pf/gp,'winpct':(st.get('wins',0)+.5*st.get('ties',0))/gp}
+              except Exception as e: print('previous league form unavailable',e)
+
+          raw=[]
+          for r in rosters:
+              u=um.get(r.get('owner_id'),{})
+              ss,sb=lineup(r,sp); ws,wb=lineup(r,wp)
+              season_start=sum(x['pts'] for x in ss); week_start=sum(x['pts'] for x in ws)
+              use=max(4,min(8,math.floor(len(ss)*.55)))
+              depth=sum(x['pts'] for x in sb[:use])
+              health=max(45,100-sum(inj(x['p']) for x in ws)/max(1,len(ws))*2.2)
+              form=prev_form.get(r.get('owner_id'),{})
+              raw.append({'r':r,'team':team_name(u,r),'owner':owner_name(u),'ss':ss,'ws':ws,'bench':sb,'seasonStart':season_start,'weekStart':week_start,'depth':depth,'health':health,'ppg':form.get('ppg',0),'winpct':form.get('winpct',.5)})
+
+          # Build previous published baseline using the page's original model when no saved snapshot exists.
+          prev_path=Path('power-rankings-prev.json')
+          if prev_path.exists():
+              prev_rank={x['team']:int(x['rank']) for x in json.loads(prev_path.read_text()).get('rankings',[])}
+          else:
+              TEAM_SOS={'CLE':95,'DET':93,'NO':92,'PHI':91,'TEN':90,'HOU':89,'WAS':88,'BAL':87,'IND':86,'MIA':85,'DAL':84,'MIN':83,'NE':82,'ATL':81,'JAX':80,'SEA':79,'BUF':78,'PIT':77,'GB':76,'TB':75,'KC':74,'LAR':73,'SF':72,'NYJ':71,'NYG':70,'CIN':69,'DEN':68,'LAC':67,'ARI':66,'CHI':65,'CAR':64,'LV':62}
+              sv=[x['seasonStart'] for x in raw]; dv=[x['depth'] for x in raw]
+              old=[]
+              for x in raw:
+                  ln=norm(sv,x['seasonStart']); dn=norm(dv,x['depth'])
+                  sched=sum(TEAM_SOS.get(z['p'].get('team'),75) for z in x['ss'])/max(1,len(x['ss']))
+                  old.append((.50*ln+.20*dn+.15*x['health']+.15*sched,x['team']))
+              old.sort(reverse=True); prev_rank={t:i+1 for i,(_,t) in enumerate(old)}
+
+          # Upcoming fantasy opponent from Sleeper matchup IDs.
+          by_roster={x['r']['roster_id']:x for x in raw}; groups={}
+          for m in matchups: groups.setdefault(m.get('matchup_id'),[]).append(m)
+          opp={}
+          for g in groups.values():
+              if len(g)==2:
+                  a,b=g; opp[a['roster_id']]=b['roster_id']; opp[b['roster_id']]=a['roster_id']
+
+          sv=[x['seasonStart'] for x in raw]; wv=[x['weekStart'] for x in raw]; dv=[x['depth'] for x in raw]
+          ppgv=[x['ppg'] for x in raw if x['ppg']>0] or [1,1]
+          for x in raw:
+              x['seasonN']=norm(sv,x['seasonStart']); x['weekN']=norm(wv,x['weekStart']); x['depthN']=norm(dv,x['depth'])
+              x['lineupN']=.68*x['seasonN']+.32*x['weekN']
+              x['recent']=norm(ppgv,x['ppg']) if x['ppg']>0 else 76
+              x['recent']=.70*x['recent']+.30*(62+38*x['winpct'])
+              x['base']=.45*x['lineupN']+.20*x['depthN']+.15*x['health']+.10*x['recent']
+          bases=[x['base'] for x in raw]
+          for x in raw:
+              oid=opp.get(x['r']['roster_id']); o=by_roster.get(oid)
+              opp_strength=norm(bases,o['base']) if o else 80
+              x['oppTeam']=o['team'] if o else 'Week 1 opponent TBD'; x['oppScore']=100-(opp_strength-62)
+              x['power']=.90*x['base']+.10*x['oppScore']
+          raw.sort(key=lambda x:x['power'],reverse=True)
+
+          def grade(n):
+              return 'A+' if n>=94 else 'A' if n>=90 else 'A-' if n>=86 else 'B+' if n>=82 else 'B' if n>=78 else 'B-' if n>=74 else 'C+' if n>=70 else 'C' if n>=66 else 'C-' if n>=62 else 'D'
+          out=[]
+          for i,x in enumerate(raw,1):
+              prev=prev_rank.get(x['team'],i); delta=prev-i
+              trend='up' if delta>0 else 'down' if delta<0 else 'hold'
+              icon={'up':'Assets/trending-up.svg','down':'Assets/trending-down.svg','hold':'Assets/trending-hold.svg'}[trend]
+              label=f"Up {delta}" if delta>0 else f"Down {abs(delta)}" if delta<0 else 'No change'
+              stars=sorted(x['ws'],key=lambda z:z['pts'],reverse=True)[:3]; names=[fname(z['p']) for z in stars]
+              injured=[z for z in x['ws'] if inj(z['p'])>0]
+              s1=(f"{x['team']} sits at No. {i} behind a projected core led by " + (', '.join(names[:2]) + (f" and {names[2]}" if len(names)>2 else '') if names else 'a balanced starting group') + f", with the starting lineup grading {grade(x['lineupN'])} for Week {week} and full-season projection.")
+              depthtxt='one of the league’s deeper benches' if x['depthN']>=86 else 'solid usable depth' if x['depthN']>=76 else 'a thinner bench that leaves less margin for error'
+              healthtxt=(f" Health risk is elevated by {', '.join(fname(z['p']) for z in injured[:2])}." if injured else ' The primary starters are carrying a relatively clean availability profile right now.')
+              s2=f"The roster has {depthtxt}.{healthtxt}"
+              recenttxt=(f"Last season’s profile was {x['ppg']:.1f} points per game" if x['ppg'] else 'There is limited recent in-season form to lean on')
+              oppdesc='a favorable' if x['oppScore']>=84 else 'a demanding' if x['oppScore']<72 else 'a fairly neutral'
+              s3=f"{recenttxt}, and the opening matchup against {x['oppTeam']} grades as {oppdesc} opponent test; that combination is what keeps the current Power Score at {x['power']:.1f}."
+              out.append({'rank':i,'previous_rank':prev,'movement':trend,'movement_label':label,'movement_icon':icon,'team':x['team'],'owner':x['owner'],'power':round(x['power'],1),'lineup_grade':grade(x['lineupN']),'depth_grade':grade(x['depthN']),'health_grade':grade(x['health']),'recent_grade':grade(x['recent']),'opponent_grade':grade(x['oppScore']),'opponent':x['oppTeam'],'stars':names,'article':' '.join([s1,s2,s3])})
+
+          payload={'generated_at':datetime.now(timezone.utc).isoformat(),'season':2026,'week':week,'source_week':current_week,'rankings':out}
+          Path('power-rankings-data.json').write_text(json.dumps(payload,indent=2))
+          Path('power-rankings-prev.json').write_text(json.dumps({'rankings':[{'team':x['team'],'rank':x['rank']} for x in out]},indent=2))
+
+          p=Path('power-rankings.html'); html=p.read_text()
+          html=html.replace('grid-template-columns:repeat(4,1fr)','grid-template-columns:repeat(5,1fr)',1)
+          oldmethod='<div class="method"><div><b>50%</b><span>Projected scoring</span></div><div><b>20%</b><span>Roster depth</span></div><div><b>15%</b><span>Health / availability</span></div><div><b>15%</b><span>Opponent strength</span></div></div>'
+          newmethod='<div class="method"><div><b>45%</b><span>Projected lineup</span></div><div><b>20%</b><span>Roster depth</span></div><div><b>15%</b><span>Health / availability</span></div><div><b>10%</b><span>Recent form</span></div><div><b>10%</b><span>Opponent strength</span></div></div>'
+          html=html.replace(oldmethod,newmethod)
+          html=html.replace('Preseason baseline · movement begins with the next update',f'Week {week} refresh · movement vs. previous published ranking')
+          start=html.index("<script>\nconst LEAGUE=")
+          end=html.index("</script>",start)+len('</script>')
+          renderer=r'''<script>
+          const $=s=>document.querySelector(s);
+          function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+          fetch('power-rankings-data.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()}).then(d=>{
+            $('#rankList').innerHTML=d.rankings.map(x=>`<article class="card"><div class="rank">${x.rank}</div><div><div class="teamline"><div class="team">${esc(x.team)}</div><span class="trend ${x.movement}"><img src="${esc(x.movement_icon)}" alt="${esc(x.movement_label)}"><span>${esc(x.movement_label)}</span></span></div><div class="owner">${esc(x.owner)}</div><div class="article">${esc(x.article)}</div><div class="tags"><span class="tag">Lineup <b>${esc(x.lineup_grade)}</b></span><span class="tag">Depth <b>${esc(x.depth_grade)}</b></span><span class="tag">Health <b>${esc(x.health_grade)}</b></span><span class="tag">Recent <b>${esc(x.recent_grade)}</b></span><span class="tag">Opponent <b>${esc(x.opponent_grade)}</b></span></div></div><div class="score"><div class="power">${Number(x.power).toFixed(1)}</div><div class="grade">Power Score</div></div></article>`).join('');
+            $('#status').innerHTML=`<b>Updated model loaded.</b> ${d.rankings.length} EFL franchises · Week ${d.week} · current Sleeper rosters and projections.`;
+          }).catch(e=>{$('#status').textContent='Current rankings data could not be loaded.';$('#rankList').innerHTML='<div class="loading">Unable to load the latest rankings.</div>'});
+          </script>'''
+          html=html[:start]+renderer+html[end:]
+          html=html.replace('This is not a standings list. Every EFL franchise is ranked by what it is projected to bring into 2026: optimal starting-lineup scoring, usable depth, current injury risk and the difficulty of the NFL schedules attached to its players.','This is not a standings list. Every EFL franchise is ranked from current Sleeper rosters and league scoring using projected starting-lineup strength, usable depth, current injuries and availability, recent performance, and the strength of the upcoming fantasy opponent.')
+          html=html.replace('<div class="source"><b>How the model works:</b> Current EFL rosters and league scoring settings are combined with 2026 player projections. The model optimizes the strongest legal starting lineup, scores usable bench depth, penalizes injury/availability risk and applies an NFL schedule-strength adjustment. The short write-up under each team is generated from the same roster signals so the ranking explains itself. Trend icons compare each new weekly ranking against the previous published EFL ranking.</div>','<div class="source"><b>How the model works:</b> Current EFL rosters and league scoring settings are combined with Sleeper 2026 season and weekly projections. The model optimizes the strongest legal starting lineup, scores usable bench depth, penalizes injury/availability risk, blends recent franchise performance, and adjusts for the upcoming EFL opponent. Trend icons compare this refresh with the previous published ranking.</div>')
+          p.write_text(html)
+          PY
+      - name: Commit rankings refresh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add power-rankings.html power-rankings-data.json power-rankings-prev.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Refresh current EFL power rankings"
+          git push
