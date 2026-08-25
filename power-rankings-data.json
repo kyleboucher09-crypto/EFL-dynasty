@@ -1,0 +1,272 @@
+{
+  "generated_at": "2026-08-25T13:30:18.697600+00:00",
+  "season": 2026,
+  "week": 1,
+  "source_week": 3,
+  "rankings": [
+    {
+      "rank": 1,
+      "previous_rank": 1,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
+      "team": "Master Peyton",
+      "owner": "mattgr1983",
+      "power": 89.2,
+      "lineup_grade": "A+",
+      "depth_grade": "A+",
+      "health_grade": "A+",
+      "recent_grade": "A+",
+      "opponent_grade": "B+",
+      "opponent": "The Duke \ud83d\udc51",
+      "stars": [
+        "Jahmyr Gibbs",
+        "Ja'Marr Chase",
+        "Jaxon Smith-Njigba"
+      ],
+      "article": "Master Peyton sits at No. 1 behind a projected core led by Jahmyr Gibbs, Ja'Marr Chase and Jaxon Smith-Njigba, with the starting lineup grading A+ for Week 1 and full-season projection. The roster has one of the league\u2019s deeper benches. The primary starters are carrying a relatively clean availability profile right now. Last season\u2019s profile was 144.8 points per game, and the opening matchup against The Duke \ud83d\udc51 grades as a fairly neutral opponent test; that combination is what keeps the current Power Score at 89.2."
+    },
+    {
+      "rank": 2,
+      "previous_rank": 3,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "The Don\u2019s Soldiers ",
+      "owner": "Thefantasydon24",
+      "power": 84.2,
+      "lineup_grade": "A",
+      "depth_grade": "B+",
+      "health_grade": "A+",
+      "recent_grade": "A+",
+      "opponent_grade": "A+",
+      "opponent": "LandsharkSC",
+      "stars": [
+        "Christian McCaffrey",
+        "Joe Burrow",
+        "Amon-Ra St. Brown"
+      ],
+      "article": "The Don\u2019s Soldiers  sits at No. 2 behind a projected core led by Christian McCaffrey, Joe Burrow and Amon-Ra St. Brown, with the starting lineup grading A for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Christian McCaffrey. Last season\u2019s profile was 139.9 points per game, and the opening matchup against LandsharkSC grades as a favorable opponent test; that combination is what keeps the current Power Score at 84.2."
+    },
+    {
+      "rank": 3,
+      "previous_rank": 2,
+      "movement": "down",
+      "movement_label": "Down 1",
+      "movement_icon": "Assets/trending-down.svg",
+      "team": "Kaaron Rodgers",
+      "owner": "KodyBartels",
+      "power": 83.8,
+      "lineup_grade": "A",
+      "depth_grade": "B+",
+      "health_grade": "A+",
+      "recent_grade": "A-",
+      "opponent_grade": "A+",
+      "opponent": "KamaraVirus125177",
+      "stars": [
+        "Puka Nacua",
+        "Brock Bowers",
+        "Jared Goff"
+      ],
+      "article": "Kaaron Rodgers sits at No. 3 behind a projected core led by Puka Nacua, Brock Bowers and Jared Goff, with the starting lineup grading A for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Puka Nacua. Last season\u2019s profile was 116.0 points per game, and the opening matchup against KamaraVirus125177 grades as a favorable opponent test; that combination is what keeps the current Power Score at 83.8."
+    },
+    {
+      "rank": 4,
+      "previous_rank": 4,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
+      "team": "Blaze Infantry \u2694\ufe0f",
+      "owner": "BlazeInfantry",
+      "power": 75.3,
+      "lineup_grade": "B",
+      "depth_grade": "B",
+      "health_grade": "A+",
+      "recent_grade": "B+",
+      "opponent_grade": "B+",
+      "opponent": "Trash Pandas",
+      "stars": [
+        "Josh Allen",
+        "Omarion Hampton",
+        "DeVonta Smith"
+      ],
+      "article": "Blaze Infantry \u2694\ufe0f sits at No. 4 behind a projected core led by Josh Allen, Omarion Hampton and DeVonta Smith, with the starting lineup grading B for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Ashton Jeanty. Last season\u2019s profile was 111.7 points per game, and the opening matchup against Trash Pandas grades as a favorable opponent test; that combination is what keeps the current Power Score at 75.3."
+    },
+    {
+      "rank": 5,
+      "previous_rank": 6,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "Trash Pandas",
+      "owner": "JoshBunting",
+      "power": 74.1,
+      "lineup_grade": "B-",
+      "depth_grade": "B",
+      "health_grade": "A+",
+      "recent_grade": "B",
+      "opponent_grade": "B+",
+      "opponent": "Blaze Infantry \u2694\ufe0f",
+      "stars": [
+        "Jaxson Dart",
+        "Drake London",
+        "Rashee Rice"
+      ],
+      "article": "Trash Pandas sits at No. 5 behind a projected core led by Jaxson Dart, Drake London and Rashee Rice, with the starting lineup grading B- for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Breece Hall, Tucker Kraft. Last season\u2019s profile was 107.1 points per game, and the opening matchup against Blaze Infantry \u2694\ufe0f grades as a fairly neutral opponent test; that combination is what keeps the current Power Score at 74.1."
+    },
+    {
+      "rank": 6,
+      "previous_rank": 7,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "Mach Chicken \ud83d\udc13 ",
+      "owner": "Machchiken",
+      "power": 72.8,
+      "lineup_grade": "C+",
+      "depth_grade": "B",
+      "health_grade": "A+",
+      "recent_grade": "C+",
+      "opponent_grade": "A",
+      "opponent": "BigKipper74",
+      "stars": [
+        "Malik Willis",
+        "Zay Flowers",
+        "Sam LaPorta"
+      ],
+      "article": "Mach Chicken \ud83d\udc13  sits at No. 6 behind a projected core led by Malik Willis, Zay Flowers and Sam LaPorta, with the starting lineup grading C+ for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Sam LaPorta, Emeka Egbuka. Last season\u2019s profile was 87.9 points per game, and the opening matchup against BigKipper74 grades as a favorable opponent test; that combination is what keeps the current Power Score at 72.8."
+    },
+    {
+      "rank": 7,
+      "previous_rank": 5,
+      "movement": "down",
+      "movement_label": "Down 2",
+      "movement_icon": "Assets/trending-down.svg",
+      "team": "The Duke \ud83d\udc51",
+      "owner": "TheDuke7",
+      "power": 72.6,
+      "lineup_grade": "B",
+      "depth_grade": "B-",
+      "health_grade": "A+",
+      "recent_grade": "B",
+      "opponent_grade": "C-",
+      "opponent": "Master Peyton",
+      "stars": [
+        "Bijan Robinson",
+        "Jalen Hurts",
+        "Chris Olave"
+      ],
+      "article": "The Duke \ud83d\udc51 sits at No. 7 behind a projected core led by Bijan Robinson, Jalen Hurts and Chris Olave, with the starting lineup grading B for Week 1 and full-season projection. The roster has solid usable depth. Health risk is elevated by Jeremiyah Love, Luther Burden. Last season\u2019s profile was 110.4 points per game, and the opening matchup against Master Peyton grades as a demanding opponent test; that combination is what keeps the current Power Score at 72.6."
+    },
+    {
+      "rank": 8,
+      "previous_rank": 8,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
+      "team": "BigKipper74",
+      "owner": "BigKipper74",
+      "power": 70.2,
+      "lineup_grade": "C",
+      "depth_grade": "C",
+      "health_grade": "A+",
+      "recent_grade": "B+",
+      "opponent_grade": "A-",
+      "opponent": "Mach Chicken \ud83d\udc13 ",
+      "stars": [
+        "Dak Prescott",
+        "A.J. Brown",
+        "Jaylen Waddle"
+      ],
+      "article": "BigKipper74 sits at No. 8 behind a projected core led by Dak Prescott, A.J. Brown and Jaylen Waddle, with the starting lineup grading C for Week 1 and full-season projection. The roster has a thinner bench that leaves less margin for error. Health risk is elevated by Michael Pittman. Last season\u2019s profile was 117.5 points per game, and the opening matchup against Mach Chicken \ud83d\udc13  grades as a favorable opponent test; that combination is what keeps the current Power Score at 70.2."
+    },
+    {
+      "rank": 9,
+      "previous_rank": 10,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "bonebuster",
+      "owner": "bonebuster",
+      "power": 67.5,
+      "lineup_grade": "C",
+      "depth_grade": "C",
+      "health_grade": "A+",
+      "recent_grade": "C-",
+      "opponent_grade": "A+",
+      "opponent": "28Wizardking",
+      "stars": [
+        "Caleb Williams",
+        "Jayden Reed",
+        "Josh Jacobs"
+      ],
+      "article": "bonebuster sits at No. 9 behind a projected core led by Caleb Williams, Jayden Reed and Josh Jacobs, with the starting lineup grading C for Week 1 and full-season projection. The roster has a thinner bench that leaves less margin for error. Health risk is elevated by Josh Jacobs, Mike Evans. Last season\u2019s profile was 72.1 points per game, and the opening matchup against 28Wizardking grades as a favorable opponent test; that combination is what keeps the current Power Score at 67.5."
+    },
+    {
+      "rank": 10,
+      "previous_rank": 11,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "28Wizardking",
+      "owner": "28Wizardking",
+      "power": 67.0,
+      "lineup_grade": "C-",
+      "depth_grade": "C",
+      "health_grade": "A+",
+      "recent_grade": "C-",
+      "opponent_grade": "A+",
+      "opponent": "bonebuster",
+      "stars": [
+        "Tua Tagovailoa",
+        "David Montgomery",
+        "Terry McLaurin"
+      ],
+      "article": "28Wizardking sits at No. 10 behind a projected core led by Tua Tagovailoa, David Montgomery and Terry McLaurin, with the starting lineup grading C- for Week 1 and full-season projection. The roster has a thinner bench that leaves less margin for error. The primary starters are carrying a relatively clean availability profile right now. Last season\u2019s profile was 75.0 points per game, and the opening matchup against bonebuster grades as a favorable opponent test; that combination is what keeps the current Power Score at 67.0."
+    },
+    {
+      "rank": 11,
+      "previous_rank": 9,
+      "movement": "down",
+      "movement_label": "Down 2",
+      "movement_icon": "Assets/trending-down.svg",
+      "team": "LandsharkSC",
+      "owner": "LandsharkSC",
+      "power": 66.0,
+      "lineup_grade": "C",
+      "depth_grade": "C-",
+      "health_grade": "A+",
+      "recent_grade": "B-",
+      "opponent_grade": "C+",
+      "opponent": "The Don\u2019s Soldiers ",
+      "stars": [
+        "Drake Maye",
+        "Tyler Warren",
+        "Mark Andrews"
+      ],
+      "article": "LandsharkSC sits at No. 11 behind a projected core led by Drake Maye, Tyler Warren and Mark Andrews, with the starting lineup grading C for Week 1 and full-season projection. The roster has a thinner bench that leaves less margin for error. Health risk is elevated by Tyler Warren, Parker Washington. Last season\u2019s profile was 94.5 points per game, and the opening matchup against The Don\u2019s Soldiers  grades as a demanding opponent test; that combination is what keeps the current Power Score at 66.0."
+    },
+    {
+      "rank": 12,
+      "previous_rank": 12,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
+      "team": "KamaraVirus125177",
+      "owner": "KamaraVirus125177",
+      "power": 63.0,
+      "lineup_grade": "C-",
+      "depth_grade": "C-",
+      "health_grade": "A+",
+      "recent_grade": "C+",
+      "opponent_grade": "C+",
+      "opponent": "Kaaron Rodgers",
+      "stars": [
+        "Lamar Jackson",
+        "Quinshon Judkins",
+        "Chuba Hubbard"
+      ],
+      "article": "KamaraVirus125177 sits at No. 12 behind a projected core led by Lamar Jackson, Quinshon Judkins and Chuba Hubbard, with the starting lineup grading C- for Week 1 and full-season projection. The roster has a thinner bench that leaves less margin for error. Health risk is elevated by Quinshon Judkins, Chuba Hubbard. Last season\u2019s profile was 89.7 points per game, and the opening matchup against Kaaron Rodgers grades as a fairly neutral opponent test; that combination is what keeps the current Power Score at 63.0."
+    }
+  ]
+}
