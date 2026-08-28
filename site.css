@@ -1,88 +1,40 @@
 @import url('base-site.css');
 @import url('newsroom-layout.css');
 
-/* Purpose-built EFL Hub banner: crop only the unused black canvas around the artwork. */
+/* EFL 2026 BLUE + GOLD THEME OVERRIDE
+   Keeps badge/rank artwork untouched while moving the site UI from purple to deep navy + electric royal blue. */
+:root{--bg:#040914!important;--panel:#081326!important;--panel2:#0c1b34!important;--purple:#1769e8!important;--purple2:#45a3ff!important;--gold:#e8b84a!important;--gold2:#ffd979!important;--text:#f5f9ff!important;--muted:#9eacc0!important}
+body{background:radial-gradient(900px 500px at 50% -100px,rgba(23,105,232,.25),transparent 64%),radial-gradient(650px 350px at 92% 11%,rgba(232,184,74,.08),transparent 65%),#040914!important;color:#f5f9ff!important}
+.topbar{background:rgba(4,9,20,.88)!important}.mobile-menu{background:rgba(4,9,20,.98)!important}.navlinks a:hover,.navlinks a.active{background:rgba(23,105,232,.20)!important}.mobile-menu a.active{background:rgba(23,105,232,.24)!important;color:var(--gold2)!important}
+.page-hero{background:radial-gradient(470px 300px at 84% 18%,rgba(232,184,74,.13),transparent 70%),radial-gradient(580px 360px at 10% 20%,rgba(23,105,232,.32),transparent 70%),#061020!important}
+
+/* Global purple UI remnants -> blue. Artwork images are intentionally unaffected. */
+.hub-tile:hover,.hub-tile:active,.hub-tile:focus,.hub-tile:focus-visible,.hub-tile.active,.hub-tile.is-active,.hub-tile[aria-current="page"]{border-color:#45a3ff!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(69,163,255,.18) 52%,rgba(4,9,20,.96) 76%)!important;box-shadow:0 0 0 2px rgba(69,163,255,.58),0 0 26px rgba(23,105,232,.42),inset 0 0 24px rgba(69,163,255,.14)!important}
+.hub-tile:hover img,.hub-tile:active img,.hub-tile:focus img,.hub-tile:focus-visible img,.hub-tile.active img,.hub-tile.is-active img,.hub-tile[aria-current="page"] img{filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(69,163,255,.68)) brightness(1.12)!important}
+@media(hover:none),(pointer:coarse){.hub-tile:active{border-color:#45a3ff!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(69,163,255,.20) 52%,rgba(4,9,20,.96) 76%)!important;box-shadow:0 0 0 2px rgba(69,163,255,.64),0 0 30px rgba(23,105,232,.48),inset 0 0 24px rgba(69,163,255,.16)!important}.hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.50)) drop-shadow(0 0 20px rgba(69,163,255,.76)) brightness(1.14)!important}}
+
+/* Legacy page has inline purple values, so override its UI chrome here without recoloring insignias/badges. */
+body:has(#ranks){--purple:#1769e8!important;--panel:#081326!important;--muted:#9eacc0!important}
+body:has(#ranks) .legacy-hero{background:radial-gradient(650px 340px at 80% 10%,rgba(255,217,121,.12),transparent 65%),radial-gradient(600px 360px at 10% 20%,rgba(23,105,232,.30),transparent 70%),#061020!important}
+body:has(#ranks) .xp i{background:linear-gradient(90deg,#1769e8,#ffd979)!important}
+body:has(#ranks) .rank-card,body:has(#ranks) .economy-compact,body:has(#ranks) .badge{background:linear-gradient(145deg,#0c1b34,#050c19)!important}
+body:has(#ranks) .econ-convert{background:rgba(23,105,232,.12)!important;border-color:rgba(69,163,255,.25)!important}
+body:has(#ranks) .badge.secret{background:radial-gradient(circle at 50% 20%,rgba(69,163,255,.16),transparent 38%),linear-gradient(145deg,#071222,#030812)!important;border-color:rgba(69,163,255,.28)!important}
+body:has(#ranks) .secret-mark{border-color:rgba(69,163,255,.42)!important;box-shadow:0 0 0 8px rgba(23,105,232,.06),0 0 34px rgba(23,105,232,.20)!important}
+body:has(#ranks) .secret-mark:before{border-color:rgba(69,163,255,.24)!important}body:has(#ranks) .badge.secret .rarity,body:has(#ranks) .badge.secret .lp,body:has(#ranks) .mystery-note b{color:#72b9ff!important}body:has(#ranks) .mystery-note{border-color:rgba(69,163,255,.22)!important;background:rgba(23,105,232,.07)!important}
+
+/* Preserve the existing hub banner and layout behavior. */
 .league-hero{margin-top:0!important}.league-hero-card{width:100%!important;max-width:880px!important;aspect-ratio:3.25/1!important;height:auto!important;overflow:hidden!important;padding:0!important;background:transparent!important;border-radius:18px!important}.league-hero-card img{content:url('Public assets/B4A8ED42-5CE1-4632-BE8B-4032500021AA.png')!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center 58%!important;border-radius:18px!important}
-/* Champion spotlight — scale the Blaze logo itself, not the trophy/background. */
-#spotlight .spot-slide:first-of-type>img{transform:none!important;scale:none!important}
-#spotlight .spot-slide:first-of-type .spot-kicker,#spotlight .spot-slide:first-of-type .champ-name,#spotlight .spot-slide:first-of-type .champ-sub{display:none!important}
-#spotlight .spot-slide:first-of-type .spot-content{left:0!important;right:0!important;bottom:4%!important;max-width:none!important;width:100%!important;overflow:visible!important}
-#spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:280px!important;background-size:104% auto!important;background-position:center bottom!important;margin:0!important;transform:none!important;transform-origin:center bottom!important}
-@media(max-width:600px){.home-shell{padding-top:4px!important}.league-hero{margin-top:0!important}.league-hero-card{width:100%!important;max-width:none!important;aspect-ratio:3.25/1!important;height:auto!important;overflow:hidden!important;padding:0!important;border-radius:14px!important}.league-hero-card img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 58%!important;border-radius:14px!important}.spot-wrap{width:calc(100% + 20px)!important;margin-left:-10px!important;margin-right:-10px!important;margin-top:10px!important}.spotlight{width:100%!important;aspect-ratio:1.78/1!important;min-height:0!important;border-radius:16px!important}.spot-slide{width:100%!important;height:100%!important}.spot-arrow{width:30px!important;height:30px!important;top:auto!important;bottom:8px!important;transform:none!important;font-size:18px!important;border-color:rgba(210,82,255,.22)!important;background:rgba(7,4,10,.06)!important;color:rgba(210,82,255,.58)!important;box-shadow:none!important;opacity:.45!important}.spot-arrow.prev{left:10px!important}.spot-arrow.next{right:10px!important}.spot-dots{bottom:10px!important;gap:10px!important}.spot-dot{width:12px!important;height:12px!important}.spot-slide:nth-of-type(2) .rank-content{left:24px!important;right:24px!important;top:5%!important;bottom:34px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important}.spot-slide:nth-of-type(2) .rank-content h2,.spot-slide:nth-of-type(2) .rank-title{font-size:clamp(25px,6.2vw,35px)!important;line-height:1!important;margin-bottom:0!important}.spot-slide:nth-of-type(2) .rank-list{max-width:none!important;width:100%!important;gap:10px!important;margin-top:34px!important}.spot-slide:nth-of-type(2) .rank-card{min-height:60px!important;padding:10px 14px!important}.spot-slide:nth-of-type(2) .rank-place{font-size:23px!important}.spot-slide:nth-of-type(2) .rank-name{font-size:15px!important}.spot-slide.match-slide .match-team-name{font-size:clamp(13px,3.8vw,19px)!important}.spot-slide.match-slide .win-prob{font-size:clamp(6px,1.55vw,9px)!important}.spot-slide.match-slide .player-chip img{width:25px!important;height:25px!important}.spot-slide.match-slide .player-pos{left:24%!important;width:10%!important;font-size:5.5px!important}.spot-slide.match-slide .player-name{left:36%!important;right:1%!important;width:auto!important;max-width:none!important;min-width:0!important;justify-content:flex-start!important;text-align:left!important;padding-left:1px!important;padding-right:1px!important;font-size:clamp(6.5px,1.7vw,9px)!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important}.league-menu-btn{font-size:0!important}.league-menu-btn::after{content:"DYNASTY"!important;display:inline!important;font-size:10px!important;font-weight:950!important;letter-spacing:.08em!important;color:#fff!important}.spot-slide:nth-of-type(4) .spot-content{left:26px!important;right:auto!important;top:1.5%!important;bottom:auto!important;max-width:58%!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:6px!important;text-align:left!important}.spot-slide:nth-of-type(4) .spot-content:before{width:100%!important;height:104px!important;margin:0!important;background-position:left bottom!important;background-size:contain!important}.spot-slide:nth-of-type(4) .purse-amount{font-size:48px!important;line-height:.84!important;margin:0!important;display:block!important}.spot-slide:nth-of-type(4) .purse-leader{font-size:20px!important;line-height:1!important;margin:0!important;padding-left:0!important;display:block!important}.spot-slide:nth-of-type(4) .purse-leader:before{font-size:7px!important;margin-bottom:3px!important}.spot-slide:nth-of-type(4) .purse-leader:after{display:none!important}.spot-slide:nth-of-type(4) .purse-points{display:block!important;width:auto!important;max-width:100%!important;margin:0!important;padding:6px 10px!important;font-size:7px!important;text-align:left!important;white-space:nowrap!important}.spot-slide:nth-of-type(4) .purse-points:before{font-size:7px!important}.hub-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}.hub-tile{min-height:124px!important;padding:9px!important}.hub-tile img{width:64px!important;height:64px!important;max-width:64px!important;max-height:64px!important;object-fit:contain!important}
-#spotlight .spot-slide:first-of-type .spot-content{left:-1%!important;right:auto!important;top:-8%!important;bottom:auto!important;width:96%!important;height:62%!important;max-width:none!important;overflow:visible!important;display:block!important}
-#spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;background-position:left top!important;background-size:contain!important;background-repeat:no-repeat!important;transform:none!important}
-#spotlight .spot-slide:first-of-type .spot-kicker,#spotlight .spot-slide:first-of-type .champ-name,#spotlight .spot-slide:first-of-type .champ-sub{display:none!important}}
-.hub-tile{transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;-webkit-tap-highlight-color:transparent}.hub-tile img{transition:filter .16s ease,transform .16s ease!important}
+#spotlight .spot-slide:first-of-type>img{transform:none!important;scale:none!important}#spotlight .spot-slide:first-of-type .spot-kicker,#spotlight .spot-slide:first-of-type .champ-name,#spotlight .spot-slide:first-of-type .champ-sub{display:none!important}#spotlight .spot-slide:first-of-type .spot-content{left:0!important;right:0!important;bottom:4%!important;max-width:none!important;width:100%!important;overflow:visible!important}#spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:280px!important;background-size:104% auto!important;background-position:center bottom!important;margin:0!important;transform:none!important;transform-origin:center bottom!important}
 
-/* Mobile Power Rankings: compact cards while preserving clear title separation. */
-@media(max-width:600px){
-#spotlight .spot-slide:nth-of-type(2) .rank-content{left:24px!important;right:24px!important;top:4%!important;bottom:30px!important;max-width:none!important}
-#spotlight .spot-slide:nth-of-type(2) .rank-content h2,#spotlight .spot-slide:nth-of-type(2) .rank-title{transform:none!important;margin:0!important}
-#spotlight .spot-slide:nth-of-type(2) .rank-list{width:100%!important;max-width:none!important;margin-top:28px!important;gap:7px!important}
-#spotlight .spot-slide:nth-of-type(2) .rank-card{min-height:46px!important;padding:7px 11px!important}
-#spotlight .spot-slide:nth-of-type(2) .rank-place{font-size:19px!important}
-#spotlight .spot-slide:nth-of-type(2) .rank-name{font-size:13px!important}
-}
-
-/* Center featured matchup team names inside their actual header panels on mobile. */
-@media(max-width:600px){
-#spotlight .spot-slide.match-slide .match-team:first-child .match-team-name{left:-2%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
-#spotlight .spot-slide.match-slide .match-team:last-child .match-team-name{left:8%!important;width:94%!important;justify-content:center!important;text-align:center!important;padding:0!important}
-}
-
-/* Give matchup player names enough horizontal room on mobile so long names never clip. */
-@media(max-width:600px){
-#spotlight .spot-slide.match-slide .player-name{left:35%!important;right:-2%!important;font-size:clamp(6.2px,1.55vw,8.4px)!important;overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
-}
-
-/* Hub tiles: permanent soft gold frame + halo. Purple is reserved for interaction only. */
-.hub-tile{
-position:relative!important;
-border:1px solid rgba(232,184,74,.34)!important;
-background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.14),rgba(232,184,74,.045) 45%,rgba(9,7,13,.96) 74%)!important;
-box-shadow:0 0 14px rgba(232,184,74,.10),0 0 30px rgba(232,184,74,.055),inset 0 0 22px rgba(232,184,74,.045)!important;
-outline:none!important;
-}
-.hub-tile img{filter:drop-shadow(0 0 9px rgba(255,215,108,.68)) drop-shadow(0 0 20px rgba(232,184,74,.28)) brightness(1.07)!important}
-
-/* Selected / pressed / focused tile = unmistakable purple contrast, never gold. */
-.hub-tile:hover,.hub-tile:active,.hub-tile:focus,.hub-tile:focus-visible,.hub-tile.active,.hub-tile.is-active,.hub-tile[aria-current="page"]{
-border-color:#b85cff!important;
-background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(184,92,255,.18) 52%,rgba(9,7,13,.96) 76%)!important;
-box-shadow:0 0 0 2px rgba(184,92,255,.62),0 0 26px rgba(153,55,230,.46),inset 0 0 24px rgba(184,92,255,.14)!important;
-outline:none!important;
-}
-.hub-tile:hover img,.hub-tile:active img,.hub-tile:focus img,.hub-tile:focus-visible img,.hub-tile.active img,.hub-tile.is-active img,.hub-tile[aria-current="page"] img{
-filter:drop-shadow(0 0 8px rgba(255,215,108,.52)) drop-shadow(0 0 18px rgba(184,92,255,.72)) brightness(1.12)!important;
-}
+/* Hub tiles retain gold prestige at rest; interaction is blue. */
+.hub-tile{position:relative!important;border:1px solid rgba(232,184,74,.34)!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.14),rgba(232,184,74,.045) 45%,rgba(4,9,20,.96) 74%)!important;box-shadow:0 0 14px rgba(232,184,74,.10),0 0 30px rgba(232,184,74,.055),inset 0 0 22px rgba(232,184,74,.045)!important;outline:none!important;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease,background .16s ease!important;-webkit-tap-highlight-color:transparent}.hub-tile img{filter:drop-shadow(0 0 9px rgba(255,215,108,.68)) drop-shadow(0 0 20px rgba(232,184,74,.28)) brightness(1.07)!important;transition:filter .16s ease,transform .16s ease!important}
 @media(hover:hover) and (pointer:fine){.hub-tile:hover{transform:translateY(-2px)!important}.hub-tile:hover img{transform:scale(1.04)!important}}
 
-/* Touch devices: no sticky hover/focus. Purple exists only while the finger is actually down. */
-@media(hover:none),(pointer:coarse){
-.hub-tile{touch-action:manipulation!important;-webkit-user-select:none!important;user-select:none!important}
-.hub-tile:hover:not(:active),.hub-tile:focus:not(:active),.hub-tile:focus-visible:not(:active),.hub-tile.active:not(:active),.hub-tile.is-active:not(:active),.hub-tile[aria-current="page"]:not(:active){border-color:rgba(232,184,74,.34)!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.14),rgba(232,184,74,.045) 45%,rgba(9,7,13,.96) 74%)!important;box-shadow:0 0 14px rgba(232,184,74,.10),0 0 30px rgba(232,184,74,.055),inset 0 0 22px rgba(232,184,74,.045)!important;transform:none!important}
-.hub-tile:hover:not(:active) img,.hub-tile:focus:not(:active) img,.hub-tile:focus-visible:not(:active) img,.hub-tile.active:not(:active) img,.hub-tile.is-active:not(:active) img,.hub-tile[aria-current="page"]:not(:active) img{filter:drop-shadow(0 0 9px rgba(255,215,108,.68)) drop-shadow(0 0 20px rgba(232,184,74,.28)) brightness(1.07)!important;transform:none!important}
-.hub-tile:active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 35%,rgba(232,184,74,.10),rgba(184,92,255,.20) 52%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 2px rgba(184,92,255,.68),0 0 30px rgba(153,55,230,.52),inset 0 0 24px rgba(184,92,255,.16)!important;transform:scale(.985)!important}
-.hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.50)) drop-shadow(0 0 20px rgba(184,92,255,.80)) brightness(1.14)!important;transform:scale(1.03)!important}
-}
-
 /* Hub naming refresh */
-.hub-grid .hub-tile:nth-child(2) h3,.hub-grid .hub-tile:nth-child(2) p,.hub-grid .hub-tile:nth-child(5) h3,.hub-grid .hub-tile:nth-child(6) h3,.hub-grid .hub-tile:nth-child(6) p{font-size:0!important}
-.hub-grid .hub-tile:nth-child(2) h3::after{content:"The Throne Room";font-size:12px!important}
-.hub-grid .hub-tile:nth-child(2) p::after{content:"EFL Champions";font-size:8px!important}
-.hub-grid .hub-tile:nth-child(5) h3::after{content:"EFL Legacy";font-size:12px!important}
-.hub-grid .hub-tile:nth-child(6) h3::after{content:"The Crown Report";font-size:12px!important}
-.hub-grid .hub-tile:nth-child(6) p::after{content:"News, moves & rivalries";font-size:8px!important}
+.hub-grid .hub-tile:nth-child(2) h3,.hub-grid .hub-tile:nth-child(2) p,.hub-grid .hub-tile:nth-child(5) h3,.hub-grid .hub-tile:nth-child(6) h3,.hub-grid .hub-tile:nth-child(6) p{font-size:0!important}.hub-grid .hub-tile:nth-child(2) h3::after{content:"The Throne Room";font-size:12px!important}.hub-grid .hub-tile:nth-child(2) p::after{content:"EFL Champions";font-size:8px!important}.hub-grid .hub-tile:nth-child(5) h3::after{content:"EFL Legacy";font-size:12px!important}.hub-grid .hub-tile:nth-child(6) h3::after{content:"The Crown Report";font-size:12px!important}.hub-grid .hub-tile:nth-child(6) p::after{content:"News, moves & rivalries";font-size:8px!important}
 
-/* Badge Vault mobile fit: keep artwork visually separated from title/requirements. */
-@media(max-width:650px){
-body:has(#badges) .badge{min-height:258px!important;padding:10px 10px 13px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important}
-body:has(#badges) .badge-art{height:96px!important;min-height:96px!important;margin:8px auto 12px!important;width:100%!important;overflow:hidden!important}
-body:has(#badges) .badge-art img{width:100%!important;height:100%!important;max-width:118px!important;max-height:96px!important;object-fit:contain!important;transform:none!important;margin:auto!important}
-body:has(#badges) .badge h3{position:relative!important;z-index:2!important;margin:4px 0 7px!important;line-height:1.15!important}
-body:has(#badges) .badge p{position:relative!important;z-index:2!important;line-height:1.45!important;margin:0 auto!important;max-width:96%!important}
-body:has(#badges) .badge .rarity{margin-top:auto!important;padding-top:10px!important}
-body:has(#badges) .badge .lp{z-index:4!important}
-body:has(#badges) .badge.secret .badge-art{height:96px!important;min-height:96px!important;overflow:visible!important}
-body:has(#badges) .secret-mark{width:70px!important;height:70px!important;font-size:30px!important;margin:auto!important}
-}
+/* Badge Vault mobile fit */
+@media(max-width:650px){body:has(#badges) .badge{min-height:258px!important;padding:10px 10px 13px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important}body:has(#badges) .badge-art{height:96px!important;min-height:96px!important;margin:8px auto 12px!important;width:100%!important;overflow:hidden!important}body:has(#badges) .badge-art img{width:100%!important;height:100%!important;max-width:118px!important;max-height:96px!important;object-fit:contain!important;transform:none!important;margin:auto!important}body:has(#badges) .badge h3{position:relative!important;z-index:2!important;margin:4px 0 7px!important;line-height:1.15!important}body:has(#badges) .badge p{position:relative!important;z-index:2!important;line-height:1.45!important;margin:0 auto!important;max-width:96%!important}body:has(#badges) .badge .rarity{margin-top:auto!important;padding-top:10px!important}body:has(#badges) .badge .lp{z-index:4!important}body:has(#badges) .badge.secret .badge-art{height:96px!important;min-height:96px!important;overflow:visible!important}body:has(#badges) .secret-mark{width:70px!important;height:70px!important;font-size:30px!important;margin:auto!important}}
+
+@media(max-width:600px){.home-shell{padding-top:4px!important}.league-hero{margin-top:0!important}.league-hero-card{width:100%!important;max-width:none!important;aspect-ratio:3.25/1!important;height:auto!important;overflow:hidden!important;padding:0!important;border-radius:14px!important}.league-hero-card img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 58%!important;border-radius:14px!important}.spot-wrap{width:calc(100% + 20px)!important;margin-left:-10px!important;margin-right:-10px!important;margin-top:10px!important}.spotlight{width:100%!important;aspect-ratio:1.78/1!important;min-height:0!important;border-radius:16px!important}.spot-slide{width:100%!important;height:100%!important}.spot-arrow{width:30px!important;height:30px!important;top:auto!important;bottom:8px!important;transform:none!important;font-size:18px!important;border-color:rgba(69,163,255,.22)!important;background:rgba(4,9,20,.06)!important;color:rgba(69,163,255,.62)!important;box-shadow:none!important;opacity:.45!important}.spot-arrow.prev{left:10px!important}.spot-arrow.next{right:10px!important}.spot-dots{bottom:10px!important;gap:10px!important}.spot-dot{width:12px!important;height:12px!important}.hub-grid{grid-template-columns:repeat(3,1fr)!important;gap:8px!important}.hub-tile{min-height:124px!important;padding:9px!important}.hub-tile img{width:64px!important;height:64px!important;max-width:64px!important;max-height:64px!important;object-fit:contain!important}#spotlight .spot-slide:first-of-type .spot-content{left:-1%!important;right:auto!important;top:-8%!important;bottom:auto!important;width:96%!important;height:62%!important;max-width:none!important;overflow:visible!important;display:block!important}#spotlight .spot-slide:first-of-type .spot-content:before{display:block!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;background-position:left top!important;background-size:contain!important;background-repeat:no-repeat!important;transform:none!important}}
