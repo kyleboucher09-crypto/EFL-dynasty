@@ -19,7 +19,7 @@ body:has(#ranks){--purple:#1769e8!important;--panel:#081326!important;--muted:#9
 
 /* Champion spotlight: fully reset the old offset/dark-overlay treatment. */
 #spotlight .spot-slide:first-of-type{background:transparent!important;overflow:hidden!important}
-#spotlight .spot-slide:first-of-type>img{content:url('5FE5484B-83FB-4C78-8250-759787C58CAA.png')!important;position:absolute!important;inset:0!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;height:100%!important;max-width:none!important;transform:none!important;translate:none!important;scale:none!important;animation:none!important;transition:none!important;filter:none!important;opacity:1!important;object-fit:cover!important;object-position:center!important}
+#spotlight .spot-slide:first-of-type>img{content:url('3B43F396-C11C-48AC-9B12-4C4EC61E261A.png')!important;position:absolute!important;inset:0!important;left:0!important;right:0!important;top:0!important;bottom:0!important;width:100%!important;height:100%!important;max-width:none!important;transform:none!important;translate:none!important;scale:none!important;animation:none!important;transition:none!important;filter:none!important;opacity:1!important;object-fit:cover!important;object-position:center!important}
 #spotlight .spot-slide:first-of-type:before,#spotlight .spot-slide:first-of-type:after{display:none!important;content:none!important;background:none!important;opacity:0!important}
 #spotlight .spot-slide:first-of-type .spot-content{display:none!important}
 
