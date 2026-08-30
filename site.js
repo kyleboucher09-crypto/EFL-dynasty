@@ -4,18 +4,18 @@ async function apiGet(path){const r=await fetch(EFL_API+path);if(!r.ok)throw new
 function teamName(user,roster){return user?.metadata?.team_name||user?.display_name||(roster?`Roster ${roster.roster_id}`:"EFL Team")}
 
 const LEGACY_RANK_LEVELS=[
- {level:1,name:'Prospect',lp:0,icon:'P',art:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'},
- {level:2,name:'Rookie',lp:1,icon:'R',art:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
- {level:3,name:'Special Teamer',lp:175,icon:'ST',art:'Assets/rank-special-teamer.svg'},
- {level:4,name:'Starter',lp:350,icon:'S',art:'Assets/rank-starter.svg'},
- {level:5,name:'Veteran',lp:500,icon:'V',art:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
- {level:6,name:'All-Pro',lp:850,icon:'AP',art:'Assets/rank-all-pro.svg'},
- {level:7,name:'Captain ★',lp:1200,icon:'C1',art:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
- {level:8,name:'Captain ★★',lp:2200,icon:'C2',art:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
- {level:9,name:'Captain ★★★',lp:3400,icon:'C3',art:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
- {level:10,name:'Captain ★★★★',lp:4700,icon:'C4',art:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
- {level:11,name:'Franchise Legend',lp:5400,icon:'FL',art:'Assets/rank-franchise-legend.svg'},
- {level:12,name:'Hall of Famer',lp:6000,icon:'HOF',art:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'}
+ {level:1,name:'Prospect',lp:0,icon:'P',art:'Assets/ranks/rank-01-prospect.svg'},
+ {level:2,name:'Rookie',lp:1,icon:'R',art:'Assets/ranks/rank-02-rookie.svg'},
+ {level:3,name:'Special Teamer',lp:175,icon:'ST',art:'Assets/ranks/rank-03-special-teamer.svg'},
+ {level:4,name:'Starter',lp:350,icon:'S',art:'Assets/ranks/rank-04-starter.svg'},
+ {level:5,name:'Veteran',lp:500,icon:'V',art:'Assets/ranks/rank-05-veteran.svg'},
+ {level:6,name:'All-Pro',lp:850,icon:'AP',art:'Assets/ranks/rank-06-all-pro.svg'},
+ {level:7,name:'Captain ★',lp:1200,icon:'C1',art:'Assets/ranks/rank-07-captain-1.svg'},
+ {level:8,name:'Captain ★★',lp:2200,icon:'C2',art:'Assets/ranks/rank-08-captain-2.svg'},
+ {level:9,name:'Captain ★★★',lp:3400,icon:'C3',art:'Assets/ranks/rank-09-captain-3.svg'},
+ {level:10,name:'Captain ★★★★',lp:4700,icon:'C4',art:'Assets/ranks/rank-10-captain-4.svg'},
+ {level:11,name:'Franchise Legend',lp:5400,icon:'FL',art:'Assets/ranks/rank-11-franchise-legend.svg'},
+ {level:12,name:'Hall of Famer',lp:6000,icon:'HOF',art:'Assets/ranks/rank-12-hall-of-famer.svg'}
 ];
 
 window.EFL_LEGACY_POLICY={hallOfFameTargetYears:[8,12],rankScope:'franchise-per-league',multiLeagueMode:'separate-franchise-ledgers',leagueIds:[EFL_ID],note:'One owner may have multiple league franchises, but each franchise keeps its own LP and rank so joining more leagues does not accelerate a single Hall of Fame track.'};
@@ -32,18 +32,18 @@ installLegacyEconomyPatch();
 
 function setupRankArtwork(){
  const art={
-  P:{name:'Prospect',src:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'},
-  R:{name:'Rookie',src:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
-  ST:{name:'Special Teamer',src:'Assets/rank-special-teamer.svg'},
-  S:{name:'Starter',src:'Assets/rank-starter.svg'},
-  V:{name:'Veteran',src:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
-  AP:{name:'All-Pro',src:'Assets/rank-all-pro.svg'},
-  C1:{name:'Captain ★',src:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
-  C2:{name:'Captain ★★',src:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
-  C3:{name:'Captain ★★★',src:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
-  C4:{name:'Captain ★★★★',src:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
-  FL:{name:'Franchise Legend',src:'Assets/rank-franchise-legend.svg'},
-  HOF:{name:'Hall of Famer',src:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'}
+  P:{name:'Prospect',src:'Assets/ranks/rank-01-prospect.svg'},
+  R:{name:'Rookie',src:'Assets/ranks/rank-02-rookie.svg'},
+  ST:{name:'Special Teamer',src:'Assets/ranks/rank-03-special-teamer.svg'},
+  S:{name:'Starter',src:'Assets/ranks/rank-04-starter.svg'},
+  V:{name:'Veteran',src:'Assets/ranks/rank-05-veteran.svg'},
+  AP:{name:'All-Pro',src:'Assets/ranks/rank-06-all-pro.svg'},
+  C1:{name:'Captain ★',src:'Assets/ranks/rank-07-captain-1.svg'},
+  C2:{name:'Captain ★★',src:'Assets/ranks/rank-08-captain-2.svg'},
+  C3:{name:'Captain ★★★',src:'Assets/ranks/rank-09-captain-3.svg'},
+  C4:{name:'Captain ★★★★',src:'Assets/ranks/rank-10-captain-4.svg'},
+  FL:{name:'Franchise Legend',src:'Assets/ranks/rank-11-franchise-legend.svg'},
+  HOF:{name:'Hall of Famer',src:'Assets/ranks/rank-12-hall-of-famer.svg'}
  };
  const style=document.createElement('style');
  style.textContent=`
