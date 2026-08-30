@@ -1,1 +1,623 @@
-{"name":"EFL Legacy System","version":9,"startSeason":2026,"eraName":"The Legacy Era","currency":{"name":"Legacy Points","short":"LP","spendable":"EFL Credits","spendableShort":"EC","conversion":"10 LP = 1 EC"},"levels":[{"level":1,"name":"Prospect","lp":0},{"level":2,"name":"Rookie","lp":150},{"level":3,"name":"Veteran","lp":400},{"level":4,"name":"Captain","lp":800},{"level":5,"name":"All Star","lp":1400},{"level":6,"name":"MVP","lp":2200},{"level":7,"name":"Elite","lp":3200},{"level":8,"name":"Legend","lp":4500},{"level":9,"name":"Hall of Famer","lp":6000}],"rewards":[{"credits":100,"name":"+$25 FAAB","icon":"💵","note":"The commissioner adds $25 in FAAB to the owner's waiver budget for the eligible league season."},{"credits":200,"name":"Supplemental Dynasty Rookie Pick","icon":"🎟️","note":"One additional rookie pick awarded after the normal rookie draft and before waivers open. Exact slot is set by league rule."},{"credits":400,"name":"Free EFL Dynasty Entry","icon":"🏆","note":"One future EFL Dynasty season entry paid in full."}],"rules":["The EFL Legacy System begins with the 2026 season.","Normal performance badges and Legacy Points are earned only from achievements completed during 2026 or later.","Pre-2026 history is recognized only through designated Heritage badges.","Lifetime Legacy Points never decrease and determine permanent Legacy Rank.","For every 10 Legacy Points earned, a franchise also earns 1 spendable EFL Credit.","Unless a badge explicitly says otherwise, each badge unlocks only once per franchise.","Regular-season achievements are not finalized until the relevant week or regular season is complete. Postseason and season-finish achievements are awarded only after the applicable game or season is final.","A badge cannot be awarded early merely because a franchise temporarily satisfies a condition. For example, Worst to First requires a completed last-place season followed by a championship in the immediately following season; it can never be earned after Week 2 or from an in-season standings swing.","When two badges describe nested versions of the same accomplishment in the same season, the more prestigious badge controls unless the badge text specifically states both can be earned. Triple Crown Season therefore replaces Double Crown for that same season.","Commissioner review resolves platform-data errors, subjective awards, stat corrections and achievements that cannot be verified automatically.","Secret badge requirements are intentionally hidden from the public Badge Vault and are revealed only after unlock."],"badges":[{"id":"legacy_franchise","name":"Legacy Franchise Owner","image":"Assets/badges/upload/badge-legacy-franchise.png","rarity":"Heritage","lp":50,"auto":true,"heritage":true,"requirement":"Owned an EFL Dynasty franchise before the start of the 2026 Legacy Era."},{"id":"legacy_champion","name":"Legacy Champion","image":"Assets/badges/upload/badge-legacy-champion.png","rarity":"Heritage","lp":100,"auto":true,"heritage":true,"requirement":"Won at least one EFL championship before the 2026 Legacy Era."},{"id":"champion","name":"EFL Champion","image":"Assets/badges/upload/badge-champion.png","rarity":"Championship","lp":300,"auto":true,"requirement":"Win an EFL championship during the Legacy Era. Awarded only after the championship matchup is final."},{"id":"back_to_back_champion","name":"Back-to-Back Champion","image":"Assets/badges/upload/badge-back-to-chack-champion.png","rarity":"Dynasty","lp":450,"auto":true,"requirement":"Win EFL championships in two immediately consecutive Legacy Era seasons."},{"id":"regular_season_king","name":"Regular Season King","image":"Assets/badges/upload/badge-regular-season-king.png","rarity":"Elite","lp":125,"auto":true,"requirement":"Finish the completed regular season alone or officially tied for 1st in the standings under EFL tiebreak rules."},{"id":"points_king","name":"Points King","image":"Assets/badges/upload/badge-point-king.png","rarity":"Elite","lp":125,"auto":true,"requirement":"Finish the completed regular season with the league's most total points scored."},{"id":"untouchable","name":"Untouchable","image":"Assets/badges/upload/badge-untouchable.png","rarity":"Legendary","lp":350,"auto":true,"requirement":"Complete the entire fantasy regular season without a loss. Postseason games do not count."},{"id":"two_hundred_club","name":"200 Club","image":"Assets/badges/upload/badge-200-club.png","rarity":"Achievement","lp":40,"auto":true,"requirement":"Score at least 200.00 fantasy points in one finalized EFL matchup."},{"id":"absolute_destruction","name":"Absolute Destruction","image":"Assets/badges/upload/badge-absolute-destruction.png","rarity":"Achievement","lp":50,"auto":true,"requirement":"Win one finalized matchup by at least 100.00 fantasy points."},{"id":"photo_finish","name":"Photo Finish","image":"Assets/badges/upload/badge-photo-finish.png","rarity":"Achievement","lp":35,"auto":true,"requirement":"Win one finalized matchup by 0.99 fantasy points or less."},{"id":"hot_streak","name":"Hot Streak","image":"Assets/badges/upload/badge-hot-streak.png","rarity":"Elite","lp":75,"auto":true,"requirement":"Win five consecutive regular-season matchups in the same season. Playoff games do not extend the streak."},{"id":"perfect_month","name":"Perfect Month","image":"Assets/badges/upload/badge-perfect-month.png","rarity":"Achievement","lp":60,"auto":true,"requirement":"Win four consecutive regular-season fantasy weeks in the same season."},{"id":"comeback_kid","name":"Comeback Kid","image":"Assets/badges/upload/badge-comeback-kid.png","rarity":"Elite","lp":85,"auto":true,"requirement":"Start a season 0-3 or worse and later qualify for the championship playoffs. Awarded only when the playoff field is finalized."},{"id":"giant_killer","name":"Giant Killer","image":"Assets/badges/upload/badge-giant-killer.png","rarity":"Elite","lp":60,"auto":false,"requirement":"After Week 4, defeat the franchise ranked #1 in the most recent official EFL Power Rankings published before that matchup begins."},{"id":"king_of_hill","name":"King of the Hill","image":"Assets/badges/upload/badge-king-of-the-hill.png","rarity":"Live","lp":0,"auto":false,"live":true,"requirement":"Hold the #1 position in an official EFL Power Rankings release published after Week 4. This is a live-status badge and awards no repeat LP."},{"id":"wire_wizard","name":"Wire Wizard","image":"Assets/badges/upload/badge-wire-wizard.png","rarity":"Elite","lp":70,"auto":false,"requirement":"In one regular season, have three different waiver/free-agent additions each score at least 15 points in a starting lineup within two weeks of acquisition, with all three starts occurring in wins."},{"id":"playoff_assassin","name":"Playoff Assassin","image":"Assets/badges/upload/badge-playoff-assassin.png","rarity":"Elite","lp":125,"auto":true,"requirement":"Win two games in the EFL championship playoff bracket during the same postseason. Consolation games do not count."},{"id":"first_class_ticket","name":"First-Class Ticket","image":"Assets/badges/upload/badge-first-class-ticket.png","rarity":"Achievement","lp":75,"auto":true,"requirement":"Finish the completed regular season in a position that officially earns a first-round championship-playoff bye."},{"id":"on_the_podium","name":"On the Podium","image":"Assets/badges/upload/badge-on-the-podium.png","rarity":"Achievement","lp":60,"auto":true,"requirement":"Finish the completed EFL season 1st, 2nd or 3rd in the official final standings."},{"id":"worst_to_first","name":"Worst to First","image":"Assets/badges/upload/badge-worst-to-first.png","rarity":"Legendary","lp":300,"auto":true,"requirement":"Finish last in the official final standings of a completed Legacy Era season, then win the EFL championship in the immediately following season. This can only be awarded after that following championship is final."},{"id":"iron_franchise","name":"Iron Franchise","image":"Assets/badges/upload/badge-iron-franchise.png","rarity":"Legacy","lp":175,"auto":true,"requirement":"Complete five consecutive full Legacy Era seasons as the owner of the same EFL franchise without an ownership gap."},{"id":"efl_lifetime","name":"EFL Lifetime","image":"Assets/badges/upload/badge-efl-lifetime.png","rarity":"Legacy","lp":450,"auto":true,"requirement":"Complete ten full Legacy Era seasons as an EFL franchise owner."},{"id":"four_digits","name":"Four Digits","image":"Assets/badges/upload/badge-four-digits.png","rarity":"Elite","lp":50,"auto":true,"requirement":"Score at least 1,000.00 total fantasy points during one completed EFL regular season."},{"id":"weekly_hammer","name":"Weekly Hammer","image":"Assets/badges/upload/badge-weekly-hammer.png","rarity":"Achievement","lp":30,"auto":true,"requirement":"Post the league's highest finalized score in any one regular-season fantasy week."},{"id":"bracket_breaker","name":"Bracket Breaker","image":"Assets/badges/upload/badge-bracket-breaker.png","rarity":"Legendary","lp":150,"auto":true,"requirement":"Enter the championship playoffs as the #5 seed or lower and reach the EFL championship game. Consolation brackets do not count."},{"id":"consolation_king","name":"Consolation King","image":"Assets/badges/upload/badge-consolation-king.png","rarity":"Achievement","lp":60,"auto":true,"requirement":"Win the official EFL consolation bracket and thereby earn rookie pick 2.13 under the league format."},{"id":"business_trip","name":"Business Trip","image":"Assets/badges/upload/badge-business-trip.png","rarity":"Elite","lp":100,"auto":true,"requirement":"Earn a first-round championship-playoff bye and then advance to the EFL championship game in that same postseason."},{"id":"title_defense","name":"Title Defense","image":"Assets/badges/upload/badge-title-defense.png","rarity":"Elite","lp":125,"auto":true,"requirement":"Win the EFL championship in one season and return to the championship game in the immediately following season."},{"id":"three_week_terror","name":"Three-Week Terror","image":"Assets/badges/upload/badge-three-week-terror.png","rarity":"Elite","lp":100,"auto":true,"requirement":"Post the league's highest finalized weekly score in three different regular-season weeks during the same season."},{"id":"double_crown","name":"Double Crown","image":"Assets/badges/upload/badge-double-crown.png","rarity":"Legendary","lp":225,"auto":true,"requirement":"Finish 1st in the completed regular-season standings and win the EFL championship in the same season, without also leading the league in regular-season points. If all three are achieved, Triple Crown Season is awarded instead."},{"id":"triple_crown_season","name":"Triple Crown Season","image":"Assets/badges/upload/badge-triple-crown-season.png","rarity":"Dynasty","lp":400,"auto":true,"requirement":"In the same completed season, finish 1st in regular-season standings, lead the league in regular-season points, and win the EFL championship. This supersedes Double Crown for that season."},{"id":"survivor","name":"Survivor","image":"Assets/badges/upload/badge-survivor.png","rarity":"Achievement","lp":60,"auto":true,"requirement":"Qualify for the championship playoffs with a final regular-season winning percentage of .500 or lower."},{"id":"bench_boss","name":"Bench Boss","image":"Assets/badges/upload/badge-bench-boss.png","rarity":"Achievement","lp":55,"auto":false,"requirement":"Win three regular-season matchups in one season after promoting a player who was benched the prior week into the starting lineup, with that promoted player scoring at least 20 points in each qualifying win."},{"id":"consistency_king","name":"Consistency King","image":"Assets/badges/upload/badge-consistency-king.png","rarity":"Elite","lp":90,"auto":true,"requirement":"Score at least 130 fantasy points in eight different regular-season weeks during the same season."},{"id":"precision_drafter","name":"Precision Drafter","image":"Assets/badges/upload/badge-precision-drafter.png","rarity":"Elite","lp":100,"auto":false,"requirement":"Draft a rookie in Round 2 of the EFL rookie draft who finishes that rookie season top-12 at his position in EFL scoring."},{"id":"rivalry_king","name":"Rivalry King","image":"Assets/badges/upload/badge-rivalry-king.png","rarity":"Achievement","lp":65,"auto":true,"requirement":"Sweep every scheduled regular-season matchup against your officially designated rivalry franchise in the same season."},{"id":"roster_builder","name":"Roster Builder","image":"Assets/badges/upload/badge-roster-builder.png","rarity":"Legacy","lp":100,"auto":false,"requirement":"Make the championship playoffs while retaining at least eight players who were on your franchise's Week 1 roster through the end of that regular season."},{"id":"sleeper_hit","name":"Sleeper Hit","image":"Assets/badges/upload/badge-sleeper-hit.png","rarity":"Achievement","lp":80,"auto":false,"requirement":"Draft a rookie in Round 3 or later who finishes his rookie season top-24 at his position in EFL scoring."},{"id":"streak_breaker","name":"Streak Breaker","image":"Assets/badges/upload/badge-streak-breaker.png","rarity":"Achievement","lp":50,"auto":true,"requirement":"Defeat an opponent that enters the matchup on an active winning streak of at least five EFL games."},{"id":"sunday_miracle","name":"Sunday Miracle","image":"Assets/badges/upload/badge-sunday-miracle.png","rarity":"Elite","lp":85,"auto":false,"requirement":"Trail by at least 25 fantasy points after the Sunday afternoon NFL slate is complete, then come back to win before the Monday night game begins."},{"id":"the_spoiler","name":"The Spoiler","image":"Assets/badges/upload/badge-the-spoiler.png","rarity":"Achievement","lp":65,"auto":false,"requirement":"During the final two regular-season fantasy weeks, defeat a franchise whose loss mathematically eliminates it from championship-playoff qualification."},{"id":"trade_heist","name":"Trade Heist","image":"Assets/badges/upload/badge-trade-heist.png","rarity":"Legendary","lp":140,"auto":false,"requirement":"In one commissioner-reviewed trade, have the player acquired outscore all players sent away by at least 100 fantasy points from the trade date through the end of that regular season."},{"id":"trade_master","name":"Trade Master","image":"Assets/badges/upload/badge-trade-master.png","rarity":"Elite","lp":90,"auto":true,"requirement":"Complete five accepted trades with at least four different EFL franchises during one league year."},{"id":"upset_of_year","name":"Upset of the Year","image":"Assets/badges/upload/badge-upset-of-the-year.png","rarity":"Legendary","lp":125,"auto":false,"requirement":"Annual commissioner award for the regular-season victory with the lowest official pregame Sleeper win probability among all EFL wins that season. Awarded once per league year after the regular season."},{"id":"waiver_steal","name":"Waiver Steal","image":"Assets/badges/upload/badge-waiver-steal.png","rarity":"Achievement","lp":75,"auto":false,"requirement":"Add a player through waivers or free agency who then scores at least 100 fantasy points for your franchise that regular season and remains rostered through the end of the regular season."},{"id":"monday_night_hero","name":"Monday Night Hero","image":"Assets/badges/upload/badge-monday-night-hero.png","rarity":"Elite","lp":75,"auto":true,"requirement":"Enter Monday night trailing, then win the matchup with a Monday-night starter scoring at least 20 fantasy points."},{"id":"last_second_legend","name":"Last-Second Legend","image":"Assets/badges/upload/badge-last-second-legend.png","rarity":"Legendary","lp":150,"auto":false,"requirement":"Have an EFL matchup result officially flip from a loss or tie to a win because of a post-game stat correction after all NFL games for that fantasy week were final."},{"id":"league_record_breaker","name":"League Record Breaker","image":"Assets/badges/upload/badge-league-record-breaker.png","rarity":"Legendary","lp":200,"auto":false,"requirement":"Set a new official EFL all-time record in a tracked league record-book category. The previous record and new mark must both be documented."},{"id":"iron_curtain","name":"Iron Curtain","image":"Assets/badges/upload/badge-iron-curtain.png","rarity":"Achievement","lp":70,"auto":true,"requirement":"Win three different regular-season matchups in one season while holding the opponent below 100 fantasy points each time."},{"id":"secret_alpha","name":"???","rarity":"Secret","lp":250,"secret":true,"auto":false,"requirement":"CLASSIFIED // A rare path through the league has been detected. Requirement revealed only when unlocked."},{"id":"secret_beta","name":"???","rarity":"Secret","lp":300,"secret":true,"auto":false,"requirement":"CLASSIFIED // The conditions are hidden. The Badge Vault will reveal the truth only after achievement."},{"id":"secret_gamma","name":"???","rarity":"Secret","lp":350,"secret":true,"auto":false,"requirement":"CLASSIFIED // Some accomplishments are meant to be discovered, not chased."},{"id":"secret_delta","name":"???","rarity":"Secret","lp":400,"secret":true,"auto":false,"requirement":"CLASSIFIED // Extremely rare. No public hint is available."},{"id":"secret_omega","name":"???","rarity":"Secret","lp":600,"secret":true,"auto":false,"requirement":"CLASSIFIED // The deepest EFL achievement. Requirement revealed upon unlock."}]}
+{
+  "name": "EFL Legacy System",
+  "version": 10,
+  "startSeason": 2026,
+  "eraName": "The Legacy Era",
+  "currency": {
+    "name": "Legacy Points",
+    "short": "LP",
+    "spendable": "EFL Credits",
+    "spendableShort": "EC",
+    "conversion": "10 LP = 1 EC"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "name": "Prospect",
+      "lp": 0,
+      "icon": "P",
+      "art": "Assets/178F123F-4E02-4833-99DB-34F158424913.png"
+    },
+    {
+      "level": 2,
+      "name": "Rookie",
+      "lp": 1,
+      "icon": "R",
+      "art": "Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png"
+    },
+    {
+      "level": 3,
+      "name": "Special Teamer",
+      "lp": 175,
+      "icon": "ST",
+      "art": "Assets/rank-special-teamer.svg"
+    },
+    {
+      "level": 4,
+      "name": "Starter",
+      "lp": 350,
+      "icon": "S",
+      "art": "Assets/rank-starter.svg"
+    },
+    {
+      "level": 5,
+      "name": "Veteran",
+      "lp": 500,
+      "icon": "V",
+      "art": "Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png"
+    },
+    {
+      "level": 6,
+      "name": "All-Pro",
+      "lp": 850,
+      "icon": "AP",
+      "art": "Assets/rank-all-pro.svg"
+    },
+    {
+      "level": 7,
+      "name": "Captain ★",
+      "lp": 1200,
+      "icon": "C1",
+      "art": "Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png"
+    },
+    {
+      "level": 8,
+      "name": "Captain ★★",
+      "lp": 2200,
+      "icon": "C2",
+      "art": "Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png"
+    },
+    {
+      "level": 9,
+      "name": "Captain ★★★",
+      "lp": 3400,
+      "icon": "C3",
+      "art": "Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png"
+    },
+    {
+      "level": 10,
+      "name": "Captain ★★★★",
+      "lp": 4700,
+      "icon": "C4",
+      "art": "Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png"
+    },
+    {
+      "level": 11,
+      "name": "Franchise Legend",
+      "lp": 5400,
+      "icon": "FL",
+      "art": "Assets/rank-franchise-legend.svg"
+    },
+    {
+      "level": 12,
+      "name": "Hall of Famer",
+      "lp": 6000,
+      "icon": "HOF",
+      "art": "Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png"
+    }
+  ],
+  "rewards": [
+    {
+      "credits": 100,
+      "name": "+$25 FAAB",
+      "icon": "💵",
+      "note": "The commissioner adds $25 in FAAB to the owner's waiver budget for the eligible league season."
+    },
+    {
+      "credits": 200,
+      "name": "Supplemental Dynasty Rookie Pick",
+      "icon": "🎟️",
+      "note": "One additional rookie pick awarded after the normal rookie draft and before waivers open. Exact slot is set by league rule."
+    },
+    {
+      "credits": 400,
+      "name": "Free EFL Dynasty Entry",
+      "icon": "🏆",
+      "note": "One future EFL Dynasty season entry paid in full."
+    }
+  ],
+  "rules": [
+    "The EFL Legacy System begins with the 2026 season.",
+    "Normal performance badges and Legacy Points are earned only from achievements completed during 2026 or later.",
+    "Pre-2026 history is recognized only through designated Heritage badges.",
+    "Lifetime Legacy Points never decrease and determine permanent Legacy Rank.",
+    "For every 10 Legacy Points earned, a franchise also earns 1 spendable EFL Credit.",
+    "Unless a badge explicitly says otherwise, each badge unlocks only once per franchise.",
+    "Regular-season achievements are not finalized until the relevant week or regular season is complete. Postseason and season-finish achievements are awarded only after the applicable game or season is final.",
+    "A badge cannot be awarded early merely because a franchise temporarily satisfies a condition. For example, Worst to First requires a completed last-place season followed by a championship in the immediately following season; it can never be earned after Week 2 or from an in-season standings swing.",
+    "When two badges describe nested versions of the same accomplishment in the same season, the more prestigious badge controls unless the badge text specifically states both can be earned. Triple Crown Season therefore replaces Double Crown for that same season.",
+    "Commissioner review resolves platform-data errors, subjective awards, stat corrections and achievements that cannot be verified automatically.",
+    "Secret badge requirements are intentionally hidden from the public Badge Vault and are revealed only after unlock."
+  ],
+  "badges": [
+    {
+      "id": "legacy_franchise",
+      "name": "Legacy Franchise Owner",
+      "image": "Assets/badges/upload/badge-legacy-franchise.png",
+      "rarity": "Heritage",
+      "lp": 50,
+      "auto": true,
+      "heritage": true,
+      "requirement": "Owned an EFL Dynasty franchise before the start of the 2026 Legacy Era."
+    },
+    {
+      "id": "legacy_champion",
+      "name": "Legacy Champion",
+      "image": "Assets/badges/upload/badge-legacy-champion.png",
+      "rarity": "Heritage",
+      "lp": 100,
+      "auto": true,
+      "heritage": true,
+      "requirement": "Won at least one EFL championship before the 2026 Legacy Era."
+    },
+    {
+      "id": "champion",
+      "name": "EFL Champion",
+      "image": "Assets/badges/upload/badge-champion.png",
+      "rarity": "Championship",
+      "lp": 300,
+      "auto": true,
+      "requirement": "Win an EFL championship during the Legacy Era. Awarded only after the championship matchup is final."
+    },
+    {
+      "id": "back_to_back_champion",
+      "name": "Back-to-Back Champion",
+      "image": "Assets/badges/upload/badge-back-to-chack-champion.png",
+      "rarity": "Dynasty",
+      "lp": 450,
+      "auto": true,
+      "requirement": "Win EFL championships in two immediately consecutive Legacy Era seasons."
+    },
+    {
+      "id": "regular_season_king",
+      "name": "Regular Season King",
+      "image": "Assets/badges/upload/badge-regular-season-king.png",
+      "rarity": "Elite",
+      "lp": 125,
+      "auto": true,
+      "requirement": "Finish the completed regular season alone or officially tied for 1st in the standings under EFL tiebreak rules."
+    },
+    {
+      "id": "points_king",
+      "name": "Points King",
+      "image": "Assets/badges/upload/badge-point-king.png",
+      "rarity": "Elite",
+      "lp": 125,
+      "auto": true,
+      "requirement": "Finish the completed regular season with the league's most total points scored."
+    },
+    {
+      "id": "untouchable",
+      "name": "Untouchable",
+      "image": "Assets/badges/upload/badge-untouchable.png",
+      "rarity": "Legendary",
+      "lp": 350,
+      "auto": true,
+      "requirement": "Complete the entire fantasy regular season without a loss. Postseason games do not count."
+    },
+    {
+      "id": "two_hundred_club",
+      "name": "200 Club",
+      "image": "Assets/badges/upload/badge-200-club.png",
+      "rarity": "Achievement",
+      "lp": 40,
+      "auto": true,
+      "requirement": "Score at least 200.00 fantasy points in one finalized EFL matchup."
+    },
+    {
+      "id": "absolute_destruction",
+      "name": "Absolute Destruction",
+      "image": "Assets/badges/upload/badge-absolute-destruction.png",
+      "rarity": "Achievement",
+      "lp": 50,
+      "auto": true,
+      "requirement": "Win one finalized matchup by at least 100.00 fantasy points."
+    },
+    {
+      "id": "photo_finish",
+      "name": "Photo Finish",
+      "image": "Assets/badges/upload/badge-photo-finish.png",
+      "rarity": "Achievement",
+      "lp": 35,
+      "auto": true,
+      "requirement": "Win one finalized matchup by 0.99 fantasy points or less."
+    },
+    {
+      "id": "hot_streak",
+      "name": "Hot Streak",
+      "image": "Assets/badges/upload/badge-hot-streak.png",
+      "rarity": "Elite",
+      "lp": 75,
+      "auto": true,
+      "requirement": "Win five consecutive regular-season matchups in the same season. Playoff games do not extend the streak."
+    },
+    {
+      "id": "perfect_month",
+      "name": "Perfect Month",
+      "image": "Assets/badges/upload/badge-perfect-month.png",
+      "rarity": "Achievement",
+      "lp": 60,
+      "auto": true,
+      "requirement": "Win four consecutive regular-season fantasy weeks in the same season."
+    },
+    {
+      "id": "comeback_kid",
+      "name": "Comeback Kid",
+      "image": "Assets/badges/upload/badge-comeback-kid.png",
+      "rarity": "Elite",
+      "lp": 85,
+      "auto": true,
+      "requirement": "Start a season 0-3 or worse and later qualify for the championship playoffs. Awarded only when the playoff field is finalized."
+    },
+    {
+      "id": "giant_killer",
+      "name": "Giant Killer",
+      "image": "Assets/badges/upload/badge-giant-killer.png",
+      "rarity": "Elite",
+      "lp": 60,
+      "auto": false,
+      "requirement": "After Week 4, defeat the franchise ranked #1 in the most recent official EFL Power Rankings published before that matchup begins."
+    },
+    {
+      "id": "king_of_hill",
+      "name": "King of the Hill",
+      "image": "Assets/badges/upload/badge-king-of-the-hill.png",
+      "rarity": "Live",
+      "lp": 0,
+      "auto": false,
+      "live": true,
+      "requirement": "Hold the #1 position in an official EFL Power Rankings release published after Week 4. This is a live-status badge and awards no repeat LP."
+    },
+    {
+      "id": "wire_wizard",
+      "name": "Wire Wizard",
+      "image": "Assets/badges/upload/badge-wire-wizard.png",
+      "rarity": "Elite",
+      "lp": 70,
+      "auto": false,
+      "requirement": "In one regular season, have three different waiver/free-agent additions each score at least 15 points in a starting lineup within two weeks of acquisition, with all three starts occurring in wins."
+    },
+    {
+      "id": "playoff_assassin",
+      "name": "Playoff Assassin",
+      "image": "Assets/badges/upload/badge-playoff-assassin.png",
+      "rarity": "Elite",
+      "lp": 125,
+      "auto": true,
+      "requirement": "Win two games in the EFL championship playoff bracket during the same postseason. Consolation games do not count."
+    },
+    {
+      "id": "first_class_ticket",
+      "name": "First-Class Ticket",
+      "image": "Assets/badges/upload/badge-first-class-ticket.png",
+      "rarity": "Achievement",
+      "lp": 75,
+      "auto": true,
+      "requirement": "Finish the completed regular season in a position that officially earns a first-round championship-playoff bye."
+    },
+    {
+      "id": "on_the_podium",
+      "name": "On the Podium",
+      "image": "Assets/badges/upload/badge-on-the-podium.png",
+      "rarity": "Achievement",
+      "lp": 60,
+      "auto": true,
+      "requirement": "Finish the completed EFL season 1st, 2nd or 3rd in the official final standings."
+    },
+    {
+      "id": "worst_to_first",
+      "name": "Worst to First",
+      "image": "Assets/badges/upload/badge-worst-to-first.png",
+      "rarity": "Legendary",
+      "lp": 300,
+      "auto": true,
+      "requirement": "Finish last in the official final standings of a completed Legacy Era season, then win the EFL championship in the immediately following season. This can only be awarded after that following championship is final."
+    },
+    {
+      "id": "iron_franchise",
+      "name": "Iron Franchise",
+      "image": "Assets/badges/upload/badge-iron-franchise.png",
+      "rarity": "Legacy",
+      "lp": 175,
+      "auto": true,
+      "requirement": "Complete five consecutive full Legacy Era seasons as the owner of the same EFL franchise without an ownership gap."
+    },
+    {
+      "id": "efl_lifetime",
+      "name": "EFL Lifetime",
+      "image": "Assets/badges/upload/badge-efl-lifetime.png",
+      "rarity": "Legacy",
+      "lp": 450,
+      "auto": true,
+      "requirement": "Complete ten full Legacy Era seasons as an EFL franchise owner."
+    },
+    {
+      "id": "four_digits",
+      "name": "Four Digits",
+      "image": "Assets/badges/upload/badge-four-digits.png",
+      "rarity": "Elite",
+      "lp": 50,
+      "auto": true,
+      "requirement": "Score at least 1,000.00 total fantasy points during one completed EFL regular season."
+    },
+    {
+      "id": "weekly_hammer",
+      "name": "Weekly Hammer",
+      "image": "Assets/badges/upload/badge-weekly-hammer.png",
+      "rarity": "Achievement",
+      "lp": 30,
+      "auto": true,
+      "requirement": "Post the league's highest finalized score in any one regular-season fantasy week."
+    },
+    {
+      "id": "bracket_breaker",
+      "name": "Bracket Breaker",
+      "image": "Assets/badges/upload/badge-bracket-breaker.png",
+      "rarity": "Legendary",
+      "lp": 150,
+      "auto": true,
+      "requirement": "Enter the championship playoffs as the #5 seed or lower and reach the EFL championship game. Consolation brackets do not count."
+    },
+    {
+      "id": "consolation_king",
+      "name": "Consolation King",
+      "image": "Assets/badges/upload/badge-consolation-king.png",
+      "rarity": "Achievement",
+      "lp": 60,
+      "auto": true,
+      "requirement": "Win the official EFL consolation bracket and thereby earn rookie pick 2.13 under the league format."
+    },
+    {
+      "id": "business_trip",
+      "name": "Business Trip",
+      "image": "Assets/badges/upload/badge-business-trip.png",
+      "rarity": "Elite",
+      "lp": 100,
+      "auto": true,
+      "requirement": "Earn a first-round championship-playoff bye and then advance to the EFL championship game in that same postseason."
+    },
+    {
+      "id": "title_defense",
+      "name": "Title Defense",
+      "image": "Assets/badges/upload/badge-title-defense.png",
+      "rarity": "Elite",
+      "lp": 125,
+      "auto": true,
+      "requirement": "Win the EFL championship in one season and return to the championship game in the immediately following season."
+    },
+    {
+      "id": "three_week_terror",
+      "name": "Three-Week Terror",
+      "image": "Assets/badges/upload/badge-three-week-terror.png",
+      "rarity": "Elite",
+      "lp": 100,
+      "auto": true,
+      "requirement": "Post the league's highest finalized weekly score in three different regular-season weeks during the same season."
+    },
+    {
+      "id": "double_crown",
+      "name": "Double Crown",
+      "image": "Assets/badges/upload/badge-double-crown.png",
+      "rarity": "Legendary",
+      "lp": 225,
+      "auto": true,
+      "requirement": "Finish 1st in the completed regular-season standings and win the EFL championship in the same season, without also leading the league in regular-season points. If all three are achieved, Triple Crown Season is awarded instead."
+    },
+    {
+      "id": "triple_crown_season",
+      "name": "Triple Crown Season",
+      "image": "Assets/badges/upload/badge-triple-crown-season.png",
+      "rarity": "Dynasty",
+      "lp": 400,
+      "auto": true,
+      "requirement": "In the same completed season, finish 1st in regular-season standings, lead the league in regular-season points, and win the EFL championship. This supersedes Double Crown for that season."
+    },
+    {
+      "id": "survivor",
+      "name": "Survivor",
+      "image": "Assets/badges/upload/badge-survivor.png",
+      "rarity": "Achievement",
+      "lp": 60,
+      "auto": true,
+      "requirement": "Qualify for the championship playoffs with a final regular-season winning percentage of .500 or lower."
+    },
+    {
+      "id": "bench_boss",
+      "name": "Bench Boss",
+      "image": "Assets/badges/upload/badge-bench-boss.png",
+      "rarity": "Achievement",
+      "lp": 55,
+      "auto": false,
+      "requirement": "Win three regular-season matchups in one season after promoting a player who was benched the prior week into the starting lineup, with that promoted player scoring at least 20 points in each qualifying win."
+    },
+    {
+      "id": "consistency_king",
+      "name": "Consistency King",
+      "image": "Assets/badges/upload/badge-consistency-king.png",
+      "rarity": "Elite",
+      "lp": 90,
+      "auto": true,
+      "requirement": "Score at least 130 fantasy points in eight different regular-season weeks during the same season."
+    },
+    {
+      "id": "precision_drafter",
+      "name": "Precision Drafter",
+      "image": "Assets/badges/upload/badge-precision-drafter.png",
+      "rarity": "Elite",
+      "lp": 100,
+      "auto": false,
+      "requirement": "Draft a rookie in Round 2 of the EFL rookie draft who finishes that rookie season top-12 at his position in EFL scoring."
+    },
+    {
+      "id": "rivalry_king",
+      "name": "Rivalry King",
+      "image": "Assets/badges/upload/badge-rivalry-king.png",
+      "rarity": "Achievement",
+      "lp": 65,
+      "auto": true,
+      "requirement": "Sweep every scheduled regular-season matchup against your officially designated rivalry franchise in the same season."
+    },
+    {
+      "id": "roster_builder",
+      "name": "Roster Builder",
+      "image": "Assets/badges/upload/badge-roster-builder.png",
+      "rarity": "Legacy",
+      "lp": 100,
+      "auto": false,
+      "requirement": "Make the championship playoffs while retaining at least eight players who were on your franchise's Week 1 roster through the end of that regular season."
+    },
+    {
+      "id": "sleeper_hit",
+      "name": "Sleeper Hit",
+      "image": "Assets/badges/upload/badge-sleeper-hit.png",
+      "rarity": "Achievement",
+      "lp": 80,
+      "auto": false,
+      "requirement": "Draft a rookie in Round 3 or later who finishes his rookie season top-24 at his position in EFL scoring."
+    },
+    {
+      "id": "streak_breaker",
+      "name": "Streak Breaker",
+      "image": "Assets/badges/upload/badge-streak-breaker.png",
+      "rarity": "Achievement",
+      "lp": 50,
+      "auto": true,
+      "requirement": "Defeat an opponent that enters the matchup on an active winning streak of at least five EFL games."
+    },
+    {
+      "id": "sunday_miracle",
+      "name": "Sunday Miracle",
+      "image": "Assets/badges/upload/badge-sunday-miracle.png",
+      "rarity": "Elite",
+      "lp": 85,
+      "auto": false,
+      "requirement": "Trail by at least 25 fantasy points after the Sunday afternoon NFL slate is complete, then come back to win before the Monday night game begins."
+    },
+    {
+      "id": "the_spoiler",
+      "name": "The Spoiler",
+      "image": "Assets/badges/upload/badge-the-spoiler.png",
+      "rarity": "Achievement",
+      "lp": 65,
+      "auto": false,
+      "requirement": "During the final two regular-season fantasy weeks, defeat a franchise whose loss mathematically eliminates it from championship-playoff qualification."
+    },
+    {
+      "id": "trade_heist",
+      "name": "Trade Heist",
+      "image": "Assets/badges/upload/badge-trade-heist.png",
+      "rarity": "Legendary",
+      "lp": 140,
+      "auto": false,
+      "requirement": "In one commissioner-reviewed trade, have the player acquired outscore all players sent away by at least 100 fantasy points from the trade date through the end of that regular season."
+    },
+    {
+      "id": "trade_master",
+      "name": "Trade Master",
+      "image": "Assets/badges/upload/badge-trade-master.png",
+      "rarity": "Elite",
+      "lp": 90,
+      "auto": true,
+      "requirement": "Complete five accepted trades with at least four different EFL franchises during one league year."
+    },
+    {
+      "id": "upset_of_year",
+      "name": "Upset of the Year",
+      "image": "Assets/badges/upload/badge-upset-of-the-year.png",
+      "rarity": "Legendary",
+      "lp": 125,
+      "auto": false,
+      "requirement": "Annual commissioner award for the regular-season victory with the lowest official pregame Sleeper win probability among all EFL wins that season. Awarded once per league year after the regular season."
+    },
+    {
+      "id": "waiver_steal",
+      "name": "Waiver Steal",
+      "image": "Assets/badges/upload/badge-waiver-steal.png",
+      "rarity": "Achievement",
+      "lp": 75,
+      "auto": false,
+      "requirement": "Add a player through waivers or free agency who then scores at least 100 fantasy points for your franchise that regular season and remains rostered through the end of the regular season."
+    },
+    {
+      "id": "monday_night_hero",
+      "name": "Monday Night Hero",
+      "image": "Assets/badges/upload/badge-monday-night-hero.png",
+      "rarity": "Elite",
+      "lp": 75,
+      "auto": true,
+      "requirement": "Enter Monday night trailing, then win the matchup with a Monday-night starter scoring at least 20 fantasy points."
+    },
+    {
+      "id": "last_second_legend",
+      "name": "Last-Second Legend",
+      "image": "Assets/badges/upload/badge-last-second-legend.png",
+      "rarity": "Legendary",
+      "lp": 150,
+      "auto": false,
+      "requirement": "Have an EFL matchup result officially flip from a loss or tie to a win because of a post-game stat correction after all NFL games for that fantasy week were final."
+    },
+    {
+      "id": "league_record_breaker",
+      "name": "League Record Breaker",
+      "image": "Assets/badges/upload/badge-league-record-breaker.png",
+      "rarity": "Legendary",
+      "lp": 200,
+      "auto": false,
+      "requirement": "Set a new official EFL all-time record in a tracked league record-book category. The previous record and new mark must both be documented."
+    },
+    {
+      "id": "iron_curtain",
+      "name": "Iron Curtain",
+      "image": "Assets/badges/upload/badge-iron-curtain.png",
+      "rarity": "Achievement",
+      "lp": 70,
+      "auto": true,
+      "requirement": "Win three different regular-season matchups in one season while holding the opponent below 100 fantasy points each time."
+    },
+    {
+      "id": "secret_alpha",
+      "name": "???",
+      "rarity": "Secret",
+      "lp": 250,
+      "secret": true,
+      "auto": false,
+      "requirement": "CLASSIFIED // A rare path through the league has been detected. Requirement revealed only when unlocked."
+    },
+    {
+      "id": "secret_beta",
+      "name": "???",
+      "rarity": "Secret",
+      "lp": 300,
+      "secret": true,
+      "auto": false,
+      "requirement": "CLASSIFIED // The conditions are hidden. The Badge Vault will reveal the truth only after achievement."
+    },
+    {
+      "id": "secret_gamma",
+      "name": "???",
+      "rarity": "Secret",
+      "lp": 350,
+      "secret": true,
+      "auto": false,
+      "requirement": "CLASSIFIED // Some accomplishments are meant to be discovered, not chased."
+    },
+    {
+      "id": "secret_delta",
+      "name": "???",
+      "rarity": "Secret",
+      "lp": 400,
+      "secret": true,
+      "auto": false,
+      "requirement": "CLASSIFIED // Extremely rare. No public hint is available."
+    },
+    {
+      "id": "secret_omega",
+      "name": "???",
+      "rarity": "Secret",
+      "lp": 600,
+      "secret": true,
+      "auto": false,
+      "requirement": "CLASSIFIED // The deepest EFL achievement. Requirement revealed upon unlock."
+    }
+  ]
+}

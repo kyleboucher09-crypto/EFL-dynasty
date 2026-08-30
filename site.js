@@ -1,21 +1,23 @@
 const EFL_ID="1313240395462742016", EFL_API="https://api.sleeper.app/v1";
-const $=s=>document.querySelector(s);
+const eflQuery=s=>document.querySelector(s);
 async function apiGet(path){const r=await fetch(EFL_API+path);if(!r.ok)throw new Error("Sleeper "+r.status);return r.json()}
 function teamName(user,roster){return user?.metadata?.team_name||user?.display_name||(roster?`Roster ${roster.roster_id}`:"EFL Team")}
 
 const LEGACY_RANK_LEVELS=[
- {level:1,name:'Prospect',lp:0,icon:'P'},
- {level:2,name:'Rookie',lp:1,icon:'R'},
- {level:3,name:'Veteran',lp:500,icon:'V'},
- {level:4,name:'Captain ★',lp:1200,icon:'C1'},
- {level:5,name:'Captain ★★',lp:2200,icon:'C2'},
- {level:6,name:'Captain ★★★',lp:3400,icon:'C3'},
- {level:7,name:'Captain ★★★★',lp:4700,icon:'C4'},
- {level:8,name:'Hall of Famer',lp:6000,icon:'HOF'}
+ {level:1,name:'Prospect',lp:0,icon:'P',art:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'},
+ {level:2,name:'Rookie',lp:1,icon:'R',art:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
+ {level:3,name:'Special Teamer',lp:175,icon:'ST',art:'Assets/rank-special-teamer.svg'},
+ {level:4,name:'Starter',lp:350,icon:'S',art:'Assets/rank-starter.svg'},
+ {level:5,name:'Veteran',lp:500,icon:'V',art:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
+ {level:6,name:'All-Pro',lp:850,icon:'AP',art:'Assets/rank-all-pro.svg'},
+ {level:7,name:'Captain ★',lp:1200,icon:'C1',art:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
+ {level:8,name:'Captain ★★',lp:2200,icon:'C2',art:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
+ {level:9,name:'Captain ★★★',lp:3400,icon:'C3',art:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
+ {level:10,name:'Captain ★★★★',lp:4700,icon:'C4',art:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
+ {level:11,name:'Franchise Legend',lp:5400,icon:'FL',art:'Assets/rank-franchise-legend.svg'},
+ {level:12,name:'Hall of Famer',lp:6000,icon:'HOF',art:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'}
 ];
 
-const LEGACY_BADGE_ALIASES={efl_champion:'champion',first_round_bye:'first_class_ticket',podium:'on_the_podium',consolation:'consolation_king',bye_to_final:'business_trip',thousand:'four_digits',high_week:'weekly_hammer',defending_champ:'title_defense',iron_man:'iron_franchise',decade:'efl_lifetime'};
-const SEASONAL_REPEAT_BADGES=new Set(['champion','regular_season_king','points_king','untouchable','two_hundred_club','absolute_destruction','photo_finish','hot_streak','perfect_month','comeback_kid','giant_killer','wire_wizard','playoff_assassin','first_class_ticket','on_the_podium','four_digits','weekly_hammer','bracket_breaker','consolation_king','business_trip','title_defense','three_week_terror','double_crown','triple_crown_season','survivor','bench_boss','consistency_king','precision_drafter','rivalry_king','roster_builder','sleeper_hit','streak_breaker','sunday_miracle','the_spoiler','trade_heist','trade_master','upset_of_year','waiver_steal','monday_night_hero','iron_curtain']);
 window.EFL_LEGACY_POLICY={hallOfFameTargetYears:[8,12],rankScope:'franchise-per-league',multiLeagueMode:'separate-franchise-ledgers',leagueIds:[EFL_ID],note:'One owner may have multiple league franchises, but each franchise keeps its own LP and rank so joining more leagues does not accelerate a single Hall of Fame track.'};
 
 function installLegacyEconomyPatch(){
@@ -25,34 +27,6 @@ function installLegacyEconomyPatch(){
   if(typeof RULES!=='undefined'&&Array.isArray(RULES.levels)){RULES.levels=LEGACY_RANK_LEVELS.map(x=>({...x}));clearInterval(rulesTimer)}
   if(tries>120)clearInterval(rulesTimer);
  },25);
- if(typeof window.award==='function'&&!window.award.__eflLegacyPatched){
-  const originalAward=window.award;
-  const patched=function(a,id,count=1,meta=''){
-   id=LEGACY_BADGE_ALIASES[id]||id;
-   const b=(typeof RULES!=='undefined'&&RULES.badges||[]).find(x=>x.id===id);
-   if(!b||count<=0)return;
-   const year=Number(a?.modern?.[a.modern.length-1]?.year)||0;
-   if(SEASONAL_REPEAT_BADGES.has(id)&&year>=2026){
-    let old=a.badges.find(x=>x.id===id);
-    const units=Math.max(1,Number(count)||1);
-    if(!old){old={...b,count:0,meta,_creditedSeasons:[]};a.badges.push(old)}
-    old._creditedSeasons=Array.isArray(old._creditedSeasons)?old._creditedSeasons:[];
-    if(old._creditedSeasons.includes(year))return;
-    old._creditedSeasons.push(year);old.count=(old.count||0)+units;a.lp+=b.lp*units;
-    if(id==='triple_crown_season'){
-     const dbl=a.badges.find(x=>x.id==='double_crown');
-     if(dbl&&Array.isArray(dbl._creditedSeasons)&&dbl._creditedSeasons.includes(year)){
-      dbl._creditedSeasons=dbl._creditedSeasons.filter(y=>y!==year);dbl.count=Math.max(0,(dbl.count||1)-1);
-      const db=(RULES.badges||[]).find(x=>x.id==='double_crown');if(db)a.lp=Math.max(0,a.lp-db.lp);
-      if(!dbl._creditedSeasons.length)a.badges=a.badges.filter(x=>x!==dbl);
-     }
-    }
-    return;
-   }
-   return originalAward(a,id,count,meta);
-  };
-  patched.__eflLegacyPatched=true;window.award=patched;
- }
 }
 installLegacyEconomyPatch();
 
@@ -60,11 +34,15 @@ function setupRankArtwork(){
  const art={
   P:{name:'Prospect',src:'Assets/178F123F-4E02-4833-99DB-34F158424913.png'},
   R:{name:'Rookie',src:'Assets/CF04E411-C2B2-4276-9CBE-5F4B8397FF61.png'},
+  ST:{name:'Special Teamer',src:'Assets/rank-special-teamer.svg'},
+  S:{name:'Starter',src:'Assets/rank-starter.svg'},
   V:{name:'Veteran',src:'Assets/8AA2E171-AA60-4632-9925-F4F7E2C67A18.png'},
+  AP:{name:'All-Pro',src:'Assets/rank-all-pro.svg'},
   C1:{name:'Captain ★',src:'Assets/60D48321-51C2-4892-8313-EFB01FEC7A92.png'},
   C2:{name:'Captain ★★',src:'Assets/DAF87217-63F7-4F79-8AC1-EF0456E381B6.png'},
   C3:{name:'Captain ★★★',src:'Assets/AC44FE13-5FED-4EF2-9E17-965B4352BDD5.png'},
   C4:{name:'Captain ★★★★',src:'Assets/D5A91E50-F4C3-4A6D-927D-7BA0E1758E1C.png'},
+  FL:{name:'Franchise Legend',src:'Assets/rank-franchise-legend.svg'},
   HOF:{name:'Hall of Famer',src:'Assets/59D1F958-F0DA-4B86-96DE-DBC87D77EE02.png'}
  };
  const style=document.createElement('style');
@@ -107,7 +85,7 @@ function setupRankArtwork(){
 
 function setupHubTouchTrail(){
  const grid=document.querySelector('.hub-grid');if(!grid||grid.dataset.touchTrailReady)return;grid.dataset.touchTrailReady='1';
- const style=document.createElement('style');style.textContent=`.hub-tile{will-change:transform,box-shadow,border-color}.hub-tile.hub-touch-active{border-color:#b85cff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;box-shadow:0 0 0 1px rgba(184,92,255,.62),0 0 30px rgba(153,55,230,.42),inset 0 0 24px rgba(184,92,255,.13)!important;transform:translateY(-1px) scale(.99)!important}.hub-tile.hub-touch-active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}@media(hover:none),(pointer:coarse){.hub-tile:active{border-color:rgba(232,184,74,.28)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.13),rgba(232,184,74,.045) 46%,rgba(9,7,13,.96) 74%)!important;box-shadow:0 0 16px rgba(232,184,74,.12),inset 0 0 20px rgba(232,184,74,.045)!important;transform:none!important}.hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.6)) drop-shadow(0 0 18px rgba(232,184,74,.25)) brightness(1.06)!important;transform:none!important}.hub-tile.hub-touch-active,.hub-tile.hub-touch-active:active{border-color:#b85cff!important;box-shadow:0 0 0 1px rgba(184,92,255,.62),0 0 30px rgba(153,55,230,.42),inset 0 0 24px rgba(184,92,255,.13)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(184,92,255,.16) 53%,rgba(9,7,13,.96) 76%)!important;transform:translateY(-1px) scale(.99)!important}.hub-tile.hub-touch-active img,.hub-tile.hub-touch-active:active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(184,92,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}}`;document.head.appendChild(style);
+ const style=document.createElement('style');style.textContent=`.hub-tile{will-change:transform,box-shadow,border-color}.hub-tile.hub-touch-active{border-color:#45a3ff!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(23,105,232,.18) 53%,rgba(4,9,20,.96) 76%)!important;box-shadow:0 0 0 1px rgba(69,163,255,.65),0 0 30px rgba(23,105,232,.42),inset 0 0 24px rgba(69,163,255,.14)!important;transform:translateY(-1px) scale(.99)!important}.hub-tile.hub-touch-active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(69,163,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}@media(hover:none),(pointer:coarse){.hub-tile:active{border-color:rgba(232,184,74,.28)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.13),rgba(232,184,74,.045) 46%,rgba(4,9,20,.96) 74%)!important;box-shadow:0 0 16px rgba(232,184,74,.12),inset 0 0 20px rgba(232,184,74,.045)!important;transform:none!important}.hub-tile:active img{filter:drop-shadow(0 0 8px rgba(255,215,108,.6)) drop-shadow(0 0 18px rgba(232,184,74,.25)) brightness(1.06)!important;transform:none!important}.hub-tile.hub-touch-active,.hub-tile.hub-touch-active:active{border-color:#45a3ff!important;box-shadow:0 0 0 1px rgba(69,163,255,.65),0 0 30px rgba(23,105,232,.42),inset 0 0 24px rgba(69,163,255,.14)!important;background:radial-gradient(circle at 50% 34%,rgba(232,184,74,.12),rgba(23,105,232,.18) 53%,rgba(4,9,20,.96) 76%)!important;transform:translateY(-1px) scale(.99)!important}.hub-tile.hub-touch-active img,.hub-tile.hub-touch-active:active img{filter:drop-shadow(0 0 9px rgba(255,215,108,.72)) drop-shadow(0 0 18px rgba(69,163,255,.68)) brightness(1.12)!important;transform:scale(1.035)!important}}`;document.head.appendChild(style);
  let active=null,touchId=null,startX=0,startY=0;
  const setActive=tile=>{if(active===tile)return;active?.classList.remove('hub-touch-active');active=tile||null;active?.classList.add('hub-touch-active')};
  const tileAt=(x,y)=>{const el=document.elementFromPoint(x,y);const tile=el?.closest?.('.hub-tile');return tile&&grid.contains(tile)?tile:null};
@@ -120,7 +98,7 @@ function setupHubTouchTrail(){
 
 function setupMobileDock(){
  if(document.querySelector('.efl-mobile-dock'))return;const page=location.pathname.split('/').pop()||'index.html';
- const style=document.createElement('style');style.textContent=`.efl-mobile-dock{display:none}@media(max-width:850px){body{padding-bottom:74px!important}.efl-mobile-dock{position:fixed;left:10px;right:10px;bottom:10px;z-index:120;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:7px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(8,6,11,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 14px 38px rgba(0,0,0,.48)}.efl-mobile-dock a,.efl-mobile-dock button{min-width:0;height:50px;border:0;border-radius:12px;background:transparent;color:#a99faf;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:800 8px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;letter-spacing:.02em}.efl-mobile-dock .dock-icon{font-size:19px;line-height:1}.efl-mobile-dock a.active{color:#ffd979;background:rgba(255,217,121,.09)}.efl-mobile-dock button{cursor:pointer}.efl-mobile-dock button:active,.efl-mobile-dock a:active{background:rgba(255,255,255,.08)}}`;document.head.appendChild(style);
+ const style=document.createElement('style');style.textContent=`.efl-mobile-dock{display:none}@media(max-width:850px){body{padding-bottom:74px!important}.efl-mobile-dock{position:fixed;left:10px;right:10px;bottom:10px;z-index:120;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:7px;border:1px solid rgba(69,163,255,.22);border-radius:18px;background:rgba(4,9,20,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 14px 38px rgba(0,0,0,.48),0 0 22px rgba(23,105,232,.12)}.efl-mobile-dock a,.efl-mobile-dock button{min-width:0;height:50px;border:0;border-radius:12px;background:transparent;color:#8fa6c7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:800 8px/1 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-decoration:none;letter-spacing:.02em}.efl-mobile-dock .dock-icon{font-size:19px;line-height:1}.efl-mobile-dock a.active{color:#ffd979;background:rgba(23,105,232,.18)}.efl-mobile-dock button{cursor:pointer}.efl-mobile-dock button:active,.efl-mobile-dock a:active{background:rgba(69,163,255,.12)}}`;document.head.appendChild(style);
  const dock=document.createElement('nav');dock.className='efl-mobile-dock';dock.setAttribute('aria-label','Primary mobile navigation');const links=[['index.html','🏠','Home'],['franchises.html','🛡️','Franchise'],['legacy.html','🏅','Legacy'],['power-rankings.html','📈','Rankings']];dock.innerHTML=links.map(([href,icon,label])=>`<a href="${href}"${page===href?' class="active" aria-current="page"':''}><span class="dock-icon">${icon}</span><span>${label}</span></a>`).join('')+`<button type="button" id="dockMore" aria-label="Open more navigation"><span class="dock-icon">☰</span><span>More</span></button>`;document.body.appendChild(dock);
  const more=dock.querySelector('#dockMore');more?.addEventListener('click',()=>{const menu=document.querySelector('#mobileMenu')||document.querySelector('#mobile');const topBtn=document.querySelector('#menuBtn');if(menu){const open=menu.classList.toggle('open');if(topBtn){topBtn.setAttribute('aria-expanded',String(open));if(topBtn.classList.contains('menu-btn'))topBtn.textContent=open?'✕':'☰'}if(open)window.scrollTo({top:0,behavior:'smooth'})}});
 }
@@ -130,6 +108,6 @@ function enforcePreseasonHeritageBaseline(){
  const timer=setInterval(()=>{tries++;const arr=window.EFL;if(!Array.isArray(arr)||!arr.length){if(tries>120)clearInterval(timer);return}const gamesPlayed=arr.reduce((n,a)=>n+(+a.r?.settings?.wins||0)+(+a.r?.settings?.losses||0)+(+a.r?.settings?.ties||0),0);if(gamesPlayed===0&&typeof RULES!=='undefined'&&typeof card==='function'){RULES.levels=LEGACY_RANK_LEVELS.map(x=>({...x}));const franchiseBadge=RULES.badges.find(b=>b.id==='legacy_franchise');const championBadge=RULES.badges.find(b=>b.id==='legacy_champion');for(const a of arr){a.badges=[];a.lp=0;if(a.heritageYears?.length&&franchiseBadge){a.badges.push({...franchiseBadge,count:1,icon:`<img src="${franchiseBadge.image}" alt="Legacy Franchise Owner badge">`,meta:'Pre-2026 franchise owner'});a.lp+=franchiseBadge.lp}if(a.historicTitles>0&&championBadge){a.badges.push({...championBadge,count:1,icon:`<img src="${championBadge.image}" alt="Legacy Champion badge">`,meta:`${a.historicTitles} pre-2026 championship${a.historicTitles===1?'':'s'}`});a.lp+=championBadge.lp}}arr.sort((a,b)=>b.lp-a.lp||b.historicTitles-a.historicTitles);const grid=document.querySelector('#grid');if(grid)grid.innerHTML=arr.map((a,i)=>card(a,i)).join('')}clearInterval(timer)},100);
 }
 
-function setupShell(){const page=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute('href')===page)a.classList.add('active')});const btn=$('#menuBtn'),menu=$('#mobileMenu');if(btn&&menu){btn.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'✕':'☰'});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove('open');btn.textContent='☰';btn.setAttribute('aria-expanded','false')}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
+function setupShell(){const page=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('[data-nav]').forEach(a=>{if(a.getAttribute('href')===page)a.classList.add('active')});const btn=eflQuery('#menuBtn'),menu=eflQuery('#mobileMenu');if(btn&&menu){btn.addEventListener('click',()=>{const open=menu.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'✕':'☰'});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn&&!e.target.closest('#dockMore')){menu.classList.remove('open');btn.textContent='☰';btn.setAttribute('aria-expanded','false')}})}setupMobileDock();setupRankArtwork();setupHubTouchTrail();enforcePreseasonHeritageBaseline()}
 document.addEventListener('DOMContentLoaded',setupShell);
-// Legacy rank artwork uses the latest uploaded Prospect, Rookie, Veteran, Captain 1-4 star, and Hall of Famer patches across both franchise and legacy views.
+// Legacy rank artwork follows the 12-step football ladder while preserving the Captain 1-4 star progression.
