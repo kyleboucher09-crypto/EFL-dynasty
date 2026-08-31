@@ -29,7 +29,7 @@ These values must be stored in Vercel environment variables. Never commit them t
 
 Existing `COMMISSIONER_KEY` remains supported as a bootstrap/fallback for the Commissioner Account Inbox while the commissioner account is being established.
 
-After adding or changing any of these environment variables, create a fresh Vercel deployment before testing so the preview/runtime picks up the new values. Auth and email variables used for feature-branch testing must be enabled for the **Preview** environment as well as Production.
+After adding or changing any of these environment variables, create a fresh Vercel deployment before testing so the preview/runtime picks up the new values. Auth and email variables used for feature-branch testing must be enabled for the **Preview** environment as well as Production. If the Resend key is rotated during testing, redeploy the Preview before retrying a verification email.
 
 ## Transactional email domain
 
