@@ -1,6 +1,28 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Hall of Champions</title><link rel="stylesheet" href="site.css"><style>.hero-grid{display:grid;grid-template-columns:1fr .8fr;gap:28px;align-items:center}.throne{padding:24px;border:1px solid #e8b84a4c;border-radius:22px;background:#e8b84a10}.throne .crown{font-size:48px}.throne-team{font-size:28px;font-weight:1000;margin-top:7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.stat{padding:14px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff0d}.stat small{color:var(--muted);font-size:8px;text-transform:uppercase}.stat b{display:block;color:var(--gold2);font-size:20px;margin-top:5px}.wall{display:grid;grid-template-columns:1fr 1fr;gap:14px}.season{padding:20px;border-radius:20px;background:linear-gradient(145deg,#20160f,#120c18);border:1px solid #e8b84a3e}.year{font-size:42px;font-weight:1000;color:var(--gold2)}.winner{padding:15px;border-radius:14px;background:#e8b84a0f;border:1px solid #e8b84a29;margin-top:12px}.winner b{display:block;font-size:21px;margin-top:5px}.owner{color:var(--muted);font-size:10px}.places{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.place{padding:11px;border-radius:11px;background:#ffffff08}.place small{color:var(--muted);font-size:8px}.place b{display:block;font-size:12px;margin-top:4px}@media(max-width:800px){.hero-grid,.wall{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}</style></head><body>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EFL Hall of Champions</title><link rel="stylesheet" href="site.css"><style>.hero-grid{display:grid;grid-template-columns:1fr .8fr;gap:28px;align-items:center}.throne{padding:24px;border:1px solid #e8b84a4c;border-radius:22px;background:#e8b84a10}.throne .crown{font-size:48px}.throne-team{font-size:28px;font-weight:1000;margin-top:7px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.stat{padding:14px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff0d}.stat small{color:var(--muted);font-size:8px;text-transform:uppercase}.stat b{display:block;color:var(--gold2);font-size:20px;margin-top:5px}.wall{display:grid;grid-template-columns:1fr 1fr;gap:14px}.season{padding:20px;border-radius:20px;background:linear-gradient(145deg,#20160f,#120c18);border:1px solid #e8b84a3e}.year{font-size:42px;font-weight:1000;color:var(--gold2)}.winner{padding:15px;border-radius:14px;background:#e8b84a0f;border:1px solid #e8b84a29;margin-top:12px}.winner b{display:block;font-size:21px;margin-top:5px}.owner{color:var(--muted);font-size:10px}.places{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.place{padding:11px;border-radius:11px;background:#ffffff08}.place small{color:var(--muted);font-size:8px}.place b{display:block;font-size:12px;margin-top:4px}@media(max-width:800px){.hero-grid,.wall{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}</style><style id="efl-brand-consistency">
+/* Shared EFL header identity: same logo, title and gold subtitle everywhere. */
+.brand{display:flex!important;align-items:center!important;gap:10px!important;margin-right:auto!important;min-width:0!important;max-width:100%!important;font-weight:950!important;text-decoration:none!important}
+.brand img{display:block!important;width:46px!important;height:46px!important;aspect-ratio:1/1!important;max-width:none!important;object-fit:cover!important;object-position:center!important;border-radius:12px!important;flex:0 0 46px!important}
+.brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+.brand-copy span{display:block!important;color:#f5f9ff!important;font-size:15px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+.brand-copy small{display:block!important;color:#ffd979!important;font-size:8px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;margin-top:5px!important;white-space:nowrap!important}
+@media(max-width:700px){
+  .nav{height:62px!important;min-height:62px!important;padding-left:12px!important;padding-right:12px!important;gap:8px!important}
+  .brand{gap:7px!important;max-width:calc(100% - 48px)!important;overflow:hidden!important}
+  .brand img{width:34px!important;height:34px!important;border-radius:9px!important;flex:0 0 34px!important}
+  .brand-copy span{font-size:12.5px!important}
+  .brand-copy small{font-size:6.2px!important;letter-spacing:.12em!important;margin-top:3px!important}
+  .menu-btn,.menu{width:40px!important;height:40px!important;flex:0 0 40px!important}
+  .mobile-menu,.mobile{top:62px!important}
+}
+@media(max-width:390px){
+  .brand img{width:32px!important;height:32px!important;flex-basis:32px!important}
+  .brand-copy span{font-size:12px!important}
+  .brand-copy small{font-size:5.8px!important;letter-spacing:.10em!important}
+}
+</style>
+</head><body>
 <div class="topbar"><div class="nav">
-<a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a>
+<a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand-copy"><span>EFL Dynasty</span><small>ELITE FANTASY FOOTBALLERS</small></div></a>
 <div class="navlinks">
 <a data-nav href="index.html">Home</a><a data-nav href="champions.html">Champions</a><a data-nav href="power-rankings.html">Power Rankings</a><a data-nav href="records.html">Records</a><a data-nav href="franchises.html">Franchises</a><a data-nav href="history.html">History</a><a data-nav href="commissioner.html">Commissioner</a>
 </div><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>

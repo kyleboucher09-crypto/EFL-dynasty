@@ -24,8 +24,30 @@
 <link rel="stylesheet" href="featured-matchup.css?v=20260831-2">
 <link rel="stylesheet" href="scoring-crown.css?v=20260831-1">
 <link rel="stylesheet" href="power-rankings-spotlight.css?v=20260831-1">
+<style id="efl-brand-consistency">
+/* Shared EFL header identity: same logo, title and gold subtitle everywhere. */
+.brand{display:flex!important;align-items:center!important;gap:10px!important;margin-right:auto!important;min-width:0!important;max-width:100%!important;font-weight:950!important;text-decoration:none!important}
+.brand img{display:block!important;width:46px!important;height:46px!important;aspect-ratio:1/1!important;max-width:none!important;object-fit:cover!important;object-position:center!important;border-radius:12px!important;flex:0 0 46px!important}
+.brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+.brand-copy span{display:block!important;color:#f5f9ff!important;font-size:15px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+.brand-copy small{display:block!important;color:#ffd979!important;font-size:8px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;margin-top:5px!important;white-space:nowrap!important}
+@media(max-width:700px){
+  .nav{height:62px!important;min-height:62px!important;padding-left:12px!important;padding-right:12px!important;gap:8px!important}
+  .brand{gap:7px!important;max-width:calc(100% - 48px)!important;overflow:hidden!important}
+  .brand img{width:34px!important;height:34px!important;border-radius:9px!important;flex:0 0 34px!important}
+  .brand-copy span{font-size:12.5px!important}
+  .brand-copy small{font-size:6.2px!important;letter-spacing:.12em!important;margin-top:3px!important}
+  .menu-btn,.menu{width:40px!important;height:40px!important;flex:0 0 40px!important}
+  .mobile-menu,.mobile{top:62px!important}
+}
+@media(max-width:390px){
+  .brand img{width:32px!important;height:32px!important;flex-basis:32px!important}
+  .brand-copy span{font-size:12px!important}
+  .brand-copy small{font-size:5.8px!important;letter-spacing:.10em!important}
+}
+</style>
 </head><body>
-<header class="topbar"><div class="nav"><a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL"><span>EFL Dynasty<small>Elite Fantasy Footballers</small></span></a><nav class="navlinks"><a href="index.html">Home</a><a href="power-rankings.html">Power Rankings</a><a href="records.html">Records</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a><a href="rulebook.html">Rulebook</a><a href="commissioner.html">Commissioner</a></nav><div class="league-menu" id="leagueMenu"><button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false"><span class="league-dot dynasty-dot"></span>DYNASTY ▾</button><div class="league-pop"><a href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Switch league</small></span></a></div></div><button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">☰</button></div></header>
+<header class="topbar"><div class="nav"><a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand-copy"><span>EFL Dynasty</span><small>ELITE FANTASY FOOTBALLERS</small></div></a><nav class="navlinks"><a href="index.html">Home</a><a href="power-rankings.html">Power Rankings</a><a href="records.html">Records</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a><a href="rulebook.html">Rulebook</a><a href="commissioner.html">Commissioner</a></nav><div class="league-menu" id="leagueMenu"><button class="league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false"><span class="league-dot dynasty-dot"></span>DYNASTY ▾</button><div class="league-pop"><a href="redraft.html"><span class="league-dot redraft-dot"></span><span><b>EFL Redraft</b><small>Switch league</small></span></a></div></div><button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">☰</button></div></header>
 <div class="mobile-menu" id="mobileMenu"><a href="index.html">🏠 Home</a><a href="champions.html">👑 Champions</a><a href="power-rankings.html">📈 Power Rankings</a><a href="records.html">🔥 Records</a><a href="franchises.html">🛡️ Franchises</a><a href="legacy.html">🏅 Legacy</a><a href="rulebook.html">⚖️ Rulebook</a><a href="commissioner.html">♛ Commissioner</a></div>
 <main class="home-shell"><section class="league-hero"><div class="league-hero-card"><img src="Assets/league-hub-hero.jpg" alt="The EFL League Hub"></div><div class="league-status"><i></i><span id="status">Connecting to Sleeper…</span></div></section>
 <section class="spot-wrap">

@@ -24,9 +24,31 @@
 .legacy-grid{grid-template-columns:repeat(2,1fr);gap:8px}.badge{min-height:190px!important;padding:9px!important}.badge-art{height:84px!important;min-height:84px!important;margin:7px auto 5px!important}.badge-art img{max-width:126px!important;max-height:84px!important}.badge.secret .badge-art{height:84px!important;min-height:84px!important}.rank-ladder{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.rank-card{display:block;min-height:174px;padding:11px;text-align:center}.rank-num{right:9px;top:9px;font-size:17px}.rank-mark{width:88px;height:96px;margin:10px auto 0}.rank-mark img{width:88px!important;height:96px!important;max-width:88px!important;max-height:96px!important}.rank-card h3{margin:6px 0 3px;font-size:12px}.rank-lp{font-size:10px}.standings-head{align-items:start;padding:16px}.standings-head h2{font-size:21px}.standings-status{font-size:9px;text-align:right}.standing-row{grid-template-columns:32px 48px minmax(0,1fr);gap:10px;padding:12px 11px;min-height:108px}.standing-place{font-size:13px}.standing-patch{width:48px;height:48px}.standing-team{min-width:0}.standing-team b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.standing-team span,.standing-rank span{font-size:9px}.standing-rank{grid-column:3;grid-row:2;margin-top:-17px}.standing-rank b{font-size:11px}.standing-progress{grid-column:1/-1;grid-row:3;margin-top:2px}.standing-progress-label{font-size:9px}.standing-progress-label strong{font-size:9px}.standing-bar{height:9px;margin-top:7px}.section-head{margin-top:20px}}
 @media(max-width:430px){.legacy-hero h1{font-size:43px}.legacy-loop{font-size:10px}.badge h3{font-size:10px}.badge p{font-size:7px}.secret-mark{width:64px;height:64px;font-size:30px}.reward{flex-basis:78%}}
 </style>
+<style id="efl-brand-consistency">
+/* Shared EFL header identity: same logo, title and gold subtitle everywhere. */
+.brand{display:flex!important;align-items:center!important;gap:10px!important;margin-right:auto!important;min-width:0!important;max-width:100%!important;font-weight:950!important;text-decoration:none!important}
+.brand img{display:block!important;width:46px!important;height:46px!important;aspect-ratio:1/1!important;max-width:none!important;object-fit:cover!important;object-position:center!important;border-radius:12px!important;flex:0 0 46px!important}
+.brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+.brand-copy span{display:block!important;color:#f5f9ff!important;font-size:15px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+.brand-copy small{display:block!important;color:#ffd979!important;font-size:8px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;margin-top:5px!important;white-space:nowrap!important}
+@media(max-width:700px){
+  .nav{height:62px!important;min-height:62px!important;padding-left:12px!important;padding-right:12px!important;gap:8px!important}
+  .brand{gap:7px!important;max-width:calc(100% - 48px)!important;overflow:hidden!important}
+  .brand img{width:34px!important;height:34px!important;border-radius:9px!important;flex:0 0 34px!important}
+  .brand-copy span{font-size:12.5px!important}
+  .brand-copy small{font-size:6.2px!important;letter-spacing:.12em!important;margin-top:3px!important}
+  .menu-btn,.menu{width:40px!important;height:40px!important;flex:0 0 40px!important}
+  .mobile-menu,.mobile{top:62px!important}
+}
+@media(max-width:390px){
+  .brand img{width:32px!important;height:32px!important;flex-basis:32px!important}
+  .brand-copy span{font-size:12px!important}
+  .brand-copy small{font-size:5.8px!important;letter-spacing:.10em!important}
+}
+</style>
 </head>
 <body>
-<div class="topbar"><div class="nav"><a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg"><div><span>EFL Dynasty</span><small>Elite Fantasy Footballers</small></div></a><div class="navlinks"><a href="index.html">Home</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a><a href="rulebook.html">Rulebook</a></div><button class="menu-btn" id="menuBtn">☰</button></div></div>
+<div class="topbar"><div class="nav"><a class="brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand-copy"><span>EFL Dynasty</span><small>ELITE FANTASY FOOTBALLERS</small></div></a><div class="navlinks"><a href="index.html">Home</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a><a href="rulebook.html">Rulebook</a></div><button class="menu-btn" id="menuBtn">☰</button></div></div>
 <div class="mobile-menu" id="mobileMenu"><a href="index.html">🏠 Home</a><a href="franchises.html">🛡️ Franchises</a><a href="legacy.html">🏅 Legacy System</a><a href="rulebook.html">⚖️ Rulebook</a></div>
 <main class="shell">
 <section class="page-hero legacy-hero"><div class="eyebrow">Performance · Prestige · Rewards</div><h1>EFL <span>LEGACY</span></h1><p class="legacy-loop"><strong>Perform</strong><i aria-hidden="true">→</i><strong>Earn LP</strong><i aria-hidden="true">→</i><strong>Build your legacy</strong></p><a class="legacy-rules-link" href="rulebook.html#legacy">How the Legacy System works <span aria-hidden="true">→</span></a></section>

@@ -14,6 +14,28 @@ button{border:0;border-radius:10px;padding:12px 14px;font-weight:1000;font-size:
 .dash-head{display:flex;align-items:center;gap:10px;margin:22px 0 10px}.dash-head h2{margin:0}.dash-head .count{margin-left:auto;padding:6px 8px;border-radius:999px;font-size:8px;background:#ffffff09;color:var(--gold);font-weight:900}.card{margin-top:12px;padding:18px;border-radius:17px;background:linear-gradient(145deg,#171020,#0d0912);border:1px solid #ffffff11}.card h3{margin:5px 0;font-size:21px}.meta{color:var(--muted);font-size:9px}.status{display:inline-block;margin-top:8px;padding:5px 7px;border-radius:999px;font-size:8px;font-weight:1000;background:#ffffff10}.logo-preview{width:82px;height:82px;border-radius:15px;object-fit:cover;border:1px solid #ffffff16;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:13px}.field{padding:10px;border-radius:10px;background:#ffffff07}.field small{display:block;color:var(--gold);font-size:7px;font-weight:900}.field b{display:block;font-size:10px;margin-top:4px;overflow-wrap:anywhere}.story{margin-top:11px;padding:12px;border-radius:10px;background:#ffffff05;color:#d7ccdd;font-size:11px;line-height:1.6}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.empty{text-align:center;padding:34px 16px;color:#93889e;border:1px dashed #ffffff18;border-radius:15px;margin-top:12px}.loading{text-align:center;padding:25px;color:var(--muted);font-size:11px}.hidden{display:none!important}.version{text-align:center;color:#5f5667;font-size:8px;margin-top:22px}
 @media(max-width:620px){.grid{grid-template-columns:1fr}.key-row{flex-direction:column}.key-row button{width:100%}}
 </style>
+<style id="efl-brand-consistency">
+/* Shared EFL header identity: same logo, title and gold subtitle everywhere. */
+.brand{display:flex!important;align-items:center!important;gap:10px!important;margin-right:auto!important;min-width:0!important;max-width:100%!important;font-weight:950!important;text-decoration:none!important}
+.brand img{display:block!important;width:46px!important;height:46px!important;aspect-ratio:1/1!important;max-width:none!important;object-fit:cover!important;object-position:center!important;border-radius:12px!important;flex:0 0 46px!important}
+.brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+.brand-copy span{display:block!important;color:#f5f9ff!important;font-size:15px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+.brand-copy small{display:block!important;color:#ffd979!important;font-size:8px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;margin-top:5px!important;white-space:nowrap!important}
+@media(max-width:700px){
+  .nav{height:62px!important;min-height:62px!important;padding-left:12px!important;padding-right:12px!important;gap:8px!important}
+  .brand{gap:7px!important;max-width:calc(100% - 48px)!important;overflow:hidden!important}
+  .brand img{width:34px!important;height:34px!important;border-radius:9px!important;flex:0 0 34px!important}
+  .brand-copy span{font-size:12.5px!important}
+  .brand-copy small{font-size:6.2px!important;letter-spacing:.12em!important;margin-top:3px!important}
+  .menu-btn,.menu{width:40px!important;height:40px!important;flex:0 0 40px!important}
+  .mobile-menu,.mobile{top:62px!important}
+}
+@media(max-width:390px){
+  .brand img{width:32px!important;height:32px!important;flex-basis:32px!important}
+  .brand-copy span{font-size:12px!important}
+  .brand-copy small{font-size:5.8px!important;letter-spacing:.10em!important}
+}
+</style>
 </head>
 <body>
 <main class="wrap">
