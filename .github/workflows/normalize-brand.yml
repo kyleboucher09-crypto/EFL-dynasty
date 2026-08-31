@@ -1,0 +1,86 @@
+name: Normalize EFL Website Header
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/normalize-brand.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  normalize-brand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Normalize branding across every HTML page
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          STYLE = r'''<style id="efl-brand-consistency">
+          /* Shared EFL header identity: same logo, title and gold subtitle everywhere. */
+          .brand{display:flex!important;align-items:center!important;gap:10px!important;margin-right:auto!important;min-width:0!important;max-width:100%!important;font-weight:950!important;text-decoration:none!important}
+          .brand img{display:block!important;width:46px!important;height:46px!important;aspect-ratio:1/1!important;max-width:none!important;object-fit:cover!important;object-position:center!important;border-radius:12px!important;flex:0 0 46px!important}
+          .brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+          .brand-copy span{display:block!important;color:#f5f9ff!important;font-size:15px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+          .brand-copy small{display:block!important;color:#ffd979!important;font-size:8px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;margin-top:5px!important;white-space:nowrap!important}
+          @media(max-width:700px){
+            .nav{height:62px!important;min-height:62px!important;padding-left:12px!important;padding-right:12px!important;gap:8px!important}
+            .brand{gap:7px!important;max-width:calc(100% - 48px)!important;overflow:hidden!important}
+            .brand img{width:34px!important;height:34px!important;border-radius:9px!important;flex:0 0 34px!important}
+            .brand-copy span{font-size:12.5px!important}
+            .brand-copy small{font-size:6.2px!important;letter-spacing:.12em!important;margin-top:3px!important}
+            .menu-btn,.menu{width:40px!important;height:40px!important;flex:0 0 40px!important}
+            .mobile-menu,.mobile{top:62px!important}
+          }
+          @media(max-width:390px){
+            .brand img{width:32px!important;height:32px!important;flex-basis:32px!important}
+            .brand-copy span{font-size:12px!important}
+            .brand-copy small{font-size:5.8px!important;letter-spacing:.10em!important}
+          }
+          </style>'''
+
+          anchor_re = re.compile(r'(<a[^>]*class=["\'][^"\']*\bbrand\b[^"\']*["\'][^>]*>)(.*?)(</a>)', re.I | re.S)
+          old_style_re = re.compile(r'<style id=["\']efl-brand-consistency["\']>.*?</style>', re.I | re.S)
+          changed = []
+
+          for path in Path('.').glob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if 'efl-logo.jpeg' not in text or 'class="brand"' not in text and "class='brand'" not in text:
+                  continue
+
+              def normalize_anchor(match):
+                  inner = match.group(2)
+                  if 'efl-logo.jpeg' not in inner:
+                      return match.group(0)
+                  normalized = '<img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand-copy"><span>EFL Dynasty</span><small>ELITE FANTASY FOOTBALLERS</small></div>'
+                  return match.group(1) + normalized + match.group(3)
+
+              new = anchor_re.sub(normalize_anchor, text, count=1)
+              new = old_style_re.sub('', new)
+              if '</head>' in new:
+                  new = new.replace('</head>', STYLE + '\n</head>', 1)
+
+              if new != text:
+                  path.write_text(new, encoding='utf-8')
+                  changed.append(str(path))
+
+          print('Updated:', ', '.join(changed) if changed else 'none')
+
+      - name: Commit normalized headers
+        run: |
+          if git diff --quiet; then
+            echo "No header changes needed"
+            exit 0
+          fi
+          git config user.name "EFL Website Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add '*.html'
+          git commit -m "Standardize EFL header branding and mobile logo"
+          git push
