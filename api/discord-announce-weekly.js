@@ -3,7 +3,7 @@ import {discord,discordConfigured,getBotUser,getGuildChannels,resolveGuild} from
 
 const REPORT_SOURCE='https://raw.githubusercontent.com/kyleboucher09-crypto/EFL-dynasty/main/weekly-report.json';
 const REPORT_URL='https://www.efldynasty.com/#game-day';
-const LOGO_URL='https://www.efldynasty.com/Assets/efl-logo.jpeg';
+const LOGO_URL='https://www.efldynasty.com/Assets/efl-logo.jpeg?v=efl-2026-08-31';
 
 function canonical(v){
   return String(v||'').normalize('NFKD').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'');

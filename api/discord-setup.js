@@ -99,7 +99,7 @@ function hubEmbed(){
     title:'👑 EFL LEAGUE HUB',
     description:'**Everything official lives on EFLDynasty.com.**\n\nDiscord is the EFL clubhouse for conversation, trades, NFL talk, trivia, and league reactions.',
     color:8200905,
-    thumbnail:{url:'https://www.efldynasty.com/Assets/efl-logo.jpeg'},
+    thumbnail:{url:'https://www.efldynasty.com/Assets/efl-logo.jpeg?v=efl-2026-08-31'},
     fields:[
       {name:'🏠 League Hub',value:'[Open EFL Dynasty](https://www.efldynasty.com/)',inline:true},
       {name:'📈 Power Rankings',value:'[View Rankings](https://www.efldynasty.com/power-rankings.html)',inline:true},
