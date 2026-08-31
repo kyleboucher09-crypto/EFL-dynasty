@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EFL Discord Setup</title>
+<style>
+:root{--bg:#07060a;--panel:#100b17;--purple:#7d22c9;--gold:#ffd979;--gold2:#e8b84a;--text:#f8f3ff;--muted:#aaa0b6;--green:#57d39b;--red:#ff7d89}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;background:radial-gradient(900px 500px at 50% -120px,#7d22c944,transparent 65%),linear-gradient(180deg,#130522 0,#07060a 42%)}
+.wrap{max-width:880px;margin:auto;padding:24px 16px 70px}.topbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}.logo{width:46px;height:46px;border-radius:12px;object-fit:cover;border:1px solid #e8b84a55}.brand b{display:block;font-size:15px}.brand small{color:var(--gold);font-size:8px;letter-spacing:.18em;font-weight:900}.home{margin-left:auto;color:#d9cfe1;font-size:11px;padding:9px 11px;border:1px solid #ffffff14;border-radius:10px;text-decoration:none}
+.hero{padding:30px 24px;border-radius:24px;border:1px solid #e8b84a50;background:radial-gradient(420px 200px at 90% 0,#7d22c920,transparent 70%),linear-gradient(145deg,#120b18,#0b080e);box-shadow:0 20px 60px #0007}.eye{color:var(--gold);font-size:9px;font-weight:1000;letter-spacing:.18em;text-transform:uppercase}.hero h1{margin:8px 0 10px;font-size:clamp(38px,7vw,66px);line-height:.92;letter-spacing:-.05em}.hero h1 span{color:var(--gold);display:block}.hero p{color:#c9bed1;line-height:1.55;max-width:720px}.panel{margin-top:16px;padding:20px;border-radius:18px;background:linear-gradient(145deg,#15101c,#0d0912);border:1px solid #ffffff12}.panel h2{margin:6px 0 8px}.panel p{color:var(--muted);font-size:11px;line-height:1.55}.key-row,.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.key-row input,select{flex:1;min-width:0;padding:13px 12px;background:#08060b;color:#fff;border:1px solid #ffffff18;border-radius:11px;font:inherit}button,a.btn{border:0;border-radius:10px;padding:12px 14px;font-weight:1000;font-size:9px;letter-spacing:.05em;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#211405}.green{background:var(--green);color:#06180f}.ghost{background:#ffffff09;color:#fff;border:1px solid #ffffff12}.purple{background:var(--purple);color:white}.hidden{display:none!important}.msg,.status{margin-top:12px;padding:12px;border-radius:11px;font-size:10px;line-height:1.5;background:#ffffff07;border:1px solid #ffffff10}.bad{background:#ff7d8912;border-color:#ff7d8938;color:#ffabb3}.good{background:#57d39b12;border-color:#57d39b38;color:#91edc2}.steps{display:grid;gap:9px;margin-top:14px}.step{padding:13px;border-radius:12px;background:#ffffff06;border:1px solid #ffffff0d}.step b{display:block;font-size:11px}.step span{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.45}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--gold);font-size:10px}.channels{margin-top:13px;padding:13px;border-radius:12px;background:#08060b;border:1px solid #ffffff10;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;line-height:1.7;color:#d9cfe1}.version{text-align:center;color:#5f5667;font-size:8px;margin-top:22px}@media(max-width:620px){.key-row{flex-direction:column}.key-row button,.actions button,.actions .btn{width:100%}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="topbar"><img class="logo" src="Assets/efl-logo.jpeg" alt="EFL"><div class="brand"><b>EFL Dynasty</b><small>DISCORD CONTROL</small></div><a class="home" href="commissioner-dashboard.html">Commissioner</a></div>
+<section class="hero"><div class="eye">EFL Commissioner Bot</div><h1>DISCORD <span>CONTROL ROOM</span></h1><p>Authorize the private EFL bot once, then build or re-sync the league's Discord channels from here. The bot token never enters this page and is never stored in browser memory.</p></section>
+
+<section class="panel" id="loginCard">
+<div class="eye">Commissioner Access</div><h2>Unlock Discord controls</h2><p>Use the same commissioner key as the existing EFL dashboard.</p>
+<div class="key-row"><input id="key" type="password" autocomplete="current-password" placeholder="Enter commissioner key"><button class="gold" id="loginBtn">OPEN CONTROL ROOM</button></div>
+<div class="msg bad hidden" id="loginMsg"></div>
+</section>
+
+<section id="control" class="hidden">
+<section class="panel">
+<div class="eye">Connection</div><h2>EFL Commissioner Bot</h2><div class="status" id="status">Checking Discord connection…</div>
+<div class="actions"><a class="btn purple hidden" id="inviteBtn" target="_blank" rel="noopener">AUTHORIZE BOT IN DISCORD</a><button class="ghost" id="refreshBtn">REFRESH STATUS</button></div>
+</section>
+
+<section class="panel hidden" id="needsToken">
+<div class="eye">One-Time Secret Setup</div><h2>Add the bot token to Vercel</h2><p>Create the Discord application/bot first, then add its token directly to the EFL Vercel project as an encrypted environment variable named <span class="code">DISCORD_BOT_TOKEN</span>. Do not paste the token into chat, GitHub, or this page.</p>
+<div class="steps"><div class="step"><b>1. Create the Discord application</b><span>Name it <strong>EFL Commissioner</strong> (or EFL Commissioner Bot), then create its bot user.</span></div><div class="step"><b>2. Copy the bot token</b><span>Keep it private. A Discord bot token authenticates the bot and should be handled like a password.</span></div><div class="step"><b>3. Vercel → Project Settings → Environment Variables</b><span>Add <span class="code">DISCORD_BOT_TOKEN</span> to Production, then redeploy the site.</span></div></div>
+</section>
+
+<section class="panel hidden" id="builder">
+<div class="eye">Server Builder</div><h2>Build the EFL channels</h2><p>The sync is safe to run again later. Existing matching channels are reused/moved instead of duplicated.</p>
+<div id="guildPicker" class="hidden"><label class="eye" for="guild">EFL Server</label><select id="guild"></select></div>
+<div class="channels">📢 LEAGUE<br>　# 👑・announcements　(read-only)<br>　# 🌐・efl-hub　　　　(read-only)<br><br>💬 CLUBHOUSE<br>　# 💬・general<br>　# 🤝・trade-block<br>　# 🏈・nfl-talk<br><br>🎮 LEAGUE FUN<br>　# 🧠・trivia<br><br>🔊 VOICE<br>　🔊 EFL War Room</div>
+<div class="actions"><button class="green" id="buildBtn">BUILD / SYNC EFL DISCORD</button></div><div class="msg hidden" id="result"></div>
+</section>
+</section>
+<div class="version">EFL Discord Control Room v1.0</div>
+</main>
+<script>
+const Q=s=>document.querySelector(s);
+async function api(path,options={}){return fetch(path,{credentials:'same-origin',...options})}
+function msg(el,text,kind=''){el.textContent=text;el.className=`msg ${kind}`.trim()}
+function openControl(){Q('#loginCard').classList.add('hidden');Q('#control').classList.remove('hidden')}
+function showLogin(text=''){Q('#control').classList.add('hidden');Q('#loginCard').classList.remove('hidden');if(text){Q('#loginMsg').classList.remove('hidden');msg(Q('#loginMsg'),text,'bad')}}
+async function login(){const key=Q('#key').value.trim();if(!key)return showLogin('Enter your commissioner key first.');Q('#loginBtn').textContent='CHECKING…';try{const r=await api('/api/commissioner-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});Q('#key').value='';if(!r.ok)return showLogin(r.status===401?'That commissioner key was not accepted.':'Could not unlock the control room.');openControl();await loadStatus()}catch{return showLogin('Could not reach the EFL backend.')}finally{Q('#loginBtn').textContent='OPEN CONTROL ROOM'}}
+async function loadStatus(){Q('#status').textContent='Checking Discord connection…';Q('#needsToken').classList.add('hidden');Q('#builder').classList.add('hidden');Q('#inviteBtn').classList.add('hidden');try{const r=await api('/api/discord-status');if(r.status===401)return showLogin('Your commissioner session expired. Sign in again.');const j=await r.json();if(!r.ok){Q('#status').textContent=j.error||'Discord connection failed.';return}if(!j.configured){Q('#status').textContent='Bot code is ready, but the Discord bot token has not been added to Vercel yet.';Q('#needsToken').classList.remove('hidden');return}const botName=j.bot?.global_name||j.bot?.username||j.application?.name||'EFL Commissioner';Q('#status').innerHTML=`<strong>${botName}</strong> is configured.${j.active_guild?` Connected to <strong>${j.active_guild.name}</strong>.`:j.guilds?.length?' Choose the EFL server below after authorizing the bot.':' The bot has not been added to the EFL Discord server yet.'}${j.structure?`<br><br>Channel structure: <strong>${j.structure.present}/${j.structure.expected}</strong>${j.structure.complete?' ✓':''}`:''}`;Q('#inviteBtn').href=j.invite_url;Q('#inviteBtn').classList.remove('hidden');Q('#builder').classList.remove('hidden');const manageable=(j.guilds||[]).filter(x=>x.can_manage_channels);const picker=Q('#guildPicker'),select=Q('#guild');select.innerHTML='';if(manageable.length>1){picker.classList.remove('hidden');manageable.forEach(g=>{const o=document.createElement('option');o.value=g.id;o.textContent=g.name;select.appendChild(o)})}else{picker.classList.add('hidden');if(manageable.length===1){const o=document.createElement('option');o.value=manageable[0].id;o.textContent=manageable[0].name;select.appendChild(o)}}}catch{Q('#status').textContent='Could not reach the EFL Discord backend.'}}
+async function build(){Q('#buildBtn').disabled=true;Q('#buildBtn').textContent='SYNCING…';Q('#result').classList.add('hidden');try{const guildId=Q('#guild').value||'';const r=await api('/api/discord-setup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({guildId})});const j=await r.json();Q('#result').classList.remove('hidden');if(!r.ok){msg(Q('#result'),j.error||'Discord setup failed.','bad');return}const summary=`EFL Discord synced to ${j.guild.name}. Created ${j.created.length}, updated ${j.updated.length}, reused ${j.reused.length}. League Hub post: ${j.hub_post||'not changed'}${j.hub_pinned?' and pinned.':'.'}`;msg(Q('#result'),summary,'good');await loadStatus()}catch{Q('#result').classList.remove('hidden');msg(Q('#result'),'Could not run the Discord sync.','bad')}finally{Q('#buildBtn').disabled=false;Q('#buildBtn').textContent='BUILD / SYNC EFL DISCORD'}}
+async function restore(){try{const r=await api('/api/discord-status');if(r.status===401)return;if(r.ok){openControl();await loadStatus()}}catch{}}
+Q('#loginBtn').onclick=login;Q('#key').onkeydown=e=>{if(e.key==='Enter')login()};Q('#refreshBtn').onclick=loadStatus;Q('#buildBtn').onclick=build;restore();
+</script>
+</body>
+</html>
