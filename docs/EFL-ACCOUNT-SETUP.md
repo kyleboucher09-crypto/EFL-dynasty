@@ -29,6 +29,8 @@ These values must be stored in Vercel environment variables. Never commit them t
 
 Existing `COMMISSIONER_KEY` remains supported as a bootstrap/fallback for the Commissioner Account Inbox while the commissioner account is being established.
 
+After adding or changing any of these environment variables, create a fresh Vercel deployment before testing so the preview/runtime picks up the new values.
+
 ## Transactional email domain
 
 Before public signup opens, configure and verify `efldynasty.com` with the transactional email provider so verification, reset and claim emails pass SPF/DKIM checks and do not look like spoofed mail.
