@@ -2,8 +2,21 @@
   const $=s=>document.querySelector(s);
   const state={session:null,account:null,leagues:[],selectedLeague:null,selectedRoster:null};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const api=(url,options={})=>fetch(url,{credentials:'same-origin',...options});
-  async function json(r){try{return await r.json()}catch{return {}}}
+  const previewShare=new URLSearchParams(location.search).get('_vercel_share')||'';
+  function requestUrl(url){
+    if(!previewShare||!String(url).startsWith('/'))return url;
+    const u=new URL(url,location.origin);u.searchParams.set('_vercel_share',previewShare);return `${u.pathname}${u.search}`;
+  }
+  const api=(url,options={})=>fetch(requestUrl(url),{credentials:'same-origin',...options});
+  async function json(r){
+    const text=await r.text().catch(()=>"");
+    if(!text)return {};
+    try{return JSON.parse(text)}catch{return {_raw:text}}
+  }
+  function responseError(j,r,fallback){
+    const raw=String(j?._raw||'').replace(/\s+/g,' ').trim();
+    return j?.message||j?.error||(raw?`${fallback} (HTTP ${r.status}: ${raw.slice(0,180)})`:`${fallback} (HTTP ${r.status})`);
+  }
   function message(target,text,type=''){const el=$(target);el.textContent=text;el.className=`statusbox ${type}`.trim();el.classList.remove('hidden')}
   function clearMessage(target){$(target)?.classList.add('hidden')}
   function show(stage){['#loadingStage','#authStage','#accountStage'].forEach(s=>$(s).classList.add('hidden'));$(stage).classList.remove('hidden')}
@@ -36,24 +49,24 @@
     const btn=e.submitter;btn.disabled=true;btn.textContent='CREATING…';
     try{
       const r=await api('/api/auth/sign-up/email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password,callbackURL:`${location.origin}/account.html?verified=1`})});const j=await json(r);
-      if(!r.ok)return message('#authMessage',j.message||j.error||'Account creation failed.','bad');
+      if(!r.ok)return message('#authMessage',responseError(j,r,'Account creation failed.'),'bad');
       message('#authMessage','Account created. Check your email and click the EFL verification link before signing in.','good');
       $('#signUpPassword').value='';$('#signUpConfirm').value='';
-    }catch{message('#authMessage','Could not create your EFL account.','bad')}finally{btn.disabled=false;btn.textContent='CREATE & VERIFY ACCOUNT'}
+    }catch(e){message('#authMessage',`Could not create your EFL account${e?.message?`: ${e.message}`:'.'}`,'bad')}finally{btn.disabled=false;btn.textContent='CREATE & VERIFY ACCOUNT'}
   }
 
   async function signIn(e){
     e.preventDefault();clearMessage('#authMessage');const email=$('#signInEmail').value.trim(),password=$('#signInPassword').value;const btn=e.submitter;btn.disabled=true;btn.textContent='SIGNING IN…';
     try{
       const r=await api('/api/auth/sign-in/email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,rememberMe:true,callbackURL:`${location.origin}/account.html`})});const j=await json(r);
-      if(!r.ok){if(r.status===403)return message('#authMessage','Your email still needs to be verified. Check your inbox for the EFL verification link.','bad');return message('#authMessage',j.message||j.error||'Email or password was not accepted.','bad')}
+      if(!r.ok){if(r.status===403)return message('#authMessage','Your email still needs to be verified. Check your inbox for the EFL verification link.','bad');return message('#authMessage',responseError(j,r,'Email or password was not accepted.'),'bad')}
       await load();
-    }catch{message('#authMessage','Could not sign in right now.','bad')}finally{btn.disabled=false;btn.textContent='SIGN IN TO EFL'}
+    }catch(e){message('#authMessage',`Could not sign in right now${e?.message?`: ${e.message}`:'.'}`,'bad')}finally{btn.disabled=false;btn.textContent='SIGN IN TO EFL'}
   }
 
   async function forgot(){
     const email=$('#signInEmail').value.trim()||prompt('Enter the email attached to your EFL account:')||'';if(!email)return;
-    try{const r=await api('/api/auth/request-password-reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,redirectTo:`${location.origin}/reset-password.html`})});if(!r.ok){const j=await json(r);return message('#authMessage',j.message||j.error||'Could not send reset email.','bad')}message('#authMessage','If that email has an EFL account, a password-reset link is on the way.','good')}catch{message('#authMessage','Could not request a password reset.','bad')}
+    try{const r=await api('/api/auth/request-password-reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,redirectTo:`${location.origin}/reset-password.html`})});const j=await json(r);if(!r.ok)return message('#authMessage',responseError(j,r,'Could not send reset email.'),'bad');message('#authMessage','If that email has an EFL account, a password-reset link is on the way.','good')}catch{message('#authMessage','Could not request a password reset.','bad')}
   }
 
   async function signOut(){try{await api('/api/auth/sign-out',{method:'POST'})}catch{}state.session=null;state.account=null;show('#authStage');authMode('signin')}
@@ -102,7 +115,7 @@
 
   async function onboarding(body,button){
     clearMessage('#accountMessage');button.disabled=true;const original=button.textContent;button.textContent='SENDING…';
-    try{const r=await api('/api/efl-onboarding',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await json(r);if(!r.ok)return message('#accountMessage',j.error||'Could not complete that request.','bad');message('#accountMessage',body.mode==='prospect'?'You’re now registered as an EFL Prospect for this league.':'Franchise claim sent. The Commissioner has been notified for approval.','good');state.selectedLeague=null;state.selectedRoster=null;await refreshAccount()}catch{message('#accountMessage','Could not reach the EFL onboarding service.','bad')}finally{button.disabled=false;button.textContent=original}
+    try{const r=await api('/api/efl-onboarding',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await json(r);if(!r.ok)return message('#accountMessage',responseError(j,r,'Could not complete that request.'),'bad');message('#accountMessage',body.mode==='prospect'?'You’re now registered as an EFL Prospect for this league.':'Franchise claim sent. The Commissioner has been notified for approval.','good');state.selectedLeague=null;state.selectedRoster=null;await refreshAccount()}catch{message('#accountMessage','Could not reach the EFL onboarding service.','bad')}finally{button.disabled=false;button.textContent=original}
   }
 
   async function refreshAccount(){
