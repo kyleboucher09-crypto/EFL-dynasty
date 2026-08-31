@@ -23,7 +23,7 @@ These values must be stored in Vercel environment variables. Never commit them t
 - `DATABASE_URL` — already used by the EFL site.
 - `BETTER_AUTH_SECRET` — a new high-entropy secret, at least 32 characters.
 - `BETTER_AUTH_URL` — production value: `https://www.efldynasty.com`.
-- `RESEND_API_KEY` — API key for transactional account emails.
+- `RESEND_API_KEY` — API key for transactional account emails. The key must have sending permission for `efldynasty.com` (or all verified domains).
 - `EFL_AUTH_FROM_EMAIL` — verified sender, recommended: `EFL Dynasty <accounts@efldynasty.com>`.
 - `COMMISSIONER_EMAIL` — email that receives new franchise-claim notifications. It also identifies the commissioner EFL account role once that email signs up and verifies.
 
