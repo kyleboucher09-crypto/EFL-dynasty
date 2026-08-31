@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'power-rankings-data.json'
+      - '.github/workflows/discord-power-rankings.yml'
   workflow_dispatch:
 
 permissions:
