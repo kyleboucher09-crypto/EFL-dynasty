@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'weekly-report.json'
+      - '.github/workflows/discord-weekly-report.yml'
   workflow_dispatch:
 
 permissions:
