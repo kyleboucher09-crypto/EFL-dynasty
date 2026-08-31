@@ -1,0 +1,22 @@
+name: Announce EFL Power Rankings in Discord
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'power-rankings-data.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post latest rankings to EFL Discord
+        run: |
+          curl --fail --silent --show-error \
+            --retry 5 --retry-delay 8 --retry-all-errors \
+            -X POST \
+            https://www.efldynasty.com/api/discord-announce-power-rankings
