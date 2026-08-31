@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "currency": "EC",
+  "items": [
+    {"id":"banner_midnight","name":"Midnight Dynasty","slot":"banner","rarity":"Common","price":25,"icon":"🌌","description":"Deep navy franchise banner with a clean game-night feel."},
+    {"id":"banner_gridiron","name":"Gridiron Lights","slot":"banner","rarity":"Rare","price":75,"icon":"🏟️","description":"Stadium-light treatment for your Franchise HQ header."},
+    {"id":"banner_royal","name":"Royal Standard","slot":"banner","rarity":"Epic","price":150,"icon":"👑","description":"Gold-trimmed royal banner reserved for franchises that want to flex."},
+    {"id":"frame_blue","name":"EFL Blue Frame","slot":"frame","rarity":"Common","price":20,"icon":"🔷","description":"Electric blue profile frame inspired by the modern EFL identity."},
+    {"id":"frame_gold","name":"Gold Standard","slot":"frame","rarity":"Rare","price":90,"icon":"✨","description":"Polished gold profile frame with premium Legacy styling."},
+    {"id":"frame_crown","name":"Crown of Champions","slot":"frame","rarity":"Legendary","price":0,"lootOnly":true,"icon":"👑","description":"Legendary loot-exclusive crowned profile frame."},
+    {"id":"title_contender","name":"The Contender","slot":"title","rarity":"Common","price":30,"icon":"⚔️","description":"A custom title displayed beneath your franchise name."},
+    {"id":"title_architect","name":"Rebuild Architect","slot":"title","rarity":"Rare","price":65,"icon":"🧱","description":"For the owner playing the long game."},
+    {"id":"title_villain","name":"League Villain","slot":"title","rarity":"Epic","price":125,"icon":"😈","description":"Lean into it. Every league needs one."},
+    {"id":"case_neon","name":"Neon Trophy Case","slot":"showcase","rarity":"Rare","price":80,"icon":"💡","description":"Blue neon trim around your featured achievements."},
+    {"id":"case_royal","name":"Royal Trophy Case","slot":"showcase","rarity":"Epic","price":175,"icon":"🏆","description":"Gold showcase treatment for your three proudest achievements."},
+    {"id":"effect_champion","name":"Champion Aura","slot":"effect","rarity":"Legendary","price":0,"lootOnly":true,"icon":"🔥","description":"Animated championship glow. Legendary Victory Crate exclusive."}
+  ]
+}
