@@ -1,4 +1,8 @@
 (()=>{
+  const PARAMS=new URLSearchParams(location.search);
+  const EFL_LEAGUE_ID=PARAMS.get('league')||'efl-dynasty';
+  const REQUESTED_ROSTER=Number(PARAMS.get('roster'))||0;
+  const previewShare=PARAMS.get('_vercel_share')||'';
   const LEAGUE_ID='1313240395462742016';
   const API='https://api.sleeper.app/v1';
   const cache=new Map();
@@ -9,6 +13,17 @@
   const get=path=>{if(!cache.has(path))cache.set(path,fetch(API+path).then(r=>{if(!r.ok)throw Error(`Sleeper ${r.status}`);return r.json()}).catch(e=>{cache.delete(path);throw e}));return cache.get(path)};
   const teamName=(u,r)=>u?.metadata?.team_name||u?.display_name||`Roster ${r?.roster_id||'?'}`;
   const avatar=u=>u?.avatar?`https://sleepercdn.com/avatars/thumbs/${u.avatar}`:'';
+  function localUrl(path){if(!previewShare)return path;const u=new URL(path,location.origin);u.searchParams.set('_vercel_share',previewShare);return `${u.pathname}${u.search}`}
+
+  async function renderAccess(owner){
+    const el=q('#accessStatus');if(!el||!owner?.roster?.roster_id)return;el.textContent='CHECKING ACCESS…';
+    try{
+      const path=`/api/efl-franchise-access?leagueId=${encodeURIComponent(EFL_LEAGUE_ID)}&rosterId=${Number(owner.roster.roster_id)}`;
+      const r=await fetch(localUrl(path),{credentials:'same-origin',cache:'no-store'});let j={};try{j=await r.json()}catch{}
+      if(r.ok&&j.allowed){const role=String(j.role||'owner').toUpperCase();el.textContent=`${role} ACCESS · MANAGEMENT AUTHORIZED`;el.dataset.access='allowed';return}
+      el.textContent='VIEW ONLY · SIGN IN FOR MANAGEMENT';el.dataset.access='view';
+    }catch{el.textContent='VIEW ONLY · ACCESS CHECK UNAVAILABLE';el.dataset.access='view'}
+  }
 
   async function season(leagueId){
     const [league,users,rosters,winners,consolation]=await Promise.all([
@@ -85,7 +100,7 @@
     q('#crateCount').textContent=wins;q('#crateText').textContent=wins?`${wins} Victory Crate${wins===1?'':'s'} earned from ${new Date().getFullYear()} Sleeper wins in this prototype. Final version will track opened vs. unopened crates permanently.`:'Every finalized Sleeper win will award one Victory Crate. Crates can contain cosmetics or a small Legacy Point bonus.';
     const earned=new Set(owner.badges.map(b=>b.id));q('#vaultGrid').innerHTML=RULES.badges.map(b=>badgeCard(b,earned.has(b.id))).join('');
     const top=[...owner.badges].filter(b=>!b.live).sort((a,b)=>(Number(b.lp)||0)-(Number(a.lp)||0)).slice(0,3);q('#showcaseGrid').innerHTML=top.length?top.map(b=>`<div class="trophy-slot"><img src="${esc(b.image)}" alt="${esc(b.name)}"><strong>${esc(b.name)}</strong><small>${b.rarity||'EFL ACHIEVEMENT'} · ${Number(b.lp)||0} LP</small></div>`).join(''):'<div class="empty">No earned trophies yet. The first 2026 achievements will start filling this case.</div>';
-    renderShop(credits);q('#hq').classList.add('on');
+    renderShop(credits);renderAccess(owner);q('#hq').classList.add('on');
   }
 
   async function load(){
@@ -95,9 +110,10 @@
     chain.forEach(data=>{const year=Number(data.league.season),champId=champion(data);data.rosters.forEach(roster=>{const o=owners[roster.owner_id];if(!o)return;if(year<RULES.startSeason)o.heritageYears.push(year);if(year<RULES.startSeason&&champId===roster.owner_id)o.historicTitles++})});
     await Promise.all(Object.values(owners).map(async owner=>{if(owner.heritageYears.length)award(owner,'legacy_franchise');if(owner.historicTitles)award(owner,'legacy_champion',owner.historicTitles);for(const data of [...chain].reverse())await evaluateModern(owner,data);const modern=owner.modern.sort((a,b)=>a.year-b.year),completed=modern.filter(x=>x.complete);for(let i=1;i<modern.length;i++){const now=modern[i],prior=modern[i-1];if(!now.complete)continue;if(now.champ&&prior.champ)award(owner,'back_to_back_champion',1,now.year);if(now.champ&&prior.last)award(owner,'worst_to_first',1,now.year);if(now.final&&prior.champ)award(owner,'title_defense',1,now.year)}if(completed.length>=5)award(owner,'iron_franchise');if(completed.length>=10)award(owner,'efl_lifetime')}));
     OWNERS=Object.values(owners).sort((a,b)=>teamName(a.user,a.roster).localeCompare(teamName(b.user,b.roster)));
-    const picker=q('#franchisePicker');picker.innerHTML=OWNERS.map((o,i)=>`<option value="${i}">${esc(teamName(o.user,o.roster))}</option>`).join('');picker.onchange=()=>renderOwner(OWNERS[Number(picker.value)||0]);q('#status').textContent=`Sleeper live · ${current.league.season} · ${OWNERS.length} franchises`;renderOwner(OWNERS[0]);
+    const picker=q('#franchisePicker');picker.innerHTML=OWNERS.map((o,i)=>`<option value="${i}">${esc(teamName(o.user,o.roster))}</option>`).join('');picker.onchange=()=>renderOwner(OWNERS[Number(picker.value)||0]);q('#status').textContent=`Sleeper live · ${current.league.season} · ${OWNERS.length} franchises`;
+    const requestedIndex=REQUESTED_ROSTER?OWNERS.findIndex(o=>Number(o.roster?.roster_id)===REQUESTED_ROSTER):-1;const initialIndex=requestedIndex>=0?requestedIndex:0;picker.value=String(initialIndex);renderOwner(OWNERS[initialIndex]);
   }
 
   document.addEventListener('click',e=>{const btn=e.target.closest('.tab');if(!btn)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('on'));btn.classList.add('on');q('#'+btn.dataset.panel)?.classList.add('on')});
-  load().catch(err=>{console.error(err);q('#status').textContent='Unable to load Franchise HQ prototype';q('#franchisePicker').innerHTML='<option>Try refreshing</option>'});
+  load().catch(err=>{console.error(err);q('#status').textContent='Unable to load Franchise HQ prototype';q('#franchisePicker').innerHTML='<option>Try refreshing</option>';if(q('#accessStatus'))q('#accessStatus').textContent='ACCESS CHECK UNAVAILABLE'});
 })();
