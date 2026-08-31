@@ -1,168 +1,339 @@
-/* Desktop-only spotlight refinement. Mobile layouts remain unchanged. */
-@media (min-width: 761px) {
-  #spotlight {
-    height: 380px !important;
-    min-height: 380px !important;
+/*
+ * Authoritative desktop layout for the EFL homepage.
+ * Everything below starts at the desktop navigation breakpoint so the
+ * approved mobile layouts in the feature stylesheets remain untouched.
+ */
+@media (min-width: 901px) {
+  /* One shared width for the header, banner, carousel and page content. */
+  .nav,
+  .home-shell {
+    width: min(1600px, calc(100% - 56px)) !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
-  /* Featured Matchup: use the width of a desktop screen instead of stretching three rows. */
+  .nav {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .home-shell {
+    padding: 22px 0 64px !important;
+  }
+
+  .league-hero,
+  .league-hero-card,
+  .spot-wrap,
+  #spotlight {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .league-hero-card {
+    aspect-ratio: 3 / 1 !important;
+    margin: 0 !important;
+    border-radius: 20px !important;
+  }
+
+  .league-hero-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: inherit !important;
+  }
+
+  .spot-wrap {
+    margin-top: 20px !important;
+  }
+
+  /* A PC stage needs enough height for real content, not a poster crop. */
+  #spotlight {
+    height: clamp(520px, 43vw, 720px) !important;
+    min-height: 520px !important;
+    aspect-ratio: auto !important;
+    border-radius: 24px !important;
+  }
+
+  #spotlight .spot-slide {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: inherit !important;
+  }
+
+  #spotlight .spot-slide:first-of-type > img {
+    inset: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  #spotlight .spot-arrow {
+    top: 50% !important;
+    width: 48px !important;
+    height: 48px !important;
+    transform: translateY(-50%) !important;
+  }
+
+  #spotlight .spot-arrow.prev { left: 18px !important; }
+  #spotlight .spot-arrow.next { right: 18px !important; }
+  #spotlight .spot-dots { bottom: 16px !important; }
+
+  /* Power Rankings: five explicit tracks prevent any row collision. */
+  #spotlight .spot-slide.power-slide .rank-content {
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 34px 86px 58px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  .power-slide .rank-head,
+  #spotlight .spot-slide.power-slide .rank-list {
+    width: min(68%, 1040px) !important;
+    max-width: none !important;
+  }
+
+  .power-slide .rank-head {
+    flex: 0 0 auto !important;
+    padding: 0 2px 13px !important;
+  }
+
+  .power-slide .rank-kicker {
+    font-size: 9px !important;
+  }
+
+  #spotlight .spot-slide.power-slide .spot-title {
+    font-size: clamp(31px, 3vw, 43px) !important;
+  }
+
+  .power-slide .rank-count {
+    min-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 10px !important;
+  }
+
+  #spotlight .spot-slide.power-slide .rank-list {
+    position: static !important;
+    inset: auto !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-rows: repeat(5, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+
+  #spotlight .spot-slide.power-slide .rank-card,
+  #spotlight .spot-slide.power-slide .rank-card:nth-child(n) {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+    display: grid !important;
+    grid-template-columns: 74px minmax(0, 1fr) auto !important;
+    gap: 16px !important;
+    padding: 9px 17px 9px 8px !important;
+    border-radius: 14px !important;
+  }
+
+  #spotlight .spot-slide.power-slide .rank-place {
+    display: block !important;
+    font-size: clamp(42px, 4.1vw, 58px) !important;
+  }
+
+  #spotlight .spot-slide.power-slide .rank-name {
+    font-size: clamp(18px, 1.8vw, 26px) !important;
+  }
+
+  #spotlight .spot-slide.power-slide .rank-meta {
+    margin-top: 6px !important;
+    font-size: 10px !important;
+  }
+
+  .power-slide .rank-trend {
+    min-width: 108px !important;
+    gap: 8px !important;
+    font-size: 10px !important;
+  }
+
+  .power-slide .rank-trend img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* Featured Matchup: both clubs and all six starters use the full stage. */
   #spotlight .spot-slide.match-slide .match-content {
-    padding: 18px 72px 40px !important;
-    gap: 10px !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 32px 86px 58px !important;
+    gap: 20px !important;
   }
 
   .match-mark {
-    width: 36px;
-    height: 36px;
-    flex-basis: 36px;
-    border-radius: 10px;
+    width: 52px !important;
+    height: 52px !important;
+    flex-basis: 52px !important;
+    border-radius: 14px !important;
   }
 
-  .match-heading {
-    font-size: clamp(23px, 2.35vw, 28px);
+  .match-kicker { font-size: 9px !important; }
+  .match-heading { font-size: clamp(31px, 3vw, 43px) !important; }
+
+  .match-live,
+  .match-week {
+    min-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 10px !important;
   }
 
   #spotlight .spot-slide.match-slide .match-board {
-    grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr) !important;
-    gap: 11px !important;
+    grid-template-columns: minmax(0, 1fr) 68px minmax(0, 1fr) !important;
+    gap: 18px !important;
   }
 
   #spotlight .spot-slide.match-slide .match-team {
-    padding: 12px 14px !important;
-    border-radius: 15px !important;
+    padding: 21px !important;
+    border-radius: 19px !important;
   }
+
+  .match-team-meta { font-size: 9px !important; }
 
   #spotlight .spot-slide.match-slide .match-team-name {
-    font-size: clamp(18px, 1.8vw, 22px) !important;
+    font-size: clamp(24px, 2.3vw, 34px) !important;
   }
 
-  .win-prob strong {
-    font-size: clamp(24px, 2.6vw, 30px);
-  }
-
-  .prob-track {
-    margin: 8px 0 10px;
-  }
+  .win-prob strong { font-size: clamp(35px, 3.2vw, 47px) !important; }
+  .win-prob span { font-size: 8px !important; }
+  .prob-track { height: 7px !important; margin: 14px 0 17px !important; }
 
   #spotlight .spot-slide.match-slide .player-stack {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     grid-template-rows: minmax(0, 1fr) !important;
-    gap: 8px !important;
+    gap: 12px !important;
   }
 
   #spotlight .spot-slide.match-slide .player-chip {
     grid-template-columns: 1fr !important;
-    grid-template-rows: 46px auto !important;
+    grid-template-rows: minmax(62px, .7fr) auto !important;
     align-content: center !important;
     justify-items: center !important;
-    gap: 8px !important;
-    padding: 11px 7px !important;
+    gap: 12px !important;
+    padding: 16px 10px !important;
     text-align: center !important;
     background:
-      radial-gradient(circle at 50% 20%, rgba(69, 163, 255, .12), transparent 45%),
+      radial-gradient(circle at 50% 24%, rgba(69, 163, 255, .16), transparent 48%),
       rgba(4, 13, 27, .72) !important;
   }
 
   #spotlight .spot-slide.match-slide .player-chip img,
   #spotlight .spot-slide.match-slide .player-avatar-fallback {
-    width: 46px !important;
-    height: 46px !important;
+    width: 64px !important;
+    height: 64px !important;
   }
 
   #spotlight .spot-slide.match-slide .player-copy {
-    width: 100%;
-    min-width: 0;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
+    width: 100% !important;
+    min-width: 0 !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 7px !important;
   }
 
-  #spotlight .spot-slide.match-slide .player-pos {
-    font-size: 8px !important;
-  }
+  #spotlight .spot-slide.match-slide .player-pos { font-size: 10px !important; }
 
   #spotlight .spot-slide.match-slide .player-name {
     width: 100% !important;
-    font-size: clamp(10px, .95vw, 12px) !important;
+    font-size: clamp(13px, 1.15vw, 17px) !important;
     text-align: center !important;
   }
 
   .match-vs span {
-    width: 40px;
-    height: 40px;
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 14px !important;
   }
 
-  /* Scoring Crown: shallower, centered panels with stronger information hierarchy. */
+  /* Scoring Crown: two deliberate panels with no unused lower half. */
   #spotlight .spot-slide.crown-slide .crown-content {
-    padding: 20px 72px 40px !important;
-    gap: 12px !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 35px 86px 58px !important;
+    gap: 20px !important;
   }
 
   .crown-head {
-    align-items: center;
-    padding-bottom: 10px;
+    align-items: center !important;
+    padding-bottom: 15px !important;
   }
 
-  .crown-title {
-    font-size: clamp(34px, 3.6vw, 43px);
+  .crown-kicker { font-size: 9px !important; }
+  .crown-title { font-size: clamp(40px, 4vw, 57px) !important; }
+
+  .crown-live {
+    min-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 10px !important;
   }
 
   .crown-board {
-    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
-    gap: 14px;
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr) !important;
+    gap: 18px !important;
+  }
+
+  .crown-prize,
+  .crown-leader-card {
+    border-radius: 20px !important;
   }
 
   .crown-prize {
-    align-items: center;
-    padding: 18px 24px;
-    text-align: center;
+    align-items: center !important;
+    padding: 28px !important;
+    text-align: center !important;
   }
+
+  .crown-prize-copy > span,
+  .crown-label { font-size: 10px !important; }
 
   .crown-prize strong {
-    margin: 11px 0 8px;
-    font-size: clamp(78px, 8vw, 98px);
+    margin: 18px 0 14px !important;
+    font-size: clamp(98px, 9vw, 136px) !important;
   }
 
-  .crown-prize small {
-    font-size: 10px;
-  }
+  .crown-prize small { font-size: 12px !important; }
 
   .crown-leader-card {
-    align-items: flex-start;
-    padding: 24px 34px;
+    align-items: flex-start !important;
+    padding: 34px 44px !important;
   }
 
   .crown-team {
-    margin-top: 12px;
-    font-size: clamp(36px, 4.4vw, 52px);
+    margin-top: 17px !important;
+    font-size: clamp(45px, 5vw, 72px) !important;
   }
 
   .crown-points {
-    margin-top: 14px;
-    padding: 9px 13px;
-    font-size: 11px;
+    margin-top: 20px !important;
+    padding: 11px 16px !important;
+    font-size: 13px !important;
   }
+}
 
-  /* Keep five desktop rankings readable inside the shorter shared stage. */
-  #spotlight .spot-slide.power-slide .rank-content {
-    padding: 17px 68px 40px !important;
-    gap: 7px !important;
-  }
-
-  .power-slide .rank-head {
-    padding-bottom: 7px;
-  }
-
-  #spotlight .spot-slide.power-slide .rank-list {
-    gap: 4px !important;
-  }
-
-  #spotlight .spot-slide.power-slide .rank-card {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-  }
-
-  #spotlight .spot-slide.power-slide .rank-place {
-    font-size: clamp(29px, 3vw, 38px) !important;
+/* Prevent very wide screens from turning the page into a narrow centre column. */
+@media (min-width: 1700px) {
+  .nav,
+  .home-shell {
+    width: min(1680px, calc(100% - 88px)) !important;
   }
 }
