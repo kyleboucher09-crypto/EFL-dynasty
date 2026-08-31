@@ -1,0 +1,308 @@
+/* Responsive EFL Scoring Crown — one clean interface, no stacked poster artwork. */
+#spotlight .spot-slide.crown-slide {
+  isolation: isolate !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 84% 16%, rgba(255, 217, 121, .14), transparent 33%),
+    radial-gradient(circle at 14% 88%, rgba(23, 105, 232, .22), transparent 40%),
+    linear-gradient(145deg, #020713 0%, #071a35 52%, #031020 100%) !important;
+  border: 1px solid rgba(69, 163, 255, .27) !important;
+}
+
+#spotlight .spot-slide.crown-slide > img {
+  display: none !important;
+}
+
+#spotlight .spot-slide.crown-slide::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  opacity: .68 !important;
+  background:
+    linear-gradient(118deg, transparent 0 58%, rgba(255, 217, 121, .08) 58.15%, transparent 58.4%),
+    repeating-linear-gradient(0deg, transparent 0 55px, rgba(69, 163, 255, .045) 56px 57px) !important;
+}
+
+#spotlight .spot-slide.crown-slide::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background: linear-gradient(90deg, rgba(2, 7, 19, .16), transparent 48%, rgba(2, 7, 19, .2)) !important;
+}
+
+#spotlight .spot-slide.crown-slide .crown-content {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 28px 72px 42px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+}
+
+#spotlight .spot-slide.crown-slide .crown-content::before,
+#spotlight .spot-slide.crown-slide .crown-content::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+.crown-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(69, 163, 255, .2);
+}
+
+.crown-kicker {
+  color: #8fbdf6;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.crown-title {
+  margin-top: 6px;
+  color: #f5f9ff;
+  font-size: clamp(31px, 4vw, 48px);
+  line-height: .88;
+  font-weight: 1000;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+
+.crown-title span { color: #ffd979; }
+
+.crown-live {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 11px;
+  border-radius: 999px;
+  color: #cfe5ff;
+  background: rgba(23, 105, 232, .14);
+  border: 1px solid rgba(69, 163, 255, .28);
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.crown-live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #69e5a8;
+  box-shadow: 0 0 11px rgba(105, 229, 168, .72);
+}
+
+.crown-board {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 14px;
+}
+
+.crown-prize,
+.crown-leader-card {
+  min-width: 0;
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035), 0 16px 30px rgba(0, 0, 0, .24);
+}
+
+.crown-prize {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid rgba(69, 163, 255, .23);
+  background: linear-gradient(155deg, rgba(14, 38, 72, .94), rgba(5, 15, 31, .96));
+}
+
+.crown-prize-copy > span,
+.crown-label {
+  display: block;
+  color: #8fbdf6;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.crown-prize strong {
+  display: block;
+  margin: 8px 0 7px;
+  color: #ffd979;
+  font-size: clamp(60px, 8vw, 88px);
+  line-height: .78;
+  font-weight: 1000;
+  letter-spacing: -.075em;
+  text-shadow: 0 0 28px rgba(232, 184, 74, .18);
+}
+
+.crown-prize small {
+  display: block;
+  color: #9eacc0;
+  font-size: 9px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+
+.crown-leader-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 23px 25px;
+  border: 1px solid rgba(232, 184, 74, .32);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 217, 121, .1), transparent 44%),
+    linear-gradient(155deg, rgba(24, 39, 66, .96), rgba(6, 16, 32, .98));
+}
+
+.crown-leader-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff0ad, #dca735);
+  box-shadow: 0 0 18px rgba(232, 184, 74, .38);
+}
+
+.crown-team {
+  margin-top: 11px;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: .95;
+  font-weight: 1000;
+  letter-spacing: -.045em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.crown-points {
+  width: max-content;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: #cfe5ff;
+  background: rgba(23, 105, 232, .14);
+  border: 1px solid rgba(69, 163, 255, .24);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 850;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 760px) {
+  #spotlight.crown-active {
+    height: 375px !important;
+    min-height: 375px !important;
+    aspect-ratio: auto !important;
+  }
+
+  #spotlight.crown-active .spot-arrow {
+    top: auto !important;
+    bottom: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 24px !important;
+  }
+
+  #spotlight.crown-active .spot-arrow.prev { left: 12px !important; }
+  #spotlight.crown-active .spot-arrow.next { right: 12px !important; }
+  #spotlight.crown-active .spot-dots { bottom: 16px !important; }
+
+  #spotlight .spot-slide.crown-slide .crown-content {
+    padding: 17px 14px 57px !important;
+    gap: 10px !important;
+  }
+
+  .crown-head {
+    align-items: center;
+    padding-bottom: 9px;
+  }
+
+  .crown-kicker { font-size: 7px; }
+  .crown-title { margin-top: 5px; font-size: 27px; }
+  .crown-live { min-height: 27px; padding: 0 9px; font-size: 7px; }
+
+  .crown-board {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: 8px;
+  }
+
+  .crown-prize {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 15px;
+    border-radius: 13px;
+  }
+
+  .crown-prize strong {
+    flex: 0 0 auto;
+    margin: 0;
+    font-size: 48px;
+  }
+
+  .crown-prize-copy > span,
+  .crown-label { font-size: 8px; }
+
+  .crown-prize small {
+    margin-top: 6px;
+    max-width: 180px;
+    font-size: 9px;
+  }
+
+  .crown-leader-card {
+    padding: 14px 18px;
+    border-radius: 13px;
+  }
+
+  .crown-leader-card::before { top: 12px; bottom: 12px; }
+  .crown-team { margin-top: 8px; font-size: 25px; }
+  .crown-points { margin-top: 10px; padding: 7px 10px; font-size: 11px; }
+}
+
+@media (max-width: 370px) {
+  #spotlight.crown-active { height: 390px !important; min-height: 390px !important; }
+  .crown-live { display: none; }
+  .crown-title { font-size: 25px; }
+  .crown-prize strong { font-size: 43px; }
+  .crown-team { font-size: 23px; }
+}
