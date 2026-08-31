@@ -1,0 +1,42 @@
+name: Refresh Existing Discord Logos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/refresh-discord-logos.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Refresh existing Discord embed thumbnails
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          for attempt in {1..12}; do
+            code="$(curl -sS -o "$response" -w '%{http_code}' -H 'x-vercel-cron-schedule: */5 * * * *' 'https://www.efldynasty.com/api/discord-refresh-embed-logos' || true)"
+            if [ "$code" = "200" ]; then
+              cat "$response"
+              echo
+              break
+            fi
+            echo "Attempt $attempt returned HTTP $code; waiting for deployment..."
+            sleep 8
+          done
+          test "$code" = "200"
+
+      - name: Remove temporary refresher
+        run: |
+          git rm api/discord-refresh-embed-logos.js .github/workflows/refresh-discord-logos.yml
+          git config user.name "EFL Website Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git commit -m "Remove temporary Discord logo refresher"
+          git push
