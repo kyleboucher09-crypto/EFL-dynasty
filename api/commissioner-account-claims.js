@@ -1,5 +1,5 @@
 import { commissionerOK, sameOrigin } from './_common.js';
-import { isCommissionerUser, listCommissionerAccountData, requireEflSession, reviewFranchiseClaim } from '../lib/efl-account-data.js';
+import { commissionerScope, listCommissionerAccountData, requireEflSession, reviewFranchiseClaim } from '../lib/efl-account-data.js';
 
 function bodyOf(req) {
   if (req.body && typeof req.body === 'object') return req.body;
@@ -7,11 +7,13 @@ function bodyOf(req) {
 }
 
 async function reviewer(req) {
-  if (commissionerOK(req)) return { ok: true, reviewerUserId: 'commissioner-key' };
   const session = await requireEflSession(req).catch(() => null);
-  if (!session?.user) return { ok: false };
-  const allowed = await isCommissionerUser(session.user.id);
-  return allowed ? { ok: true, reviewerUserId: session.user.id } : { ok: false };
+  if (session?.user) {
+    const scope = await commissionerScope(session.user.id);
+    if (scope.global || scope.leagueIds.length) return { ok: true, reviewerUserId: session.user.id, scope };
+  }
+  if (commissionerOK(req)) return { ok: true, reviewerUserId: 'commissioner-key', scope: { global: true, leagueIds: [] } };
+  return { ok: false };
 }
 
 export default async function handler(req, res) {
@@ -24,8 +26,8 @@ export default async function handler(req, res) {
     if (!access.ok) return res.status(401).json({ error: 'Commissioner access required' });
 
     if (req.method === 'GET') {
-      const data = await listCommissionerAccountData();
-      return res.status(200).json(data);
+      const data = await listCommissionerAccountData(access.scope);
+      return res.status(200).json({ ...data, scope: access.scope });
     }
 
     const body = bodyOf(req);
@@ -37,6 +39,7 @@ export default async function handler(req, res) {
       status,
       reviewerUserId: access.reviewerUserId,
       reviewNote: String(body.note || '').trim(),
+      scope: access.scope,
     });
     return res.status(200).json({ ok: true, claim });
   } catch (error) {
