@@ -3,7 +3,7 @@ import {discord,discordConfigured,getBotUser,getGuildChannels,resolveGuild} from
 
 const LEAGUE_ID='1313240395462742016';
 const SLEEPER='https://api.sleeper.app/v1';
-const LOGO_URL='https://www.efldynasty.com/Assets/efl-logo.jpeg';
+const LOGO_URL='https://www.efldynasty.com/Assets/efl-logo.jpeg?v=efl-2026-08-31';
 const GAME_DAY_URL='https://www.efldynasty.com/#game-day';
 const CRON_SCHEDULE='*/5 * * * *';
 const TYPE_TEXT=0;
