@@ -1,0 +1,147 @@
+name: Deploy EFL Discord Onboarding
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/deploy-discord-onboarding.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add permanent onboarding support
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('api/discord-setup.js')
+          s=p.read_text(encoding='utf-8')
+
+          if "name:'👋・start-here'" not in s:
+              old="""  {name:'📢 LEAGUE',type:TYPE_CATEGORY,children:[\n    {name:'👑・announcements',type:TYPE_TEXT,readOnly:true,topic:'Official EFL commissioner announcements. Official league information lives at https://www.efldynasty.com/'},"""
+              new="""  {name:'📢 LEAGUE',type:TYPE_CATEGORY,children:[\n    {name:'👋・start-here',type:TYPE_TEXT,readOnly:true,topic:'New to the EFL Discord? Start here. Discord is the clubhouse, Sleeper handles teams and transactions, and EFLDynasty.com is the official league home.'},\n    {name:'👑・announcements',type:TYPE_TEXT,readOnly:true,topic:'Official EFL commissioner announcements. Official league information lives at https://www.efldynasty.com/'},"""
+              if old not in s: raise SystemExit('LEAGUE marker not found')
+              s=s.replace(old,new,1)
+
+          if 'function welcomeEmbed(children)' not in s:
+              marker='async function ensureHubPost(channel,botUser,activity){'
+              block=r'''function welcomeEmbed(children){
+  const mention=key=>children[key]?.id?`<#${children[key].id}>`:'the channel list';
+  return {
+    title:'👋 WELCOME TO THE EFL',
+    description:'**This is the new clubhouse for Elite Fantasy Footballers.**\n\nYou do not need to learn every Discord feature. Three things matter:',
+    color:3447003,
+    thumbnail:{url:'https://www.efldynasty.com/Assets/efl-logo.jpeg?v=efl-2026-08-31'},
+    fields:[
+      {name:'💬 DISCORD = THE CLUBHOUSE',value:`League conversation, reactions and trash talk live here. Start in ${mention('general')}. Trade chatter belongs in ${mention('trade-block')}, and league games live in ${mention('trivia')}.`,inline:false},
+      {name:'🏈 SLEEPER = YOUR TEAM',value:'Keep using Sleeper for lineups, waivers, trades, rosters and matchup management. Important Sleeper activity automatically flows back into Discord.',inline:false},
+      {name:'🌐 EFLDYNASTY.COM = THE OFFICIAL HOME',value:'Power Rankings, EFL Weekly, league history, champions, records, franchises and the rulebook live on the website.',inline:false},
+      {name:'👑 THE SIMPLE VERSION',value:'**Talk here. Manage your team on Sleeper. Find official league content on the website.**',inline:false}
+    ],
+    footer:{text:'Elite Fantasy Footballers • Dynasty'}
+  };
+}
+
+async function ensureWelcomePost(channel,botUser,children,guildId,activity){
+  let messages=[];
+  try{messages=await discord(`/channels/${channel.id}/messages?limit=50`)}catch{}
+  let post=(messages||[]).find(m=>String(m.author?.id)===String(botUser.id)&&(m.embeds||[]).some(e=>e.title==='👋 WELCOME TO THE EFL'));
+  const channelUrl=key=>children[key]?.id?`https://discord.com/channels/${guildId}/${children[key].id}`:`https://discord.com/channels/${guildId}/${channel.id}`;
+  const body={allowed_mentions:{parse:[]},embeds:[welcomeEmbed(children)],components:[{type:1,components:[
+    {type:2,style:5,label:'Start in General',url:channelUrl('general'),emoji:{name:'💬'}},
+    {type:2,style:5,label:'Open EFL Website',url:'https://www.efldynasty.com/',emoji:{name:'🌐'}},
+    {type:2,style:5,label:'Open Sleeper',url:'https://sleeper.com/leagues/1313240395462742016',emoji:{name:'🏈'}}
+  ]}]};
+  if(post){post=await discord(`/channels/${channel.id}/messages/${post.id}`,{method:'PATCH',body});activity.welcome_post='updated'}
+  else{post=await discord(`/channels/${channel.id}/messages`,{method:'POST',body});activity.welcome_post='created'}
+  try{await discord(`/channels/${channel.id}/messages/pins/${post.id}`,{method:'PUT',reason:'Pin EFL Discord welcome'});activity.welcome_pinned=true}
+  catch(e){activity.welcome_pinned=false;activity.warnings.push(`Welcome post created, but pinning failed: ${e.message}`)}
+}
+
+'''
+              if marker not in s: raise SystemExit('Hub marker not found')
+              s=s.replace(marker,block+marker,1)
+
+          s=s.replace("const activity={guild,created:[],updated:[],reused:[],warnings:[],hub_post:null,hub_pinned:false};","const activity={guild,created:[],updated:[],reused:[],warnings:[],welcome_post:null,welcome_pinned:false,hub_post:null,hub_pinned:false};")
+          old="""    const hub=children['efl-hub'];\n    if(hub) await ensureHubPost(hub,botUser,activity);"""
+          if "children['start-here']" not in s and old in s:
+              s=s.replace(old,"""    const start=children['start-here'];\n    if(start) await ensureWelcomePost(start,botUser,children,guild.id,activity);\n    const hub=children['efl-hub'];\n    if(hub) await ensureHubPost(hub,botUser,activity);""",1)
+          p.write_text(s,encoding='utf-8')
+
+      - name: Create temporary live sync endpoint
+        run: |
+          cat > api/discord-onboarding-sync.js <<'EOF'
+          import {json,noStore} from './_common.js';
+          import {discord,discordConfigured,getBotUser,getGuildChannels,resolveGuild} from './discord-lib.js';
+          const TYPE_TEXT=0,TYPE_CATEGORY=4,VIEW=1024n,SEND=2048n,EMBED=16384n,HISTORY=65536n;
+          const LOGO='https://www.efldynasty.com/Assets/efl-logo.jpeg?v=efl-2026-08-31';
+          function c(v){return String(v||'').normalize('NFKD').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'')}
+          function perms(guildId,botId,current=[]){
+            const list=Array.isArray(current)?current.map(x=>({...x})):[];
+            let e=list.find(x=>String(x.id)===String(guildId)&&Number(x.type)===0);if(!e){e={id:String(guildId),type:0,allow:'0',deny:'0'};list.push(e)}
+            let ea=0n,ed=0n;try{ea=BigInt(e.allow||'0')}catch{}try{ed=BigInt(e.deny||'0')}catch{}e.allow=(ea&~SEND).toString();e.deny=(ed|SEND).toString();
+            let b=list.find(x=>String(x.id)===String(botId)&&Number(x.type)===1);if(!b){b={id:String(botId),type:1,allow:'0',deny:'0'};list.push(b)}
+            let ba=0n,bd=0n;try{ba=BigInt(b.allow||'0')}catch{}try{bd=BigInt(b.deny||'0')}catch{}const need=VIEW|SEND|EMBED|HISTORY;b.allow=(ba|need).toString();b.deny=(bd&~need).toString();return list;
+          }
+          export default async function handler(req,res){
+            noStore(res);if(req.method!=='GET')return json(res,405,{error:'Method not allowed'});if(req.headers['x-efl-onboarding-sync']!=='yes')return json(res,401,{error:'Unauthorized'});if(!discordConfigured())return json(res,503,{error:'Discord bot not configured'});
+            try{
+              const [guild,bot]=await Promise.all([resolveGuild(),getBotUser()]);let channels=await getGuildChannels(guild.id);
+              let cat=channels.find(x=>x.type===TYPE_CATEGORY&&c(x.name)==='league');if(!cat){cat=await discord(`/guilds/${guild.id}/channels`,{method:'POST',body:{name:'📢 LEAGUE',type:TYPE_CATEGORY,position:0}});channels.push(cat)}
+              let ch=channels.find(x=>x.type===TYPE_TEXT&&c(x.name)==='start-here'),created=false;const topic='New to the EFL Discord? Start here. Discord is the clubhouse, Sleeper handles teams and transactions, and EFLDynasty.com is the official league home.';
+              if(!ch){ch=await discord(`/guilds/${guild.id}/channels`,{method:'POST',body:{name:'👋・start-here',type:TYPE_TEXT,parent_id:cat.id,topic,permission_overwrites:perms(guild.id,bot.id)}});created=true;channels.push(ch)}
+              else ch=await discord(`/channels/${ch.id}`,{method:'PATCH',body:{name:'👋・start-here',parent_id:cat.id,topic,permission_overwrites:perms(guild.id,bot.id,ch.permission_overwrites)}});
+              const by=k=>channels.find(x=>x.type===TYPE_TEXT&&c(x.name)===k);const general=by('general'),trade=by('trade-block'),trivia=by('trivia');
+              const mention=x=>x?.id?`<#${x.id}>`:'the channel list';const url=x=>x?.id?`https://discord.com/channels/${guild.id}/${x.id}`:`https://discord.com/channels/${guild.id}/${ch.id}`;
+              const embed={title:'👋 WELCOME TO THE EFL',description:'**This is the new clubhouse for Elite Fantasy Footballers.**\n\nYou do not need to learn every Discord feature. Three things matter:',color:3447003,thumbnail:{url:LOGO},fields:[
+                {name:'💬 DISCORD = THE CLUBHOUSE',value:`League conversation, reactions and trash talk live here. Start in ${mention(general)}. Trade chatter belongs in ${mention(trade)}, and league games live in ${mention(trivia)}.`,inline:false},
+                {name:'🏈 SLEEPER = YOUR TEAM',value:'Keep using Sleeper for lineups, waivers, trades, rosters and matchup management. Important Sleeper activity automatically flows back into Discord.',inline:false},
+                {name:'🌐 EFLDYNASTY.COM = THE OFFICIAL HOME',value:'Power Rankings, EFL Weekly, league history, champions, records, franchises and the rulebook live on the website.',inline:false},
+                {name:'👑 THE SIMPLE VERSION',value:'**Talk here. Manage your team on Sleeper. Find official league content on the website.**',inline:false}],footer:{text:'Elite Fantasy Footballers • Dynasty'}};
+              const body={allowed_mentions:{parse:[]},embeds:[embed],components:[{type:1,components:[{type:2,style:5,label:'Start in General',url:url(general),emoji:{name:'💬'}},{type:2,style:5,label:'Open EFL Website',url:'https://www.efldynasty.com/',emoji:{name:'🌐'}},{type:2,style:5,label:'Open Sleeper',url:'https://sleeper.com/leagues/1313240395462742016',emoji:{name:'🏈'}}]}]};
+              let msgs=[];try{msgs=await discord(`/channels/${ch.id}/messages?limit=50`)}catch{}let post=(msgs||[]).find(m=>String(m.author?.id)===String(bot.id)&&(m.embeds||[]).some(e=>e.title==='👋 WELCOME TO THE EFL'));
+              if(post)post=await discord(`/channels/${ch.id}/messages/${post.id}`,{method:'PATCH',body});else post=await discord(`/channels/${ch.id}/messages`,{method:'POST',body});
+              let pinned=true;try{await discord(`/channels/${ch.id}/messages/pins/${post.id}`,{method:'PUT',reason:'Pin EFL Discord welcome'})}catch{pinned=false}
+              return json(res,200,{ok:true,channel_id:ch.id,channel_created:created,message_id:post.id,pinned});
+            }catch(e){return json(res,502,{error:e.message||'Onboarding sync failed'})}
+          }
+          EOF
+
+      - name: Commit permanent setup and temporary sync
+        run: |
+          git config user.name "EFL Website Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add api/discord-setup.js api/discord-onboarding-sync.js
+          git commit -m "Add EFL Discord start-here onboarding"
+          git push
+
+      - name: Create live onboarding channel
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          code="000"
+          for attempt in {1..15}; do
+            code="$(curl -sS -o "$response" -w '%{http_code}' -H 'x-efl-onboarding-sync: yes' 'https://www.efldynasty.com/api/discord-onboarding-sync' || true)"
+            if [ "$code" = "200" ]; then
+              cat "$response"
+              echo
+              break
+            fi
+            echo "Attempt $attempt returned HTTP $code; waiting for production deployment..."
+            sleep 8
+          done
+          test "$code" = "200"
+
+      - name: Remove temporary deployment helpers
+        run: |
+          git pull --rebase
+          git rm api/discord-onboarding-sync.js .github/workflows/deploy-discord-onboarding.yml
+          git commit -m "Remove temporary Discord onboarding deployer"
+          git push
