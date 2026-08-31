@@ -196,15 +196,21 @@
 
 .power-slide .rank-trend {
   min-width: 76px;
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 25px 46px;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: end;
   gap: 5px;
   color: #ffd979;
   font-size: 8px;
   line-height: 1;
   font-weight: 950;
   white-space: nowrap;
+}
+
+.power-slide .rank-trend span {
+  min-width: 0;
+  text-align: left;
 }
 
 .power-slide .rank-trend img {
@@ -374,6 +380,8 @@
   .power-slide .rank-trend {
     min-width: 0 !important;
     width: 78px !important;
+    grid-template-columns: 25px 45px !important;
+    justify-content: end !important;
     gap: 4px !important;
     font-size: 8px !important;
   }
@@ -398,6 +406,6 @@
 
   #spotlight .spot-slide.power-slide .rank-place { font-size: 31px !important; }
   #spotlight .spot-slide.power-slide .rank-name { font-size: 14px !important; }
-  .power-slide .rank-trend { width: 68px !important; font-size: 7px !important; }
+  .power-slide .rank-trend { width: 68px !important; grid-template-columns: 22px 42px !important; font-size: 7px !important; }
   .power-slide .rank-trend img { width: 22px !important; height: 22px !important; }
 }
