@@ -1,0 +1,26 @@
+name: Sleeper Feed Smoke Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sleeper-feed-smoke.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger production Sleeper feed once
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          code="$(curl --retry 4 --retry-all-errors --retry-delay 5 -sS -o "$response" -w '%{http_code}' \
+            -H 'x-vercel-cron-schedule: */5 * * * *' \
+            'https://www.efldynasty.com/api/discord-sleeper-feed')"
+          cat "$response"
+          echo
+          echo "HTTP $code"
+          test "$code" = "200"
