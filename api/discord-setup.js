@@ -111,7 +111,7 @@ async function ensureHubPost(channel,botUser,activity){
     activity.hub_post='created';
   }
   try{
-    await discord(`/channels/${channel.id}/pins/${post.id}`,{method:'PUT',body:{},reason:'Pin the EFL League Hub'});
+    await discord(`/channels/${channel.id}/messages/pins/${post.id}`,{method:'PUT',reason:'Pin the EFL League Hub'});
     activity.hub_pinned=true;
   }catch(e){activity.hub_pinned=false;activity.warnings.push(`Hub post created, but pinning failed: ${e.message}`)}
 }
