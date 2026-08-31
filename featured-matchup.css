@@ -442,8 +442,8 @@
 
 @media (max-width: 760px) {
   #spotlight.matchup-active {
-    height: 455px !important;
-    min-height: 455px !important;
+    height: 500px !important;
+    min-height: 500px !important;
     aspect-ratio: auto !important;
   }
 
@@ -475,8 +475,8 @@
 
   #spotlight .spot-slide.match-slide .match-board {
     grid-template-columns: 1fr !important;
-    grid-template-rows: minmax(0, 1fr) 20px minmax(0, 1fr) !important;
-    gap: 5px !important;
+    grid-template-rows: minmax(0, 1fr) 26px minmax(0, 1fr) !important;
+    gap: 4px !important;
   }
 
   #spotlight .spot-slide.match-slide .match-team {
@@ -491,13 +491,17 @@
   .prob-track { height: 5px; margin: 7px 0 8px; }
 
   #spotlight .spot-slide.match-slide .player-stack {
+    flex: 0 0 auto !important;
+    grid-template-rows: repeat(3, 30px) !important;
     gap: 4px !important;
   }
 
   #spotlight .spot-slide.match-slide .player-chip {
     grid-template-columns: 31px minmax(0, 1fr) !important;
     gap: 8px !important;
+    min-height: 30px !important;
     padding: 2px 8px !important;
+    overflow: visible !important;
     border-radius: 8px !important;
   }
 
@@ -508,10 +512,12 @@
   }
 
   #spotlight .spot-slide.match-slide .player-pos { font-size: 8px !important; }
-  #spotlight .spot-slide.match-slide .player-name { font-size: 12px !important; font-weight: 900 !important; }
+  #spotlight .spot-slide.match-slide .player-copy { height: 100%; align-items: center; }
+  #spotlight .spot-slide.match-slide .player-name { display: flex !important; align-items: center !important; height: 100%; font-size: 12px !important; font-weight: 900 !important; }
 
   #spotlight .spot-slide.match-slide .match-vs {
     font-size: 9px !important;
+    transform: translateY(-3px) !important;
   }
 
   .match-vs span {
@@ -522,7 +528,7 @@
 }
 
 @media (max-width: 370px) {
-  #spotlight.matchup-active { height: 470px !important; min-height: 470px !important; }
+  #spotlight.matchup-active { height: 510px !important; min-height: 510px !important; }
   #spotlight .spot-slide.match-slide .match-content { padding-left: 10px !important; padding-right: 10px !important; }
   .match-heading { font-size: 20px; }
   #spotlight .spot-slide.match-slide .player-name { font-size: 11px !important; }
