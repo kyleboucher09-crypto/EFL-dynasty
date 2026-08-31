@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-const indexUrl = new URL('../index.html', import.meta.url);
+const indexUrl = new URL('../home-static.html', import.meta.url);
 let cachedHtml = '';
 
 async function homepageHtml() {
@@ -8,7 +8,7 @@ async function homepageHtml() {
     const source = await readFile(indexUrl, 'utf8');
     cachedHtml = source.includes('home-account.js')
       ? source
-      : source.replace('</body>', '<script src="/home-account.js?v=1"></script></body>');
+      : source.replace('</body>', '<script src="/home-account.js?v=2"></script></body>');
   }
   return cachedHtml;
 }
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
   try {
     const html = await homepageHtml();
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400');
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
     if (req.method === 'HEAD') return res.status(200).end();
     return res.status(200).send(html);
   } catch (error) {
