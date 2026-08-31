@@ -1,6 +1,6 @@
 {
   "name": "EFL Legacy System",
-  "version": 12,
+  "version": 13,
   "startSeason": 2026,
   "eraName": "The Legacy Era",
   "currency": {
@@ -16,84 +16,84 @@
       "name": "Prospect",
       "lp": 0,
       "icon": "P",
-      "art": "Assets/ranks-football/rank-01-prospect.svg"
+      "art": "Assets/legacy-ranks-v3/rank-01-prospect.svg"
     },
     {
       "level": 2,
       "name": "Rookie",
       "lp": 1,
       "icon": "R",
-      "art": "Assets/ranks-football/rank-02-rookie.svg"
+      "art": "Assets/legacy-ranks-v3/rank-02-rookie.svg"
     },
     {
       "level": 3,
       "name": "Special Teamer",
       "lp": 175,
       "icon": "ST",
-      "art": "Assets/ranks-football/rank-03-special-teamer.svg"
+      "art": "Assets/legacy-ranks-v3/rank-03-special-teamer.svg"
     },
     {
       "level": 4,
       "name": "Starter",
       "lp": 350,
       "icon": "S",
-      "art": "Assets/ranks-football/rank-04-starter.svg"
+      "art": "Assets/legacy-ranks-v3/rank-04-starter.svg"
     },
     {
       "level": 5,
       "name": "Veteran",
       "lp": 500,
       "icon": "V",
-      "art": "Assets/ranks-football/rank-05-veteran.svg"
+      "art": "Assets/legacy-ranks-v3/rank-05-veteran.svg"
     },
     {
       "level": 6,
       "name": "All-Pro",
       "lp": 850,
       "icon": "AP",
-      "art": "Assets/ranks-football/rank-06-all-pro.svg"
+      "art": "Assets/legacy-ranks-v3/rank-06-all-pro.svg"
     },
     {
       "level": 7,
       "name": "Captain ★",
       "lp": 1200,
       "icon": "C1",
-      "art": "Assets/ranks-football/rank-07-captain-1.svg"
+      "art": "Assets/legacy-ranks-v3/rank-07-captain-1.svg"
     },
     {
       "level": 8,
       "name": "Captain ★★",
       "lp": 2200,
       "icon": "C2",
-      "art": "Assets/ranks-football/rank-08-captain-2.svg"
+      "art": "Assets/legacy-ranks-v3/rank-08-captain-2.svg"
     },
     {
       "level": 9,
       "name": "Captain ★★★",
       "lp": 3400,
       "icon": "C3",
-      "art": "Assets/ranks-football/rank-09-captain-3.svg"
+      "art": "Assets/legacy-ranks-v3/rank-09-captain-3.svg"
     },
     {
       "level": 10,
       "name": "Captain ★★★★",
       "lp": 4700,
       "icon": "C4",
-      "art": "Assets/ranks-football/rank-10-captain-4.svg"
+      "art": "Assets/legacy-ranks-v3/rank-10-captain-4.svg"
     },
     {
       "level": 11,
       "name": "Franchise Legend",
       "lp": 5400,
       "icon": "FL",
-      "art": "Assets/ranks-football/rank-11-franchise-legend.svg"
+      "art": "Assets/legacy-ranks-v3/rank-11-franchise-legend.svg"
     },
     {
       "level": 12,
       "name": "Hall of Famer",
       "lp": 6000,
       "icon": "HOF",
-      "art": "Assets/ranks-football/rank-12-hall-of-famer.svg"
+      "art": "Assets/legacy-ranks-v3/rank-12-hall-of-famer.svg"
     }
   ],
   "rewards": [
