@@ -4,7 +4,10 @@ import {discord,discordConfigured,getBotUser,getGuildChannels,resolveGuild} from
 const TYPE_TEXT=0;
 const TYPE_VOICE=2;
 const TYPE_CATEGORY=4;
+const VIEW_CHANNEL=1024n;
 const SEND_MESSAGES=2048n;
+const EMBED_LINKS=16384n;
+const READ_MESSAGE_HISTORY=65536n;
 const REASON='EFL Commissioner Bot channel sync';
 
 const STRUCTURE=[
@@ -29,15 +32,27 @@ function canonical(v){
   return String(v||'').normalize('NFKD').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-+|-+$/g,'');
 }
 function sameTarget(channel,spec){return channel&&channel.type===spec.type&&canonical(channel.name)===canonical(spec.name)}
-function mergeReadOnly(overwrites,guildId){
+function mergeReadOnly(overwrites,guildId,botUserId){
   const list=Array.isArray(overwrites)?overwrites.map(x=>({...x})):[];
-  let row=list.find(x=>String(x.id)===String(guildId)&&Number(x.type)===0);
-  if(!row){row={id:String(guildId),type:0,allow:'0',deny:'0'};list.push(row)}
-  let allow=0n,deny=0n;
-  try{allow=BigInt(row.allow||'0')}catch{}
-  try{deny=BigInt(row.deny||'0')}catch{}
-  row.allow=(allow&~SEND_MESSAGES).toString();
-  row.deny=(deny|SEND_MESSAGES).toString();
+
+  let everyone=list.find(x=>String(x.id)===String(guildId)&&Number(x.type)===0);
+  if(!everyone){everyone={id:String(guildId),type:0,allow:'0',deny:'0'};list.push(everyone)}
+  let everyoneAllow=0n,everyoneDeny=0n;
+  try{everyoneAllow=BigInt(everyone.allow||'0')}catch{}
+  try{everyoneDeny=BigInt(everyone.deny||'0')}catch{}
+  everyone.allow=(everyoneAllow&~SEND_MESSAGES).toString();
+  everyone.deny=(everyoneDeny|SEND_MESSAGES).toString();
+
+  if(botUserId){
+    let bot=list.find(x=>String(x.id)===String(botUserId)&&Number(x.type)===1);
+    if(!bot){bot={id:String(botUserId),type:1,allow:'0',deny:'0'};list.push(bot)}
+    let botAllow=0n,botDeny=0n;
+    try{botAllow=BigInt(bot.allow||'0')}catch{}
+    try{botDeny=BigInt(bot.deny||'0')}catch{}
+    const needed=VIEW_CHANNEL|SEND_MESSAGES|EMBED_LINKS|READ_MESSAGE_HISTORY;
+    bot.allow=(botAllow|needed).toString();
+    bot.deny=(botDeny&~needed).toString();
+  }
   return list;
 }
 async function createChannel(guildId,body){return discord(`/guilds/${guildId}/channels`,{method:'POST',body,reason:REASON})}
@@ -57,12 +72,12 @@ async function ensureCategory(guildId,channels,spec,position,activity){
   return found;
 }
 
-async function ensureChild(guildId,channels,parent,spec,activity){
+async function ensureChild(guildId,channels,parent,spec,activity,botUserId){
   let found=channels.find(c=>sameTarget(c,spec));
   if(!found){
     const body={name:spec.name,type:spec.type,parent_id:parent.id};
     if(spec.topic) body.topic=spec.topic;
-    if(spec.readOnly) body.permission_overwrites=mergeReadOnly([],guildId);
+    if(spec.readOnly) body.permission_overwrites=mergeReadOnly([],guildId,botUserId);
     found=await createChannel(guildId,body);
     channels.push(found);activity.created.push(spec.name);
   }else{
@@ -70,7 +85,7 @@ async function ensureChild(guildId,channels,parent,spec,activity){
     if(found.name!==spec.name) patch.name=spec.name;
     if(String(found.parent_id||'')!==String(parent.id)) patch.parent_id=parent.id;
     if(spec.topic&&found.topic!==spec.topic) patch.topic=spec.topic;
-    if(spec.readOnly) patch.permission_overwrites=mergeReadOnly(found.permission_overwrites,guildId);
+    if(spec.readOnly) patch.permission_overwrites=mergeReadOnly(found.permission_overwrites,guildId,botUserId);
     if(Object.keys(patch).length){
       found=await updateChannel(found.id,patch);activity.updated.push(spec.name);
       const i=channels.findIndex(c=>c.id===found.id);if(i>=0)channels[i]=found;
@@ -132,7 +147,7 @@ export default async function handler(req,res){
     for(let i=0;i<STRUCTURE.length;i++){
       const category=await ensureCategory(guild.id,channels,STRUCTURE[i],i,activity);
       for(const spec of STRUCTURE[i].children){
-        const child=await ensureChild(guild.id,channels,category,spec,activity);
+        const child=await ensureChild(guild.id,channels,category,spec,activity,botUser.id);
         children[canonical(spec.name)]=child;
       }
     }
