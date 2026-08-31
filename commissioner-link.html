@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Link EFL Commissioner Account</title>
+  <link rel="stylesheet" href="account.css?v=1">
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <img src="Assets/efl-logo.jpeg" alt="EFL logo">
+    <div class="brand"><b>EFL Dynasty</b><small>COMMISSIONER SETUP</small></div>
+    <a id="backLink" href="account.html">Back to Account</a>
+  </header>
+
+  <section class="hero">
+    <div class="eye">One-Time Admin Setup</div>
+    <h1>LINK YOUR<br>COMMISSIONER ACCOUNT.</h1>
+    <p>This securely connects your verified EFL account to Primary Commissioner/Admin access. You only need to do this once.</p>
+    <div class="security-row"><span>✓ VERIFIED EFL SESSION</span><span>✓ COMMISSIONER KEY REQUIRED</span><span>✓ KEY IS NOT STORED</span><span>✓ AUDITED ROLE CHANGE</span></div>
+  </section>
+
+  <section class="stage">
+    <div class="auth-card" style="max-width:620px;margin:auto">
+      <div class="eye">Primary Commissioner Bootstrap</div>
+      <h2>Connect this account</h2>
+      <p>You must already be signed in to your verified EFL account. Enter the existing Commissioner key below. After it succeeds, your regular EFL login becomes your admin login.</p>
+      <div id="msg" class="statusbox hidden"></div>
+      <div class="field"><label>COMMISSIONER KEY</label><input id="key" type="password" autocomplete="current-password"></div>
+      <button class="primary full" id="linkBtn" type="button">LINK AS PRIMARY COMMISSIONER</button>
+      <p style="margin-top:12px;color:#7f94ad;font-size:8px;line-height:1.5">The key is checked server-side and is not saved to your EFL profile. Once linked, use your normal email/password account for Commissioner access.</p>
+    </div>
+  </section>
+</main>
+<script>
+(()=>{
+  const $=s=>document.querySelector(s);
+  const share=new URLSearchParams(location.search).get('_vercel_share')||'';
+  const reqUrl=url=>{if(!share)return url;const u=new URL(url,location.origin);u.searchParams.set('_vercel_share',share);return `${u.pathname}${u.search}`};
+  if(share)$('#backLink').href=`account.html?_vercel_share=${encodeURIComponent(share)}`;
+  function msg(text,type=''){const el=$('#msg');el.textContent=text;el.className=`statusbox ${type}`.trim();el.classList.remove('hidden')}
+  async function link(){
+    const key=$('#key').value.trim();if(!key)return msg('Enter your Commissioner key.','bad');
+    const btn=$('#linkBtn');btn.disabled=true;btn.textContent='LINKING…';
+    try{
+      const r=await fetch(reqUrl('/api/commissioner-link-account'),{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});
+      const j=await r.json().catch(()=>({}));$('#key').value='';
+      if(!r.ok)return msg(j.error||'Could not link Commissioner access.','bad');
+      msg('Primary Commissioner access linked. Returning to your EFL account…','good');
+      setTimeout(()=>{location.href=share?`account.html?_vercel_share=${encodeURIComponent(share)}`:'account.html'},900);
+    }catch{msg('Could not reach the Commissioner account service.','bad')}finally{btn.disabled=false;btn.textContent='LINK AS PRIMARY COMMISSIONER'}
+  }
+  $('#linkBtn').onclick=link;$('#key').onkeydown=e=>{if(e.key==='Enter')link()};
+})();
+</script>
+</body>
+</html>
