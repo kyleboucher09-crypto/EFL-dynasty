@@ -55,7 +55,9 @@ function erf(value) {
 function winProbabilities(a, b) {
   if (!(a > 0) && !(b > 0)) return [50, 50];
   const average = Math.max(80, (a + b) / 2);
-  const differenceDeviation = Math.max(18, average * 0.16 * Math.SQRT2);
+  // A fantasy lineup is much more volatile than a single projection total.
+  // This spread is calibrated against Sleeper's displayed Week 1 matchup odds.
+  const differenceDeviation = Math.max(18, average * 0.30 * Math.SQRT2);
   const probabilityA = 100 * 0.5 * (1 + erf((a - b) / (differenceDeviation * Math.SQRT2)));
   const boundedA = Math.max(5, Math.min(95, probabilityA));
   return [Number(boundedA.toFixed(1)), Number((100 - boundedA).toFixed(1))];
