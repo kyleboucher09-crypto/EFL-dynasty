@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>EFL Account</title>
+  <link rel="stylesheet" href="account.css?v=1">
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <img src="Assets/efl-logo.jpeg" alt="EFL logo">
+    <div class="brand"><b>EFL Dynasty</b><small>FRANCHISE ACCESS</small></div>
+    <a href="index.html">League Hub</a>
+  </header>
+
+  <section class="hero">
+    <div class="eye">EFL Accounts</div>
+    <h1>ONE ACCOUNT.<br>YOUR EFL IDENTITY.</h1>
+    <p>Create a verified EFL account, join a league as a Prospect or claim the franchise you manage. Franchise Headquarters controls only unlock after commissioner approval.</p>
+    <div class="security-row"><span>✓ EMAIL VERIFIED</span><span>✓ SECURE SESSIONS</span><span>✓ COMMISSIONER APPROVAL</span><span>✓ DATABASE-BACKED ACCESS</span></div>
+  </section>
+
+  <section class="stage" id="loadingStage"><div class="statusbox">Checking your EFL account…</div></section>
+
+  <section class="stage hidden" id="authStage">
+    <div class="auth-grid">
+      <div class="auth-card">
+        <div class="switches"><button class="switch on" id="signInTab" type="button">SIGN IN</button><button class="switch" id="signUpTab" type="button">CREATE ACCOUNT</button></div>
+        <div id="authMessage" class="statusbox hidden"></div>
+
+        <form id="signInForm">
+          <div class="eye">Welcome Back</div><h2>Sign in</h2><p>Use the verified email attached to your EFL account.</p>
+          <div class="field"><label>EMAIL</label><input id="signInEmail" type="email" autocomplete="email" required></div>
+          <div class="field"><label>PASSWORD</label><input id="signInPassword" type="password" autocomplete="current-password" required minlength="10"></div>
+          <button class="primary full" type="submit">SIGN IN TO EFL</button>
+          <button class="linkbtn" id="forgotBtn" type="button">Forgot your password?</button>
+        </form>
+
+        <form id="signUpForm" class="hidden">
+          <div class="eye">New EFL Account</div><h2>Create account</h2><p>We’ll email you a verification link before any league access can be requested.</p>
+          <div class="field"><label>YOUR NAME</label><input id="signUpName" type="text" autocomplete="name" required maxlength="120"></div>
+          <div class="field"><label>EMAIL</label><input id="signUpEmail" type="email" autocomplete="email" required></div>
+          <div class="field"><label>PASSWORD</label><input id="signUpPassword" type="password" autocomplete="new-password" required minlength="10" maxlength="128"></div>
+          <div class="field"><label>CONFIRM PASSWORD</label><input id="signUpConfirm" type="password" autocomplete="new-password" required minlength="10" maxlength="128"></div>
+          <button class="primary full" type="submit">CREATE & VERIFY ACCOUNT</button>
+        </form>
+      </div>
+
+      <aside class="auth-aside">
+        <div class="eye">Why an EFL account?</div><h3>Your login becomes the key to your Franchise HQ.</h3>
+        <div class="trust">
+          <div><b>🔒 No public editing</b><p>Only the approved owner of a franchise can change its Headquarters, inventory, cosmetics or rewards.</p></div>
+          <div><b>🏈 Multi-league ready</b><p>Select your league first. One EFL account can eventually belong to more than one league.</p></div>
+          <div><b>👀 Prospects welcome</b><p>Don’t own a franchise? Join as a Prospect and stay in the pool for future openings or expansion.</p></div>
+          <div><b>👑 Commissioner controlled</b><p>Owning a Sleeper roster does not automatically grant site control. Franchise claims require approval.</p></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="stage hidden" id="accountStage">
+    <div class="account-head">
+      <div class="account-avatar" id="accountAvatar">EFL</div>
+      <div><div class="eye">Verified EFL Account</div><h2 id="accountName">—</h2><p id="accountEmail">—</p></div>
+      <div class="account-actions"><button class="secondary" id="refreshAccount" type="button">REFRESH</button><button class="danger" id="signOutBtn" type="button">SIGN OUT</button></div>
+    </div>
+    <div id="accountMessage" class="statusbox hidden" style="margin-top:14px"></div>
+    <div class="summary-grid">
+      <div class="summary"><small>LEAGUES JOINED</small><strong id="leagueCount">0</strong></div>
+      <div class="summary"><small>FRANCHISES APPROVED</small><strong id="ownershipCount">0</strong></div>
+      <div class="summary"><small>PENDING CLAIMS</small><strong id="pendingCount">0</strong></div>
+    </div>
+
+    <div class="onboarding" id="onboardingArea">
+      <div class="section-title"><div><div class="eye">Join the EFL</div><h3>Choose your path</h3></div><span>League → Role → Franchise</span></div>
+      <div class="steps"><span class="step on" id="stepLeague">1 · SELECT LEAGUE</span><span class="step" id="stepRole">2 · YOUR ROLE</span><span class="step" id="stepFranchise">3 · FRANCHISE</span></div>
+      <div id="leaguePicker" class="league-grid"></div>
+      <div id="rolePicker" class="choice-grid hidden" style="margin-top:10px">
+        <button class="choice" type="button" data-role-choice="owner"><div class="icon">🏈</div><b>I own a franchise</b><p>Select the franchise you manage in this league and submit it for commissioner approval.</p><small>FRANCHISE CLAIM REQUIRED</small></button>
+        <button class="choice" type="button" data-role-choice="prospect"><div class="icon">👀</div><b>I’m a Prospect</b><p>Join this league without a franchise. You’ll appear in the commissioner’s Prospect pool for future openings.</p><small>NO FRANCHISE PERMISSIONS</small></button>
+      </div>
+      <div id="franchisePickerWrap" class="hidden" style="margin-top:12px"><div class="section-title"><div><div class="eye">Sleeper Franchises</div><h3>Select your franchise</h3></div><span id="franchiseStatus">Loading…</span></div><div id="franchisePicker" class="franchise-grid"></div><button class="primary full hidden" id="submitClaimBtn" type="button">SUBMIT FRANCHISE CLAIM</button></div>
+      <div id="prospectConfirm" class="prospect-callout hidden" style="margin-top:12px"><div class="eye">Prospect Registration</div><h3>Join without owning a franchise</h3><p>You’ll have a verified EFL account and membership in this league, but no access to manage any Franchise Headquarters. If you take over a team later, you can submit a claim from this same account.</p><button class="primary" id="joinProspectBtn" type="button">JOIN AS A PROSPECT</button></div>
+    </div>
+
+    <div class="onboarding">
+      <div class="section-title"><div><div class="eye">Your Access</div><h3>Memberships & claims</h3></div></div>
+      <div id="accountRecords" class="records"></div>
+    </div>
+  </section>
+
+  <div class="footer">EFL Account System · Secure access foundation</div>
+</main>
+<script src="account.js?v=1"></script>
+</body>
+</html>
