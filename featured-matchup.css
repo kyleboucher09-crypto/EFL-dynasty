@@ -442,8 +442,8 @@
 
 @media (max-width: 760px) {
   #spotlight.matchup-active {
-    height: 400px !important;
-    min-height: 400px !important;
+    height: 455px !important;
+    min-height: 455px !important;
     aspect-ratio: auto !important;
   }
 
@@ -464,14 +464,14 @@
     gap: 10px !important;
   }
 
-  .match-slide-head { gap: 10px; }
+  .match-slide-head { gap: 12px; }
   .match-head-main { gap: 8px; }
-  .match-head-meta { gap: 6px; }
-  .match-mark { width: 34px; height: 34px; flex-basis: 34px; border-radius: 9px; }
-  .match-kicker { font-size: 6px; }
-  .match-heading { margin-top: 3px; font-size: 19px; }
-  .match-live { min-height: 24px; padding: 0 8px; font-size: 6px; }
-  .match-week { min-height: 24px; padding: 0 8px; font-size: 7px; }
+  .match-head-meta { gap: 7px; }
+  .match-mark { width: 36px; height: 36px; flex-basis: 36px; border-radius: 9px; }
+  .match-kicker { font-size: 7px; }
+  .match-heading { margin-top: 3px; font-size: 22px; }
+  .match-live { display: none; }
+  .match-week { min-height: 29px; padding: 0 10px; font-size: 9px; }
 
   #spotlight .spot-slide.match-slide .match-board {
     grid-template-columns: 1fr !important;
@@ -484,47 +484,48 @@
     border-radius: 13px !important;
   }
 
-  .match-team-meta { margin-bottom: 3px; font-size: 6px; }
-  #spotlight .spot-slide.match-slide .match-team-name { font-size: 14px !important; }
-  .win-prob strong { font-size: 20px; }
-  .win-prob span { margin-top: 3px; font-size: 5.5px; }
-  .prob-track { height: 4px; margin: 6px 0 7px; }
+  .match-team-meta { margin-bottom: 4px; font-size: 8px; }
+  #spotlight .spot-slide.match-slide .match-team-name { font-size: 18px !important; }
+  .win-prob strong { font-size: 25px; }
+  .win-prob span { margin-top: 4px; font-size: 7px; }
+  .prob-track { height: 5px; margin: 7px 0 8px; }
 
   #spotlight .spot-slide.match-slide .player-stack {
     gap: 4px !important;
   }
 
   #spotlight .spot-slide.match-slide .player-chip {
-    grid-template-columns: 27px minmax(0, 1fr) !important;
-    gap: 7px !important;
-    padding: 3px 7px !important;
+    grid-template-columns: 31px minmax(0, 1fr) !important;
+    gap: 8px !important;
+    padding: 2px 8px !important;
     border-radius: 8px !important;
   }
 
   #spotlight .spot-slide.match-slide .player-chip img,
   .player-avatar-fallback {
-    width: 24px !important;
-    height: 24px !important;
+    width: 28px !important;
+    height: 28px !important;
   }
 
-  #spotlight .spot-slide.match-slide .player-pos { font-size: 6px !important; }
-  #spotlight .spot-slide.match-slide .player-name { font-size: 9px !important; }
+  #spotlight .spot-slide.match-slide .player-pos { font-size: 8px !important; }
+  #spotlight .spot-slide.match-slide .player-name { font-size: 12px !important; font-weight: 900 !important; }
 
   #spotlight .spot-slide.match-slide .match-vs {
-    font-size: 8px !important;
+    font-size: 9px !important;
   }
 
   .match-vs span {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-width: 2px;
   }
 }
 
 @media (max-width: 370px) {
-  #spotlight.matchup-active { height: 410px !important; min-height: 410px !important; }
-  .match-live { display: none; }
+  #spotlight.matchup-active { height: 470px !important; min-height: 470px !important; }
   #spotlight .spot-slide.match-slide .match-content { padding-left: 10px !important; padding-right: 10px !important; }
+  .match-heading { font-size: 20px; }
+  #spotlight .spot-slide.match-slide .player-name { font-size: 11px !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
