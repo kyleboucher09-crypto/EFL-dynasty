@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "leagues": [
+    {
+      "id": "efl-dynasty",
+      "name": "EFL Dynasty",
+      "shortName": "EFL",
+      "sleeperLeagueId": "1313240395462742016",
+      "active": true,
+      "acceptingProspects": true,
+      "claimsEnabled": true
+    }
+  ]
+}
