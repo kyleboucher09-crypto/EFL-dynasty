@@ -1,6 +1,7 @@
 (()=>{
   const qs=s=>document.querySelector(s);
   const share=new URLSearchParams(location.search).get('_vercel_share')||'';
+  const userIcon='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.5 19c.7-3.4 3-5.2 6.5-5.2s5.8 1.8 6.5 5.2"></path></svg>';
   const withShare=url=>{
     if(!share)return url;
     const u=new URL(url,location.origin);
@@ -14,43 +15,28 @@
     if(value.length<=16)return value;
     return value.split(/\s+/)[0].slice(0,16)||'MY ACCOUNT';
   };
-
-  function installStyles(){
-    if(qs('#eflAccountNavStyles'))return;
-    const style=document.createElement('style');
-    style.id='eflAccountNavStyles';
-    style.textContent=`
-      .efl-account-nav{height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 12px;border-radius:12px;border:1px solid rgba(69,163,255,.58);background:linear-gradient(135deg,#0e55c7,#2588ff);color:#fff!important;font-size:9px;font-weight:1000;letter-spacing:.045em;white-space:nowrap;box-shadow:0 8px 22px rgba(23,105,232,.18),inset 0 1px rgba(255,255,255,.12);transition:border-color .18s,background .18s,transform .18s,box-shadow .18s}
-      .efl-account-nav:hover{border-color:#8bcaff;background:linear-gradient(135deg,#1769e8,#45a3ff);box-shadow:0 10px 28px rgba(23,105,232,.3),inset 0 1px rgba(255,255,255,.16);transform:translateY(-1px)}
-      .efl-account-nav .efl-account-icon{font-size:14px;line-height:1}
-      .efl-account-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.02}
-      .efl-account-copy strong{font-size:9px;max-width:116px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-      .efl-account-copy small{display:none;margin-top:3px;color:#c9e7ff;font-size:6px;font-weight:900;letter-spacing:.12em}
-      .efl-account-nav.is-signed-in .efl-account-copy small{display:block}
-      .efl-account-nav .efl-account-badge{min-width:18px;height:18px;padding:0 5px;border-radius:999px;display:none;align-items:center;justify-content:center;background:#ff596f;color:#fff;font-size:8px;line-height:1;box-shadow:0 0 0 2px #07101d}
-      .efl-account-nav.has-pending .efl-account-badge{display:inline-flex}
-      .navlinks .efl-hq-nav{color:#8dccff!important;font-weight:950!important}
-      .navlinks .efl-hq-nav:hover{color:#d9f0ff!important}
-      .mobile-menu .efl-mobile-account,.mobile-menu .efl-mobile-hq{border:1px solid rgba(69,163,255,.28);background:linear-gradient(135deg,rgba(23,105,232,.14),rgba(69,163,255,.08));color:#bfe2ff}
-      .mobile-menu .efl-mobile-account{display:flex;align-items:center;gap:8px}
-      .mobile-menu .efl-mobile-account strong{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:none;align-items:center;justify-content:center;background:#ff596f;color:#fff;font-size:9px}
-      .mobile-menu .efl-mobile-account.has-pending strong{display:inline-flex}
-      .mobile-menu .efl-mobile-hq{font-weight:950}
-      @media(max-width:980px){.efl-account-nav{padding:0 10px}.efl-account-copy strong{max-width:88px;font-size:8px}}
-      @media(max-width:760px){.nav>.efl-account-nav{margin-left:auto;padding:0 9px;width:42px}.nav>.efl-account-nav .efl-account-copy{display:none}.navlinks{display:none!important}}
-    `;
-    document.head.appendChild(style);
-  }
+  const initials=name=>String(name||'EFL').trim().split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase().slice(0,2)||'E';
+  const accountHref=()=>{
+    let requested=document.body?.dataset?.accountReturn||'';
+    if(!requested&&document.body?.dataset?.eflPage==='hq'){
+      const current=new URL(location.href);
+      current.searchParams.delete('_vercel_share');
+      requested=`${current.pathname}${current.search}`;
+    }
+    const url=new URL('/account.html',location.origin);
+    if(requested)url.searchParams.set('return',requested);
+    return withShare(`${url.pathname}${url.search}`);
+  };
 
   function makeDesktop(){
     const nav=qs('.nav');if(!nav)return null;
-    let link=qs('#eflAccountNav');if(link)return link;
+    let link=qs('#eflAccountNav');if(link){link.href=accountHref();return link}
     link=document.createElement('a');
     link.id='eflAccountNav';
     link.className='efl-account-nav';
-    link.href=withShare('/account.html');
-    link.setAttribute('aria-label','Log in to EFL');
-    link.innerHTML='<span class="efl-account-icon">👤</span><span class="efl-account-copy"><strong>LOG IN</strong><small>ACCOUNT</small></span><span class="efl-account-badge" aria-label="Pending requests">0</span>';
+    link.href=accountHref();
+    link.setAttribute('aria-label','Sign in to EFL Franchise HQ');
+    link.innerHTML=`<span class="efl-account-avatar">${userIcon}</span><span class="efl-account-copy"><strong>SIGN IN</strong><small>FRANCHISE HQ</small></span><span class="efl-account-badge" aria-label="Pending requests">0</span>`;
     const league=qs('#leagueMenu');
     nav.insertBefore(link,league||qs('#menuBtn')||null);
     return link;
@@ -58,12 +44,12 @@
 
   function makeMobile(){
     const menu=qs('#mobileMenu');if(!menu)return null;
-    let link=qs('#eflMobileAccount');if(link)return link;
+    let link=qs('#eflMobileAccount');if(link){link.href=accountHref();return link}
     link=document.createElement('a');
     link.id='eflMobileAccount';
     link.className='efl-mobile-account';
-    link.href=withShare('/account.html');
-    link.innerHTML='<span>👤 Log In / Account</span><strong>0</strong>';
+    link.href=accountHref();
+    link.innerHTML='<span>Sign In · Franchise HQ</span><strong>0</strong>';
     menu.appendChild(link);
     return link;
   }
@@ -71,9 +57,11 @@
   function setHqLink(href){
     const navlinks=qs('.navlinks');
     const mobile=qs('#mobileMenu');
+    const onHq=document.body?.dataset?.eflPage==='hq';
     let desktop=qs('#eflFranchiseHqNav');
     let mobileLink=qs('#eflMobileHq');
-    if(!href){desktop?.remove();mobileLink?.remove();return}
+    if(!href&&!onHq){desktop?.remove();mobileLink?.remove();return}
+    const fallback='/franchise-hq-v2.html';
     if(navlinks&&!desktop){
       desktop=document.createElement('a');
       desktop.id='eflFranchiseHqNav';
@@ -90,27 +78,27 @@
       const account=qs('#eflMobileAccount');
       mobile.insertBefore(mobileLink,account||null);
     }
-    const target=withShare(href);
-    if(desktop)desktop.href=target;
-    if(mobileLink)mobileLink.href=target;
+    const target=withShare(href||fallback);
+    if(desktop){desktop.href=target;desktop.classList.toggle('active',onHq);if(onHq)desktop.setAttribute('aria-current','page')}
+    if(mobileLink){mobileLink.href=target;mobileLink.classList.toggle('active',onHq);if(onHq)mobileLink.setAttribute('aria-current','page')}
   }
 
   function render({signedIn=false,commissioner=false,primary=false,moderator=false,pending=0,name='',hqHref=''}={}){
     const desktop=qs('#eflAccountNav'),mobile=qs('#eflMobileAccount');
-    const icon=signedIn?(commissioner?'👑':'👤'):'👤';
-    const label=signedIn?shortName(name):'LOG IN';
-    const role=primary?'ADMIN':commissioner?'COMMISSIONER':moderator?'MODERATOR':'ACCOUNT';
+    const label=signedIn?shortName(name):'SIGN IN';
+    const role=primary?'ADMIN':commissioner?'COMMISSIONER':moderator?'MODERATOR':'EFL MEMBER';
     if(desktop){
       desktop.classList.toggle('is-signed-in',signedIn);
-      desktop.querySelector('.efl-account-icon').textContent=icon;
+      const avatar=desktop.querySelector('.efl-account-avatar');
+      if(avatar)signedIn?avatar.textContent=initials(name):avatar.innerHTML=userIcon;
       desktop.querySelector('.efl-account-copy strong').textContent=label;
-      desktop.querySelector('.efl-account-copy small').textContent=role;
-      desktop.setAttribute('aria-label',signedIn?`Open ${name||'my'} EFL account`:'Log in to EFL');
+      desktop.querySelector('.efl-account-copy small').textContent=signedIn?(hqHref?'OPEN HQ':role):'FRANCHISE HQ';
+      desktop.setAttribute('aria-label',signedIn?`Open ${name||'my'} EFL account`:'Sign in to EFL Franchise HQ');
       const badge=desktop.querySelector('.efl-account-badge');badge.textContent=String(pending||0);
       desktop.classList.toggle('has-pending',pending>0);
     }
     if(mobile){
-      mobile.querySelector('span').textContent=signedIn?`${icon} ${name||'My EFL Account'} · ${role}`:'👤 Log In / Account';
+      mobile.querySelector('span').textContent=signedIn?`${name||'My EFL Account'} · ${hqHref?'Open HQ':role}`:'Sign In · Franchise HQ';
       mobile.querySelector('strong').textContent=String(pending||0);
       mobile.classList.toggle('has-pending',pending>0);
     }
@@ -146,11 +134,11 @@
       }
       if(commissioner){
         const claimsRes=await api('/api/commissioner-account-claims');
-        if(claimsRes.ok){const claims=await claimsRes.json().catch(()=>({}));pending=(claims.claims||[]).filter(c=>c.status==='pending').length;}
+        if(claimsRes.ok){const claims=await claimsRes.json().catch(()=>({}));pending=(claims.claims||[]).filter(c=>c.status==='pending').length}
       }
       render({signedIn:true,commissioner,primary,moderator,pending,name,hqHref});
     }catch{}
   }
 
-  installStyles();makeDesktop();makeMobile();render();hydrate();
+  makeDesktop();makeMobile();render();hydrate();
 })();

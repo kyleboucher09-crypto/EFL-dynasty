@@ -8,7 +8,7 @@ async function homepageHtml() {
     const source = await readFile(indexUrl, 'utf8');
     cachedHtml = source.includes('home-account.js')
       ? source
-      : source.replace('</body>', '<script src="/home-account.js?v=2"></script></body>');
+      : source.replace('</body>', '<script src="/home-account.js?v=3"></script></body>');
   }
   return cachedHtml;
 }

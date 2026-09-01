@@ -1,0 +1,46 @@
+:root{--efl-shell-bg:#040914;--efl-shell-panel:#071326;--efl-shell-blue:#1769e8;--efl-shell-blue2:#45a3ff;--efl-shell-gold:#ffd979;--efl-shell-muted:#9eacc0}
+.efl-site-header{position:sticky!important;top:0!important;z-index:1000!important;background:rgba(4,9,20,.94)!important;border-bottom:1px solid rgba(69,163,255,.16)!important;box-shadow:0 10px 35px rgba(0,0,0,.2)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+.efl-site-nav{width:100%!important;max-width:1180px!important;height:72px!important;min-height:72px!important;margin:0 auto!important;padding:0 20px!important;display:flex!important;align-items:center!important;gap:10px!important}
+.efl-site-brand{display:flex!important;align-items:center!important;gap:10px!important;margin:0 auto 0 0!important;min-width:0!important;color:#f5f9ff!important;text-decoration:none!important}
+.efl-site-brand img{display:block!important;width:42px!important;height:42px!important;flex:0 0 42px!important;object-fit:cover!important;border:1px solid rgba(255,217,121,.28)!important;border-radius:12px!important;box-shadow:0 0 18px rgba(23,105,232,.14)!important}
+.efl-site-brand .brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1!important}
+.efl-site-brand .brand-copy span{display:block!important;color:#f5f9ff!important;font-size:14px!important;font-weight:950!important;line-height:1!important;white-space:nowrap!important}
+.efl-site-brand .brand-copy small{display:block!important;margin-top:5px!important;color:var(--efl-shell-gold)!important;font-size:7px!important;font-weight:900!important;line-height:1!important;letter-spacing:.16em!important;text-transform:uppercase!important;white-space:nowrap!important}
+.efl-site-links{display:flex!important;align-items:center!important;gap:2px!important;margin:0!important}
+.efl-site-links a{padding:9px 8px!important;border-radius:9px!important;color:#b7c5d8!important;font-size:10px!important;font-weight:850!important;line-height:1!important;text-decoration:none!important;white-space:nowrap!important}
+.efl-site-links a:hover,.efl-site-links a.active{background:rgba(23,105,232,.18)!important;color:#fff!important}
+.efl-site-links .efl-hq-nav{color:#ffe49a!important}
+.efl-site-links .efl-hq-nav.active{background:rgba(255,217,121,.1)!important;box-shadow:inset 0 0 0 1px rgba(255,217,121,.2)!important}
+.efl-account-nav{position:relative;height:42px;min-width:106px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 11px;border:1px solid rgba(255,217,121,.38);border-radius:12px;background:linear-gradient(145deg,rgba(14,31,58,.98),rgba(5,13,27,.98));color:#fff!important;text-decoration:none!important;box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045);transition:border-color .18s,background .18s,transform .18s,box-shadow .18s}
+.efl-account-nav:hover,.efl-account-nav:focus-visible{border-color:#ffd979;background:linear-gradient(145deg,rgba(18,49,91,.98),rgba(7,20,40,.98));box-shadow:0 10px 28px rgba(0,0,0,.28),0 0 18px rgba(23,105,232,.16);transform:translateY(-1px);outline:none}
+.efl-account-nav.current{border-color:#ffd979;box-shadow:0 0 0 1px rgba(255,217,121,.12),0 8px 24px rgba(0,0,0,.22)}
+.efl-account-avatar{width:24px;height:24px;flex:0 0 24px;display:grid;place-items:center;border:1px solid rgba(69,163,255,.36);border-radius:50%;background:rgba(23,105,232,.16);color:#ffd979;font-size:8px;font-weight:950;line-height:1;overflow:hidden}
+.efl-account-avatar svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.efl-account-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0;line-height:1}
+.efl-account-copy strong{max-width:112px;overflow:hidden;color:#fff;font-size:8px;font-weight:1000;letter-spacing:.07em;text-overflow:ellipsis;white-space:nowrap}
+.efl-account-copy small{display:block;margin-top:4px;color:#ffd979;font-size:6px;font-weight:900;letter-spacing:.12em;white-space:nowrap}
+.efl-account-badge{position:absolute;top:-5px;right:-5px;min-width:18px;height:18px;padding:0 5px;border:2px solid var(--efl-shell-bg);border-radius:999px;display:none;align-items:center;justify-content:center;background:#ff6678;color:#fff;font-size:7px;font-weight:950;line-height:1}
+.efl-account-nav.has-pending .efl-account-badge{display:inline-flex}
+.efl-league-menu{position:relative;flex:0 0 auto}
+.efl-league-menu-btn{height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid rgba(255,255,255,.11);border-radius:12px;background:#07101f;color:#fff;font-size:9px;font-weight:950;letter-spacing:.08em;cursor:pointer}
+.efl-league-dot{width:8px;height:8px;display:inline-block;border-radius:50%}
+.efl-dynasty-dot{background:#ffd979;box-shadow:0 0 12px rgba(255,217,121,.72)}
+.efl-redraft-dot{background:#baff31}
+.efl-league-pop{position:absolute;top:49px;right:0;z-index:1020;width:220px;padding:8px;display:none;border:1px solid rgba(69,163,255,.22);border-radius:14px;background:#050c18;box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.efl-league-menu.open .efl-league-pop{display:block}
+.efl-league-pop a{display:flex;align-items:center;gap:10px;padding:11px;border-radius:10px;color:#fff;text-decoration:none}
+.efl-league-pop a:hover{background:rgba(23,105,232,.13)}
+.efl-league-pop b{display:block;font-size:11px}.efl-league-pop small{display:block;margin-top:3px;color:#8296b1;font-size:8px}
+.efl-menu-btn{width:42px;height:42px;flex:0 0 42px;display:none;place-items:center;border:1px solid rgba(255,255,255,.11);border-radius:12px;background:#07101f;color:#fff;font-size:20px;cursor:pointer}
+.efl-mobile-menu{position:fixed;z-index:1010;top:72px;left:0;right:0;padding:10px 14px 16px;display:none;grid-template-columns:1fr 1fr;gap:8px;border-bottom:1px solid rgba(69,163,255,.2);background:rgba(4,9,20,.985);box-shadow:0 20px 40px rgba(0,0,0,.48)}
+.efl-mobile-menu.open{display:grid!important}
+.efl-mobile-menu a{padding:13px 12px;border-radius:11px;background:rgba(69,163,255,.055);color:#c6d5e8;font-size:11px;font-weight:850;text-decoration:none}
+.efl-mobile-menu a:hover,.efl-mobile-menu a.active{background:rgba(23,105,232,.18);color:#fff}
+.efl-mobile-menu .efl-mobile-hq,.efl-mobile-menu .efl-mobile-account{border:1px solid rgba(255,217,121,.2);color:#ffe49a}
+.efl-mobile-menu .efl-mobile-account{display:flex;align-items:center;gap:8px}
+.efl-mobile-menu .efl-mobile-account strong{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;display:none;align-items:center;justify-content:center;background:#ff6678;color:#fff;font-size:8px}
+.efl-mobile-menu .efl-mobile-account.has-pending strong{display:inline-flex}
+@media(max-width:1080px){.efl-site-links{display:none!important}.efl-menu-btn{display:grid!important}}
+@media(max-width:700px){.efl-site-nav{height:62px!important;min-height:62px!important;padding:0 12px!important;gap:8px!important}.efl-site-brand{gap:7px!important;overflow:hidden!important}.efl-site-brand img{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:9px!important}.efl-site-brand .brand-copy span{font-size:12.5px!important}.efl-site-brand .brand-copy small{font-size:6px!important;letter-spacing:.1em!important;margin-top:3px!important}.efl-account-nav{width:40px;min-width:40px;height:40px;padding:0}.efl-account-copy{display:none}.efl-account-avatar{width:24px;height:24px}.efl-league-menu-btn{height:40px;padding:0 10px}.efl-menu-btn{width:40px;height:40px;flex-basis:40px}.efl-mobile-menu{top:62px}}
+@media(max-width:430px){.efl-site-brand .brand-copy small{display:none}.efl-site-brand .brand-copy span{font-size:12px!important}.efl-league-menu-btn{padding:0 8px;font-size:8px}.efl-site-nav{gap:6px!important}.efl-mobile-menu{grid-template-columns:1fr}}
+@media(min-width:1081px){.efl-mobile-menu{display:none!important}}
