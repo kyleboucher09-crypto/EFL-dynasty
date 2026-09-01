@@ -5,6 +5,9 @@
 :root{--bg:#040914!important;--panel:#081326!important;--panel2:#0c1b34!important;--purple:#1769e8!important;--purple2:#45a3ff!important;--gold:#e8b84a!important;--gold2:#ffd979!important;--text:#f5f9ff!important;--muted:#9eacc0!important}
 body{background:radial-gradient(900px 500px at 50% -100px,rgba(23,105,232,.25),transparent 64%),radial-gradient(650px 350px at 92% 11%,rgba(232,184,74,.08),transparent 65%),#040914!important;color:#f5f9ff!important}.topbar{background:rgba(4,9,20,.88)!important}.mobile-menu{background:rgba(4,9,20,.98)!important}.navlinks a:hover,.navlinks a.active{background:rgba(23,105,232,.20)!important}.mobile-menu a.active{background:rgba(23,105,232,.24)!important;color:var(--gold2)!important}.page-hero{background:radial-gradient(470px 300px at 84% 18%,rgba(232,184,74,.13),transparent 70%),radial-gradient(580px 360px at 10% 20%,rgba(23,105,232,.32),transparent 70%),#061020!important}
 
+/* Compact public page heroes on desktop; retain the established mobile layout. */
+@media(min-width:901px){.page-hero{min-height:280px!important;padding:30px 36px!important}.page-hero h1{font-size:clamp(42px,4.6vw,64px)!important;margin:8px 0!important}}
+
 /* League Hub: full-bleed 3:1 artwork, no surrounding black bars. */
 .league-hero{margin-top:0!important;height:auto!important;min-height:0!important;overflow:visible!important}.league-hero-card{display:block!important;width:100%!important;max-width:880px!important;aspect-ratio:3/1!important;height:auto!important;min-height:0!important;overflow:hidden!important;padding:0!important;background:transparent!important;border:0!important;border-radius:16px!important;box-shadow:none!important}.league-hero-card img{content:url('1AE308A1-7057-46D8-99DA-55BBBB0758E5.png')!important;display:block!important;width:100%!important;height:100%!important;max-width:100%!important;object-fit:cover!important;object-position:center!important;border:0!important;border-radius:16px!important}
 
