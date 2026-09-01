@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>EFL Commissioner · Account Claims</title>
+  <link rel="stylesheet" href="account.css?v=1">
+  <style>
+    .claim-grid{display:grid;gap:10px}.claim-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:#071426}.claim-top{display:flex;gap:12px;align-items:flex-start}.claim-top h3{margin:4px 0;font-size:18px}.claim-top p{margin:0;color:#8fa4bd;font-size:9px;line-height:1.5}.claim-top .pill{margin-left:auto}.claim-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.claim-meta div{padding:10px;border-radius:11px;background:#ffffff05}.claim-meta small{display:block;color:#7e94ad;font-size:7px;font-weight:900}.claim-meta b{display:block;margin-top:4px;font-size:9px}.claim-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.prospect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.prospect{padding:13px;border-radius:14px;border:1px solid rgba(69,163,255,.15);background:rgba(69,163,255,.05)}.prospect b{font-size:11px}.prospect p{font-size:8px;color:#8da2ba;margin:4px 0 0}@media(max-width:680px){.claim-meta,.prospect-grid{grid-template-columns:1fr}.claim-top{flex-wrap:wrap}.claim-top .pill{margin-left:0}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand"><b>EFL Dynasty</b><small>COMMISSIONER · ACCOUNTS</small></div><a href="commissioner-dashboard.html">Main Dashboard</a></header>
+  <section class="hero"><div class="eye">Commissioner's Office</div><h1>ACCOUNT &<br>FRANCHISE CLAIMS.</h1><p>Approve who can manage each Franchise Headquarters and keep an eye on the EFL Prospect pool. A claim never grants access until you approve it here.</p><div class="security-row"><span>✓ SECURE COMMISSIONER SESSION</span><span>✓ APPROVAL AUDIT LOG</span><span>✓ ONE OWNER PER FRANCHISE</span></div></section>
+
+  <section class="stage" id="loginStage">
+    <div class="auth-card" style="max-width:560px;margin:auto"><div class="eye">Commissioner Access Required</div><h2>Unlock account controls</h2><p>Your existing EFL commissioner key is exchanged for the secure HttpOnly commissioner session. The key is not stored in the page.</p><div class="field"><label>COMMISSIONER KEY</label><input id="commissionerKey" type="password" autocomplete="current-password"></div><button class="primary full" id="loginBtn" type="button">OPEN ACCOUNT INBOX</button><div id="loginMsg" class="statusbox bad hidden" style="margin-top:10px"></div></div>
+  </section>
+
+  <section class="stage hidden" id="dashboardStage">
+    <div class="account-head"><div class="account-avatar">👑</div><div><div class="eye">Account Administration</div><h2>Commissioner Inbox</h2><p>Franchise claims and Prospects across EFL leagues.</p></div><div class="account-actions"><button class="secondary" id="refreshBtn">REFRESH</button><button class="danger" id="lockBtn">LOCK</button></div></div>
+    <div id="dashMsg" class="statusbox hidden" style="margin-top:12px"></div>
+    <div class="summary-grid"><div class="summary"><small>PENDING CLAIMS</small><strong id="pendingCount">0</strong></div><div class="summary"><small>PROSPECTS</small><strong id="prospectCount">0</strong></div><div class="summary"><small>REVIEWED CLAIMS</small><strong id="reviewedCount">0</strong></div></div>
+
+    <div class="onboarding"><div class="section-title"><div><div class="eye">Needs Your Decision</div><h3>Pending franchise claims</h3></div></div><div id="pendingClaims" class="claim-grid"></div></div>
+    <div class="onboarding"><div class="section-title"><div><div class="eye">Future Managers</div><h3>Prospect pool</h3></div></div><div id="prospects" class="prospect-grid"></div></div>
+    <div class="onboarding"><div class="section-title"><div><div class="eye">History</div><h3>Recently reviewed</h3></div></div><div id="reviewedClaims" class="claim-grid"></div></div>
+  </section>
+</main>
+<script>
+const Q=s=>document.querySelector(s);const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const api=(u,o={})=>fetch(u,{credentials:'same-origin',...o});
+function msg(sel,t,type=''){const e=Q(sel);e.textContent=t;e.className=`statusbox ${type}`.trim();e.classList.remove('hidden')}function hide(sel){Q(sel).classList.add('hidden')}
+async function login(){hide('#loginMsg');const key=Q('#commissionerKey').value.trim();if(!key)return msg('#loginMsg','Enter your commissioner key.','bad');Q('#loginBtn').disabled=true;try{const r=await api('/api/commissioner-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key})});Q('#commissionerKey').value='';if(!r.ok)return msg('#loginMsg',r.status===401?'That commissioner key was not accepted.':'Could not open the account inbox.','bad');await load()}finally{Q('#loginBtn').disabled=false}}
+function claimCard(c,pending=false){return `<article class="claim-card"><div class="claim-top"><div><div class="eye">CLAIM #${Number(c.id)}</div><h3>${esc(c.franchise_name)}</h3><p>${esc(c.user_name)} · ${esc(c.user_email)}</p></div><span class="pill ${esc(c.status)}">${esc(String(c.status).toUpperCase())}</span></div><div class="claim-meta"><div><small>LEAGUE</small><b>${esc(c.league_name)}</b></div><div><small>ROSTER</small><b>#${Number(c.roster_id)}</b></div><div><small>REQUESTED</small><b>${c.requested_at?new Date(c.requested_at).toLocaleString():'—'}</b></div></div>${c.review_note?`<div class="statusbox" style="margin-top:10px">${esc(c.review_note)}</div>`:''}${pending?`<div class="claim-actions"><button class="primary" data-review="approved" data-id="${Number(c.id)}">✓ APPROVE & UNLOCK HQ</button><button class="danger" data-review="denied" data-id="${Number(c.id)}">✕ DENY CLAIM</button></div>`:''}</article>`}
+function render(j){const claims=j.claims||[],pending=claims.filter(x=>x.status==='pending'),reviewed=claims.filter(x=>x.status!=='pending'),prospects=j.prospects||[];Q('#pendingCount').textContent=pending.length;Q('#prospectCount').textContent=prospects.length;Q('#reviewedCount').textContent=reviewed.length;Q('#pendingClaims').innerHTML=pending.length?pending.map(c=>claimCard(c,true)).join(''):'<div class="statusbox good">No franchise claims are waiting for approval.</div>';Q('#prospects').innerHTML=prospects.length?prospects.map(p=>`<div class="prospect"><b>👀 ${esc(p.display_name||'EFL Prospect')}</b><p>${esc(p.league_id)} · joined ${p.created_at?new Date(p.created_at).toLocaleDateString():'recently'}</p></div>`).join(''):'<div class="statusbox">No Prospects are registered yet.</div>';Q('#reviewedClaims').innerHTML=reviewed.length?reviewed.slice(0,30).map(c=>claimCard(c,false)).join(''):'<div class="statusbox">No account claims have been reviewed yet.</div>'}
+async function load(){try{const r=await api('/api/commissioner-account-claims',{cache:'no-store'});if(r.status===401){Q('#dashboardStage').classList.add('hidden');Q('#loginStage').classList.remove('hidden');return}const j=await r.json();if(!r.ok)return msg('#dashMsg',j.error||'Could not load account claims.','bad');Q('#loginStage').classList.add('hidden');Q('#dashboardStage').classList.remove('hidden');hide('#dashMsg');render(j)}catch{msg('#dashMsg','Could not reach the account claim service.','bad')}}
+async function review(id,status){const note=prompt(status==='approved'?'Optional approval note:':'Optional reason for denying this claim:')||'';const r=await api('/api/commissioner-account-claims',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({claimId:Number(id),status,note})});let j={};try{j=await r.json()}catch{}if(!r.ok){msg('#dashMsg',j.error||'Could not review that claim.','bad');return}msg('#dashMsg',status==='approved'?'Franchise approved. Headquarters management is now unlocked for that account.':'Claim denied. The manager has been notified.','good');await load()}
+async function lock(){try{await api('/api/commissioner-logout',{method:'POST'})}catch{}Q('#dashboardStage').classList.add('hidden');Q('#loginStage').classList.remove('hidden')}
+Q('#loginBtn').onclick=login;Q('#commissionerKey').onkeydown=e=>{if(e.key==='Enter')login()};Q('#refreshBtn').onclick=load;Q('#lockBtn').onclick=lock;Q('#pendingClaims').addEventListener('click',e=>{const b=e.target.closest('[data-review]');if(b)review(b.dataset.id,b.dataset.review)});load();
+</script>
+</body>
+</html>

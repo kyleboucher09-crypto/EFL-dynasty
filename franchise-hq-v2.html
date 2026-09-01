@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EFL Franchise HQ Prototype</title>
+  <link rel="stylesheet" href="franchise-hq-v2.css?v=1">
+  <link rel="stylesheet" href="franchise-hq-shop-v2.css?v=2">
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <img src="Assets/efl-logo.jpeg" alt="EFL logo">
+      <div><b>EFL Dynasty</b><small>FRANCHISE HQ LAB</small></div>
+      <a href="franchises.html">← Back to Franchises</a>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">The Legacy Era · Prototype</div>
+      <h1>YOUR FRANCHISE.<br>YOUR LEGACY.</h1>
+      <p>A first look at the owner progression layer: Legacy Bank, Credits, Victory Crates, Badge Vault, Trophy Showcase and cosmetic collecting. Live Legacy totals are calculated from Sleeper and the current EFL Legacy rules.</p>
+      <div class="picker">
+        <select id="franchisePicker"><option>Loading EFL franchises…</option></select>
+        <span class="status" id="status">Connecting to Sleeper…</span>
+        <span class="status" id="accessStatus">CHECKING ACCESS…</span>
+      </div>
+    </section>
+
+    <section class="hq" id="hq">
+      <div class="profilebar">
+        <div class="profile-main">
+          <div class="avatar" id="avatar"></div>
+          <div>
+            <div class="eyebrow">Franchise Headquarters</div>
+            <h2 id="teamName">—</h2>
+            <div class="owner" id="ownerName">—</div>
+          </div>
+          <div class="rankbadge">
+            <img id="rankArt" alt="Legacy rank patch">
+            <div><b id="rankName">—</b><small id="rankLevel">LEGACY RANK</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <section class="panel">
+          <div class="eyebrow">Franchise Bank</div>
+          <h3>Legacy Wallet</h3>
+          <div class="bank-grid">
+            <div class="bank-card"><small>LIFETIME LEGACY</small><strong id="lpTotal">0</strong><div class="sub">LP · never spent</div></div>
+            <div class="bank-card"><small>EFL CREDITS</small><strong id="creditTotal">0</strong><div class="sub">EC · 10 LP = 1 EC</div></div>
+            <div class="bank-card"><small>BADGES EARNED</small><strong id="badgeTotal">0</strong><div class="sub" id="badgeSub">0 available</div></div>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span id="progressFrom">Current rank</span><b id="progressTo">Next rank</b></div>
+            <div class="bar"><i id="progressBar" style="width:0%"></i></div>
+            <div class="note" id="progressNote"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="eyebrow">Victory Rewards</div>
+          <h3>Loot Locker</h3>
+          <div class="crate">
+            <div>
+              <div class="crate-icon">🎁</div>
+              <strong id="crateCount">0</strong>
+              <p id="crateText">Every finalized Sleeper win earns one Victory Crate. Crates can contain cosmetics or a small Legacy Point bonus.</p>
+              <button class="disabled-btn" type="button" disabled>OPENING COMES WITH OWNER LOGIN</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel section">
+        <div class="tabs" role="tablist">
+          <button class="tab on" data-panel="vault">🏅 BADGE VAULT</button>
+          <button class="tab" data-panel="showcase">🏆 TROPHY SHOWCASE</button>
+          <button class="tab" data-panel="shop">🎨 COSMETIC SHOP</button>
+        </div>
+        <div class="tab-panel on" id="vault"><div class="vault-grid" id="vaultGrid"></div></div>
+        <div class="tab-panel" id="showcase"><div class="showcase" id="showcaseGrid"></div><div class="note">Final version: owners choose the three badges/trophies they are most proud of. Higher Legacy ranks can unlock more showcase slots.</div></div>
+        <div class="tab-panel" id="shop"><div class="shop-grid" id="shopGrid"></div><div class="note">Prototype prices only. Purchases will use persistent EC balances after owner authentication is added. Loot-exclusive cosmetics cannot be bought.</div></div>
+      </section>
+    </section>
+  </main>
+  <script src="franchise-hq-v2.js?v=2"></script>
+  <script src="franchise-hq-shop-v2.js?v=2"></script>
+  <script src="franchise-hq-shop-guard.js?v=1"></script>
+</body>
+</html>
