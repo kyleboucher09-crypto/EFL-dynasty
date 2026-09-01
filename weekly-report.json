@@ -1,39 +1,39 @@
 {
-  "edition": "2026 PRESEASON — WEEK 1 UPDATE",
+  "edition": "2026 PRESEASON — WEEK 1 FINAL PREVIEW",
   "season": 2026,
   "week": 1,
-  "published": "August 25, 2026",
-  "headline": "The Board Moves Before the Games Begin",
-  "dek": "No completed EFL fantasy week yet, but the latest preseason model has reshuffled the chase behind No. 1 and sharpened the opening matchup picture.",
+  "published": "September 1, 2026",
+  "headline": "The Opening Lines Are In",
+  "dek": "The EFL still has no completed 2026 fantasy week, but fresh Sleeper projections have sharpened the Week 1 slate with two near-tossups, two heavy early favorites and a power board waiting for real results.",
   "lead": {
-    "tag": "WEEK 1 PRESEASON UPDATE",
-    "title": "Master Peyton Holds the Line as the Contender Order Shifts",
-    "body": "The EFL is still waiting for its first completed fantasy week of 2026, so there are no regular-season results to manufacture into a story. What has changed is the league's current preseason hierarchy. Master Peyton remains No. 1 with an 89.2 Power Score, but the order immediately behind has tightened: The Don's Soldiers has climbed one spot to No. 2 at 84.2, edging Kaaron Rodgers, which slips to No. 3 at 83.8. Defending champion Blaze Infantry remains fourth at 75.3. The movement is still projection-driven rather than earned through completed games, but it gives Week 1 a clearer shape: the favorite is holding steady, the challengers are separating themselves, and several franchises already face opening matchups capable of changing the board quickly once real scoring begins."
+    "tag": "WEEK 1 FINAL PREVIEW",
+    "title": "Sleeper's First Full Week 1 Read Turns the Spotlight From Rankings to Matchups",
+    "body": "The 2026 EFL season is still in preview mode as of September 1: no fantasy matchup has been completed, so there are no legitimate scoring trends, winners or losers to manufacture. What the league does have now is a fresh Sleeper-based Week 1 projection set across all six matchups. The September 1 model shows a slate with real contrast — two games separated by less than five projected points, including one matchup split just 51.2% to 48.8%, while two other pairings carry favorite probabilities of 82.4% and 76.8%. The published EFL power board remains the August 25 order, with Master Peyton No. 1 at 89.2, The Don's Soldiers No. 2 at 84.2, Kaaron Rodgers No. 3 at 83.8 and defending champion Blaze Infantry No. 4 at 75.3. Until actual Week 1 scores arrive, projections are context rather than proof — but the opening slate is finally taking shape."
   },
   "briefs": [
     {
-      "icon": "↗",
-      "label": "POWER MOVE",
-      "title": "The Don's Soldiers Jumps Into the No. 2 Spot",
-      "body": "The Don's Soldiers moved from third to second in the latest EFL model, posting an 84.2 Power Score behind a projected core led by Christian McCaffrey, Joe Burrow and Amon-Ra St. Brown. Kaaron Rodgers is now third at 83.8, leaving only four-tenths of a point between the two contenders. That is effectively a dead heat entering Week 1 and makes the first real scoring sample especially important."
-    },
-    {
-      "icon": "↓",
-      "label": "FALLING STOCK",
-      "title": "The Duke and LandsharkSC Take the Biggest Preseason Slides",
-      "body": "The Duke falls two places from fifth to seventh, while LandsharkSC drops from ninth to eleventh. The Duke's opening assignment is the toughest of the two: a Week 1 matchup with top-ranked Master Peyton. LandsharkSC draws the newly elevated No. 2 team, The Don's Soldiers. Neither move reflects a completed loss, but both franchises enter the season with immediate opportunities to reverse the preseason trend."
-    },
-    {
-      "icon": "⚔",
+      "icon": "⚖",
       "label": "MATCHUP WATCH",
-      "title": "No. 1 Master Peyton Gets an Immediate Test From The Duke",
-      "body": "Master Peyton opens against The Duke in one of the most consequential Week 1 pairings on the board. The league leader brings an 89.2 Power Score and an A+ projected lineup grade, while The Duke sits seventh at 72.6 with Bijan Robinson, Jalen Hurts and Chris Olave headlining the roster. A strong showing by the favorite would validate the preseason model; an upset would give the rankings their first real piece of evidence."
+      "title": "Two Week 1 Games Open Almost Dead Even",
+      "body": "The latest Sleeper projection model identifies two especially tight Week 1 matchups. The closest is separated by only 1.19 projected points and carries a 51.2%-48.8% win-probability split. Another is separated by 4.38 projected points with a 53.8%-46.2% split. Before any real scoring begins, those are the two clearest candidates for opening-week drama."
+    },
+    {
+      "icon": "▲",
+      "label": "FAVORITE WATCH",
+      "title": "The Early Model Also Shows Two Clear Favorites",
+      "body": "Not every Week 1 pairing looks close on paper. One matchup currently carries an 82.4% projected win chance for the favorite, while another sits at 76.8%. The highest individual team projection on the six-game slate is 147.91 points. Those numbers establish the early expectation, but no EFL franchise has earned anything yet — the first actual scores will decide whether the model was signal or noise."
     },
     {
       "icon": "♛",
-      "label": "CHAMPION WATCH",
-      "title": "Blaze Infantry Opens the Title Defense at No. 4",
-      "body": "Blaze Infantry remains fourth in the current rankings with a 75.3 Power Score and opens against fifth-ranked Trash Pandas at 74.1. That 1.2-point separation makes it one of the tightest pairings among neighboring teams on the board. Until regular-season scoring begins, there are no completed matchup, waiver or trade results to overstate; for now, the defending champion's first assignment is simply to protect its position against the team directly behind it."
+      "label": "POWER BOARD",
+      "title": "Master Peyton Still Owns the Published No. 1 Spot",
+      "body": "The most recent published EFL power rankings remain the August 25 edition. Master Peyton leads at 89.2, followed by The Don's Soldiers at 84.2 and Kaaron Rodgers at 83.8, with Blaze Infantry fourth at 75.3. The Don's Soldiers and Kaaron Rodgers are separated by only 0.4 Power Score points, leaving the first completed fantasy week positioned to provide the first meaningful on-field evidence in that contender race."
+    },
+    {
+      "icon": "⏱",
+      "label": "WEEK 1 CLOCK",
+      "title": "The League Is Still Waiting for the First Real Box Scores",
+      "body": "The NFL regular season has not started yet, so the EFL correctly remains on Week 1 under its preseason convention. That means there are no completed fantasy results or scoring trends to report in this edition. The newsroom is treating projections as projections and is not presenting unverified trades, waivers or free-agent activity as fact; once completed Sleeper data exists, the weekly report can shift from preview mode to results, movement and transaction analysis."
     }
   ]
 }
