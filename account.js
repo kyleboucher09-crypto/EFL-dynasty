@@ -1,6 +1,6 @@
 (()=>{
   const $=s=>document.querySelector(s);
-  const state={session:null,account:null,leagues:[],selectedLeague:null,selectedRoster:null};
+  const state={session:null,account:null,leagues:[],selectedLeague:null,selectedRoster:null,authReadiness:null};
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const previewShare=new URLSearchParams(location.search).get('_vercel_share')||'';
   function requestUrl(url){
@@ -30,6 +30,7 @@
     show('#loadingStage');
     await loadLeagues();
     try{
+      const readinessResponse=await api('/api/efl-auth-readiness',{cache:'no-store'});state.authReadiness=readinessResponse.ok?await json(readinessResponse):null;const signUpTab=$('#signUpTab');if(signUpTab){const unavailable=Boolean(state.authReadiness&&!state.authReadiness.publicSignupAvailable);signUpTab.classList.toggle('unavailable',unavailable);signUpTab.setAttribute('aria-disabled',String(unavailable));signUpTab.title=unavailable?'New account registration opens after EFL email verification is activated.':''}
       const authRes=await api('/api/auth/get-session',{cache:'no-store'});
       if(authRes.status===503){show('#authStage');message('#authMessage','Secure accounts are built but the authentication environment still needs to be activated before signups can open.','bad');return}
       if(!authRes.ok){show('#authStage');return}
@@ -130,7 +131,7 @@
     rows.sort((a,b)=>a.weight-b.weight);host.innerHTML=rows.length?rows.map(x=>x.html).join(''):'<div class="statusbox">You haven’t joined a league yet. Select a league above to begin.</div>';
   }
 
-  $('#signInTab').onclick=()=>authMode('signin');$('#signUpTab').onclick=()=>authMode('signup');$('#signInForm').onsubmit=signIn;$('#signUpForm').onsubmit=signUp;$('#forgotBtn').onclick=forgot;$('#signOutBtn').onclick=signOut;$('#refreshAccount').onclick=refreshAccount;
+  $('#signInTab').onclick=()=>authMode('signin');$('#signUpTab').onclick=()=>{if(state.authReadiness&&!state.authReadiness.publicSignupAvailable)return message('#authMessage','New account registration is temporarily closed while EFL email verification is activated. Existing members can still sign in.','bad');authMode('signup')};$('#signInForm').onsubmit=signIn;$('#signUpForm').onsubmit=signUp;$('#forgotBtn').onclick=forgot;$('#signOutBtn').onclick=signOut;$('#refreshAccount').onclick=refreshAccount;
   $('#leaguePicker').addEventListener('click',e=>{const b=e.target.closest('[data-league]');if(b)selectLeague(b.dataset.league)});
   $('#rolePicker').addEventListener('click',e=>{const b=e.target.closest('[data-role-choice]');if(b)chooseRole(b.dataset.roleChoice,b)});
   $('#franchisePicker').addEventListener('click',e=>{const b=e.target.closest('[data-roster]');if(b)selectRoster(b.dataset.roster)});

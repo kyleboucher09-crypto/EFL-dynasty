@@ -7,7 +7,7 @@
   const API='https://api.sleeper.app/v1';
   const cache=new Map();
   const seasonalBadges=new Set(['champion','regular_season_king','points_king','untouchable','two_hundred_club','absolute_destruction','photo_finish','hot_streak','perfect_month','comeback_kid','playoff_assassin','first_class_ticket','on_the_podium','four_digits','weekly_hammer','bracket_breaker','consolation_king','business_trip','title_defense','three_week_terror','double_crown','triple_crown_season']);
-  let RULES=null,COSMETICS=null,OWNERS=[];
+  let RULES=null,COSMETICS=null,OWNERS=[],ACTIVE_OWNER=null,ECONOMY=null;
   const q=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const get=path=>{if(!cache.has(path))cache.set(path,fetch(API+path).then(r=>{if(!r.ok)throw Error(`Sleeper ${r.status}`);return r.json()}).catch(e=>{cache.delete(path);throw e}));return cache.get(path)};
@@ -15,15 +15,19 @@
   const avatar=u=>u?.avatar?`https://sleepercdn.com/avatars/thumbs/${u.avatar}`:'';
   function localUrl(path){if(!previewShare)return path;const u=new URL(path,location.origin);u.searchParams.set('_vercel_share',previewShare);return `${u.pathname}${u.search}`}
 
+  function publishEconomy(owner,economy,allowed=false){window.EFL_HQ_STATE={leagueId:EFL_LEAGUE_ID,rosterId:Number(owner?.roster?.roster_id)||0,allowed:Boolean(allowed),economy:economy||null};document.dispatchEvent(new CustomEvent('efl:hq-economy',{detail:window.EFL_HQ_STATE}))}
+  function applyEconomy(owner,economy){if(!owner||Number(ACTIVE_OWNER?.roster?.roster_id)!==Number(owner.roster?.roster_id))return;ECONOMY=economy;q('#lpTotal').textContent=Number(economy.performance?.lp||owner.lp).toLocaleString();q('#creditTotal').textContent=Number(economy.wallet?.balance||0).toLocaleString();const crates=economy.crates||{};q('#crateCount').textContent=Number(crates.unopened||0);q('#crateText').textContent=`${Number(crates.earned||0)} earned · ${Number(crates.opened||0)} opened · ${Number(crates.unopened||0)} ready. Each finalized Sleeper win creates one crate; duplicate drops convert to EFL Credits.`;const btn=q('#openCrateBtn');if(btn){btn.disabled=!Number(crates.unopened||0);btn.textContent=btn.disabled?'NO CRATES READY':`OPEN VICTORY CRATE · ${Number(crates.unopened||0)} READY`}publishEconomy(owner,economy,true)}
   async function renderAccess(owner){
-    const el=q('#accessStatus');if(!el||!owner?.roster?.roster_id)return;el.textContent='CHECKING ACCESS…';
+    const el=q('#accessStatus');if(!el||!owner?.roster?.roster_id)return;const rosterId=Number(owner.roster.roster_id);ACTIVE_OWNER=owner;ECONOMY=null;el.textContent='CHECKING ACCESS…';publishEconomy(owner,null,false);
     try{
       const path=`/api/efl-franchise-access?leagueId=${encodeURIComponent(EFL_LEAGUE_ID)}&rosterId=${Number(owner.roster.roster_id)}`;
       const r=await fetch(localUrl(path),{credentials:'same-origin',cache:'no-store'});let j={};try{j=await r.json()}catch{}
-      if(r.ok&&j.allowed){const role=String(j.role||'owner').toUpperCase();el.textContent=`${role} ACCESS · MANAGEMENT AUTHORIZED`;el.dataset.access='allowed';return}
+      if(Number(ACTIVE_OWNER?.roster?.roster_id)!==rosterId)return;if(r.ok&&j.allowed){const role=String(j.role||'owner').toUpperCase();el.textContent=`${role} ACCESS · MANAGEMENT AUTHORIZED`;el.dataset.access='allowed';const economyPath=`/api/efl-hq-economy?leagueId=${encodeURIComponent(EFL_LEAGUE_ID)}&rosterId=${rosterId}`;const er=await fetch(localUrl(economyPath),{credentials:'same-origin',cache:'no-store'});let ej={};try{ej=await er.json()}catch{}if(!er.ok)throw Error(ej.error||'Economy unavailable');applyEconomy(owner,ej.economy);return}
       el.textContent='VIEW ONLY · SIGN IN FOR MANAGEMENT';el.dataset.access='view';
-    }catch{el.textContent='VIEW ONLY · ACCESS CHECK UNAVAILABLE';el.dataset.access='view'}
+      const btn=q('#openCrateBtn');if(btn){btn.disabled=true;btn.textContent='SIGN IN TO OPEN'}
+    }catch(error){if(Number(ACTIVE_OWNER?.roster?.roster_id)!==rosterId)return;console.error('HQ access/economy check failed',error);el.textContent='VIEW ONLY · ACCESS CHECK UNAVAILABLE';el.dataset.access='view';const btn=q('#openCrateBtn');if(btn){btn.disabled=true;btn.textContent='HQ ECONOMY UNAVAILABLE'}}
   }
+  async function economyAction(action,payload={}){const owner=ACTIVE_OWNER;if(!owner?.roster?.roster_id)throw Error('Select a franchise first.');const response=await fetch(localUrl('/api/efl-hq-economy'),{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({leagueId:EFL_LEAGUE_ID,rosterId:Number(owner.roster.roster_id),action,...payload})});let json={};try{json=await response.json()}catch{}if(!response.ok)throw Error(json.error||'That HQ action could not be completed.');applyEconomy(owner,json.economy);return json}window.EFL_HQ_ACTION=economyAction;
 
   async function season(leagueId){
     const [league,users,rosters,winners,consolation]=await Promise.all([
@@ -92,12 +96,12 @@
     q('#shopGrid').innerHTML=COSMETICS.items.map(item=>`<article class="shop-card"><div class="shop-icon">${item.icon}</div><span class="rarity ${item.rarity}">${item.rarity.toUpperCase()}</span><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p><div class="price">${item.lootOnly?'🎁 LOOT EXCLUSIVE':`${item.price} EC`}</div><button type="button" disabled>${item.lootOnly?'VICTORY CRATE DROP':credits>=item.price?'PURCHASE AFTER LOGIN':'NOT ENOUGH EC'}</button></article>`).join('');
   }
   function renderOwner(owner){
-    const r=rankFor(owner.lp),name=teamName(owner.user,owner.roster),img=avatar(owner.user),credits=Math.floor(owner.lp/10),wins=Number(owner.roster.settings?.wins)||0;
+    ACTIVE_OWNER=owner;ECONOMY=null;const r=rankFor(owner.lp),name=teamName(owner.user,owner.roster),img=avatar(owner.user),credits=Math.floor(owner.lp/10);
     q('#teamName').textContent=name;q('#ownerName').textContent=owner.user?.display_name||'EFL Franchise';q('#avatar').innerHTML=img?`<img src="${img}" alt="${esc(name)} avatar">`:esc(name.slice(0,2));
     q('#rankArt').src=r.art;q('#rankArt').alt=`${r.name} Legacy rank patch`;q('#rankName').textContent=r.name;q('#rankLevel').textContent=`LEGACY RANK ${r.level} OF ${RULES.levels.length}`;
     q('#lpTotal').textContent=owner.lp.toLocaleString();q('#creditTotal').textContent=credits.toLocaleString();q('#badgeTotal').textContent=owner.badges.length;q('#badgeSub').textContent=`${RULES.badges.length-owner.badges.length} still locked`;
     q('#progressFrom').textContent=r.name;q('#progressBar').style.width=`${r.pct}%`;if(r.next){const remaining=Math.max(0,r.next.lp-owner.lp);q('#progressTo').textContent=r.next.name;q('#progressNote').textContent=`${remaining.toLocaleString()} LP until promotion to ${r.next.name}.`;}else{q('#progressTo').textContent='LADDER COMPLETE';q('#progressNote').textContent='Maximum Legacy rank achieved.'}
-    q('#crateCount').textContent=wins;q('#crateText').textContent=wins?`${wins} Victory Crate${wins===1?'':'s'} earned from ${new Date().getFullYear()} Sleeper wins in this prototype. Final version will track opened vs. unopened crates permanently.`:'Every finalized Sleeper win will award one Victory Crate. Crates can contain cosmetics or a small Legacy Point bonus.';
+    q('#crateCount').textContent='—';q('#crateText').textContent='Sign in with an approved franchise account to load server-verified crates, inventory and spendable Credits.';q('#crateResult').textContent='';const crateBtn=q('#openCrateBtn');if(crateBtn){crateBtn.disabled=true;crateBtn.textContent='CHECKING OWNER ACCESS…'}
     const earned=new Set(owner.badges.map(b=>b.id));q('#vaultGrid').innerHTML=RULES.badges.map(b=>badgeCard(b,earned.has(b.id))).join('');
     const top=[...owner.badges].filter(b=>!b.live).sort((a,b)=>(Number(b.lp)||0)-(Number(a.lp)||0)).slice(0,3);q('#showcaseGrid').innerHTML=top.length?top.map(b=>`<div class="trophy-slot"><img src="${esc(b.image)}" alt="${esc(b.name)}"><strong>${esc(b.name)}</strong><small>${b.rarity||'EFL ACHIEVEMENT'} · ${Number(b.lp)||0} LP</small></div>`).join(''):'<div class="empty">No earned trophies yet. The first 2026 achievements will start filling this case.</div>';
     renderShop(credits);renderAccess(owner);q('#hq').classList.add('on');
@@ -115,5 +119,6 @@
   }
 
   document.addEventListener('click',e=>{const btn=e.target.closest('.tab');if(!btn)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('on'));btn.classList.add('on');q('#'+btn.dataset.panel)?.classList.add('on')});
-  load().catch(err=>{console.error(err);q('#status').textContent='Unable to load Franchise HQ prototype';q('#franchisePicker').innerHTML='<option>Try refreshing</option>';if(q('#accessStatus'))q('#accessStatus').textContent='ACCESS CHECK UNAVAILABLE'});
+  q('#openCrateBtn')?.addEventListener('click',async e=>{const btn=e.currentTarget;btn.disabled=true;btn.textContent='OPENING…';q('#crateResult').textContent='Verifying the win and opening the crate…';try{const result=await economyAction('open_crate'),reward=result.reward||{};q('#crateResult').textContent=reward.type==='duplicate_credit'?`Duplicate ${reward.itemName} converted to ${Number(reward.credits)||0} EC.`:`Unlocked ${reward.itemName} · ${String(reward.rarity||'EFL').toUpperCase()}.`;}catch(error){q('#crateResult').textContent=error.message||'The crate could not be opened.';if(ECONOMY)applyEconomy(ACTIVE_OWNER,ECONOMY)}});
+  load().catch(err=>{console.error(err);q('#status').textContent='Unable to load Franchise HQ';q('#franchisePicker').innerHTML='<option>Try refreshing</option>';if(q('#accessStatus'))q('#accessStatus').textContent='ACCESS CHECK UNAVAILABLE'});
 })();

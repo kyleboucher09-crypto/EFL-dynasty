@@ -25,6 +25,7 @@ These values must be stored in Vercel environment variables. Never commit them t
 - `BETTER_AUTH_URL` — production value: `https://www.efldynasty.com`.
 - `RESEND_API_KEY` — API key for transactional account emails. The key must have sending permission for `efldynasty.com` (or all verified domains).
 - `EFL_AUTH_FROM_EMAIL` — verified sender, recommended: `EFL Dynasty <accounts@efldynasty.com>`.
+- `EFL_PUBLIC_SIGNUP_ENABLED` — set to `true` only after live verification and password-reset emails have both been received from the verified sender domain.
 - `COMMISSIONER_EMAIL` — email that receives new franchise-claim notifications. It also identifies the commissioner EFL account role once that email signs up and verifies.
 
 Existing `COMMISSIONER_KEY` remains supported as a bootstrap/fallback for the Commissioner Account Inbox while the commissioner account is being established.
@@ -34,6 +35,8 @@ After adding or changing any of these environment variables, create a fresh Verc
 ## Transactional email domain
 
 Before public signup opens, configure and verify `efldynasty.com` with the transactional email provider so verification, reset and claim emails pass SPF/DKIM checks and do not look like spoofed mail.
+
+Public signup is fail-closed. Existing-member sign-in remains available, but registration stays disabled until the required account/email variables are present and `EFL_PUBLIC_SIGNUP_ENABLED=true`. Verification and password-reset requests now wait for the provider to accept the email instead of reporting success while a provider error is logged in the background.
 
 ## Security rules built into the system
 
@@ -66,5 +69,16 @@ Better Auth manages its own user/session/account/verification tables. EFL-specif
 - `efl_franchise_claims`
 - `efl_franchise_owners`
 - `efl_account_audit_log`
+- `efl_cosmetic_inventory`
+- `efl_economy_ledger`
+- `efl_equipped_cosmetics`
+- `efl_victory_crate_openings`
 
-The next economy milestone should reference `efl_franchise_owners` before allowing any wallet, crate, cosmetic, inventory or Headquarters mutation.
+## Franchise HQ economy
+
+- Spendable Credits equal `floor(authoritative lifetime LP / 10)` plus the permanent Credit ledger.
+- Cosmetic purchases subtract EC but never subtract LP or change Legacy rank.
+- Every finalized Sleeper win from the Legacy era creates one server-verifiable Victory Crate. Crates are earned only and are never sold.
+- Crate rewards are chosen on the server. New cosmetics enter permanent franchise inventory; duplicates convert to rarity-based EC.
+- Purchases, crate openings and equipment changes require a verified session plus approved owner, moderator or Commissioner access.
+- Every economy mutation is serialized per franchise and written to the EFL audit log.

@@ -1,0 +1,2 @@
+import { eflAuthReadiness } from '../lib/efl-auth.js';
+export default function handler(req,res){res.setHeader('Cache-Control','no-store, max-age=0');res.setHeader('X-Content-Type-Options','nosniff');if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});const ready=eflAuthReadiness();return res.status(200).json({signInAvailable:ready.coreConfigured,passwordResetAvailable:ready.coreConfigured&&ready.emailConfigured,publicSignupAvailable:ready.publicSignupEnabled});}

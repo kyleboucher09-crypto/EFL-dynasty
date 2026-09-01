@@ -1,6 +1,6 @@
 (()=>{
   const DATA_URL='legacy-cosmetics.json?v=2';
-  const state={items:[],selected:null,filters:{q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'}};
+  const state={items:[],selected:null,economy:null,allowed:false,target:null,confirmPurchase:null,busy:false,filters:{q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'}};
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const slug=v=>String(v||'core').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -36,12 +36,15 @@
     return `<div class="visual effect-visual"><div class="particle-field"><i></i><i></i><i></i><i></i><i></i></div><b>${short}</b></div>`;
   }
   function styleVars(item){const [a,b,c]=palette(item);return `--cos-a:${a};--cos-b:${b};--cos-c:${c}`}
+  function owned(item){return Boolean(state.economy?.inventory?.some(entry=>entry.id===item.id))}
+  function equipped(item){return state.economy?.equipped?.[item.slot]===item.id}
+  function actionMarkup(item){if(!state.allowed)return `<button class="economy-action" type="button" disabled>${item.lootOnly?'VICTORY CRATE EXCLUSIVE':'OWNER SIGN-IN REQUIRED'}</button>`;if(owned(item)){if(equipped(item))return `<button class="economy-action equipped" type="button" data-economy="unequip" data-slot="${esc(item.slot)}">EQUIPPED · REMOVE</button>`;return `<button class="economy-action" type="button" data-economy="equip" data-item="${esc(item.id)}">EQUIP TO HQ</button>`}if(item.lootOnly)return '<button class="economy-action" type="button" disabled>VICTORY CRATE EXCLUSIVE</button>';const balance=Number(state.economy?.wallet?.balance||0),price=Number(item.price)||0;if(balance<price)return `<button class="economy-action" type="button" disabled>NEED ${(price-balance).toLocaleString()} MORE EC</button>`;return `<button class="economy-action buy" type="button" data-economy="purchase" data-item="${esc(item.id)}">${state.confirmPurchase===item.id?`CONFIRM · SPEND ${price} EC`:`BUY · ${price} EC`}</button>`}
   function card(item){
     const loot=item.lootOnly;return `<article class="cosmetic-card rarity-${slug(item.rarity)}" data-cosmetic-id="${esc(item.id)}" style="${styleVars(item)}">
       <button class="cosmetic-art" type="button" data-preview="${esc(item.id)}" aria-label="Preview ${esc(item.name)}">${artMarkup(item)}</button>
       <div class="cosmetic-meta"><div class="cosmetic-tags"><span>${esc(slotLabel(item.slot))}</span><span>${esc(item.collection||'EFL')}</span></div><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p>
       <div class="cosmetic-bottom"><span class="rarity ${esc(item.rarity)}">${esc(String(item.rarity).toUpperCase())}</span><strong>${loot?'LOOT ONLY':`${Number(item.price)||0} EC`}</strong></div>
-      <button class="preview-btn" type="button" data-preview="${esc(item.id)}">PREVIEW ON HQ</button></div>
+      <button class="preview-btn" type="button" data-preview="${esc(item.id)}">PREVIEW ON HQ</button>${actionMarkup(item)}</div>
     </article>`;
   }
   function filtered(){
@@ -60,6 +63,7 @@
     const count=$('#cosmeticCount');if(count)count.textContent=`${arr.length} OF ${state.items.length} COSMETICS`;
     const label=$('#activeCollectionLabel');if(label)label.textContent=state.filters.collection==='all'?'ALL COLLECTIONS':state.filters.collection.toUpperCase();
   }
+  function renderInventory(){const grid=$('#inventoryGrid'),summary=$('#inventorySummary');if(!grid||!summary)return;if(!state.allowed){summary.textContent='Sign in with an approved franchise account to load its permanent inventory.';grid.innerHTML='';return}const inventory=state.items.filter(item=>owned(item));summary.innerHTML=`<strong>${inventory.length} COSMETIC${inventory.length===1?'':'S'} OWNED</strong> · ${Object.keys(state.economy?.equipped||{}).length} currently equipped · purchases and crate unlocks are saved to this franchise.`;grid.classList.add('enhanced-shop-grid');grid.innerHTML=inventory.length?inventory.map(card).join(''):'<div class="cosmetic-empty">No cosmetics yet. Earn Credits through Legacy performance or open a Victory Crate after a finalized win.</div>'}
   function collectionStats(){
     const map=new Map();for(const item of state.items){const k=item.collection||'Other';if(!map.has(k))map.set(k,[]);map.get(k).push(item)}return [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
   }
@@ -77,7 +81,7 @@
       <div class="preview-profile"><div class="preview-avatar">${avatar}</div><div class="preview-copy"><small>${esc(owner)}</small><h3>${esc(team)}</h3><div class="preview-title">${item.slot==='title'?esc(item.name):'FRANCHISE OWNER'}</div></div></div>
       <div class="preview-nameplate">${item.slot==='nameplate'?esc(item.name):esc(team)}</div>
       <div class="preview-badges"><i></i><i></i><i></i></div><div class="preview-case"><i></i><i></i><i></i></div>
-    </div><div class="preview-info"><div><span class="rarity ${esc(item.rarity)}">${esc(item.rarity.toUpperCase())}</span><small>${esc(slotLabel(item.slot))} · ${esc(item.collection||'EFL')}</small><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p></div><strong>${item.lootOnly?'🎁 VICTORY CRATE EXCLUSIVE':`${Number(item.price)||0} EC`}</strong></div>`;
+    </div><div class="preview-info"><div><span class="rarity ${esc(item.rarity)}">${esc(item.rarity.toUpperCase())}</span><small>${esc(slotLabel(item.slot))} · ${esc(item.collection||'EFL')}</small><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p></div><strong>${item.lootOnly?'🎁 VICTORY CRATE EXCLUSIVE':`${Number(item.price)||0} EC`}</strong>${actionMarkup(item)}</div>`;
     document.querySelectorAll('.cosmetic-card.selected').forEach(x=>x.classList.remove('selected'));document.querySelector(`[data-cosmetic-id="${CSS.escape(item.id)}"]`)?.classList.add('selected');
   }
   function controls(){
@@ -96,9 +100,12 @@
     $('#clearCosmeticFilters').addEventListener('click',()=>{state.filters={q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'};$('#cosmeticSearch').value='';$('#slotFilter').value='all';$('#rarityFilter').value='all';$('#collectionFilter').value='all';$('#sortFilter').value='featured';renderCollections();renderItems()});
     ui.addEventListener('click',e=>{const coll=e.target.closest('[data-collection]');if(coll){state.filters.collection=coll.dataset.collection;$('#collectionFilter').value=state.filters.collection;renderCollections();renderItems();document.querySelector('#catalogMount')?.scrollIntoView({behavior:'smooth',block:'start'});return}const btn=e.target.closest('[data-preview]');if(btn){const item=state.items.find(x=>x.id===btn.dataset.preview);if(item)preview(item)}});
   }
-  function refresh(){if(!state.items.length)return;renderCollections();renderItems();const selected=state.selected||state.items.find(x=>x.rarity==='Legendary')||state.items[0];if(selected)preview(selected)}
+  function applyEquipped(){const profile=$('.profilebar');if(!profile)return;const slots=['banner','frame','title','background','nameplate','showcase','effect','badgeEffect'];slots.forEach(slot=>{const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`);profile.removeAttribute(`data-equipped-${attr}`);['a','b','c'].forEach(key=>profile.style.removeProperty(`--eq-${attr}-${key}`))});const title=$('#equippedTitle'),nameplate=$('#equippedNameplate');if(title){title.hidden=true;title.textContent=''}if(nameplate){nameplate.hidden=true;nameplate.textContent=''}Object.entries(state.economy?.equipped||{}).forEach(([slot,id])=>{const item=state.items.find(entry=>entry.id===id);if(!item)return;const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`),[a,b,c]=palette(item);profile.setAttribute(`data-equipped-${attr}`,item.id);profile.style.setProperty(`--eq-${attr}-a`,a);profile.style.setProperty(`--eq-${attr}-b`,b);profile.style.setProperty(`--eq-${attr}-c`,c);if(slot==='title'&&title){title.textContent=item.name;title.hidden=false}if(slot==='nameplate'&&nameplate){nameplate.textContent=item.name;nameplate.hidden=false}})}
+  function toast(message,bad=false){const shop=$('#shop');if(!shop)return;let el=$('#economyToast');if(!el){el=document.createElement('div');el.id='economyToast';el.className='economy-toast';shop.prepend(el)}el.textContent=message;el.style.color=bad?'#ff8c9b':'#ffd979';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.remove(),5000)}
+  async function performEconomy(button){if(state.busy||!window.EFL_HQ_ACTION)return;const action=button.dataset.economy,itemId=button.dataset.item||'',slot=button.dataset.slot||'';if(action==='purchase'&&state.confirmPurchase!==itemId){state.confirmPurchase=itemId;renderItems();renderInventory();if(state.selected?.id===itemId)preview(state.selected);setTimeout(()=>{if(state.confirmPurchase===itemId){state.confirmPurchase=null;refresh()}},5000);return}state.confirmPurchase=null;state.busy=true;button.disabled=true;const old=button.textContent;button.textContent=action==='purchase'?'PURCHASING…':action==='equip'?'EQUIPPING…':'UPDATING…';try{const result=await window.EFL_HQ_ACTION(action,{itemId,slot}),reward=result.reward||{};toast(reward.type==='purchase'?`${reward.itemName} added to this franchise inventory.`:reward.type==='equipped'?`${reward.itemName} is now equipped.`:'Cosmetic removed from this HQ slot.')}catch(error){toast(error.message||'That HQ action could not be completed.',true);button.disabled=false;button.textContent=old}finally{state.busy=false}}
+  function refresh(){if(!state.items.length)return;renderCollections();renderItems();renderInventory();applyEquipped();const selected=state.selected||state.items.find(x=>x.rarity==='Legendary')||state.items[0];if(selected)preview(selected)}
   async function init(){
-    try{const data=await fetch(DATA_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()});state.items=data.items||[];let tries=0;const timer=setInterval(()=>{tries++;if($('#shopGrid')){clearInterval(timer);controls();refresh();$('#franchisePicker')?.addEventListener('change',()=>setTimeout(refresh,20))}else if(tries>120)clearInterval(timer)},50)}catch(e){console.error('Cosmetic shop enhancement failed',e)}
+    try{const data=await fetch(DATA_URL,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(r.status);return r.json()});state.items=data.items||[];document.addEventListener('efl:hq-economy',event=>{state.target=event.detail||null;state.allowed=Boolean(event.detail?.allowed);state.economy=event.detail?.economy||null;state.confirmPurchase=null;refresh()});document.addEventListener('click',event=>{const button=event.target.closest('[data-economy]');if(button)performEconomy(button)});if(window.EFL_HQ_STATE){state.target=window.EFL_HQ_STATE;state.allowed=Boolean(window.EFL_HQ_STATE.allowed);state.economy=window.EFL_HQ_STATE.economy||null}let tries=0;const timer=setInterval(()=>{tries++;if($('#shopGrid')){clearInterval(timer);controls();refresh();$('#franchisePicker')?.addEventListener('change',()=>setTimeout(refresh,20))}else if(tries>120)clearInterval(timer)},50)}catch(e){console.error('Cosmetic shop enhancement failed',e)}
   }
   init();
 })();
