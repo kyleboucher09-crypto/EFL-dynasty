@@ -31,7 +31,7 @@
     show('#loadingStage');
     await loadLeagues();
     try{
-      const readinessResponse=await api('/api/efl-auth-readiness',{cache:'no-store'});state.authReadiness=readinessResponse.ok?await json(readinessResponse):null;const signUpTab=$('#signUpTab');if(signUpTab){const unavailable=Boolean(state.authReadiness&&!state.authReadiness.publicSignupAvailable);signUpTab.classList.toggle('unavailable',unavailable);signUpTab.setAttribute('aria-disabled',String(unavailable));signUpTab.title=unavailable?'New account registration opens after EFL email verification is activated.':''}
+      const readinessResponse=await api('/api/efl-auth-readiness',{cache:'no-store'});state.authReadiness=readinessResponse.ok?await json(readinessResponse):null;const signUpTab=$('#signUpTab');if(signUpTab){const unavailable=Boolean(state.authReadiness&&!state.authReadiness.publicSignupAvailable);signUpTab.classList.toggle('unavailable',unavailable);signUpTab.setAttribute('aria-disabled',String(unavailable));signUpTab.dataset.signupMode=state.authReadiness?.signupMode||'unknown';signUpTab.dataset.signupBlocker=state.authReadiness?.signupBlocker||'';signUpTab.title=unavailable?'New account registration opens after EFL email verification is activated.':''}
       const authRes=await api('/api/auth/get-session',{cache:'no-store'});
       if(authRes.status===503){show('#authStage');message('#authMessage','Secure accounts are built but the authentication environment still needs to be activated before signups can open.','bad');return}
       if(!authRes.ok){show('#authStage');return}
