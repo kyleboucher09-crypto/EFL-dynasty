@@ -1,0 +1,11 @@
+.league-card.approved {
+  border-color: rgba(94, 214, 154, .34);
+  background: rgba(94, 214, 154, .07);
+}
+
+.league-card.pending:disabled {
+  cursor: default;
+  opacity: .76;
+  border-color: rgba(255, 217, 121, .22);
+  background: rgba(255, 217, 121, .05);
+}

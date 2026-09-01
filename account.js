@@ -7,6 +7,7 @@
     if(!previewShare||!String(url).startsWith('/'))return url;
     const u=new URL(url,location.origin);u.searchParams.set('_vercel_share',previewShare);return `${u.pathname}${u.search}`;
   }
+  function pageUrl(url){const u=new URL(url,location.origin);if(previewShare)u.searchParams.set('_vercel_share',previewShare);return `${u.pathname}${u.search}${u.hash}`}
   const api=(url,options={})=>fetch(requestUrl(url),{credentials:'same-origin',...options});
   async function json(r){
     const text=await r.text().catch(()=>"");
@@ -85,8 +86,10 @@
     const host=$('#leaguePicker');if(!state.leagues.length){host.innerHTML='<div class="statusbox bad">No active EFL leagues are configured.</div>';return}
     host.innerHTML=state.leagues.map(l=>{
       const member=memberships.find(x=>x.league_id===l.id),pending=claims.find(x=>x.league_id===l.id&&x.status==='pending'),owned=ownerships.find(x=>x.league_id===l.id);
-      const status=owned?'FRANCHISE APPROVED':pending?'CLAIM PENDING':member?.membership_type==='prospect'?'PROSPECT':'AVAILABLE';
-      return `<button class="league-card ${state.selectedLeague?.id===l.id?'on':''}" type="button" data-league="${esc(l.id)}"><b>🏈 ${esc(l.name)}</b><small>${esc(status)} · Select league</small></button>`
+      if(owned){const hq=pageUrl(`franchise-hq-v2.html?league=${encodeURIComponent(owned.league_id)}&roster=${Number(owned.roster_id)}`);return `<button class="league-card approved" type="button" data-hq="${esc(hq)}"><b>🏟️ ${esc(l.name)}</b><small>FRANCHISE APPROVED · OPEN HQ →</small></button>`}
+      if(pending)return `<button class="league-card pending" type="button" disabled><b>⏳ ${esc(l.name)}</b><small>CLAIM PENDING · AWAITING COMMISSIONER</small></button>`;
+      const status=member?.membership_type==='prospect'?'PROSPECT · CLAIM A FRANCHISE':'AVAILABLE · SELECT LEAGUE';
+      return `<button class="league-card ${state.selectedLeague?.id===l.id?'on':''}" type="button" data-league="${esc(l.id)}"><b>🏈 ${esc(l.name)}</b><small>${esc(status)}</small></button>`
     }).join('');
   }
 
@@ -125,14 +128,14 @@
 
   function renderRecords(memberships,claims,ownerships){
     const host=$('#accountRecords'),rows=[];
-    ownerships.forEach(o=>rows.push({weight:0,html:`<div class="record"><div><b>${esc(leagueName(o.league_id))} · Franchise ${Number(o.roster_id)}</b><p>Commissioner-approved Franchise Headquarters access.</p><a class="manage-link" href="franchise-hq-v2.html?league=${encodeURIComponent(o.league_id)}&roster=${Number(o.roster_id)}">MANAGE FRANCHISE HQ →</a></div><span class="pill approved">APPROVED</span></div>`}));
+    ownerships.forEach(o=>rows.push({weight:0,html:`<div class="record"><div><b>${esc(leagueName(o.league_id))} · Franchise ${Number(o.roster_id)}</b><p>Commissioner-approved Franchise Headquarters access.</p><a class="manage-link" href="${esc(pageUrl(`franchise-hq-v2.html?league=${encodeURIComponent(o.league_id)}&roster=${Number(o.roster_id)}`))}">MANAGE FRANCHISE HQ →</a></div><span class="pill approved">APPROVED</span></div>`}));
     claims.forEach(c=>rows.push({weight:c.status==='pending'?1:3,html:`<div class="record"><div><b>${esc(c.franchise_name)} · ${esc(c.league_name)}</b><p>Claim submitted ${c.requested_at?new Date(c.requested_at).toLocaleDateString():''}${c.review_note?` · ${esc(c.review_note)}`:''}</p></div><span class="pill ${esc(c.status)}">${esc(c.status.toUpperCase())}</span></div>`}));
     memberships.filter(m=>m.membership_type==='prospect').forEach(m=>rows.push({weight:2,html:`<div class="record"><div><b>${esc(leagueName(m.league_id))} Prospect</b><p>No franchise management access. You can submit a franchise claim later from this account.</p></div><span class="pill prospect">PROSPECT</span></div>`}));
     rows.sort((a,b)=>a.weight-b.weight);host.innerHTML=rows.length?rows.map(x=>x.html).join(''):'<div class="statusbox">You haven’t joined a league yet. Select a league above to begin.</div>';
   }
 
   $('#signInTab').onclick=()=>authMode('signin');$('#signUpTab').onclick=()=>{if(state.authReadiness&&!state.authReadiness.publicSignupAvailable)return message('#authMessage','New account registration is temporarily closed while EFL email verification is activated. Existing members can still sign in.','bad');authMode('signup')};$('#signInForm').onsubmit=signIn;$('#signUpForm').onsubmit=signUp;$('#forgotBtn').onclick=forgot;$('#signOutBtn').onclick=signOut;$('#refreshAccount').onclick=refreshAccount;
-  $('#leaguePicker').addEventListener('click',e=>{const b=e.target.closest('[data-league]');if(b)selectLeague(b.dataset.league)});
+  $('#leaguePicker').addEventListener('click',e=>{const hq=e.target.closest('[data-hq]');if(hq){location.assign(hq.dataset.hq);return}const b=e.target.closest('[data-league]');if(b)selectLeague(b.dataset.league)});
   $('#rolePicker').addEventListener('click',e=>{const b=e.target.closest('[data-role-choice]');if(b)chooseRole(b.dataset.roleChoice,b)});
   $('#franchisePicker').addEventListener('click',e=>{const b=e.target.closest('[data-roster]');if(b)selectRoster(b.dataset.roster)});
   $('#joinProspectBtn').onclick=e=>{if(state.selectedLeague)onboarding({mode:'prospect',leagueId:state.selectedLeague.id},e.currentTarget)};
