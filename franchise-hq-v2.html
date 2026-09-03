@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EFL Franchise HQ</title>
-  <link rel="stylesheet" href="franchise-hq-v2.css?v=1">
+  <link rel="stylesheet" href="franchise-hq-v2.css?v=2">
   <link rel="stylesheet" href="franchise-hq-shop-v2.css?v=2">
   <link rel="stylesheet" href="franchise-hq-economy.css?v=2">
   <link rel="stylesheet" href="efl-shell.css?v=20260901-shell1">
+  <link rel="stylesheet" href="franchise-hq-responsive.css?v=1">
 </head>
 <body data-efl-page="hq">
   <header class="topbar efl-site-header"><div class="nav efl-site-nav"><a class="brand efl-site-brand" href="index.html"><img src="Assets/efl-logo.jpeg" alt="EFL logo"><div class="brand-copy"><span>EFL Dynasty</span><small>ELITE FANTASY FOOTBALLERS</small></div></a><nav class="navlinks efl-site-links" aria-label="EFL website navigation"><a href="index.html">Home</a><a href="power-rankings.html">Power Rankings</a><a href="records.html">Records</a><a href="franchises.html">Franchises</a><a href="legacy.html">Legacy</a><a href="rulebook.html">Rulebook</a><a class="efl-hq-nav active" id="eflFranchiseHqNav" href="franchise-hq-v2.html" aria-current="page">Franchise HQ</a><a href="commissioner.html">Commissioner</a></nav><a class="efl-account-nav" id="eflAccountNav" href="account.html" aria-label="Sign in to EFL Franchise HQ"><span class="efl-account-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.5 19c.7-3.4 3-5.2 6.5-5.2s5.8 1.8 6.5 5.2"></path></svg></span><span class="efl-account-copy"><strong>SIGN IN</strong><small>FRANCHISE HQ</small></span><span class="efl-account-badge" aria-label="Pending requests">0</span></a><div class="league-menu efl-league-menu" id="leagueMenu"><button class="league-menu-btn efl-league-menu-btn" id="leagueMenuBtn" type="button" aria-expanded="false"><span class="league-dot dynasty-dot efl-league-dot efl-dynasty-dot"></span>DYNASTY ▾</button><div class="league-pop efl-league-pop"><a href="redraft.html"><span class="league-dot redraft-dot efl-league-dot efl-redraft-dot"></span><span><b>EFL Redraft</b><small>Switch league</small></span></a></div></div><button class="menu-btn efl-menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button></div></header>
@@ -16,7 +17,6 @@
     <section class="hero">
       <div class="eyebrow">The Legacy Era · Franchise Headquarters</div>
       <h1>YOUR FRANCHISE.<br>YOUR LEGACY.</h1>
-      <p>Your EFL front office for Legacy Points, Credits, Victory Crates, earned badges, trophies and cosmetics. Live Legacy totals are calculated from Sleeper and the current EFL Legacy rules.</p>
       <div class="picker">
         <select id="franchisePicker"><option>Loading EFL franchises…</option></select>
         <span class="status" id="status">Connecting to Sleeper…</span>
@@ -86,8 +86,8 @@
       </section>
     </section>
   </main>
-  <script src="franchise-hq-v2.js?v=3"></script>
-  <script src="franchise-hq-shop-v2.js?v=3"></script>
+  <script src="franchise-hq-v2.js?v=4"></script>
+  <script src="franchise-hq-shop-v2.js?v=4"></script>
   <script src="franchise-hq-shop-guard.js?v=1"></script>
   <script src="efl-shell.js?v=20260901-shell1"></script>
   <script src="home-account.js?v=3"></script>
