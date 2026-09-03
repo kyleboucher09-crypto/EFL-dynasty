@@ -71,6 +71,19 @@
     try{const r=await api('/api/auth/request-password-reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,redirectTo:`${location.origin}/reset-password.html`})});const j=await json(r);if(!r.ok)return message('#authMessage',responseError(j,r,'Could not send reset email.'),'bad');message('#authMessage','If that email has an EFL account, a password-reset link is on the way.','good')}catch{message('#authMessage','Could not request a password reset.','bad')}
   }
 
+  async function resendVerification(source,button){
+    clearMessage('#authMessage');
+    const email=(source==='signup'?$('#signUpEmail').value:$('#signInEmail').value).trim();
+    if(!email)return message('#authMessage','Enter the email address for your EFL account first.','bad');
+    const original=button.textContent;button.disabled=true;button.textContent='SENDING…';
+    try{
+      const callbackURL=`${location.origin}${pageUrl('/account.html?verified=1')}`;
+      const r=await api('/api/auth/send-verification-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,callbackURL})});const j=await json(r);
+      if(!r.ok)return message('#authMessage',responseError(j,r,'Could not resend the verification email.'),'bad');
+      message('#authMessage','Verification email requested. Confirm the address you entered, then check your inbox, junk and spam folders.','good');
+    }catch(e){message('#authMessage',`Could not resend the verification email${e?.message?`: ${e.message}`:'.'}`,'bad')}finally{button.disabled=false;button.textContent=original}
+  }
+
   async function signOut(){try{await api('/api/auth/sign-out',{method:'POST'})}catch{}state.session=null;state.account=null;show('#authStage');authMode('signin')}
 
   function leagueName(id){return state.leagues.find(x=>x.id===id)?.name||id}
@@ -134,7 +147,7 @@
     rows.sort((a,b)=>a.weight-b.weight);host.innerHTML=rows.length?rows.map(x=>x.html).join(''):'<div class="statusbox">You haven’t joined a league yet. Select a league above to begin.</div>';
   }
 
-  $('#signInTab').onclick=()=>authMode('signin');$('#signUpTab').onclick=()=>{if(state.authReadiness&&!state.authReadiness.publicSignupAvailable)return message('#authMessage','New account registration is temporarily closed while EFL email verification is activated. Existing members can still sign in.','bad');authMode('signup')};$('#signInForm').onsubmit=signIn;$('#signUpForm').onsubmit=signUp;$('#forgotBtn').onclick=forgot;$('#signOutBtn').onclick=signOut;$('#refreshAccount').onclick=refreshAccount;
+  $('#signInTab').onclick=()=>authMode('signin');$('#signUpTab').onclick=()=>{if(state.authReadiness&&!state.authReadiness.publicSignupAvailable)return message('#authMessage','New account registration is temporarily closed while EFL email verification is activated. Existing members can still sign in.','bad');authMode('signup')};$('#signInForm').onsubmit=signIn;$('#signUpForm').onsubmit=signUp;$('#forgotBtn').onclick=forgot;$('#resendVerificationSignInBtn').onclick=e=>resendVerification('signin',e.currentTarget);$('#resendVerificationSignUpBtn').onclick=e=>resendVerification('signup',e.currentTarget);$('#signOutBtn').onclick=signOut;$('#refreshAccount').onclick=refreshAccount;
   $('#leaguePicker').addEventListener('click',e=>{const hq=e.target.closest('[data-hq]');if(hq){location.assign(hq.dataset.hq);return}const b=e.target.closest('[data-league]');if(b)selectLeague(b.dataset.league)});
   $('#rolePicker').addEventListener('click',e=>{const b=e.target.closest('[data-role-choice]');if(b)chooseRole(b.dataset.roleChoice,b)});
   $('#franchisePicker').addEventListener('click',e=>{const b=e.target.closest('[data-roster]');if(b)selectRoster(b.dataset.roster)});
