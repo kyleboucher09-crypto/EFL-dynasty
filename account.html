@@ -36,6 +36,7 @@
           <div class="field"><label>PASSWORD</label><input id="signInPassword" type="password" autocomplete="current-password" required minlength="10"></div>
           <button class="primary full" type="submit">SIGN IN TO EFL</button>
           <button class="linkbtn" id="forgotBtn" type="button">Forgot your password?</button>
+          <button class="linkbtn" id="resendVerificationSignInBtn" type="button">Resend verification email</button>
         </form>
 
         <form id="signUpForm" class="hidden">
@@ -45,6 +46,7 @@
           <div class="field"><label>PASSWORD</label><input id="signUpPassword" type="password" autocomplete="new-password" required minlength="10" maxlength="128"></div>
           <div class="field"><label>CONFIRM PASSWORD</label><input id="signUpConfirm" type="password" autocomplete="new-password" required minlength="10" maxlength="128"></div>
           <button class="primary full" type="submit">CREATE & VERIFY ACCOUNT</button>
+          <button class="linkbtn" id="resendVerificationSignUpBtn" type="button">Resend verification email</button>
         </form>
       </div>
 
@@ -93,7 +95,7 @@
 
   <div class="footer">EFL Account System · Secure access foundation</div>
 </main>
-<script src="account.js?v=4"></script>
+<script src="account.js?v=5"></script>
 <script src="account-admin.js?v=1"></script>
 <script src="account-admin-sync.js?v=1"></script>
 <script src="account-return.js?v=1"></script>
