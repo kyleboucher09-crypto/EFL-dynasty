@@ -64,7 +64,40 @@
     const label=$('#activeCollectionLabel');if(label)label.textContent=state.filters.collection==='all'?'ALL COLLECTIONS':state.filters.collection.toUpperCase();
   }
   function renderInventory(){const grid=$('#inventoryGrid'),summary=$('#inventorySummary');if(!grid||!summary)return;if(!state.allowed){summary.textContent=state.accessStatus==='loading'?'Loading this franchise’s permanent inventory…':'Sign in with an approved franchise account to load its permanent inventory.';grid.innerHTML='';return}const inventory=state.items.filter(item=>owned(item));summary.innerHTML=`<strong>${inventory.length} COSMETIC${inventory.length===1?'':'S'} OWNED</strong> · ${Object.keys(state.economy?.equipped||{}).length} currently equipped · purchases and crate unlocks are saved to this franchise.`;grid.classList.add('enhanced-shop-grid');grid.innerHTML=inventory.length?inventory.map(card).join(''):'<div class="cosmetic-empty">No cosmetics yet. Earn Credits through Legacy performance or open a Victory Crate after a finalized win.</div>'}
-  function renderActivity(){const host=$('#activityList');if(!host)return;if(!state.allowed){host.innerHTML=`<div class="inventory-summary">${state.accessStatus==='loading'?'Loading this franchise’s economy activity…':'Sign in with an approved franchise account to view its private economy activity.'}</div>`;return}const events=state.economy?.recentActivity||[];host.innerHTML=events.length?events.map(event=>{const item=state.items.find(entry=>entry.id===event.itemId),amount=Number(event.amount)||0;let title='HQ activity',detail='Franchise economy updated';if(event.type==='cosmetic_purchase'){title=`Purchased ${item?.name||'cosmetic'}`;detail='Added permanently to inventory'}else if(event.type==='crate_duplicate_credit'){title=`Duplicate ${item?.name||'cosmetic'}`;detail='Converted into EFL Credits'}else if(event.type==='crate_cosmetic'){title=`Unlocked ${item?.name||'cosmetic'}`;detail='Victory Crate reward'}const date=event.at?new Date(event.at).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'';return `<article class="activity-row"><div><strong>${esc(title)}</strong><span>${esc(detail)}${date?` · ${esc(date)}`:''}</span></div><b class="${amount<0?'debit':amount>0?'credit':''}">${amount?`${amount>0?'+':''}${amount} EC`:'UNLOCK'}</b></article>`}).join(''):'<div class="inventory-summary"><strong>NO ECONOMY ACTIVITY YET</strong> · Purchases and Victory Crate rewards will appear here.</div>'}
+  function renderActivity(){
+    const host=$('#activityList');
+    if(!host)return;
+    if(!state.allowed){
+      host.innerHTML=`<div class="inventory-summary">${state.accessStatus==='loading'?'Loading this franchise’s economy activity…':'Sign in with an approved franchise account to view its private economy activity.'}</div>`;
+      return;
+    }
+    const events=state.economy?.recentActivity||[];
+    const performance=state.economy?.performance||{};
+    const lifetimeLp=Math.max(0,Number(performance.lp)||0);
+    const earnedCredits=Math.max(0,Number(performance.earnedCredits)||0);
+    const performanceRow=earnedCredits?`<article class="activity-row activity-row-source"><div><strong>Legacy performance Credits</strong><span>${lifetimeLp.toLocaleString()} lifetime LP currently provides ${earnedCredits.toLocaleString()} EC · 10 LP = 1 EC</span></div><b class="credit">${earnedCredits.toLocaleString()} EC EARNED</b></article>`:'';
+    const history=events.map(event=>{
+      const item=state.items.find(entry=>entry.id===event.itemId),amount=Number(event.amount)||0;
+      let title='HQ activity',detail='Franchise economy updated';
+      if(event.type==='cosmetic_purchase'){
+        title=`Purchased ${item?.name||'cosmetic'}`;
+        detail='Added permanently to inventory';
+      }else if(event.type==='crate_duplicate_credit'){
+        title=`Duplicate ${item?.name||'cosmetic'}`;
+        detail='Converted into EFL Credits';
+      }else if(event.type==='crate_cosmetic'){
+        title=`Unlocked ${item?.name||'cosmetic'}`;
+        detail='Victory Crate reward';
+      }else if(event.type==='commissioner_adjustment'){
+        title=amount>=0?'Commissioner Credit grant':'Commissioner Credit adjustment';
+        detail='Manual league economy adjustment';
+      }
+      const date=event.at?new Date(event.at).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'';
+      return `<article class="activity-row"><div><strong>${esc(title)}</strong><span>${esc(detail)}${date?` · ${esc(date)}`:''}</span></div><b class="${amount<0?'debit':amount>0?'credit':''}">${amount?`${amount>0?'+':''}${amount} EC`:'UNLOCK'}</b></article>`;
+    }).join('');
+    const empty='<div class="inventory-summary"><strong>NO PURCHASES OR CRATE REWARDS YET</strong> · New economy activity will appear below.</div>';
+    host.innerHTML=performanceRow+(history||empty);
+  }
   function collectionStats(){
     const map=new Map();for(const item of state.items){const k=item.collection||'Other';if(!map.has(k))map.set(k,[]);map.get(k).push(item)}return [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
   }
