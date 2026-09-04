@@ -84,7 +84,7 @@
         detail='Added permanently to inventory';
       }else if(event.type==='crate_duplicate_credit'){
         title=`Duplicate ${item?.name||'cosmetic'}`;
-        detail='Converted into EFL Credits';
+        detail=event.detail?.test?'Commissioner test duplicate converted into EFL Credits':'Converted into EFL Credits';
       }else if(event.type==='crate_cosmetic'){
         title=`Unlocked ${item?.name||'cosmetic'}`;
         detail=event.detail?.test?'Commissioner test crate reward':'Victory Crate reward';

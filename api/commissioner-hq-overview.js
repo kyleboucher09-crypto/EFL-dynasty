@@ -23,6 +23,7 @@ export default async function handler(req,res){
       const action=String(data.action||'').trim();
       if(action==='adjust_credits')return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:session.user.id,amount:data.amount,note:data.note}));
       if(action==='grant_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:session.user.id,note:data.note}));
+      if(action==='grant_duplicate_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:session.user.id,note:data.note,forceDuplicate:true}));
       return res.status(400).json({error:'Unsupported commissioner economy action.'});
     }
     const access=await accessFor(req);if(!access.allowed)return res.status(401).json({error:'Commissioner access required'});
