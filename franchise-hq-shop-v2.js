@@ -90,7 +90,7 @@
         detail='Victory Crate reward';
       }else if(event.type==='commissioner_adjustment'){
         title=amount>=0?'Commissioner Credit grant':'Commissioner Credit adjustment';
-        detail='Manual league economy adjustment';
+        detail=event.detail?.note||'Manual league economy adjustment';
       }
       const date=event.at?new Date(event.at).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'';
       return `<article class="activity-row"><div><strong>${esc(title)}</strong><span>${esc(detail)}${date?` · ${esc(date)}`:''}</span></div><b class="${amount<0?'debit':amount>0?'credit':''}">${amount?`${amount>0?'+':''}${amount} EC`:'UNLOCK'}</b></article>`;

@@ -1,6 +1,8 @@
-import { commissionerOK } from './_common.js';
-import { commissionerScope, requireEflSession } from '../lib/efl-account-data.js';
-import { getCommissionerEconomyOverview } from '../lib/efl-hq-economy.js';
+import { commissionerOK, sameOrigin } from './_common.js';
+import { commissionerScope, isPrimaryCommissionerUser, requireEflSession } from '../lib/efl-account-data.js';
+import { adjustHqCredits, getCommissionerEconomyOverview } from '../lib/efl-hq-economy.js';
+
+function body(req){if(req.body&&typeof req.body==='object')return req.body;if(typeof req.body==='string'){try{return JSON.parse(req.body)}catch{return {}}}return {}}
 
 async function accessFor(req){
   const session=await requireEflSession(req).catch(()=>null);
@@ -11,8 +13,16 @@ async function accessFor(req){
 
 export default async function handler(req,res){
   res.setHeader('Cache-Control','no-store, max-age=0');res.setHeader('X-Content-Type-Options','nosniff');
-  if(req.method!=='GET')return res.status(405).json({error:'Method not allowed'});
+  if(!['GET','POST'].includes(req.method))return res.status(405).json({error:'Method not allowed'});
   try{
+    if(req.method==='POST'){
+      if(!sameOrigin(req))return res.status(403).json({error:'Invalid request origin'});
+      const session=await requireEflSession(req).catch(()=>null);
+      if(!session?.user||!await isPrimaryCommissionerUser(session.user.id))return res.status(403).json({error:'The verified primary Commissioner account is required for Credit adjustments.'});
+      const data=body(req),leagueId=String(data.leagueId||'').trim(),rosterId=Number(data.rosterId);
+      if(String(data.action||'').trim()!=='adjust_credits')return res.status(400).json({error:'Unsupported commissioner economy action.'});
+      return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:session.user.id,amount:data.amount,note:data.note}));
+    }
     const access=await accessFor(req);if(!access.allowed)return res.status(401).json({error:'Commissioner access required'});
     const leagueId=String(req.query?.leagueId||'').trim();
     if(!access.scope.global&&!access.scope.leagueIds.includes(leagueId))return res.status(403).json({error:'Commissioner access is not available for that league.'});
