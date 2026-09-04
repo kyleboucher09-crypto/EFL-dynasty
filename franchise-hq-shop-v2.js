@@ -87,7 +87,7 @@
         detail='Converted into EFL Credits';
       }else if(event.type==='crate_cosmetic'){
         title=`Unlocked ${item?.name||'cosmetic'}`;
-        detail='Victory Crate reward';
+        detail=event.detail?.test?'Commissioner test crate reward':'Victory Crate reward';
       }else if(event.type==='commissioner_adjustment'){
         title=amount>=0?'Commissioner Credit grant':'Commissioner Credit adjustment';
         detail=event.detail?.note||'Manual league economy adjustment';

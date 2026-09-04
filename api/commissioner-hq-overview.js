@@ -1,6 +1,6 @@
 import { commissionerOK, sameOrigin } from './_common.js';
 import { commissionerScope, isPrimaryCommissionerUser, requireEflSession } from '../lib/efl-account-data.js';
-import { adjustHqCredits, getCommissionerEconomyOverview } from '../lib/efl-hq-economy.js';
+import { adjustHqCredits, getCommissionerEconomyOverview, grantHqTestCrate } from '../lib/efl-hq-economy.js';
 
 function body(req){if(req.body&&typeof req.body==='object')return req.body;if(typeof req.body==='string'){try{return JSON.parse(req.body)}catch{return {}}}return {}}
 
@@ -18,10 +18,12 @@ export default async function handler(req,res){
     if(req.method==='POST'){
       if(!sameOrigin(req))return res.status(403).json({error:'Invalid request origin'});
       const session=await requireEflSession(req).catch(()=>null);
-      if(!session?.user||!await isPrimaryCommissionerUser(session.user.id))return res.status(403).json({error:'The verified primary Commissioner account is required for Credit adjustments.'});
+      if(!session?.user||!await isPrimaryCommissionerUser(session.user.id))return res.status(403).json({error:'The verified primary Commissioner account is required for economy controls.'});
       const data=body(req),leagueId=String(data.leagueId||'').trim(),rosterId=Number(data.rosterId);
-      if(String(data.action||'').trim()!=='adjust_credits')return res.status(400).json({error:'Unsupported commissioner economy action.'});
-      return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:session.user.id,amount:data.amount,note:data.note}));
+      const action=String(data.action||'').trim();
+      if(action==='adjust_credits')return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:session.user.id,amount:data.amount,note:data.note}));
+      if(action==='grant_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:session.user.id,note:data.note}));
+      return res.status(400).json({error:'Unsupported commissioner economy action.'});
     }
     const access=await accessFor(req);if(!access.allowed)return res.status(401).json({error:'Commissioner access required'});
     const leagueId=String(req.query?.leagueId||'').trim();
