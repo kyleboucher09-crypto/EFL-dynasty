@@ -31,10 +31,10 @@ Continue the EFL Dynasty Franchise HQ build from this handoff. Use the remote `f
 ## Cosmetic catalog state
 
 - Catalog file: `legacy-cosmetics.json`
-- Catalog version: `6`
-- Active premium items: `52`
+- Catalog version: `7`
+- Active premium items: `60`
 - Target: `120`
-- Remaining: `68`
+- Remaining: `60`
 - Every active entry currently has `premium: true` and a real raster `asset`.
 - Active slots: stadium, banner, frame, collectible, and nameplate.
 - Active rarities: Rare, Epic, and Legendary only.
@@ -43,6 +43,7 @@ Continue the EFL Dynasty Franchise HQ build from this handoff. Use the remote `f
 
 Current collection counts:
 
+- Blackout: 8
 - Sunday Night Royalty: 3
 - Frozen Fortress: 10
 - Golden Hour: 1
@@ -79,6 +80,7 @@ The crown, trophy, and star graphics were deliberately renamed as replicas or di
 6. Prefer stadiums, tunnels, locker rooms, equipment, helmets, game balls, cleats, rings, display memorabilia, crest frames, nameplates, and other franchise-identity pieces.
 7. Avoid badge, medal, rank patch, or official-trophy silhouettes unless the item is unmistakably labelled and presented as a decorative replica.
 8. Preserve the site's premium navy/blue/gold visual language. Additional team-identity colors can appear inside optional cosmetics. Avoid making purple the dominant site color.
+   Keep blue controlled rather than washing every collection in it; Blackout deliberately balances its blue venue accents with black, graphite, gunmetal, and warm gold equipment pieces.
 9. Victory Crates are earned, not sold. Legendary items may remain crate-exclusive.
 10. No owner should be pre-granted the new catalog. Ownership must come from purchase, crate reward, or an explicit commissioner action.
 
@@ -122,4 +124,3 @@ Before publishing each batch:
 ## Local safety note
 
 If the previous scratch checkout is reused, preserve the unrelated user-modified file `1787346056841-ec2d7253-f982-4f45-a043-d96024c8acd9.png`. Do not stage, overwrite, or revert it.
-

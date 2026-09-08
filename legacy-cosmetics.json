@@ -1,8 +1,97 @@
 {
-  "version": 6,
+  "version": 7,
   "currency": "EC",
   "designNote": "Curated premium football identity pieces for Franchise HQ. Cosmetics never alter official Legacy ranks, earned badges, trophies, standings, or results.",
   "items": [
+    {
+      "id": "stadium_blackout_coliseum",
+      "name": "Blackout Coliseum",
+      "slot": "stadium",
+      "rarity": "Legendary",
+      "price": 0,
+      "lootOnly": true,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/blackout-coliseum-stadium.webp",
+      "description": "A lights-out football coliseum built from black steel, warm gold architecture and controlled blue field light.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "stadium_midnight_circuit_dome",
+      "name": "Midnight Circuit Dome",
+      "slot": "stadium",
+      "rarity": "Epic",
+      "price": 220,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/midnight-circuit-dome.webp",
+      "description": "A shadowed indoor football venue with graphite structure, gold suites and precise blue field lighting.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "banner_lights_out_walkout",
+      "name": "Lights Out Walkout",
+      "slot": "banner",
+      "rarity": "Epic",
+      "price": 180,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/lights-out-walkout.webp",
+      "description": "A carbon-fibre player tunnel with warm gold ceiling light and a disciplined blue path to the field.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "frame_obsidian_signal",
+      "name": "Obsidian Signal Frame",
+      "slot": "frame",
+      "rarity": "Epic",
+      "price": 175,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/obsidian-signal-frame.webp",
+      "description": "Obsidian metal, carbon fibre and restrained signal lighting form a hard-edged housing for your crest.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "collectible_blackout_carbon_helmet",
+      "name": "Blackout Carbon Helmet",
+      "slot": "collectible",
+      "rarity": "Epic",
+      "price": 160,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/blackout-carbon-helmet.webp",
+      "description": "A blank carbon-fibre football helmet with gunmetal hardware and a narrow electric-blue center stripe.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "nameplate_obsidian_locker",
+      "name": "Obsidian Locker Plate",
+      "slot": "nameplate",
+      "rarity": "Rare",
+      "price": 130,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/obsidian-locker-plate.webp",
+      "description": "A satin-black locker plate finished with carbon-fibre ends and restrained brushed-gold trim.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "collectible_nocturne_game_ball",
+      "name": "Nocturne Game Ball",
+      "slot": "collectible",
+      "rarity": "Rare",
+      "price": 115,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/nocturne-game-ball.webp",
+      "description": "A matte-black display football with natural white laces and one fine brushed-gold seam.",
+      "collection": "Blackout"
+    },
+    {
+      "id": "collectible_after_hours_cleats",
+      "name": "After Hours Cleats",
+      "slot": "collectible",
+      "rarity": "Epic",
+      "price": 145,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/after-hours-cleats.webp",
+      "description": "Matte-black football cleats with gunmetal carbon plates and polished gold hardware for the equipment display.",
+      "collection": "Blackout"
+    },
     {
       "id": "stadium_sunday_night_royalty",
       "name": "Sunday Night Royalty",

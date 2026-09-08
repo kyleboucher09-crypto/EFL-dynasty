@@ -144,7 +144,7 @@
   }
 
   async function load(){
-    [RULES,COSMETICS]=await Promise.all([fetch('legacy-system.json?v=14',{cache:'no-store'}).then(r=>r.json()),fetch('legacy-cosmetics.json?v=6',{cache:'no-store'}).then(r=>r.json())]);
+    [RULES,COSMETICS]=await Promise.all([fetch('legacy-system.json?v=14',{cache:'no-store'}).then(r=>r.json()),fetch('legacy-cosmetics.json?v=7',{cache:'no-store'}).then(r=>r.json())]);
     const current=await season(LEAGUE_ID),owners={};current.rosters.forEach(roster=>{const id=roster.owner_id||`roster-${roster.roster_id}`;owners[id]={id,roster,user:current.userById[roster.owner_id],badges:[],lp:0,modern:[],heritageYears:[],historicTitles:0}});
     const chain=[current];let previous=current.league.previous_league_id,depth=1;while(previous&&depth++<20){const data=await season(previous);chain.push(data);previous=data.league.previous_league_id}
     chain.forEach(data=>{const year=Number(data.league.season),champId=champion(data);data.rosters.forEach(roster=>{const o=owners[roster.owner_id];if(!o)return;if(year<RULES.startSeason)o.heritageYears.push(year);if(year<RULES.startSeason&&champId===roster.owner_id)o.historicTitles++})});

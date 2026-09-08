@@ -1,5 +1,5 @@
 (()=>{
-  const DATA_URL='legacy-cosmetics.json?v=6';
+  const DATA_URL='legacy-cosmetics.json?v=7';
   const state={items:[],selected:null,economy:null,allowed:false,accessStatus:'loading',target:null,confirmPurchase:null,busy:false,filters:{q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'}};
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
