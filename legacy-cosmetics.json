@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "currency": "EC",
   "designNote": "Curated premium football identity pieces for Franchise HQ. Cosmetics never alter official Legacy ranks, earned badges, trophies, standings, or results.",
   "items": [
@@ -49,6 +49,109 @@
       "premium": true,
       "asset": "Assets/cosmetics/premium/frozen-fortress-stadium.webp",
       "description": "An open-air mountain stadium under ice-blue lights and a frozen midnight sky.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "stadium_glacier_dome",
+      "name": "Glacier Dome",
+      "slot": "stadium",
+      "rarity": "Legendary",
+      "price": 0,
+      "lootOnly": true,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/glacier-dome-stadium.webp",
+      "description": "An ice-glass football dome framed by frozen peaks and prime-time lights.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "banner_frostline_tunnel",
+      "name": "Frostline Tunnel",
+      "slot": "banner",
+      "rarity": "Epic",
+      "price": 180,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/frostline-tunnel.webp",
+      "description": "A frozen steel player football tunnel opening onto a brilliant night field.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "banner_aurora_walkout",
+      "name": "Aurora Walkout",
+      "slot": "banner",
+      "rarity": "Legendary",
+      "price": 0,
+      "lootOnly": true,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/aurora-walkout.webp",
+      "description": "A northern-lights entrance into an open-air mountain football fortress.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "frame_frostbite_steel",
+      "name": "Frostbite Steel Frame",
+      "slot": "frame",
+      "rarity": "Epic",
+      "price": 165,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/frostbite-steel-frame.webp",
+      "description": "Brushed gunmetal, frozen crystal and football leather built around your crest.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "frame_polar_night",
+      "name": "Polar Night Frame",
+      "slot": "frame",
+      "rarity": "Legendary",
+      "price": 0,
+      "lootOnly": true,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/polar-night-frame.webp",
+      "description": "Dark navy titanium and faceted ice glass with a cold stadium glow.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "collectible_frostline_helmet",
+      "name": "Frostline Helmet",
+      "slot": "collectible",
+      "rarity": "Epic",
+      "price": 150,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/frostline-helmet.webp",
+      "description": "A deep-navy helmet with a crystalline stripe and museum-grade silver facemask.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "collectible_winter_game_ball",
+      "name": "Winter Game Ball",
+      "slot": "collectible",
+      "rarity": "Rare",
+      "price": 110,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/winter-game-ball.webp",
+      "description": "Midnight leather, white laces and frozen-silver seams on an ice-glass cradle.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "collectible_subzero_cleats",
+      "name": "Subzero Cleats",
+      "slot": "collectible",
+      "rarity": "Epic",
+      "price": 140,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/subzero-cleats.webp",
+      "description": "Elite navy cleats with ice-blue carbon plates and polished silver studs.",
+      "collection": "Frozen Fortress"
+    },
+    {
+      "id": "collectible_frozen_fortress_miniature",
+      "name": "Frozen Fortress Miniature",
+      "slot": "collectible",
+      "rarity": "Legendary",
+      "price": 0,
+      "lootOnly": true,
+      "premium": true,
+      "asset": "Assets/cosmetics/premium/frozen-fortress-miniature.webp",
+      "description": "A detailed ice-stadium scale model built for the Franchise HQ display case.",
       "collection": "Frozen Fortress"
     },
     {
