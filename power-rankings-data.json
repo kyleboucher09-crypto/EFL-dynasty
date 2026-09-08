@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T13:47:09.173075+00:00",
+  "generated_at": "2026-09-08T14:11:01.188449+00:00",
   "season": 2026,
   "week": 1,
   "source_week": 1,
@@ -13,7 +13,7 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Master Peyton",
       "owner": "mattgr1983",
-      "power": 88.7,
+      "power": 89.0,
       "lineup_grade": "A+",
       "depth_grade": "A+",
       "health_grade": "A+",
@@ -25,7 +25,7 @@
         "Ja'Marr Chase",
         "Jaxon Smith-Njigba"
       ],
-      "article": "Master Peyton lands at No. 1 behind a projected core led by Jahmyr Gibbs, Ja'Marr Chase and Jaxon Smith-Njigba, with the optimized starting lineup grading A+ for Week 1 and the full-season outlook. The roster carries one of the league’s deeper benches; Availability risk is concentrated around Ja'Marr Chase, Kenneth Walker. Last season checks in at 144.8 points per game, while the upcoming matchup against The Duke 👑 grades as a fairly neutral opponent test."
+      "article": "Master Peyton lands at No. 1 behind a projected core led by Jahmyr Gibbs, Ja'Marr Chase and Jaxon Smith-Njigba, with the optimized starting lineup grading A+ for Week 1 and the full-season outlook. The roster carries one of the league’s deeper benches; Availability risk is concentrated around Ja'Marr Chase. Last season checks in at 144.8 points per game, while the upcoming matchup against The Duke 👑 grades as a fairly neutral opponent test."
     },
     {
       "rank": 2,
@@ -35,19 +35,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "The Don’s Soldiers",
       "owner": "Thefantasydon24",
-      "power": 84.1,
+      "power": 83.7,
       "lineup_grade": "A",
       "depth_grade": "B",
       "health_grade": "A+",
       "recent_grade": "A+",
-      "opponent_grade": "A",
+      "opponent_grade": "A+",
       "opponent": "LandsharkSC",
       "stars": [
         "Christian McCaffrey",
         "Joe Burrow",
         "Amon-Ra St. Brown"
       ],
-      "article": "The Don’s Soldiers lands at No. 2 behind a projected core led by Christian McCaffrey, Joe Burrow and Amon-Ra St. Brown, with the optimized starting lineup grading A for Week 1 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Christian McCaffrey. Last season checks in at 139.9 points per game, while the upcoming matchup against LandsharkSC grades as a favorable opponent test."
+      "article": "The Don’s Soldiers lands at No. 2 behind a projected core led by Christian McCaffrey, Joe Burrow and Amon-Ra St. Brown, with the optimized starting lineup grading A for Week 1 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Christian McCaffrey, Tee Higgins. Last season checks in at 139.9 points per game, while the upcoming matchup against LandsharkSC grades as a favorable opponent test."
     },
     {
       "rank": 3,
@@ -57,7 +57,7 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Kaaron Rodgers",
       "owner": "KodyBartels",
-      "power": 83.8,
+      "power": 83.7,
       "lineup_grade": "A",
       "depth_grade": "B+",
       "health_grade": "A+",
@@ -79,7 +79,7 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Blaze Infantry ⚔️",
       "owner": "BlazeInfantry",
-      "power": 75.5,
+      "power": 75.4,
       "lineup_grade": "B",
       "depth_grade": "B-",
       "health_grade": "A+",
@@ -117,13 +117,13 @@
     },
     {
       "rank": 6,
-      "previous_rank": 7,
-      "movement": "up",
-      "movement_label": "Up 1",
-      "movement_icon": "Assets/trending-up.svg",
+      "previous_rank": 6,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "The Duke 👑",
       "owner": "TheDuke7",
-      "power": 73.3,
+      "power": 73.0,
       "lineup_grade": "B",
       "depth_grade": "B-",
       "health_grade": "A+",
@@ -139,25 +139,25 @@
     },
     {
       "rank": 7,
-      "previous_rank": 6,
-      "movement": "down",
-      "movement_label": "Down 1",
-      "movement_icon": "Assets/trending-down.svg",
+      "previous_rank": 7,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "Mach Chicken 🐓",
       "owner": "Machchiken",
       "power": 72.8,
       "lineup_grade": "B-",
       "depth_grade": "B-",
-      "health_grade": "A+",
+      "health_grade": "A",
       "recent_grade": "C+",
       "opponent_grade": "A-",
       "opponent": "BigKipper74",
       "stars": [
         "Kyler Murray",
-        "Zay Flowers",
-        "Sam LaPorta"
+        "Sam LaPorta",
+        "Zay Flowers"
       ],
-      "article": "Mach Chicken 🐓 lands at No. 7 behind a projected core led by Kyler Murray, Zay Flowers and Sam LaPorta, with the optimized starting lineup grading B- for Week 1 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Zay Flowers, Sam LaPorta. Last season checks in at 87.9 points per game, while the upcoming matchup against BigKipper74 grades as a favorable opponent test."
+      "article": "Mach Chicken 🐓 lands at No. 7 behind a projected core led by Kyler Murray, Sam LaPorta and Zay Flowers, with the optimized starting lineup grading B- for Week 1 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Bhayshul Tuten, Zay Flowers. Last season checks in at 87.9 points per game, while the upcoming matchup against BigKipper74 grades as a favorable opponent test."
     },
     {
       "rank": 8,
@@ -167,7 +167,7 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "BigKipper74",
       "owner": "BigKipper74",
-      "power": 71.8,
+      "power": 71.7,
       "lineup_grade": "C+",
       "depth_grade": "C",
       "health_grade": "A+",
@@ -183,13 +183,13 @@
     },
     {
       "rank": 9,
-      "previous_rank": 10,
-      "movement": "up",
-      "movement_label": "Up 1",
-      "movement_icon": "Assets/trending-up.svg",
+      "previous_rank": 9,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "28Wizardking",
       "owner": "28Wizardking",
-      "power": 67.5,
+      "power": 67.7,
       "lineup_grade": "C-",
       "depth_grade": "C",
       "health_grade": "A+",
@@ -201,14 +201,14 @@
         "David Montgomery",
         "Terry McLaurin"
       ],
-      "article": "28Wizardking lands at No. 9 behind a projected core led by Tua Tagovailoa, David Montgomery and Terry McLaurin, with the optimized starting lineup grading C- for Week 1 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Brian Thomas. Last season checks in at 75.0 points per game, while the upcoming matchup against bonebuster grades as a favorable opponent test."
+      "article": "28Wizardking lands at No. 9 behind a projected core led by Tua Tagovailoa, David Montgomery and Terry McLaurin, with the optimized starting lineup grading C- for Week 1 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Last season checks in at 75.0 points per game, while the upcoming matchup against bonebuster grades as a favorable opponent test."
     },
     {
       "rank": 10,
-      "previous_rank": 11,
-      "movement": "up",
-      "movement_label": "Up 1",
-      "movement_icon": "Assets/trending-up.svg",
+      "previous_rank": 10,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "LandsharkSC",
       "owner": "LandsharkSC",
       "power": 67.2,
@@ -221,19 +221,19 @@
       "stars": [
         "Drake Maye",
         "Tyler Warren",
-        "Mark Andrews"
+        "D'Andre Swift"
       ],
-      "article": "LandsharkSC lands at No. 10 behind a projected core led by Drake Maye, Tyler Warren and Mark Andrews, with the optimized starting lineup grading C+ for Week 1 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Josh Downs, Tyler Warren. Last season checks in at 94.5 points per game, while the upcoming matchup against The Don’s Soldiers grades as a demanding opponent test."
+      "article": "LandsharkSC lands at No. 10 behind a projected core led by Drake Maye, Tyler Warren and D'Andre Swift, with the optimized starting lineup grading C+ for Week 1 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around D'Andre Swift, Josh Downs. Last season checks in at 94.5 points per game, while the upcoming matchup against The Don’s Soldiers grades as a demanding opponent test."
     },
     {
       "rank": 11,
-      "previous_rank": 9,
-      "movement": "down",
-      "movement_label": "Down 2",
-      "movement_icon": "Assets/trending-down.svg",
+      "previous_rank": 11,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "bonebuster",
       "owner": "bonebuster",
-      "power": 66.0,
+      "power": 66.1,
       "lineup_grade": "C-",
       "depth_grade": "C",
       "health_grade": "A+",
