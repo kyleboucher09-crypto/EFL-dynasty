@@ -1,5 +1,5 @@
 (()=>{
-  const DATA_URL='legacy-cosmetics.json?v=3';
+  const DATA_URL='legacy-cosmetics.json?v=4';
   const state={items:[],selected:null,economy:null,allowed:false,accessStatus:'loading',target:null,confirmPurchase:null,busy:false,filters:{q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'}};
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -22,7 +22,10 @@
     'Front Office':['#071326','#194f83','#ffd979'],
     'Equipment Room':['#090d13','#465d74','#dfe9f2'],
     'Game Day':['#071522','#1769e8','#ffd979'],
-    'Sunday Night Royalty':['#030914','#145daa','#ffd979']
+    'Sunday Night Royalty':['#030914','#145daa','#ffd979'],
+    'Frozen Fortress':['#03101f','#2d73ad','#d9f4ff'],
+    'Golden Hour':['#11182a','#9b6519','#ffd979'],
+    'Equipment Vault':['#050b16','#183d68','#e4bd5f']
   };
   function palette(item){return palettes[item.collection]||['#071326','#1769e8','#ffd979']}
   function artMarkup(item,large=false){
@@ -61,7 +64,7 @@
   }
   function renderItems(){
     const grid=$('#shopGrid');if(!grid)return;const arr=filtered();grid.classList.add('enhanced-shop-grid');grid.innerHTML=arr.length?arr.map(card).join(''):'<div class="cosmetic-empty">No cosmetics match those filters.</div>';
-    const count=$('#cosmeticCount');if(count)count.textContent=`${arr.length} OF ${state.items.length} COSMETICS`;
+    const count=$('#cosmeticCount');if(count)count.textContent=`${arr.length} OF ${state.items.length} PREMIUM PIECES`;
     const label=$('#activeCollectionLabel');if(label)label.textContent=state.filters.collection==='all'?'ALL COLLECTIONS':state.filters.collection.toUpperCase();
   }
   function renderInventory(){const grid=$('#inventoryGrid'),summary=$('#inventorySummary');if(!grid||!summary)return;if(!state.allowed){summary.textContent=state.accessStatus==='loading'?'Loading this franchise’s permanent inventory…':'Sign in with an approved franchise account to load its permanent inventory.';grid.innerHTML='';return}const inventory=state.items.filter(item=>owned(item));summary.innerHTML=`<strong>${inventory.length} COSMETIC${inventory.length===1?'':'S'} OWNED</strong> · ${Object.keys(state.economy?.equipped||{}).length} currently equipped · purchases and crate unlocks are saved to this franchise.`;grid.classList.add('enhanced-shop-grid');grid.innerHTML=inventory.length?inventory.map(card).join(''):'<div class="cosmetic-empty">No cosmetics yet. Earn Credits through Legacy performance or open a Victory Crate after a finalized win.</div>'}
@@ -104,7 +107,7 @@
   }
   function renderCollections(){
     const host=$('#collectionBrowser');if(!host)return;host.innerHTML=collectionStats().map(([name,items])=>{
-      const featured=items.find(x=>x.rarity==='Legendary')||items.find(x=>x.rarity==='Epic')||items[0];const loot=items.filter(x=>x.lootOnly).length;return `<button class="collection-card ${state.filters.collection===name?'on':''}" type="button" data-collection="${esc(name)}" style="${styleVars(featured)}"><div class="collection-art collection-${slug(name)}"><i></i><i></i><b>${esc(featured.icon||'🏈')}</b></div><span>${esc(name)}</span><small>${items.length} ITEMS${loot?` · ${loot} LOOT`:''}</small></button>`
+      const featured=items.find(x=>x.rarity==='Legendary')||items.find(x=>x.rarity==='Epic')||items[0];const loot=items.filter(x=>x.lootOnly).length;return `<button class="collection-card ${state.filters.collection===name?'on':''}" type="button" data-collection="${esc(name)}" style="${styleVars(featured)}"><div class="collection-art collection-${slug(name)}"><img src="${esc(featured.asset)}" alt="" loading="lazy"></div><span>${esc(name)}</span><small>${items.length} PIECES${loot?` · ${loot} CRATE`:''}</small></button>`
     }).join('');
   }
   function preview(item){
@@ -113,7 +116,7 @@
     preview.innerHTML=`<div class="preview-stage slot-${esc(item.slot)}">
       ${scene}
       <div class="preview-effect"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="preview-banner"><span>EFL FRANCHISE HQ</span><b>${esc(item.icon||'🏈')}</b></div>
+      <div class="preview-banner"><span>EFL FRANCHISE HQ</span><b>GAME DAY</b></div>
       <div class="preview-profile"><div class="preview-avatar">${avatar}${frame}</div><div class="preview-copy"><small>${esc(owner)}</small><h3>${esc(team)}</h3><div class="preview-title">${item.slot==='title'?esc(item.name):'FRANCHISE OWNER'}</div></div></div>
       <div class="preview-nameplate">${item.slot==='nameplate'?esc(item.name):esc(team)}</div>
       <div class="preview-badges"><i></i><i></i><i></i></div><div class="preview-case"><i></i><i></i><i></i></div>${collectible}
@@ -123,7 +126,7 @@
   function controls(){
     const shop=$('#shop');const grid=$('#shopGrid');if(!shop||!grid||$('#cosmeticShopTools'))return;
     const collections=[...new Set(state.items.map(x=>x.collection).filter(Boolean))].sort();const slots=[...new Set(state.items.map(x=>x.slot).filter(Boolean))].sort();
-    const ui=document.createElement('div');ui.id='cosmeticShopTools';ui.innerHTML=`<div class="shop-intro"><div><div class="eyebrow">EFL Franchise Collections</div><h3>Build Your Football Identity</h3><p>Collect stadiums, entrance banners, crest frames, locker treatments and display pieces. These personalize your HQ only—official Legacy ranks, earned badges and trophies remain performance-only.</p></div><div class="catalog-count" id="cosmeticCount"></div></div>
+    const ui=document.createElement('div');ui.id='cosmeticShopTools';ui.innerHTML=`<div class="shop-intro"><div><div class="eyebrow">EFL Franchise Collections</div><h3>Build Your Football Identity</h3><p>A curated collection of premium stadiums, entrance banners, crest frames and football memorabilia. No placeholders or emoji artwork. These personalize your HQ only—official Legacy ranks, earned badges and trophies remain performance-only.</p></div><div class="catalog-count" id="cosmeticCount"></div></div>
       <div class="collection-head"><b>COLLECTIONS</b><span id="activeCollectionLabel">ALL COLLECTIONS</span></div><div class="collection-browser" id="collectionBrowser"></div>
       <div class="shop-workspace"><aside class="preview-panel"><div class="preview-label">LIVE COSMETIC PREVIEW</div><div id="cosmeticPreview" class="cosmetic-preview"></div><div class="preview-hint">Click any cosmetic to try it on. Previewing does not spend Credits.</div></aside>
       <div class="catalog-panel"><div class="shop-toolbar"><input id="cosmeticSearch" type="search" placeholder="Search cosmetics…" aria-label="Search cosmetics"><select id="slotFilter"><option value="all">All types</option>${slots.map(s=>`<option value="${esc(s)}">${esc(slotLabel(s))}</option>`).join('')}</select><select id="rarityFilter"><option value="all">All rarities</option><option>Common</option><option>Rare</option><option>Epic</option><option>Legendary</option></select><select id="collectionFilter"><option value="all">All collections</option>${collections.map(c=>`<option>${esc(c)}</option>`).join('')}</select><select id="sortFilter"><option value="featured">Collection</option><option value="rarity">Rarity</option><option value="price-asc">Price: Low</option><option value="price-desc">Price: High</option></select><button id="clearCosmeticFilters" type="button">RESET</button></div><div id="catalogMount"></div></div></div>`;

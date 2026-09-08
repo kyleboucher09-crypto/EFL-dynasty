@@ -14,3 +14,4 @@
 
 /* Premium identity art is separate from official rank and achievement records. */
 .cosmetic-tags .premium-tag{color:#ffe29a;border-color:rgba(255,217,121,.35);background:rgba(255,217,121,.1)}
+.collection-art img{position:absolute;z-index:1;inset:0;width:100%;height:100%;object-fit:cover}.collection-art:has(img):after,.collection-art:has(img) i{display:none}.collection-art:has(img){background:#030914}.collection-card[data-collection="Equipment Vault"] .collection-art img{object-fit:contain;background:radial-gradient(circle at 50% 40%,#163258,#030914 72%)}
