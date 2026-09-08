@@ -101,6 +101,35 @@
   function renderShop(credits){
     q('#shopGrid').innerHTML=COSMETICS.items.map(item=>`<article class="shop-card"><div class="shop-icon">${item.icon}</div><span class="rarity ${item.rarity}">${item.rarity.toUpperCase()}</span><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p><div class="price">${item.lootOnly?'🎁 LOOT EXCLUSIVE':`${item.price} EC`}</div><button type="button" disabled>${item.lootOnly?'VICTORY CRATE DROP':credits>=item.price?'PURCHASE AFTER LOGIN':'NOT ENOUGH EC'}</button></article>`).join('');
   }
+  function ensureCrateReveal(){
+    let reveal=q('#crateReveal');if(reveal)return reveal;
+    document.body.insertAdjacentHTML('beforeend',`<div class="crate-reveal" id="crateReveal" role="dialog" aria-modal="true" aria-labelledby="crateRevealTitle" hidden>
+      <div class="crate-reveal-panel">
+        <button class="crate-reveal-x" type="button" aria-label="Close reward reveal">×</button>
+        <div class="crate-reveal-stage">
+          <div class="crate-reveal-beam"></div><div class="crate-reveal-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <img class="crate-reveal-crate" src="Assets/cosmetics/premium/victory-equipment-crate.webp" alt="Victory Crate opening">
+          <img class="crate-reveal-item" id="crateRevealItem" alt="">
+        </div>
+        <div class="crate-reveal-copy"><div class="crate-reveal-kicker" id="crateRevealKicker">OPENING VICTORY CRATE</div><h2 id="crateRevealTitle">Unlocking reward…</h2><p id="crateRevealMessage">Your reward is being verified.</p><button class="crate-reveal-continue" type="button">CONTINUE</button></div>
+      </div>
+    </div>`);
+    reveal=q('#crateReveal');
+    const close=()=>{reveal.hidden=true;reveal.className='crate-reveal';document.body.classList.remove('crate-reveal-open');q('#openCrateBtn')?.focus()};
+    reveal.addEventListener('click',event=>{if(event.target===reveal||event.target.closest('.crate-reveal-x,.crate-reveal-continue'))close()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!reveal.hidden)close()});
+    return reveal;
+  }
+  function beginCrateReveal(){
+    const reveal=ensureCrateReveal(),item=q('#crateRevealItem');reveal.hidden=false;reveal.className='crate-reveal opening';reveal.removeAttribute('data-rarity');document.body.classList.add('crate-reveal-open');item.removeAttribute('src');item.alt='';q('#crateRevealKicker').textContent='OPENING VICTORY CRATE';q('#crateRevealTitle').textContent='Unlocking reward…';q('#crateRevealMessage').textContent='Your reward is being verified.';
+  }
+  function finishCrateReveal(reward){
+    const reveal=ensureCrateReveal(),item=COSMETICS?.items?.find(entry=>entry.id===reward.itemId),art=q('#crateRevealItem'),duplicate=reward.type==='duplicate_credit',rarity=String(reward.rarity||item?.rarity||'Rare');
+    reveal.className='crate-reveal revealed';reveal.dataset.rarity=rarity.toLowerCase();
+    if(item?.asset){art.src=item.asset;art.alt=`${item.name} cosmetic`}
+    q('#crateRevealKicker').textContent=duplicate?'DUPLICATE REWARD':'NEW COSMETIC UNLOCKED';q('#crateRevealTitle').textContent=reward.itemName||item?.name||'EFL Reward';q('#crateRevealMessage').textContent=duplicate?`${rarity.toUpperCase()} duplicate converted to ${Number(reward.credits)||0} EFL Credits.`:`${rarity.toUpperCase()} · ${item?.slot?String(item.slot).replace(/([A-Z])/g,' $1').toUpperCase():'FRANCHISE COSMETIC'}`;
+    q('.crate-reveal-continue').textContent=duplicate?'COLLECT CREDITS':'ADD TO INVENTORY';q('.crate-reveal-continue').focus();
+  }
   function renderOwner(owner){
     ACTIVE_OWNER=owner;ECONOMY=null;PUBLIC_EQUIPPED={};const r=rankFor(owner.lp),name=teamName(owner.user,owner.roster),img=avatar(owner.user),credits=Math.floor(owner.lp/10);
     q('#teamName').textContent=name;q('#ownerName').textContent=owner.user?.display_name||'EFL Franchise';q('#avatar').innerHTML=img?`<img src="${img}" alt="${esc(name)} avatar">`:esc(name.slice(0,2));
@@ -115,7 +144,7 @@
   }
 
   async function load(){
-    [RULES,COSMETICS]=await Promise.all([fetch('legacy-system.json?v=14',{cache:'no-store'}).then(r=>r.json()),fetch('legacy-cosmetics.json?v=1',{cache:'no-store'}).then(r=>r.json())]);
+    [RULES,COSMETICS]=await Promise.all([fetch('legacy-system.json?v=14',{cache:'no-store'}).then(r=>r.json()),fetch('legacy-cosmetics.json?v=6',{cache:'no-store'}).then(r=>r.json())]);
     const current=await season(LEAGUE_ID),owners={};current.rosters.forEach(roster=>{const id=roster.owner_id||`roster-${roster.roster_id}`;owners[id]={id,roster,user:current.userById[roster.owner_id],badges:[],lp:0,modern:[],heritageYears:[],historicTitles:0}});
     const chain=[current];let previous=current.league.previous_league_id,depth=1;while(previous&&depth++<20){const data=await season(previous);chain.push(data);previous=data.league.previous_league_id}
     chain.forEach(data=>{const year=Number(data.league.season),champId=champion(data);data.rosters.forEach(roster=>{const o=owners[roster.owner_id];if(!o)return;if(year<RULES.startSeason)o.heritageYears.push(year);if(year<RULES.startSeason&&champId===roster.owner_id)o.historicTitles++})});
@@ -126,6 +155,6 @@
   }
 
   document.addEventListener('click',e=>{const btn=e.target.closest('.tab');if(!btn)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('on'));btn.classList.add('on');q('#'+btn.dataset.panel)?.classList.add('on')});
-  q('#openCrateBtn')?.addEventListener('click',async e=>{const btn=e.currentTarget;btn.disabled=true;btn.textContent='OPENING…';q('#crateResult').textContent='Verifying the crate and opening it…';try{const result=await economyAction('open_crate'),reward=result.reward||{};q('#crateResult').textContent=reward.type==='duplicate_credit'?`${reward.test?'Test duplicate':'Duplicate'} ${reward.itemName} converted to ${Number(reward.credits)||0} EC.`:`Unlocked ${reward.itemName} · ${String(reward.rarity||'EFL').toUpperCase()}.`;}catch(error){q('#crateResult').textContent=error.message||'The crate could not be opened.';if(ECONOMY)applyEconomy(ACTIVE_OWNER,ECONOMY)}});
+  q('#openCrateBtn')?.addEventListener('click',async e=>{const btn=e.currentTarget,started=performance.now();btn.disabled=true;btn.textContent='OPENING…';q('#crateResult').textContent='Verifying the crate and opening it…';beginCrateReveal();try{const result=await economyAction('open_crate'),reward=result.reward||{},remaining=Math.max(0,1100-(performance.now()-started));if(remaining)await new Promise(resolve=>setTimeout(resolve,remaining));q('#crateResult').textContent=reward.type==='duplicate_credit'?`${reward.test?'Test duplicate':'Duplicate'} ${reward.itemName} converted to ${Number(reward.credits)||0} EC.`:`Unlocked ${reward.itemName} · ${String(reward.rarity||'EFL').toUpperCase()}.`;finishCrateReveal(reward)}catch(error){ensureCrateReveal().hidden=true;document.body.classList.remove('crate-reveal-open');q('#crateResult').textContent=error.message||'The crate could not be opened.';if(ECONOMY)applyEconomy(ACTIVE_OWNER,ECONOMY)}});
   load().catch(err=>{console.error(err);q('#status').textContent='Unable to load Franchise HQ';q('#franchisePicker').innerHTML='<option>Try refreshing</option>';if(q('#accessStatus'))q('#accessStatus').textContent='ACCESS CHECK UNAVAILABLE'});
 })();
