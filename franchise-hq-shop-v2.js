@@ -1,10 +1,10 @@
 (()=>{
-  const DATA_URL='legacy-cosmetics.json?v=2';
+  const DATA_URL='legacy-cosmetics.json?v=3';
   const state={items:[],selected:null,economy:null,allowed:false,accessStatus:'loading',target:null,confirmPurchase:null,busy:false,filters:{q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'}};
   const $=s=>document.querySelector(s);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const slug=v=>String(v||'core').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-  const slotLabel=s=>({banner:'Banner',frame:'Profile Frame',title:'Owner Title',background:'HQ Background',nameplate:'Nameplate',showcase:'Trophy Case',effect:'HQ Effect',badgeEffect:'Badge Effect'}[s]||s);
+  const slotLabel=s=>({banner:'Entrance Banner',frame:'Franchise Crest Frame',title:'Owner Title',background:'HQ Scene',stadium:'Home Stadium',collectible:'Display Collectible',nameplate:'Locker Nameplate',showcase:'Trophy Room Style',effect:'Entrance Effect'}[s]||s);
   const palettes={
     'EFL Core':['#1769e8','#45a3ff','#ffd979'],
     'Royal':['#0b1736','#81661c','#ffd979'],
@@ -19,30 +19,31 @@
     'Playoffs':['#071329','#1e61bd','#d9ecff'],
     'Champion':['#171004','#916c12','#ffd979'],
     'Seasonal':['#0e1821','#3b6c78','#d7f6ff'],
-    'Personality':['#11101f','#6f48aa','#e1c8ff'],
-    'Materials':['#0c1218','#657180','#d7dee8'],
-    'Atmosphere':['#07121d','#276687','#b7e6ff']
+    'Front Office':['#071326','#194f83','#ffd979'],
+    'Equipment Room':['#090d13','#465d74','#dfe9f2'],
+    'Game Day':['#071522','#1769e8','#ffd979'],
+    'Sunday Night Royalty':['#030914','#145daa','#ffd979']
   };
   function palette(item){return palettes[item.collection]||['#071326','#1769e8','#ffd979']}
   function artMarkup(item,large=false){
-    const label=esc(item.name);const slot=item.slot;const short=label.length>22?`${label.slice(0,20)}…`:label;
-    if(slot==='banner')return `<div class="visual banner-visual"><i></i><i></i><span>EFL</span><b>${short}</b></div>`;
-    if(slot==='frame')return `<div class="visual frame-visual"><div class="avatar-disc">EFL</div><span>${short}</span></div>`;
-    if(slot==='background')return `<div class="visual background-visual"><div class="stadium-lines"></div><b>${short}</b></div>`;
-    if(slot==='nameplate')return `<div class="visual nameplate-visual"><span>EFL FRANCHISE</span><b>${short}</b></div>`;
-    if(slot==='title')return `<div class="visual title-visual"><small>OWNER TITLE</small><b>${short}</b><i></i></div>`;
-    if(slot==='showcase')return `<div class="visual showcase-visual"><div class="shelf"><i></i><i></i><i></i></div><b>${short}</b></div>`;
-    if(slot==='badgeEffect')return `<div class="visual badgefx-visual"><div><i></i><i></i><i></i></div><b>${short}</b></div>`;
-    return `<div class="visual effect-visual"><div class="particle-field"><i></i><i></i><i></i><i></i><i></i></div><b>${short}</b></div>`;
+    const label=esc(item.name),slot=item.slot,short=label.length>22?`${label.slice(0,20)}…`:label,icon=esc(item.icon||'🏈'),classes=`visual ${slot.toLowerCase()}-visual collection-${slug(item.collection)} cosmetic-${slug(item.id)}`;
+    if(item.asset)return `<div class="${classes} premium-visual premium-${slot}"><img src="${esc(item.asset)}" alt="" loading="lazy"><div class="premium-art-shade"></div><small>${esc(slotLabel(slot))}</small><b>${short}</b></div>`;
+    if(slot==='banner')return `<div class="${classes}"><div class="yard-grid"></div><span class="art-icon">${icon}</span><small>WEEKLY BROADCAST</small><b>${short}</b></div>`;
+    if(slot==='frame')return `<div class="${classes}"><div class="avatar-disc"><span>${icon}</span><i></i></div><small>FRANCHISE CREST FRAME</small><b>${short}</b></div>`;
+    if(slot==='background')return `<div class="${classes}"><div class="stadium-lights"><i></i><i></i></div><div class="football-field"><i></i></div><span class="art-icon">${icon}</span><b>${short}</b></div>`;
+    if(slot==='nameplate')return `<div class="${classes}"><div class="scorebug"><small>EFL</small><strong>${short}</strong><i>1ST &amp; 10</i></div><span class="art-icon">${icon}</span></div>`;
+    if(slot==='title')return `<div class="${classes}"><div class="jersey-patch"><span>${icon}</span><small>OWNER TITLE</small><strong>${short}</strong></div></div>`;
+    if(slot==='showcase')return `<div class="${classes}"><div class="locker-shelf"><i>🏈</i><i>🏆</i><i>🏈</i></div><b>${short}</b></div>`;
+    return `<div class="${classes}"><div class="stadium-beam"></div><div class="particle-field"><i></i><i></i><i></i><i></i><i></i></div><span class="art-icon">${icon}</span><b>${short}</b></div>`;
   }
   function styleVars(item){const [a,b,c]=palette(item);return `--cos-a:${a};--cos-b:${b};--cos-c:${c}`}
   function owned(item){return Boolean(state.economy?.inventory?.some(entry=>entry.id===item.id))}
   function equipped(item){return state.economy?.equipped?.[item.slot]===item.id}
-  function actionMarkup(item){if(!state.allowed){const loading=state.accessStatus==='loading';return `<button class="economy-action" type="button" disabled>${loading?'LOADING HQ ACCESS…':item.lootOnly?'VICTORY CRATE EXCLUSIVE':'OWNER SIGN-IN REQUIRED'}</button>`}if(owned(item)){if(equipped(item))return `<button class="economy-action equipped" type="button" data-economy="unequip" data-slot="${esc(item.slot)}">EQUIPPED · REMOVE</button>`;return `<button class="economy-action" type="button" data-economy="equip" data-item="${esc(item.id)}">EQUIP TO HQ</button>`}if(item.lootOnly)return '<button class="economy-action" type="button" disabled>VICTORY CRATE EXCLUSIVE</button>';const balance=Number(state.economy?.wallet?.balance||0),price=Number(item.price)||0;if(balance<price)return `<button class="economy-action" type="button" disabled>NEED ${(price-balance).toLocaleString()} MORE EC</button>`;return `<button class="economy-action buy" type="button" data-economy="purchase" data-item="${esc(item.id)}">${state.confirmPurchase===item.id?`CONFIRM · SPEND ${price} EC`:`BUY · ${price} EC`}</button>`}
+  function actionMarkup(item){const crateLabel=item.asset?'PREMIUM VICTORY CRATE DROP':'VICTORY CRATE EXCLUSIVE';if(!state.allowed){const loading=state.accessStatus==='loading';return `<button class="economy-action" type="button" disabled>${loading?'LOADING HQ ACCESS…':item.lootOnly?crateLabel:'OWNER SIGN-IN REQUIRED'}</button>`}if(owned(item)){if(equipped(item))return `<button class="economy-action equipped" type="button" data-economy="unequip" data-slot="${esc(item.slot)}">EQUIPPED · REMOVE</button>`;return `<button class="economy-action" type="button" data-economy="equip" data-item="${esc(item.id)}">EQUIP TO HQ</button>`}if(item.lootOnly)return `<button class="economy-action" type="button" disabled>${crateLabel}</button>`;const balance=Number(state.economy?.wallet?.balance||0),price=Number(item.price)||0;if(balance<price)return `<button class="economy-action" type="button" disabled>NEED ${(price-balance).toLocaleString()} MORE EC</button>`;return `<button class="economy-action buy" type="button" data-economy="purchase" data-item="${esc(item.id)}">${state.confirmPurchase===item.id?`CONFIRM · SPEND ${price} EC`:`BUY · ${price} EC`}</button>`}
   function card(item){
     const loot=item.lootOnly;return `<article class="cosmetic-card rarity-${slug(item.rarity)}" data-cosmetic-id="${esc(item.id)}" style="${styleVars(item)}">
       <button class="cosmetic-art" type="button" data-preview="${esc(item.id)}" aria-label="Preview ${esc(item.name)}">${artMarkup(item)}</button>
-      <div class="cosmetic-meta"><div class="cosmetic-tags"><span>${esc(slotLabel(item.slot))}</span><span>${esc(item.collection||'EFL')}</span></div><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p>
+      <div class="cosmetic-meta"><div class="cosmetic-tags"><span>${esc(slotLabel(item.slot))}</span><span>${esc(item.collection||'EFL')}</span>${item.asset?'<span class="premium-tag">PREMIUM ART</span>':''}</div><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p>
       <div class="cosmetic-bottom"><span class="rarity ${esc(item.rarity)}">${esc(String(item.rarity).toUpperCase())}</span><strong>${loot?'LOOT ONLY':`${Number(item.price)||0} EC`}</strong></div>
       <button class="preview-btn" type="button" data-preview="${esc(item.id)}">PREVIEW ON HQ</button>${actionMarkup(item)}</div>
     </article>`;
@@ -103,25 +104,26 @@
   }
   function renderCollections(){
     const host=$('#collectionBrowser');if(!host)return;host.innerHTML=collectionStats().map(([name,items])=>{
-      const featured=items.find(x=>x.rarity==='Legendary')||items.find(x=>x.rarity==='Epic')||items[0];const loot=items.filter(x=>x.lootOnly).length;return `<button class="collection-card ${state.filters.collection===name?'on':''}" type="button" data-collection="${esc(name)}" style="${styleVars(featured)}"><div class="collection-art"><i></i><i></i><b>${esc(name.slice(0,2).toUpperCase())}</b></div><span>${esc(name)}</span><small>${items.length} ITEMS${loot?` · ${loot} LOOT`:''}</small></button>`
+      const featured=items.find(x=>x.rarity==='Legendary')||items.find(x=>x.rarity==='Epic')||items[0];const loot=items.filter(x=>x.lootOnly).length;return `<button class="collection-card ${state.filters.collection===name?'on':''}" type="button" data-collection="${esc(name)}" style="${styleVars(featured)}"><div class="collection-art collection-${slug(name)}"><i></i><i></i><b>${esc(featured.icon||'🏈')}</b></div><span>${esc(name)}</span><small>${items.length} ITEMS${loot?` · ${loot} LOOT`:''}</small></button>`
     }).join('');
   }
   function preview(item){
     state.selected=item;const preview=$('#cosmeticPreview');if(!preview)return;const [a,b,c]=palette(item);preview.style.setProperty('--cos-a',a);preview.style.setProperty('--cos-b',b);preview.style.setProperty('--cos-c',c);preview.dataset.slot=item.slot;preview.dataset.collection=slug(item.collection);
-    const team=$('#teamName')?.textContent||'EFL Franchise';const owner=$('#ownerName')?.textContent||'Owner';const avatar=$('#avatar')?.innerHTML||'EFL';
+    const team=$('#teamName')?.textContent||'EFL Franchise';const owner=$('#ownerName')?.textContent||'Owner';const avatar=$('#avatar')?.innerHTML||'EFL';const asset=item.asset?esc(item.asset):'';const scene=asset&&['stadium','banner','background'].includes(item.slot)?`<img class="preview-premium-scene" src="${asset}" alt="">`:'';const frame=asset&&item.slot==='frame'?`<img class="preview-premium-frame" src="${asset}" alt="">`:'';const collectible=asset&&item.slot==='collectible'?`<div class="preview-premium-collectible"><img src="${asset}" alt=""><small>DISPLAY COLLECTIBLE</small></div>`:'';
     preview.innerHTML=`<div class="preview-stage slot-${esc(item.slot)}">
+      ${scene}
       <div class="preview-effect"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="preview-banner"><span>EFL FRANCHISE HQ</span></div>
-      <div class="preview-profile"><div class="preview-avatar">${avatar}</div><div class="preview-copy"><small>${esc(owner)}</small><h3>${esc(team)}</h3><div class="preview-title">${item.slot==='title'?esc(item.name):'FRANCHISE OWNER'}</div></div></div>
+      <div class="preview-banner"><span>EFL FRANCHISE HQ</span><b>${esc(item.icon||'🏈')}</b></div>
+      <div class="preview-profile"><div class="preview-avatar">${avatar}${frame}</div><div class="preview-copy"><small>${esc(owner)}</small><h3>${esc(team)}</h3><div class="preview-title">${item.slot==='title'?esc(item.name):'FRANCHISE OWNER'}</div></div></div>
       <div class="preview-nameplate">${item.slot==='nameplate'?esc(item.name):esc(team)}</div>
-      <div class="preview-badges"><i></i><i></i><i></i></div><div class="preview-case"><i></i><i></i><i></i></div>
+      <div class="preview-badges"><i></i><i></i><i></i></div><div class="preview-case"><i></i><i></i><i></i></div>${collectible}
     </div><div class="preview-info"><div><span class="rarity ${esc(item.rarity)}">${esc(item.rarity.toUpperCase())}</span><small>${esc(slotLabel(item.slot))} · ${esc(item.collection||'EFL')}</small><h4>${esc(item.name)}</h4><p>${esc(item.description)}</p></div><strong>${item.lootOnly?'🎁 VICTORY CRATE EXCLUSIVE':`${Number(item.price)||0} EC`}</strong>${actionMarkup(item)}</div>`;
     document.querySelectorAll('.cosmetic-card.selected').forEach(x=>x.classList.remove('selected'));document.querySelector(`[data-cosmetic-id="${CSS.escape(item.id)}"]`)?.classList.add('selected');
   }
   function controls(){
     const shop=$('#shop');const grid=$('#shopGrid');if(!shop||!grid||$('#cosmeticShopTools'))return;
     const collections=[...new Set(state.items.map(x=>x.collection).filter(Boolean))].sort();const slots=[...new Set(state.items.map(x=>x.slot).filter(Boolean))].sort();
-    const ui=document.createElement('div');ui.id='cosmeticShopTools';ui.innerHTML=`<div class="shop-intro"><div><div class="eyebrow">EFL Cosmetic Market</div><h3>Build Your Franchise Identity</h3><p>Browse collections, filter by cosmetic type, and preview any item directly on a Franchise HQ mockup before spending Credits.</p></div><div class="catalog-count" id="cosmeticCount"></div></div>
+    const ui=document.createElement('div');ui.id='cosmeticShopTools';ui.innerHTML=`<div class="shop-intro"><div><div class="eyebrow">EFL Franchise Collections</div><h3>Build Your Football Identity</h3><p>Collect stadiums, entrance banners, crest frames, locker treatments and display pieces. These personalize your HQ only—official Legacy ranks, earned badges and trophies remain performance-only.</p></div><div class="catalog-count" id="cosmeticCount"></div></div>
       <div class="collection-head"><b>COLLECTIONS</b><span id="activeCollectionLabel">ALL COLLECTIONS</span></div><div class="collection-browser" id="collectionBrowser"></div>
       <div class="shop-workspace"><aside class="preview-panel"><div class="preview-label">LIVE COSMETIC PREVIEW</div><div id="cosmeticPreview" class="cosmetic-preview"></div><div class="preview-hint">Click any cosmetic to try it on. Previewing does not spend Credits.</div></aside>
       <div class="catalog-panel"><div class="shop-toolbar"><input id="cosmeticSearch" type="search" placeholder="Search cosmetics…" aria-label="Search cosmetics"><select id="slotFilter"><option value="all">All types</option>${slots.map(s=>`<option value="${esc(s)}">${esc(slotLabel(s))}</option>`).join('')}</select><select id="rarityFilter"><option value="all">All rarities</option><option>Common</option><option>Rare</option><option>Epic</option><option>Legendary</option></select><select id="collectionFilter"><option value="all">All collections</option>${collections.map(c=>`<option>${esc(c)}</option>`).join('')}</select><select id="sortFilter"><option value="featured">Collection</option><option value="rarity">Rarity</option><option value="price-asc">Price: Low</option><option value="price-desc">Price: High</option></select><button id="clearCosmeticFilters" type="button">RESET</button></div><div id="catalogMount"></div></div></div>`;
@@ -134,7 +136,21 @@
     $('#clearCosmeticFilters').addEventListener('click',()=>{state.filters={q:'',slot:'all',collection:'all',rarity:'all',sort:'featured'};$('#cosmeticSearch').value='';$('#slotFilter').value='all';$('#rarityFilter').value='all';$('#collectionFilter').value='all';$('#sortFilter').value='featured';renderCollections();renderItems()});
     ui.addEventListener('click',e=>{const coll=e.target.closest('[data-collection]');if(coll){state.filters.collection=coll.dataset.collection;$('#collectionFilter').value=state.filters.collection;renderCollections();renderItems();document.querySelector('#catalogMount')?.scrollIntoView({behavior:'smooth',block:'start'});return}const btn=e.target.closest('[data-preview]');if(btn){const item=state.items.find(x=>x.id===btn.dataset.preview);if(item)preview(item)}});
   }
-  function applyEquipped(){const profile=$('.profilebar');if(!profile)return;const slots=['banner','frame','title','background','nameplate','showcase','effect','badgeEffect'];slots.forEach(slot=>{const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`);profile.removeAttribute(`data-equipped-${attr}`);['a','b','c'].forEach(key=>profile.style.removeProperty(`--eq-${attr}-${key}`))});const title=$('#equippedTitle'),nameplate=$('#equippedNameplate');if(title){title.hidden=true;title.textContent=''}if(nameplate){nameplate.hidden=true;nameplate.textContent=''}Object.entries(state.economy?.equipped||{}).forEach(([slot,id])=>{const item=state.items.find(entry=>entry.id===id);if(!item)return;const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`),[a,b,c]=palette(item);profile.setAttribute(`data-equipped-${attr}`,item.id);profile.style.setProperty(`--eq-${attr}-a`,a);profile.style.setProperty(`--eq-${attr}-b`,b);profile.style.setProperty(`--eq-${attr}-c`,c);if(slot==='title'&&title){title.textContent=item.name;title.hidden=false}if(slot==='nameplate'&&nameplate){nameplate.textContent=item.name;nameplate.hidden=false}})}
+  function applyEquipped(){
+    const profile=$('.profilebar');if(!profile)return;
+    const slots=['banner','frame','title','background','stadium','collectible','nameplate','showcase','effect','badgeEffect'];
+    slots.forEach(slot=>{const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`);profile.removeAttribute(`data-equipped-${attr}`);profile.removeAttribute(`data-equipped-${attr}-collection`);['a','b','c','asset'].forEach(key=>profile.style.removeProperty(`--eq-${attr}-${key}`))});
+    const title=$('#equippedTitle'),nameplate=$('#equippedNameplate'),frameArt=$('#equippedFrameArt'),collectibleArt=$('#equippedCollectibleArt'),collectibleName=$('#equippedCollectibleName');
+    if(title){title.hidden=true;title.textContent=''}if(nameplate){nameplate.hidden=true;nameplate.textContent=''}if(frameArt){frameArt.hidden=true;frameArt.removeAttribute('src')}if(collectibleArt){collectibleArt.hidden=true;collectibleArt.removeAttribute('src')}if(collectibleName)collectibleName.textContent='';
+    Object.entries(state.economy?.equipped||{}).forEach(([slot,id])=>{
+      // Historical badge-effect records are intentionally ignored. Official ranks and
+      // achievement badges are authoritative performance records, never cosmetic slots.
+      if(slot==='badgeEffect')return;
+      const item=state.items.find(entry=>entry.id===id);if(!item)return;
+      const attr=slot.replace(/[A-Z]/g,m=>`-${m.toLowerCase()}`),[a,b,c]=palette(item);
+      profile.setAttribute(`data-equipped-${attr}`,item.id);profile.setAttribute(`data-equipped-${attr}-collection`,slug(item.collection));profile.style.setProperty(`--eq-${attr}-a`,a);profile.style.setProperty(`--eq-${attr}-b`,b);profile.style.setProperty(`--eq-${attr}-c`,c);if(item.asset)profile.style.setProperty(`--eq-${attr}-asset`,`url("${item.asset.replace(/["\\]/g,'')}")`);if(slot==='title'&&title){title.textContent=item.name;title.hidden=false}if(slot==='nameplate'&&nameplate){nameplate.textContent=item.name;nameplate.hidden=false}if(slot==='frame'&&item.asset&&frameArt){frameArt.src=item.asset;frameArt.hidden=false}if(slot==='collectible'&&item.asset&&collectibleArt){collectibleArt.src=item.asset;collectibleArt.hidden=false;if(collectibleName)collectibleName.textContent=item.name}
+    })
+  }
   function toast(message,bad=false){const shop=$('#shop');if(!shop)return;let el=$('#economyToast');if(!el){el=document.createElement('div');el.id='economyToast';el.className='economy-toast';shop.prepend(el)}el.textContent=message;el.style.color=bad?'#ff8c9b':'#ffd979';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.remove(),5000)}
   async function performEconomy(button){if(state.busy||!window.EFL_HQ_ACTION)return;const action=button.dataset.economy,itemId=button.dataset.item||'',slot=button.dataset.slot||'';if(action==='purchase'&&state.confirmPurchase!==itemId){state.confirmPurchase=itemId;renderItems();renderInventory();if(state.selected?.id===itemId)preview(state.selected);setTimeout(()=>{if(state.confirmPurchase===itemId){state.confirmPurchase=null;refresh()}},5000);return}state.confirmPurchase=null;state.busy=true;button.disabled=true;const old=button.textContent;button.textContent=action==='purchase'?'PURCHASING…':action==='equip'?'EQUIPPING…':'UPDATING…';try{const result=await window.EFL_HQ_ACTION(action,{itemId,slot}),reward=result.reward||{};toast(reward.type==='purchase'?`${reward.itemName} added to this franchise inventory.`:reward.type==='equipped'?`${reward.itemName} is now equipped.`:'Cosmetic removed from this HQ slot.')}catch(error){toast(error.message||'That HQ action could not be completed.',true);button.disabled=false;button.textContent=old}finally{state.busy=false}}
   function refresh(){if(!state.items.length)return;renderCollections();renderItems();renderInventory();renderActivity();applyEquipped();const selected=state.selected||state.items.find(x=>x.rarity==='Legendary')||state.items[0];if(selected)preview(selected)}
