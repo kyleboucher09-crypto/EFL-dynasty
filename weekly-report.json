@@ -1,39 +1,39 @@
 {
-  "edition": "2026 PRESEASON — WEEK 1 FINAL PREVIEW",
+  "edition": "2026 WEEK 1 — OPENING EVE",
   "season": 2026,
   "week": 1,
-  "published": "September 1, 2026",
-  "headline": "The Opening Lines Are In",
-  "dek": "The EFL still has no completed 2026 fantasy week, but fresh Sleeper projections have sharpened the Week 1 slate with two near-tossups, two heavy early favorites and a power board waiting for real results.",
+  "published": "September 8, 2026",
+  "headline": "One Night From Real Football",
+  "dek": "The EFL reaches the final hours of preseason with no completed fantasy results yet, a stable contender tier at the top and the first real Week 1 evidence arriving when the NFL season opens September 9.",
   "lead": {
-    "tag": "WEEK 1 FINAL PREVIEW",
-    "title": "Sleeper's First Full Week 1 Read Turns the Spotlight From Rankings to Matchups",
-    "body": "The 2026 EFL season is still in preview mode as of September 1: no fantasy matchup has been completed, so there are no legitimate scoring trends, winners or losers to manufacture. What the league does have now is a fresh Sleeper-based Week 1 projection set across all six matchups. The September 1 model shows a slate with real contrast — two games separated by less than five projected points, including one matchup split just 51.2% to 48.8%, while two other pairings carry favorite probabilities of 82.4% and 76.8%. The published EFL power board remains the August 25 order, with Master Peyton No. 1 at 89.2, The Don's Soldiers No. 2 at 84.2, Kaaron Rodgers No. 3 at 83.8 and defending champion Blaze Infantry No. 4 at 75.3. Until actual Week 1 scores arrive, projections are context rather than proof — but the opening slate is finally taking shape."
+    "tag": "WEEK 1 OPENING EVE",
+    "title": "The Preview Era Ends Here — Tomorrow the EFL Starts Producing Receipts",
+    "body": "There is still no completed 2026 EFL fantasy week to recap as of September 8, so this edition remains a factual Week 1 preview rather than a manufactured results column. The NFL regular season opens Wednesday, September 9, which means the next EFL report can finally judge actual scoring, winners, losers and lineup decisions. The latest published EFL power board, generated September 1 from Sleeper-based roster and matchup inputs, still has Master Peyton first at 88.7, The Don’s Soldiers second at 84.1, Kaaron Rodgers third at 83.8 and defending champion Blaze Infantry fourth at 75.5. Beneath that top tier, The Duke moved up to sixth, Mach Chicken slipped to seventh, 28Wizardking and LandsharkSC each gained a spot, and bonebuster fell two places to eleventh. For now those are preseason signals only. Beginning tomorrow, the league gets real evidence."
   },
   "briefs": [
     {
-      "icon": "⚖",
-      "label": "MATCHUP WATCH",
-      "title": "Two Week 1 Games Open Almost Dead Even",
-      "body": "The latest Sleeper projection model identifies two especially tight Week 1 matchups. The closest is separated by only 1.19 projected points and carries a 51.2%-48.8% win-probability split. Another is separated by 4.38 projected points with a 53.8%-46.2% split. Before any real scoring begins, those are the two clearest candidates for opening-week drama."
+      "icon": "♛",
+      "label": "POWER BOARD",
+      "title": "Master Peyton Carries No. 1 Into Opening Night",
+      "body": "The September 1 EFL ranking model keeps Master Peyton on top with an 88.7 Power Score and A+ grades for lineup, depth, health and recent form. The Don’s Soldiers sits second at 84.1 and Kaaron Rodgers third at 83.8, leaving only 0.3 points between the two closest members of the top three."
     },
     {
       "icon": "▲",
-      "label": "FAVORITE WATCH",
-      "title": "The Early Model Also Shows Two Clear Favorites",
-      "body": "Not every Week 1 pairing looks close on paper. One matchup currently carries an 82.4% projected win chance for the favorite, while another sits at 76.8%. The highest individual team projection on the six-game slate is 147.91 points. Those numbers establish the early expectation, but no EFL franchise has earned anything yet — the first actual scores will decide whether the model was signal or noise."
+      "label": "RISERS & FALLERS",
+      "title": "The Middle of the Table Already Has Movement",
+      "body": "The Duke climbed one position to No. 6, while Mach Chicken dropped one to No. 7. Farther down, 28Wizardking rose to ninth and LandsharkSC to tenth, while bonebuster took the sharpest preseason slide, falling two positions to No. 11. Those moves are model movement, not on-field verdicts."
     },
     {
-      "icon": "♛",
-      "label": "POWER BOARD",
-      "title": "Master Peyton Still Owns the Published No. 1 Spot",
-      "body": "The most recent published EFL power rankings remain the August 25 edition. Master Peyton leads at 89.2, followed by The Don's Soldiers at 84.2 and Kaaron Rodgers at 83.8, with Blaze Infantry fourth at 75.3. The Don's Soldiers and Kaaron Rodgers are separated by only 0.4 Power Score points, leaving the first completed fantasy week positioned to provide the first meaningful on-field evidence in that contender race."
+      "icon": "⚔",
+      "label": "MATCHUP BOARD",
+      "title": "The Top Four All Draw Different Opening Tests",
+      "body": "Week 1 pairs No. 1 Master Peyton with The Duke, No. 2 The Don’s Soldiers with LandsharkSC, No. 3 Kaaron Rodgers with KamaraVirus125177, and No. 4 Blaze Infantry with No. 5 Trash Pandas. The Blaze–Trash Pandas matchup is the only opening pairing featuring two teams currently ranked inside the EFL top five."
     },
     {
       "icon": "⏱",
-      "label": "WEEK 1 CLOCK",
-      "title": "The League Is Still Waiting for the First Real Box Scores",
-      "body": "The NFL regular season has not started yet, so the EFL correctly remains on Week 1 under its preseason convention. That means there are no completed fantasy results or scoring trends to report in this edition. The newsroom is treating projections as projections and is not presenting unverified trades, waivers or free-agent activity as fact; once completed Sleeper data exists, the weekly report can shift from preview mode to results, movement and transaction analysis."
+      "label": "NEWSROOM NOTE",
+      "title": "No Box Scores Means No Fake Trends",
+      "body": "Because Week 1 has not begun, there are no completed fantasy scores, scoring trends or matchup outcomes to analyze yet. This edition also avoids assigning impact to trades, waivers or free-agent moves without a completed week to evaluate them against. The next report can shift fully into results mode once Sleeper has a finished Week 1 ledger."
     }
   ]
 }
