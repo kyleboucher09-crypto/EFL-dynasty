@@ -18,12 +18,15 @@ export default async function handler(req,res){
     if(req.method==='POST'){
       if(!sameOrigin(req))return res.status(403).json({error:'Invalid request origin'});
       const session=await requireEflSession(req).catch(()=>null);
-      if(!session?.user||!await isPrimaryCommissionerUser(session.user.id))return res.status(403).json({error:'The verified primary Commissioner account is required for economy controls.'});
+      const primaryAccount=Boolean(session?.user&&await isPrimaryCommissionerUser(session.user.id));
+      const commissionerKeySession=commissionerOK(req);
+      if(!primaryAccount&&!commissionerKeySession)return res.status(403).json({error:'The primary Commissioner account or secure Commissioner session is required for economy controls.'});
+      const actingUserId=primaryAccount?session.user.id:'commissioner-key';
       const data=body(req),leagueId=String(data.leagueId||'').trim(),rosterId=Number(data.rosterId);
       const action=String(data.action||'').trim();
-      if(action==='adjust_credits')return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:session.user.id,amount:data.amount,note:data.note}));
-      if(action==='grant_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:session.user.id,note:data.note}));
-      if(action==='grant_duplicate_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:session.user.id,note:data.note,forceDuplicate:true}));
+      if(action==='adjust_credits')return res.status(200).json(await adjustHqCredits({leagueId,rosterId,userId:actingUserId,amount:data.amount,note:data.note}));
+      if(action==='grant_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:actingUserId,note:data.note}));
+      if(action==='grant_duplicate_test_crate')return res.status(200).json(await grantHqTestCrate({leagueId,rosterId,userId:actingUserId,note:data.note,forceDuplicate:true}));
       return res.status(400).json({error:'Unsupported commissioner economy action.'});
     }
     const access=await accessFor(req);if(!access.allowed)return res.status(401).json({error:'Commissioner access required'});
