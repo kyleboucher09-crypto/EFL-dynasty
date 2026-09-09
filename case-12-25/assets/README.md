@@ -1,1 +1,0 @@
-CASE 12-25 visual assets are managed for the live investigation portal. Binary WebP assets are attached through Git objects; `.txt` payloads, if present, are staging-only and are not part of the public interface.

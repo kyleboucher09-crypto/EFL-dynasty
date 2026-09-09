@@ -1,1 +1,0 @@
-CASE 12-25 deployment work in progress. Final production assets are being uploaded to the case-12-25-site branch.

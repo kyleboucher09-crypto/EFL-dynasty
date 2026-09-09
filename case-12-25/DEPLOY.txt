@@ -1,1 +1,0 @@
-CASE 12-25 public build prepared for Vercel. Self-contained public release; no host controls or hidden game mechanics exposed.

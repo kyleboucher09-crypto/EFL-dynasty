@@ -1,1 +1,0 @@
-Binary visual assets are being attached to this branch for the live CASE 12-25 portal.
