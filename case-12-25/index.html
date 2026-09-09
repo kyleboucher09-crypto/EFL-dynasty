@@ -1,4 +1,50 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#06100e"><title>CASE 12-25 — Investigation Headquarters</title><link rel="stylesheet" href="styles-v2.css"></head><body>
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=theme-color content="#06100e"><title>CASE 12-25 — Investigation Headquarters</title><link rel="stylesheet" href="styles-v2.css"></head><body><div id="rsvpGate" class="rsvp-gate" aria-hidden="true">
+  <div class="rsvp-shell">
+    <div class="rsvp-filemark">CASE 12-25 • INTAKE FILE</div>
+    <section id="rsvpFormView" class="rsvp-card">
+      <div class="rsvp-stamp">ATTENDANCE<br><b>REQUIRED</b></div>
+      <div class="rsvp-kicker">Christmas 2026 Participation Clearance</div>
+      <h2>Attendance Registry</h2>
+      <p class="rsvp-lede">Before access to Investigation Headquarters is granted, all prospective attendees must identify themselves and confirm their status for December 25.</p>
+      <form id="rsvpForm">
+        <label class="rsvp-label" for="rsvpName">Full name</label>
+        <input class="rsvp-input" id="rsvpName" name="name" autocomplete="name" placeholder="Enter your full name" required>
+        <fieldset class="rsvp-fieldset">
+          <legend>Will you be attending Christmas on December 25?</legend>
+          <label class="rsvp-choice"><input type="radio" name="attendance" value="YES — I will be there" required><span><b>YES</b><small>I will be there.</small></span></label>
+          <label class="rsvp-choice"><input type="radio" name="attendance" value="NO — I will not be attending"><span><b>NO</b><small>I will not be attending.</small></span></label>
+          <label class="rsvp-choice"><input type="radio" name="attendance" value="UNCERTAIN — I need a little more time"><span><b>UNCERTAIN</b><small>I need a little more time.</small></span></label>
+        </fieldset>
+        <fieldset id="clearanceField" class="rsvp-fieldset rsvp-clearance">
+          <legend>Requested participation clearance</legend>
+          <p class="rsvp-help">This only tells the Detective how involved you would like to be. It does not reveal any assignment.</p>
+          <label class="rsvp-choice"><input type="radio" name="clearance" value="FULL CLEARANCE"><span><b>FULL CLEARANCE</b><small>I'm all in. Give me things to do.</small></span></label>
+          <label class="rsvp-choice"><input type="radio" name="clearance" value="STANDARD CLEARANCE"><span><b>STANDARD CLEARANCE</b><small>I want to participate, but keep it fairly casual.</small></span></label>
+          <label class="rsvp-choice"><input type="radio" name="clearance" value="OBSERVER STATUS"><span><b>OBSERVER STATUS</b><small>I'll be there, but I'd rather mostly watch and investigate.</small></span></label>
+        </fieldset>
+        <label class="rsvp-label" for="rsvpNote">Optional note for the Detective</label>
+        <textarea class="rsvp-input rsvp-textarea" id="rsvpNote" name="note" rows="3" placeholder="Anything the Detective should know? (optional)"></textarea>
+        <button class="btn red rsvp-submit" type="submit">File My RSVP →</button>
+      </form>
+    </section>
+    <section id="rsvpAckView" class="rsvp-card rsvp-ack" hidden>
+      <div class="rsvp-seal">FILED</div>
+      <div class="rsvp-kicker">CASE 12-25 • Attendance Registry</div>
+      <h2>RSVP Received</h2>
+      <div class="rsvp-statusline">STATUS: FILED WITH CASE 12-25</div>
+      <p>Your attendance record has been received.</p>
+      <p>If your presence is confirmed, the Detective may contact you privately in the coming weeks with additional instructions.</p>
+      <p>Until then, review the public case file carefully.</p>
+      <p class="rsvp-warning">Not everything released this year should be taken at face value.</p>
+      <div class="rsvp-signoff">— Detective Boucher<br><small>Lead Investigator, CASE 12-25</small></div>
+      <div class="rsvp-ack-actions">
+        <button id="shareRsvp" class="btn">Transmit RSVP Record →</button>
+        <button id="enterHQ" class="btn red">Enter Investigation Headquarters →</button>
+      </div>
+      <div id="rsvpShareStatus" class="rsvp-share-status" aria-live="polite"></div>
+    </section>
+  </div>
+</div>
 <header><div class=w><a class=brand href=#top><b>CASE 12-25</b><small>Investigation Headquarters</small></a><nav class=nav><a href=#top>Home</a><a href=#brief>Case File</a><a href=#evidence>Evidence Locker</a><a href=#snow>The Snow Globe</a><a href=#dossiers>Dossiers</a><a href=#log>Case Log</a><a href=#restricted>Restricted</a></nav><div class=truth>Truth lives here.</div></div></header>
 <main id=top><section class=hero><div class=w><div class=copy><div class=ey>Some holidays<br>hide more<br>than gifts.</div><h1>CASE 12-25</h1><div class=sub>The Christmas Incident</div><div class=re>Reopened. Unresolved. Personal.</div><a class="btn red" href=#brief>View Case Briefing →</a></div><div class=stamp>Investigation<b>Active</b></div><div class=note>The truth always finds its way back.<br><b>— C</b></div></div></section>
 <div class=sw><div class=w><div class=statuses><div class=status><small>Case Status</small><b><span class=dot></span>ACTIVE</b></div><div class=status><small>Grinch Identity</small><b>UNKNOWN</b></div><div class=status><small>Exhibits Released</small><b>3</b></div><div class=status><small>Reward Status</small><b>SEALED</b></div><div class=status><small>Next Case Update</small><b>PENDING</b></div></div></div></div>
@@ -18,6 +64,6 @@
 <section class=sec id=snow><div class=w><div class=sh><h2>The Snow Globe</h2><p>The news from pole to pole. Reporting and interviews by Mikki Bee, Lead Journalist.</p></div><div class=newsgrid><div class=paperpic><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-asset="snow"></div><article class=article><h2>Case 12-25 Interview Footage</h2><p><i>by Mikki Bee, Lead Journalist</i></p><p>Sandie agreed to a supplemental interview after CASE 12-25 was reopened. The interview produced new questions — and the first physical communication recovered since the investigation resumed.</p><div class=poster onclick="openAsset('poster','CASE 12-25 — Sandie Interview')"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-asset="poster"></div></article></div></div></section>
 <section class=sec id=log><div class=w><div class=sh><h2>Case Timeline</h2><p>The chronology separates what the family actually identified from what was disclosed afterward.</p></div><div class=timeline><div class=event><div class=date>Dec 25, 2025</div><article><h3>The Christmas Incident</h3><p>The family investigates the Grinch.</p></article></div><div class=event><div class=date>Final Vote</div><article><h3>No Correct Identification</h3><p>No participant correctly identifies the Grinch. Sandie's Traitor Contract activates and she wins.</p></article></div><div class=event><div class=date>Post-game</div><article><h3>Savannah Is Disclosed</h3><p>Savannah is named only after Sandie's victory and after the family vote has ended.</p></article></div><div class=event><div class=date>September 2026</div><article><h3>CASE 12-25 Reopens</h3><p>The difference between identification and disclosure becomes the foundation of the new investigation.</p></article></div></div></div></section>
 <section class=sec id=restricted><div class=w><div class=sh><h2>Restricted</h2><p>These files exist, but public clearance has not yet been issued.</p></div><div class=locks><button class=lock onclick="info('PERSONS OF INTEREST','Public profiles remain sealed.')"><h3>Persons of Interest</h3><p>Public profiles remain sealed.</p></button><button class=lock onclick="info('PRIVATE DOSSIERS','Individual access has not been authorized.')"><h3>Private Dossiers</h3><p>Individual access has not been authorized.</p></button><button class=lock onclick="info('GRINCH TRANSMISSIONS','No public transmission archive exists at this time.')"><h3>Grinch Transmissions</h3><p>No public archive exists.</p></button><button class=lock onclick="info('THE REWARD','A substantial reward has been secured. Terms remain sealed.')"><h3>The Reward</h3><p>A substantial reward has been secured. Terms remain sealed.</p></button></div></div></section></main>
-<footer class=foot><div class=w>CASE 12-25 • Investigation Headquarters • Truth. Traditions. Together.</div></footer>
+<footer class=foot><div class=w><span>CASE 12-25 • Investigation Headquarters • Truth. Traditions. Together.</span><button id="updateRsvp" class="rsvp-update" type="button">Update RSVP</button></div></footer>
 <dialog id=img><button class=close onclick=img.close()>×</button><div class=modal><div id=it class=m></div><img id=ii></div></dialog><dialog id=inf><button class=close onclick=inf.close()>×</button><div class=modal><h2 id=ft></h2><p id=fx></p></div></dialog><dialog id=term><button class=close onclick=term.close()>×</button><div class=modal><h2>Detective Terminal</h2><div class=terminal>&gt; CASE 12-25<br>&gt; STATUS: ACTIVE<br>&gt; GRINCH IDENTITY: UNKNOWN<br>&gt; ARCHIVE INTEGRITY: NOMINAL<br>&gt; MONITORING: ON<br>&gt; ACCESS: LIMITED<br>&gt; TRUTH LIVES HERE...</div></div></dialog>
 <script src="app-v2.js"></script></body></html>
