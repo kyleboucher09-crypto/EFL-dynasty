@@ -1,39 +1,39 @@
 {
-  "edition": "2026 WEEK 1 — OPENING EVE",
+  "edition": "2026 WEEK 1 — FINAL",
   "season": 2026,
   "week": 1,
-  "published": "September 8, 2026",
-  "headline": "One Night From Real Football",
-  "dek": "The EFL reaches the final hours of preseason with no completed fantasy results yet, a stable contender tier at the top and the first real Week 1 evidence arriving when the NFL season opens September 9.",
+  "published": "September 15, 2026",
+  "headline": "Master Peyton Survives the Opening Shootout",
+  "dek": "Week 1 finally produced receipts: No. 1 Master Peyton held off The Duke 160.16–153.22, 28Wizardking escaped the league’s closest finish, and the first live power board rewarded two risers.",
   "lead": {
-    "tag": "WEEK 1 OPENING EVE",
-    "title": "The Preview Era Ends Here — Tomorrow the EFL Starts Producing Receipts",
-    "body": "There is still no completed 2026 EFL fantasy week to recap as of September 8, so this edition remains a factual Week 1 preview rather than a manufactured results column. The NFL regular season opens Wednesday, September 9, which means the next EFL report can finally judge actual scoring, winners, losers and lineup decisions. The latest published EFL power board, generated September 1 from Sleeper-based roster and matchup inputs, still has Master Peyton first at 88.7, The Don’s Soldiers second at 84.1, Kaaron Rodgers third at 83.8 and defending champion Blaze Infantry fourth at 75.5. Beneath that top tier, The Duke moved up to sixth, Mach Chicken slipped to seventh, 28Wizardking and LandsharkSC each gained a spot, and bonebuster fell two places to eleventh. For now those are preseason signals only. Beginning tomorrow, the league gets real evidence."
+    "tag": "WEEK 1 FINAL",
+    "title": "Master Peyton Takes the First Punch and Keeps the Crown",
+    "body": "The EFL’s first completed week delivered a heavyweight opener at the top of the scoring table. Master Peyton posted a league-best 160.16 points and survived The Duke 160.16–153.22, a 6.94-point margin in the week’s highest-scoring matchup at 313.38 combined points. The Duke’s 153.22 was the second-highest total in the league but still produced an 0-1 start, while Kaaron Rodgers scored 142.14 in a 61.78-point win over KamaraVirus125177 and The Don’s Soldiers opened with 133.36 in a win over LandsharkSC. Across all 12 franchises, Week 1 scoring averaged 119.68 points. The refreshed EFL power board keeps Master Peyton No. 1 at 88.4, with The Don’s Soldiers No. 2 and Kaaron Rodgers No. 3; The Duke rises to No. 5 despite the loss after its 153.22-point showing."
   },
   "briefs": [
     {
-      "icon": "♛",
-      "label": "POWER BOARD",
-      "title": "Master Peyton Carries No. 1 Into Opening Night",
-      "body": "The September 1 EFL ranking model keeps Master Peyton on top with an 88.7 Power Score and A+ grades for lineup, depth, health and recent form. The Don’s Soldiers sits second at 84.1 and Kaaron Rodgers third at 83.8, leaving only 0.3 points between the two closest members of the top three."
+      "icon": "⚡",
+      "label": "PHOTO FINISH",
+      "title": "28Wizardking Escapes by 2.14",
+      "body": "The closest result of Week 1 belonged to 28Wizardking, which edged bonebuster 106.80–104.66. The 2.14-point margin was the only EFL matchup decided by fewer than seven points outside the Master Peyton–The Duke shootout."
     },
     {
       "icon": "▲",
-      "label": "RISERS & FALLERS",
-      "title": "The Middle of the Table Already Has Movement",
-      "body": "The Duke climbed one position to No. 6, while Mach Chicken dropped one to No. 7. Farther down, 28Wizardking rose to ninth and LandsharkSC to tenth, while bonebuster took the sharpest preseason slide, falling two positions to No. 11. Those moves are model movement, not on-field verdicts."
+      "label": "POWER BOARD",
+      "title": "The Duke and Landshark Move Up",
+      "body": "The first post-Week 1 ranking refresh keeps the top four intact: Master Peyton, The Don’s Soldiers, Kaaron Rodgers and Blaze Infantry. The Duke climbs one spot to No. 5 and LandsharkSC rises to No. 9, while Trash Pandas slips to No. 6 and 28Wizardking falls to No. 10. The model movement is separate from the 1-0 and 0-1 standings."
     },
     {
-      "icon": "⚔",
-      "label": "MATCHUP BOARD",
-      "title": "The Top Four All Draw Different Opening Tests",
-      "body": "Week 1 pairs No. 1 Master Peyton with The Duke, No. 2 The Don’s Soldiers with LandsharkSC, No. 3 Kaaron Rodgers with KamaraVirus125177, and No. 4 Blaze Infantry with No. 5 Trash Pandas. The Blaze–Trash Pandas matchup is the only opening pairing featuring two teams currently ranked inside the EFL top five."
+      "icon": "📈",
+      "label": "SCORING DESK",
+      "title": "Four Franchises Clear 130 in the Opener",
+      "body": "Master Peyton (160.16), The Duke (153.22), Kaaron Rodgers (142.14) and The Don’s Soldiers (133.36) formed the opening week’s top scoring tier. The league averaged 119.68 points per franchise, with an 80.36-to-160.16 range between the week’s lowest and highest totals."
     },
     {
-      "icon": "⏱",
-      "label": "NEWSROOM NOTE",
-      "title": "No Box Scores Means No Fake Trends",
-      "body": "Because Week 1 has not begun, there are no completed fantasy scores, scoring trends or matchup outcomes to analyze yet. This edition also avoids assigning impact to trades, waivers or free-agent moves without a completed week to evaluate them against. The next report can shift fully into results mode once Sleeper has a finished Week 1 ledger."
+      "icon": "🧾",
+      "label": "TRANSACTION WIRE",
+      "title": "Waivers Move; the Trade Desk Stays Quiet",
+      "body": "Sleeper shows no completed trade in the closing Week 1 window from September 8 through September 11. The Duke spent $18 FAAB to add Michael Mayer, Mach Chicken added Jauan Jennings and Darnell Washington for $0 bids, and The Don’s Soldiers added Emari Demercado for $0 while dropping Roschon Johnson. The last completed trade in Sleeper’s Week 1 bucket remains the August 30 Duke–Blaze deal that sent Dalton Kincaid to The Duke and DK Metcalf to Blaze Infantry, with 2028 second- and third-round picks also changing hands."
     }
   ]
 }
