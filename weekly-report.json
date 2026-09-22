@@ -1,39 +1,39 @@
 {
-  "edition": "2026 WEEK 1 — FINAL",
+  "edition": "2026 WEEK 2 — FINAL",
   "season": 2026,
-  "week": 1,
-  "published": "September 15, 2026",
-  "headline": "Master Peyton Survives the Opening Shootout",
-  "dek": "Week 1 finally produced receipts: No. 1 Master Peyton held off The Duke 160.16–153.22, 28Wizardking escaped the league’s closest finish, and the first live power board rewarded two risers.",
+  "week": 2,
+  "published": "September 22, 2026",
+  "headline": "Master Peyton Drops 175 and Stays Perfect",
+  "dek": "Week 2 split the EFL into three 2-0 teams and three 0-2 teams as Master Peyton led all scoring with 175.24, The Duke survived the week’s tightest finish, and the power board shuffled at Nos. 4-5 and 8-9.",
   "lead": {
-    "tag": "WEEK 1 FINAL",
-    "title": "Master Peyton Takes the First Punch and Keeps the Crown",
-    "body": "The EFL’s first completed week delivered a heavyweight opener at the top of the scoring table. Master Peyton posted a league-best 160.16 points and survived The Duke 160.16–153.22, a 6.94-point margin in the week’s highest-scoring matchup at 313.38 combined points. The Duke’s 153.22 was the second-highest total in the league but still produced an 0-1 start, while Kaaron Rodgers scored 142.14 in a 61.78-point win over KamaraVirus125177 and The Don’s Soldiers opened with 133.36 in a win over LandsharkSC. Across all 12 franchises, Week 1 scoring averaged 119.68 points. The refreshed EFL power board keeps Master Peyton No. 1 at 88.4, with The Don’s Soldiers No. 2 and Kaaron Rodgers No. 3; The Duke rises to No. 5 despite the loss after its 153.22-point showing."
+    "tag": "WEEK 2 FINAL",
+    "title": "Master Peyton Owns the Week — and the Top of the Table",
+    "body": "Master Peyton delivered the EFL’s biggest Week 2 number, beating Kaaron Rodgers 175.24–135.28 to move to 2-0 with a league-high 335.40 points through two weeks. The Don’s Soldiers also stayed perfect with a 169.88–90.98 win over Mach Chicken, while Blaze Infantry improved to 2-0 by beating KamaraVirus125177 153.82–64.60. That leaves Master Peyton, The Don’s Soldiers and Blaze Infantry as the league’s three unbeaten franchises, with Trash Pandas, KamaraVirus125177 and bonebuster at 0-2. The refreshed EFL power board keeps Master Peyton No. 1 at 90.7, followed by The Don’s Soldiers at 82.7 and Kaaron Rodgers at 80.9."
   },
   "briefs": [
     {
       "icon": "⚡",
       "label": "PHOTO FINISH",
-      "title": "28Wizardking Escapes by 2.14",
-      "body": "The closest result of Week 1 belonged to 28Wizardking, which edged bonebuster 106.80–104.66. The 2.14-point margin was the only EFL matchup decided by fewer than seven points outside the Master Peyton–The Duke shootout."
+      "title": "The Duke Holds Off Trash Pandas by 4.78",
+      "body": "The closest matchup of Week 2 went to The Duke, which edged Trash Pandas 116.46–111.68. The 4.78-point escape moved The Duke to 1-1 and left Trash Pandas at 0-2 after two competitive weeks."
     },
     {
       "icon": "▲",
       "label": "POWER BOARD",
-      "title": "The Duke and Landshark Move Up",
-      "body": "The first post-Week 1 ranking refresh keeps the top four intact: Master Peyton, The Don’s Soldiers, Kaaron Rodgers and Blaze Infantry. The Duke climbs one spot to No. 5 and LandsharkSC rises to No. 9, while Trash Pandas slips to No. 6 and 28Wizardking falls to No. 10. The model movement is separate from the 1-0 and 0-1 standings."
+      "title": "The Duke and Landshark Climb",
+      "body": "The top three remain unchanged, but the middle shifted after Week 2. The Duke rises one spot to No. 4 at 76.5, Blaze Infantry slips one to No. 5 at 76.4, LandsharkSC moves up to No. 8 at 70.9, and BigKipper74 falls to No. 9 at 66.9."
     },
     {
-      "icon": "📈",
+      "icon": "📉",
       "label": "SCORING DESK",
-      "title": "Four Franchises Clear 130 in the Opener",
-      "body": "Master Peyton (160.16), The Duke (153.22), Kaaron Rodgers (142.14) and The Don’s Soldiers (133.36) formed the opening week’s top scoring tier. The league averaged 119.68 points per franchise, with an 80.36-to-160.16 range between the week’s lowest and highest totals."
+      "title": "League Scoring Cools, but the Ceiling Jumps",
+      "body": "Week 2 scoring averaged 112.35 points per franchise, down 7.33 from the 119.68 Week 1 average. Even with the dip, Master Peyton (175.24), The Don’s Soldiers (169.88) and Blaze Infantry (153.82) all cleared 150, while 28Wizardking, KamaraVirus125177 and bonebuster each finished below 70."
     },
     {
       "icon": "🧾",
       "label": "TRANSACTION WIRE",
-      "title": "Waivers Move; the Trade Desk Stays Quiet",
-      "body": "Sleeper shows no completed trade in the closing Week 1 window from September 8 through September 11. The Duke spent $18 FAAB to add Michael Mayer, Mach Chicken added Jauan Jennings and Darnell Washington for $0 bids, and The Don’s Soldiers added Emari Demercado for $0 while dropping Roschon Johnson. The last completed trade in Sleeper’s Week 1 bucket remains the August 30 Duke–Blaze deal that sent Dalton Kincaid to The Duke and DK Metcalf to Blaze Infantry, with 2028 second- and third-round picks also changing hands."
+      "title": "Waiver Bids Lead a Trade-Free Week",
+      "body": "Sleeper shows no completed trade in the Week 2 or early Week 3 transaction buckets. The largest listed Week 2 bid was Trash Pandas’ $8 add of Kendrick Bourne; bonebuster paid $5 for Raheim Sanders after dropping Ray Davis, and BigKipper74 spent $5 on Demond Claiborne plus $1 to add Ray Davis. Mach Chicken later added Kyle Williams for $1 and Keenan Allen for $0."
     }
   ]
 }
