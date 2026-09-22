@@ -33,5 +33,5 @@ jobs:
           git commit -m "Refresh current EFL power rankings"
           git push
 
-# Refresh trigger: 2026-09-15T13:45Z
+# Refresh trigger: 2026-09-22T13:17Z
 # Newsroom snapshot enabled: 2026-09-15
