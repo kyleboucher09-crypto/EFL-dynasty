@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-15T13:56:13.137852+00:00",
+  "generated_at": "2026-09-22T13:19:36.253187+00:00",
   "season": 2026,
-  "week": 2,
-  "source_week": 2,
+  "week": 3,
+  "source_week": 3,
   "season_type": "regular",
   "rankings": [
     {
@@ -13,19 +13,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Master Peyton",
       "owner": "mattgr1983",
-      "power": 88.4,
+      "power": 90.7,
       "lineup_grade": "A+",
       "depth_grade": "A+",
       "health_grade": "A+",
       "recent_grade": "A+",
-      "opponent_grade": "C+",
-      "opponent": "Kaaron Rodgers",
+      "opponent_grade": "A+",
+      "opponent": "KamaraVirus125177",
       "stars": [
         "Jahmyr Gibbs",
-        "Jayden Daniels",
-        "Jaxon Smith-Njigba"
+        "Jaxon Smith-Njigba",
+        "Trey McBride"
       ],
-      "article": "Master Peyton lands at No. 1 behind a projected core led by Jahmyr Gibbs, Jayden Daniels and Jaxon Smith-Njigba, with the optimized starting lineup grading A+ for Week 2 and the full-season outlook. The roster carries one of the league’s deeper benches; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 160.2 points per game, while the upcoming matchup against Kaaron Rodgers grades as a fairly neutral opponent test."
+      "article": "Master Peyton lands at No. 1 behind a projected core led by Jahmyr Gibbs, Jaxon Smith-Njigba and Trey McBride, with the optimized starting lineup grading A+ for Week 3 and the full-season outlook. The roster carries one of the league’s deeper benches; Availability risk is concentrated around Malik Nabers. Through Week 2 checks in at 167.7 points per game, while the upcoming matchup against KamaraVirus125177 grades as a favorable opponent test."
     },
     {
       "rank": 2,
@@ -35,19 +35,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "The Don’s Soldiers",
       "owner": "Thefantasydon24",
-      "power": 82.2,
+      "power": 82.7,
       "lineup_grade": "A",
-      "depth_grade": "B",
-      "health_grade": "A+",
-      "recent_grade": "A",
-      "opponent_grade": "A-",
-      "opponent": "Mach Chicken 🐓",
+      "depth_grade": "B+",
+      "health_grade": "A",
+      "recent_grade": "A+",
+      "opponent_grade": "A+",
+      "opponent": "BigKipper74",
       "stars": [
-        "Christian McCaffrey",
-        "CeeDee Lamb",
-        "Jonathan Taylor"
+        "Jonathan Taylor",
+        "Amon-Ra St. Brown",
+        "Christian McCaffrey"
       ],
-      "article": "The Don’s Soldiers lands at No. 2 behind a projected core led by Christian McCaffrey, CeeDee Lamb and Jonathan Taylor, with the optimized starting lineup grading A for Week 2 and the full-season outlook. The roster carries solid usable depth; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 133.4 points per game, while the upcoming matchup against Mach Chicken 🐓 grades as a favorable opponent test."
+      "article": "The Don’s Soldiers lands at No. 2 behind a projected core led by Jonathan Taylor, Amon-Ra St. Brown and Christian McCaffrey, with the optimized starting lineup grading A for Week 3 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Nico Collins. Through Week 2 checks in at 151.6 points per game, while the upcoming matchup against BigKipper74 grades as a favorable opponent test."
     },
     {
       "rank": 3,
@@ -57,63 +57,63 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Kaaron Rodgers",
       "owner": "KodyBartels",
-      "power": 79.0,
+      "power": 80.9,
       "lineup_grade": "A",
-      "depth_grade": "B+",
+      "depth_grade": "A-",
       "health_grade": "A",
-      "recent_grade": "A",
-      "opponent_grade": "C-",
-      "opponent": "Master Peyton",
-      "stars": [
-        "Puka Nacua",
-        "Justin Jefferson",
-        "Baker Mayfield"
-      ],
-      "article": "Kaaron Rodgers lands at No. 3 behind a projected core led by Puka Nacua, Justin Jefferson and Baker Mayfield, with the optimized starting lineup grading A for Week 2 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Brock Bowers. Through Week 1 checks in at 142.1 points per game, while the upcoming matchup against Master Peyton grades as a demanding opponent test."
-    },
-    {
-      "rank": 4,
-      "previous_rank": 4,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "Blaze Infantry ⚔️",
-      "owner": "BlazeInfantry",
-      "power": 77.5,
-      "lineup_grade": "B",
-      "depth_grade": "B-",
-      "health_grade": "A+",
-      "recent_grade": "A-",
-      "opponent_grade": "A+",
-      "opponent": "KamaraVirus125177",
-      "stars": [
-        "Josh Allen",
-        "Saquon Barkley",
-        "DeVonta Smith"
-      ],
-      "article": "Blaze Infantry ⚔️ lands at No. 4 behind a projected core led by Josh Allen, Saquon Barkley and DeVonta Smith, with the optimized starting lineup grading B for Week 2 and the full-season outlook. The roster carries solid usable depth; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 125.8 points per game, while the upcoming matchup against KamaraVirus125177 grades as a favorable opponent test."
-    },
-    {
-      "rank": 5,
-      "previous_rank": 5,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "The Duke 👑",
-      "owner": "TheDuke7",
-      "power": 76.3,
-      "lineup_grade": "B",
-      "depth_grade": "B-",
-      "health_grade": "A+",
       "recent_grade": "A-",
       "opponent_grade": "B+",
       "opponent": "Trash Pandas",
+      "stars": [
+        "Jared Goff",
+        "Derrick Henry",
+        "Justin Jefferson"
+      ],
+      "article": "Kaaron Rodgers lands at No. 3 behind a projected core led by Jared Goff, Derrick Henry and Justin Jefferson, with the optimized starting lineup grading A for Week 3 and the full-season outlook. The roster carries one of the league’s deeper benches; Availability risk is concentrated around Brock Bowers. Through Week 2 checks in at 138.7 points per game, while the upcoming matchup against Trash Pandas grades as a favorable opponent test."
+    },
+    {
+      "rank": 4,
+      "previous_rank": 5,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "The Duke 👑",
+      "owner": "TheDuke7",
+      "power": 76.5,
+      "lineup_grade": "B",
+      "depth_grade": "B",
+      "health_grade": "A+",
+      "recent_grade": "B+",
+      "opponent_grade": "B",
+      "opponent": "Blaze Infantry ⚔️",
       "stars": [
         "Bijan Robinson",
         "Jalen Hurts",
         "Chris Olave"
       ],
-      "article": "The Duke 👑 lands at No. 5 behind a projected core led by Bijan Robinson, Jalen Hurts and Chris Olave, with the optimized starting lineup grading B for Week 2 and the full-season outlook. The roster carries solid usable depth; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 153.2 points per game, while the upcoming matchup against Trash Pandas grades as a fairly neutral opponent test."
+      "article": "The Duke 👑 lands at No. 4 behind a projected core led by Bijan Robinson, Jalen Hurts and Chris Olave, with the optimized starting lineup grading B for Week 3 and the full-season outlook. The roster carries solid usable depth; The primary starters have a relatively clean availability profile right now. Through Week 2 checks in at 134.8 points per game, while the upcoming matchup against Blaze Infantry ⚔️ grades as a fairly neutral opponent test."
+    },
+    {
+      "rank": 5,
+      "previous_rank": 4,
+      "movement": "down",
+      "movement_label": "Down 1",
+      "movement_icon": "Assets/trending-down.svg",
+      "team": "Blaze Infantry ⚔️",
+      "owner": "BlazeInfantry",
+      "power": 76.4,
+      "lineup_grade": "B",
+      "depth_grade": "B",
+      "health_grade": "A+",
+      "recent_grade": "A",
+      "opponent_grade": "B",
+      "opponent": "The Duke 👑",
+      "stars": [
+        "Josh Allen",
+        "DeVonta Smith",
+        "Saquon Barkley"
+      ],
+      "article": "Blaze Infantry ⚔️ lands at No. 5 behind a projected core led by Josh Allen, DeVonta Smith and Saquon Barkley, with the optimized starting lineup grading B for Week 3 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Saquon Barkley. Through Week 2 checks in at 139.8 points per game, while the upcoming matchup against The Duke 👑 grades as a fairly neutral opponent test."
     },
     {
       "rank": 6,
@@ -123,19 +123,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Trash Pandas",
       "owner": "JoshBunting",
-      "power": 73.7,
+      "power": 73.6,
       "lineup_grade": "B-",
-      "depth_grade": "B",
+      "depth_grade": "B+",
       "health_grade": "A+",
       "recent_grade": "C+",
-      "opponent_grade": "B",
-      "opponent": "The Duke 👑",
+      "opponent_grade": "B-",
+      "opponent": "Kaaron Rodgers",
       "stars": [
         "Brock Purdy",
-        "Kyren Williams",
-        "Tucker Kraft"
+        "Breece Hall",
+        "Jalen Coker"
       ],
-      "article": "Trash Pandas lands at No. 6 behind a projected core led by Brock Purdy, Kyren Williams and Tucker Kraft, with the optimized starting lineup grading B- for Week 2 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Jalen Coker. Through Week 1 checks in at 112.9 points per game, while the upcoming matchup against The Duke 👑 grades as a fairly neutral opponent test."
+      "article": "Trash Pandas lands at No. 6 behind a projected core led by Brock Purdy, Breece Hall and Jalen Coker, with the optimized starting lineup grading B- for Week 3 and the full-season outlook. The roster carries solid usable depth; The primary starters have a relatively clean availability profile right now. Through Week 2 checks in at 112.3 points per game, while the upcoming matchup against Kaaron Rodgers grades as a fairly neutral opponent test."
     },
     {
       "rank": 7,
@@ -145,63 +145,63 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Mach Chicken 🐓",
       "owner": "Machchiken",
-      "power": 70.9,
+      "power": 72.9,
       "lineup_grade": "C+",
-      "depth_grade": "B-",
-      "health_grade": "A",
-      "recent_grade": "B+",
-      "opponent_grade": "C+",
-      "opponent": "The Don’s Soldiers",
+      "depth_grade": "B",
+      "health_grade": "A-",
+      "recent_grade": "B-",
+      "opponent_grade": "A+",
+      "opponent": "28Wizardking",
       "stars": [
-        "Malik Willis",
-        "Christian Watson",
-        "Zay Flowers"
+        "Kyler Murray",
+        "Zay Flowers",
+        "Christian Watson"
       ],
-      "article": "Mach Chicken 🐓 lands at No. 7 behind a projected core led by Malik Willis, Christian Watson and Zay Flowers, with the optimized starting lineup grading C+ for Week 2 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Zay Flowers. Through Week 1 checks in at 116.0 points per game, while the upcoming matchup against The Don’s Soldiers grades as a fairly neutral opponent test."
+      "article": "Mach Chicken 🐓 lands at No. 7 behind a projected core led by Kyler Murray, Zay Flowers and Christian Watson, with the optimized starting lineup grading C+ for Week 3 and the full-season outlook. The roster carries solid usable depth; Availability risk is concentrated around Kyler Murray, Zay Flowers. Through Week 2 checks in at 103.5 points per game, while the upcoming matchup against 28Wizardking grades as a favorable opponent test."
     },
     {
       "rank": 8,
-      "previous_rank": 8,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "BigKipper74",
-      "owner": "BigKipper74",
-      "power": 68.6,
+      "previous_rank": 9,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "LandsharkSC",
+      "owner": "LandsharkSC",
+      "power": 70.9,
       "lineup_grade": "C",
       "depth_grade": "C",
       "health_grade": "A+",
-      "recent_grade": "C-",
+      "recent_grade": "B",
       "opponent_grade": "A+",
       "opponent": "bonebuster",
       "stars": [
-        "Dak Prescott",
-        "Javonte Williams",
-        "Travis Kelce"
+        "Drake Maye",
+        "Parker Washington",
+        "Mark Andrews"
       ],
-      "article": "BigKipper74 lands at No. 8 behind a projected core led by Dak Prescott, Javonte Williams and Travis Kelce, with the optimized starting lineup grading C for Week 2 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 89.5 points per game, while the upcoming matchup against bonebuster grades as a favorable opponent test."
+      "article": "LandsharkSC lands at No. 8 behind a projected core led by Drake Maye, Parker Washington and Mark Andrews, with the optimized starting lineup grading C for Week 3 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Through Week 2 checks in at 112.5 points per game, while the upcoming matchup against bonebuster grades as a favorable opponent test."
     },
     {
       "rank": 9,
-      "previous_rank": 9,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "LandsharkSC",
-      "owner": "LandsharkSC",
-      "power": 68.3,
+      "previous_rank": 8,
+      "movement": "down",
+      "movement_label": "Down 1",
+      "movement_icon": "Assets/trending-down.svg",
+      "team": "BigKipper74",
+      "owner": "BigKipper74",
+      "power": 66.9,
       "lineup_grade": "C",
-      "depth_grade": "C-",
-      "health_grade": "A+",
+      "depth_grade": "C+",
+      "health_grade": "A",
       "recent_grade": "C+",
-      "opponent_grade": "A",
-      "opponent": "28Wizardking",
+      "opponent_grade": "C+",
+      "opponent": "The Don’s Soldiers",
       "stars": [
-        "Drake Maye",
-        "Tyler Warren",
-        "Stefon Diggs"
+        "Trevor Lawrence",
+        "Javonte Williams",
+        "Travis Kelce"
       ],
-      "article": "LandsharkSC lands at No. 9 behind a projected core led by Drake Maye, Tyler Warren and Stefon Diggs, with the optimized starting lineup grading C for Week 2 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 111.2 points per game, while the upcoming matchup against 28Wizardking grades as a favorable opponent test."
+      "article": "BigKipper74 lands at No. 9 behind a projected core led by Trevor Lawrence, Javonte Williams and Travis Kelce, with the optimized starting lineup grading C for Week 3 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Michael Pittman. Through Week 2 checks in at 93.1 points per game, while the upcoming matchup against The Don’s Soldiers grades as a fairly neutral opponent test."
     },
     {
       "rank": 10,
@@ -211,19 +211,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "28Wizardking",
       "owner": "28Wizardking",
-      "power": 68.1,
+      "power": 65.8,
       "lineup_grade": "C-",
-      "depth_grade": "C",
+      "depth_grade": "C-",
       "health_grade": "A+",
-      "recent_grade": "B+",
-      "opponent_grade": "A",
-      "opponent": "LandsharkSC",
+      "recent_grade": "C",
+      "opponent_grade": "A-",
+      "opponent": "Mach Chicken 🐓",
       "stars": [
         "David Montgomery",
         "Daniel Jones",
-        "Terry McLaurin"
+        "Hunter Henry"
       ],
-      "article": "28Wizardking lands at No. 10 behind a projected core led by David Montgomery, Daniel Jones and Terry McLaurin, with the optimized starting lineup grading C- for Week 2 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Through Week 1 checks in at 106.8 points per game, while the upcoming matchup against LandsharkSC grades as a favorable opponent test."
+      "article": "28Wizardking lands at No. 10 behind a projected core led by David Montgomery, Daniel Jones and Hunter Henry, with the optimized starting lineup grading C- for Week 3 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Jadarian Price. Through Week 2 checks in at 79.5 points per game, while the upcoming matchup against Mach Chicken 🐓 grades as a favorable opponent test."
     },
     {
       "rank": 11,
@@ -233,19 +233,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "bonebuster",
       "owner": "bonebuster",
-      "power": 66.3,
+      "power": 65.5,
       "lineup_grade": "C-",
-      "depth_grade": "C",
-      "health_grade": "A+",
-      "recent_grade": "C+",
+      "depth_grade": "C+",
+      "health_grade": "A",
+      "recent_grade": "C-",
       "opponent_grade": "A",
-      "opponent": "BigKipper74",
+      "opponent": "LandsharkSC",
       "stars": [
-        "Caleb Williams",
+        "Patrick Mahomes",
         "Mike Evans",
-        "DJ Moore"
+        "Dalton Schultz"
       ],
-      "article": "bonebuster lands at No. 11 behind a projected core led by Caleb Williams, Mike Evans and DJ Moore, with the optimized starting lineup grading C- for Week 2 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Jordan Mason. Through Week 1 checks in at 104.7 points per game, while the upcoming matchup against BigKipper74 grades as a favorable opponent test."
+      "article": "bonebuster lands at No. 11 behind a projected core led by Patrick Mahomes, Mike Evans and Dalton Schultz, with the optimized starting lineup grading C- for Week 3 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Mike Evans, DJ Moore. Through Week 2 checks in at 86.1 points per game, while the upcoming matchup against LandsharkSC grades as a favorable opponent test."
     },
     {
       "rank": 12,
@@ -255,19 +255,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "KamaraVirus125177",
       "owner": "KamaraVirus125177",
-      "power": 62.4,
+      "power": 63.2,
       "lineup_grade": "C-",
-      "depth_grade": "C-",
-      "health_grade": "A",
+      "depth_grade": "C",
+      "health_grade": "A+",
       "recent_grade": "C-",
-      "opponent_grade": "B",
-      "opponent": "Blaze Infantry ⚔️",
+      "opponent_grade": "C-",
+      "opponent": "Master Peyton",
       "stars": [
         "Lamar Jackson",
-        "Quinshon Judkins",
-        "Rhamondre Stevenson"
+        "Chuba Hubbard",
+        "TreVeyon Henderson"
       ],
-      "article": "KamaraVirus125177 lands at No. 12 behind a projected core led by Lamar Jackson, Quinshon Judkins and Rhamondre Stevenson, with the optimized starting lineup grading C- for Week 2 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; Availability risk is concentrated around Chig Okonkwo, TreVeyon Henderson. Through Week 1 checks in at 80.4 points per game, while the upcoming matchup against Blaze Infantry ⚔️ grades as a fairly neutral opponent test."
+      "article": "KamaraVirus125177 lands at No. 12 behind a projected core led by Lamar Jackson, Chuba Hubbard and TreVeyon Henderson, with the optimized starting lineup grading C- for Week 3 and the full-season outlook. The roster carries a thinner bench that leaves less margin for error; The primary starters have a relatively clean availability profile right now. Through Week 2 checks in at 72.5 points per game, while the upcoming matchup against Master Peyton grades as a demanding opponent test."
     }
   ]
 }
