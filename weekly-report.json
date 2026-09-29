@@ -1,39 +1,39 @@
 {
-  "edition": "2026 WEEK 2 — FINAL",
+  "edition": "2026 WEEK 3 — FINAL",
   "season": 2026,
-  "week": 2,
-  "published": "September 22, 2026",
-  "headline": "Master Peyton Drops 175 and Stays Perfect",
-  "dek": "Week 2 split the EFL into three 2-0 teams and three 0-2 teams as Master Peyton led all scoring with 175.24, The Duke survived the week’s tightest finish, and the power board shuffled at Nos. 4-5 and 8-9.",
+  "week": 3,
+  "published": "September 29, 2026",
+  "headline": "Master Peyton Hits 174 Again as the EFL’s Perfect Trio Reaches 3-0",
+  "dek": "Master Peyton posted the week’s high score for a second straight week, Blaze Infantry survived The Duke by 1.74, and The Don’s Soldiers joined them at 3-0 as Week 3 scoring rebounded to 115.80 per team.",
   "lead": {
-    "tag": "WEEK 2 FINAL",
-    "title": "Master Peyton Owns the Week — and the Top of the Table",
-    "body": "Master Peyton delivered the EFL’s biggest Week 2 number, beating Kaaron Rodgers 175.24–135.28 to move to 2-0 with a league-high 335.40 points through two weeks. The Don’s Soldiers also stayed perfect with a 169.88–90.98 win over Mach Chicken, while Blaze Infantry improved to 2-0 by beating KamaraVirus125177 153.82–64.60. That leaves Master Peyton, The Don’s Soldiers and Blaze Infantry as the league’s three unbeaten franchises, with Trash Pandas, KamaraVirus125177 and bonebuster at 0-2. The refreshed EFL power board keeps Master Peyton No. 1 at 90.7, followed by The Don’s Soldiers at 82.7 and Kaaron Rodgers at 80.9."
+    "tag": "WEEK 3 FINAL",
+    "title": "Master Peyton Sets the Pace Again",
+    "body": "Master Peyton beat KamaraVirus125177 174.50–86.34 to move to 3-0 and post the EFL’s top score for the second consecutive week after scoring 175.24 in Week 2. At 509.90 points through three weeks, Master Peyton leads the league in scoring by 59.58 over The Don’s Soldiers at 450.32. The Don’s Soldiers and Blaze Infantry also remain 3-0; Blaze survived The Duke 127.46–125.72 in the week’s closest game."
   },
   "briefs": [
     {
       "icon": "⚡",
       "label": "PHOTO FINISH",
-      "title": "The Duke Holds Off Trash Pandas by 4.78",
-      "body": "The closest matchup of Week 2 went to The Duke, which edged Trash Pandas 116.46–111.68. The 4.78-point escape moved The Duke to 1-1 and left Trash Pandas at 0-2 after two competitive weeks."
+      "title": "Blaze Survives by 1.74",
+      "body": "Blaze Infantry edged The Duke 127.46–125.72, the tightest Week 3 result. The win kept Blaze unbeaten at 3-0 and dropped The Duke to 1-2."
     },
     {
       "icon": "▲",
       "label": "POWER BOARD",
-      "title": "The Duke and Landshark Climb",
-      "body": "The top three remain unchanged, but the middle shifted after Week 2. The Duke rises one spot to No. 4 at 76.5, Blaze Infantry slips one to No. 5 at 76.4, LandsharkSC moves up to No. 8 at 70.9, and BigKipper74 falls to No. 9 at 66.9."
+      "title": "Trash Pandas Jump Two",
+      "body": "The current EFL power recalculation keeps Master Peyton, The Don’s Soldiers and Kaaron Rodgers at Nos. 1-3. Trash Pandas rises two spots from No. 6 to No. 4 at 76.4, Mach Chicken moves from No. 7 to No. 6, while Blaze Infantry slides from No. 5 to No. 7 despite its 3-0 start."
     },
     {
-      "icon": "📉",
+      "icon": "📈",
       "label": "SCORING DESK",
-      "title": "League Scoring Cools, but the Ceiling Jumps",
-      "body": "Week 2 scoring averaged 112.35 points per franchise, down 7.33 from the 119.68 Week 1 average. Even with the dip, Master Peyton (175.24), The Don’s Soldiers (169.88) and Blaze Infantry (153.82) all cleared 150, while 28Wizardking, KamaraVirus125177 and bonebuster each finished below 70."
+      "title": "League Offense Ticks Back Up",
+      "body": "Week 3 averaged 115.80 points per franchise, up 3.45 from Week 2’s 112.35 but still below Week 1’s 119.68. Kaaron Rodgers scored 163.26 and The Don’s Soldiers 147.08 behind Master Peyton’s 174.50, while LandsharkSC’s 78.76 was the week’s low."
     },
     {
       "icon": "🧾",
       "label": "TRANSACTION WIRE",
-      "title": "Waiver Bids Lead a Trade-Free Week",
-      "body": "Sleeper shows no completed trade in the Week 2 or early Week 3 transaction buckets. The largest listed Week 2 bid was Trash Pandas’ $8 add of Kendrick Bourne; bonebuster paid $5 for Raheim Sanders after dropping Ray Davis, and BigKipper74 spent $5 on Demond Claiborne plus $1 to add Ray Davis. Mach Chicken later added Kyle Williams for $1 and Keenan Allen for $0."
+      "title": "$18 Kendre Miller Claim Leads the Wire",
+      "body": "Master Peyton posted the largest verified Week 3 waiver bid, $18 for Kendre Miller. The Don’s Soldiers spent $13 on Darren Waller, The Duke spent $8 on Konata Mumpfield, and Blaze Infantry added Trey Benson and Kalif Raymond as free agents. Sleeper showed no completed trade in the Week 3 or early Week 4 transaction buckets as of September 29."
     }
   ]
 }
