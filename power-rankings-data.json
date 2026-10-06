@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-09-29T13:20:00.000Z",
+  "generated_at": "2026-10-06T13:43:30.304091+00:00",
   "season": 2026,
-  "week": 4,
-  "source_week": 4,
+  "week": 5,
+  "source_week": 5,
   "season_type": "regular",
   "rankings": [
     {
@@ -13,14 +13,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Master Peyton",
       "owner": "mattgr1983",
-      "power": 85.8,
+      "power": 87.4,
       "lineup_grade": "A+",
       "depth_grade": "A+",
       "health_grade": "A-",
       "recent_grade": "A+",
       "opponent_grade": "B",
-      "opponent": "Blaze Infantry ⚔️",
-      "article": "Master Peyton stays No. 1 with the strongest Week 4 starter projection in the league at about 146 points. The starting lineup and bench remain elite, while one starter currently has limited projection coverage. A tougher matchup with Blaze Infantry is not enough to knock the league leader from the top spot."
+      "opponent": "Trash Pandas",
+      "stars": [
+        "Jahmyr Gibbs",
+        "Jaxon Smith-Njigba",
+        "Trey McBride"
+      ],
+      "article": "Master Peyton stays No. 1 behind an elite Week 5 core of Jahmyr Gibbs, Jaxon Smith-Njigba and Trey McBride, backed by A+ lineup strength and A+ depth. The team leads recent form at 159.8 points per game through Week 4 and draws a fairly neutral matchup with Trash Pandas."
     },
     {
       "rank": 2,
@@ -30,14 +35,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "The Don’s Soldiers",
       "owner": "Thefantasydon24",
-      "power": 83.2,
-      "lineup_grade": "A",
+      "power": 85.2,
+      "lineup_grade": "A+",
       "depth_grade": "B+",
-      "health_grade": "A",
-      "recent_grade": "A",
+      "health_grade": "A+",
+      "recent_grade": "A+",
       "opponent_grade": "A+",
-      "opponent": "bonebuster",
-      "article": "The Don’s Soldiers holds No. 2 with a 137.7-point Week 4 starter projection and an A-grade lineup. The roster still carries useful depth and strong projection coverage. A favorable matchup with bonebuster gives this team one of the better Week 4 spots."
+      "opponent": "28Wizardking",
+      "stars": [
+        "Amon-Ra St. Brown",
+        "CeeDee Lamb",
+        "Joe Burrow"
+      ],
+      "article": "The Don’s Soldiers remains No. 2 with Amon-Ra St. Brown, CeeDee Lamb and Joe Burrow powering another A+ starting-lineup grade with solid B+ depth. A 154.8-point average through Week 4 keeps recent form elite, and the matchup with 28Wizardking is one of the week’s most favorable."
     },
     {
       "rank": 3,
@@ -47,14 +57,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "Kaaron Rodgers",
       "owner": "KodyBartels",
-      "power": 80.4,
-      "lineup_grade": "A",
+      "power": 82.6,
+      "lineup_grade": "A+",
       "depth_grade": "A-",
-      "health_grade": "B+",
-      "recent_grade": "A-",
+      "health_grade": "A",
+      "recent_grade": "A",
       "opponent_grade": "B",
-      "opponent": "The Duke 👑",
-      "article": "Kaaron Rodgers remains No. 3 with a 138.7-point Week 4 starter projection and one of the stronger depth profiles in the EFL. There is some current availability risk in the starting group, which trims the health grade. The Duke provides a meaningful opponent test, so Kaaron needs its high-end lineup to keep carrying the load."
+      "opponent": "Blaze Infantry ⚔️",
+      "stars": [
+        "Jared Goff",
+        "Puka Nacua",
+        "Brock Bowers"
+      ],
+      "article": "Kaaron Rodgers holds No. 3 with Jared Goff, Puka Nacua and Brock Bowers leading an A+ Week 5 lineup backed by A- depth. The team is averaging 147.1 points through Week 4 and draws a fairly neutral test against Blaze Infantry."
     },
     {
       "rank": 4,
@@ -64,65 +79,85 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "The Duke 👑",
       "owner": "TheDuke7",
-      "power": 75.3,
-      "lineup_grade": "B",
+      "power": 78.3,
+      "lineup_grade": "B+",
       "depth_grade": "B",
       "health_grade": "A+",
-      "recent_grade": "B+",
-      "opponent_grade": "C+",
-      "opponent": "Kaaron Rodgers",
-      "article": "The Duke holds No. 4 with a balanced lineup projected around 123.8 points this week. Depth remains solid and the primary starters have strong Week 4 projection coverage. A matchup with No. 3 Kaaron Rodgers keeps Duke just outside the top three."
+      "recent_grade": "B",
+      "opponent_grade": "A+",
+      "opponent": "KamaraVirus125177",
+      "stars": [
+        "Bijan Robinson",
+        "Jordan Love",
+        "Chris Olave"
+      ],
+      "article": "The Duke stays No. 4 with Bijan Robinson, Jordan Love and Chris Olave anchoring a B+ projected lineup with solid B-level depth. A 132.3-point average through Week 4 plus a favorable matchup with KamaraVirus125177 keeps Duke firmly in the upper tier."
     },
     {
       "rank": 5,
-      "previous_rank": 5,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "Blaze Infantry ⚔️",
-      "owner": "BlazeInfantry",
-      "power": 73.2,
-      "lineup_grade": "B",
-      "depth_grade": "B",
-      "health_grade": "A-",
-      "recent_grade": "A",
-      "opponent_grade": "C-",
-      "opponent": "Master Peyton",
-      "article": "Blaze Infantry stays No. 5 with a Week 4 starter projection around 115.9 points and B-level lineup and depth strength. Some current availability uncertainty lowers the health grade slightly. Drawing No. 1 Master Peyton is the toughest opponent adjustment on the slate."
-    },
-    {
-      "rank": 6,
-      "previous_rank": 7,
+      "previous_rank": 6,
       "movement": "up",
       "movement_label": "Up 1",
       "movement_icon": "Assets/trending-up.svg",
       "team": "Mach Chicken 🐓",
       "owner": "Machchiken",
-      "power": 72.9,
+      "power": 78.1,
       "lineup_grade": "B-",
-      "depth_grade": "B",
-      "health_grade": "A",
-      "recent_grade": "B-",
-      "opponent_grade": "A",
-      "opponent": "LandsharkSC",
-      "article": "Mach Chicken climbs to No. 6 with a Week 4 lineup projected around 113.7 points. Projection coverage is complete and the bench remains solid enough to absorb normal weekly volatility. A favorable matchup with LandsharkSC helps Mach edge ahead of Trash Pandas."
+      "depth_grade": "A-",
+      "health_grade": "A+",
+      "recent_grade": "B",
+      "opponent_grade": "A+",
+      "opponent": "bonebuster",
+      "stars": [
+        "Zay Flowers",
+        "Sam Darnold",
+        "Sam LaPorta"
+      ],
+      "article": "Mach Chicken climbs one spot to No. 5 behind Zay Flowers, Sam Darnold and Sam LaPorta. The Week 5 lineup grades B-, but A- depth and a favorable matchup with bonebuster help Mach edge into the top five."
     },
     {
-      "rank": 7,
-      "previous_rank": 6,
+      "rank": 6,
+      "previous_rank": 5,
       "movement": "down",
       "movement_label": "Down 1",
       "movement_icon": "Assets/trending-down.svg",
+      "team": "Blaze Infantry ⚔️",
+      "owner": "BlazeInfantry",
+      "power": 75,
+      "lineup_grade": "B+",
+      "depth_grade": "B",
+      "health_grade": "A",
+      "recent_grade": "B+",
+      "opponent_grade": "C",
+      "opponent": "Kaaron Rodgers",
+      "stars": [
+        "Josh Allen",
+        "Ashton Jeanty",
+        "Davante Adams"
+      ],
+      "article": "Blaze Infantry slips one place to No. 6 despite a B+ lineup led by Josh Allen, Ashton Jeanty and Davante Adams with solid B-level depth. Blaze is averaging 126.8 points through Week 4, but a demanding matchup against No. 3 Kaaron Rodgers pushes the weekly outlook down."
+    },
+    {
+      "rank": 7,
+      "previous_rank": 7,
+      "movement": "hold",
+      "movement_label": "No change",
+      "movement_icon": "Assets/trending-hold.svg",
       "team": "Trash Pandas",
       "owner": "JoshBunting",
-      "power": 72.5,
-      "lineup_grade": "B-",
-      "depth_grade": "B+",
-      "health_grade": "C+",
-      "recent_grade": "C+",
-      "opponent_grade": "A+",
-      "opponent": "KamaraVirus125177",
-      "article": "Trash Pandas slips to No. 7 despite a 117.6-point Week 4 starter projection and one of the better benches in the league. Multiple current availability questions and incomplete projection coverage pull the health grade down. The matchup with KamaraVirus125177 is favorable, but the roster needs more certainty to move back up."
+      "power": 73.6,
+      "lineup_grade": "B",
+      "depth_grade": "A-",
+      "health_grade": "A",
+      "recent_grade": "B-",
+      "opponent_grade": "C-",
+      "opponent": "Master Peyton",
+      "stars": [
+        "Kyren Williams",
+        "Brock Purdy",
+        "Drake London"
+      ],
+      "article": "Trash Pandas holds No. 7 with Kyren Williams, Brock Purdy and Drake London leading a B-grade Week 5 lineup, while A- depth remains a real strength. Recent form is 116.8 points per game, and drawing No. 1 Master Peyton gives the Pandas the toughest opponent adjustment of the week."
     },
     {
       "rank": 8,
@@ -132,14 +167,19 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "LandsharkSC",
       "owner": "LandsharkSC",
-      "power": 69.5,
+      "power": 70.8,
       "lineup_grade": "C+",
       "depth_grade": "C",
       "health_grade": "A+",
-      "recent_grade": "B",
-      "opponent_grade": "A-",
-      "opponent": "Mach Chicken 🐓",
-      "article": "LandsharkSC remains No. 8 with a Week 4 group projected around 106.6 points. The current lineup has clean projection coverage, but a thinner bench leaves less margin for error than the teams above it. Mach Chicken is manageable, though Landshark still needs more starting-lineup ceiling to climb."
+      "recent_grade": "C+",
+      "opponent_grade": "A",
+      "opponent": "BigKipper74",
+      "stars": [
+        "Drake Maye",
+        "D'Andre Swift",
+        "Parker Washington"
+      ],
+      "article": "LandsharkSC remains No. 8 with Drake Maye, D'Andre Swift and Parker Washington heading a C+ projected lineup, but C-grade depth leaves less margin for error. The team has averaged 99.0 points through Week 4 and gets a favorable matchup against BigKipper74."
     },
     {
       "rank": 9,
@@ -149,31 +189,41 @@
       "movement_icon": "Assets/trending-hold.svg",
       "team": "BigKipper74",
       "owner": "BigKipper74",
-      "power": 68.9,
+      "power": 70.3,
       "lineup_grade": "C",
       "depth_grade": "C+",
-      "health_grade": "A",
+      "health_grade": "A+",
       "recent_grade": "C+",
-      "opponent_grade": "A+",
-      "opponent": "28Wizardking",
-      "article": "BigKipper74 holds No. 9 with a lineup projected around 93.5 points in Week 4. The roster has solid projection coverage but still lacks the starting ceiling and depth of the upper half. A favorable matchup with 28Wizardking keeps BigKipper within reach of the middle tier."
+      "opponent_grade": "A",
+      "opponent": "LandsharkSC",
+      "stars": [
+        "Dak Prescott",
+        "Javonte Williams",
+        "Jaylen Waddle"
+      ],
+      "article": "BigKipper74 stays No. 9 behind Dak Prescott, Javonte Williams and Jaylen Waddle, with the optimized Week 5 lineup grading C and depth at C+. A 91.8-point average through Week 4 is modest, although a favorable LandsharkSC matchup offers a chance to outperform the ranking."
     },
     {
       "rank": 10,
-      "previous_rank": 10,
-      "movement": "hold",
-      "movement_label": "No change",
-      "movement_icon": "Assets/trending-hold.svg",
-      "team": "28Wizardking",
-      "owner": "28Wizardking",
-      "power": 66.9,
-      "lineup_grade": "C",
-      "depth_grade": "C-",
+      "previous_rank": 11,
+      "movement": "up",
+      "movement_label": "Up 1",
+      "movement_icon": "Assets/trending-up.svg",
+      "team": "KamaraVirus125177",
+      "owner": "KamaraVirus125177",
+      "power": 65.3,
+      "lineup_grade": "C-",
+      "depth_grade": "C",
       "health_grade": "A+",
-      "recent_grade": "C",
-      "opponent_grade": "A+",
-      "opponent": "BigKipper74",
-      "article": "28Wizardking stays No. 10 with a Week 4 projection around 100.1 points. The starters have complete projection coverage, but the C- depth grade still leaves little protection if the lineup underperforms. BigKipper74 is a favorable opponent on paper and gives Wizard a chance to outperform the ranking."
+      "recent_grade": "C-",
+      "opponent_grade": "B",
+      "opponent": "The Duke 👑",
+      "stars": [
+        "Lamar Jackson",
+        "Rhamondre Stevenson",
+        "Quinshon Judkins"
+      ],
+      "article": "KamaraVirus125177 moves up to No. 10 with Lamar Jackson, Rhamondre Stevenson and Quinshon Judkins supplying the projected ceiling, though the lineup grades C- and depth remains thin. Recent form sits at 82.7 points per game through Week 4, and The Duke presents a fairly neutral opponent test."
     },
     {
       "rank": 11,
@@ -181,33 +231,43 @@
       "movement": "up",
       "movement_label": "Up 1",
       "movement_icon": "Assets/trending-up.svg",
-      "team": "KamaraVirus125177",
-      "owner": "KamaraVirus125177",
-      "power": 66.4,
+      "team": "bonebuster",
+      "owner": "bonebuster",
+      "power": 64.4,
       "lineup_grade": "C-",
-      "depth_grade": "C",
-      "health_grade": "A+",
-      "recent_grade": "C-",
-      "opponent_grade": "A-",
-      "opponent": "Trash Pandas",
-      "article": "KamaraVirus125177 moves up to No. 11 with a Week 4 lineup projected around 97.7 points. Projection coverage is clean, though the starting strength and depth still trail most of the league. Trash Pandas has more availability uncertainty this week, improving Kamara's matchup outlook."
+      "depth_grade": "C+",
+      "health_grade": "A",
+      "recent_grade": "C",
+      "opponent_grade": "B",
+      "opponent": "Mach Chicken 🐓",
+      "stars": [
+        "Mike Evans",
+        "Romeo Doubs",
+        "Dalton Schultz"
+      ],
+      "article": "bonebuster climbs out of the basement to No. 11 behind Mike Evans, Romeo Doubs and Dalton Schultz. The lineup still grades C- with C+ depth, while recent scoring is 88.9 points per game through Week 4 and Mach Chicken grades as a fairly neutral opponent test."
     },
     {
       "rank": 12,
-      "previous_rank": 11,
+      "previous_rank": 10,
       "movement": "down",
-      "movement_label": "Down 1",
+      "movement_label": "Down 2",
       "movement_icon": "Assets/trending-down.svg",
-      "team": "bonebuster",
-      "owner": "bonebuster",
-      "power": 62.7,
-      "lineup_grade": "C-",
-      "depth_grade": "C+",
-      "health_grade": "B+",
+      "team": "28Wizardking",
+      "owner": "28Wizardking",
+      "power": 64,
+      "lineup_grade": "C",
+      "depth_grade": "C-",
+      "health_grade": "A",
       "recent_grade": "C-",
       "opponent_grade": "C",
       "opponent": "The Don’s Soldiers",
-      "article": "bonebuster falls to No. 12 with a league-low Week 4 starter projection around 86.9 points. The roster still carries some weekly upside, but availability uncertainty and a low recent-form grade keep the floor fragile. Facing No. 2 The Don’s Soldiers makes this the hardest path upward on the Week 4 board."
+      "stars": [
+        "Michael Wilson",
+        "Kirk Cousins",
+        "Isaiah Likely"
+      ],
+      "article": "28Wizardking falls two spots to No. 12 with Michael Wilson, Kirk Cousins and Isaiah Likely leading a C-grade Week 5 lineup, while C- depth leaves little margin for error. The team is averaging 82.6 points through Week 4 and now draws No. 2 The Don’s Soldiers in a demanding matchup."
     }
   ]
 }
